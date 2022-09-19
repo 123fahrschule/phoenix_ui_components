@@ -24,3 +24,7 @@ phoenix_ui_components-*.tar
 
 # Temporary files, for example, from tests.
 /tmp/
+
+# The directory NPM downloads your dependencies sources to.
+/node_modules/
+/assets/node_modules/

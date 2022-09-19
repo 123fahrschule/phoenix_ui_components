@@ -1,0 +1,11 @@
+{
+  "repository": {},
+  "description": " ",
+  "license": "MIT",
+  "module": "./priv/static/module.mjs",
+  "main": "./priv/static/main.cjs.js",
+  "exports": {
+    "import": "./priv/static/module.mjs",
+    "require": "./priv/static/main.cjs.js"
+  }
+}
