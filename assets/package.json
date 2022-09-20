@@ -1,0 +1,14 @@
+{
+  "repository": {},
+  "description": " ",
+  "license": "MIT",
+  "scripts": {
+    "format": "prettier --write .",
+    "lint": "eslint ."
+  },
+  "devDependencies": {
+    "eslint": "8.23.0",
+    "eslint-config-prettier": "8.5.0",
+    "prettier": "2.7.1"
+  }
+}
