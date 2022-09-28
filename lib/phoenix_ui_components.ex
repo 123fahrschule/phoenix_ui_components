@@ -13,6 +13,8 @@ defmodule PhoenixUiComponents do
 
   defmacro __using__(_) do
     quote do
+      alias PhoenixUiComponents.Icons.MaterialIcons
+
       import PhoenixUiComponents.{
         Backdrop,
         Banner,
