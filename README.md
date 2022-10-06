@@ -95,6 +95,8 @@ Change dependency from `github` to `local` in `mix.exs`
 +{:phoenix_ui_components, path: "local_path/to/phoenix_ui_components" }
 ```
 
+Add absolute path to package in `mix.exs` to `elixirc_paths` section.
+
 Update esbuild config
 
 New `NODE_PATH` should point to the directory with the package
