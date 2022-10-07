@@ -19,6 +19,7 @@ defmodule PhoenixUiComponents do
         Backdrop,
         Banner,
         Button,
+        Card,
         Checkbox,
         Form,
         Layout,
