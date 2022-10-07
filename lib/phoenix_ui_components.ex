@@ -16,6 +16,7 @@ defmodule PhoenixUiComponents do
       alias PhoenixUiComponents.Icons.MaterialIcons
 
       import PhoenixUiComponents.{
+        Avatar,
         Backdrop,
         Banner,
         Button,
