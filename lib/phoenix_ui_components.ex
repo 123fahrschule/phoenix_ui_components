@@ -18,6 +18,7 @@ defmodule PhoenixUiComponents do
       import PhoenixUiComponents.{
         Avatar,
         Backdrop,
+        Badge,
         Banner,
         Button,
         Card,
