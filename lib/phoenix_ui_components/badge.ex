@@ -21,7 +21,7 @@ defmodule PhoenixUiComponents.Badge do
     <div
       class={
         [
-          "rounded-full text-sm font-semibold hover:shadow-sm-3 inline-flex items-center cursor-pointer",
+          "rounded-full text-sm font-semibold hover:shadow-sm-3 inline-flex items-center cursor-pointer align-middle",
           get_size_classes(@size, @label),
           get_color_classes(@type),
           @class
