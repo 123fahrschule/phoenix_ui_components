@@ -28,6 +28,7 @@ defmodule PhoenixUiComponents do
         Link,
         SideNav,
         Spinner,
+        TopNav,
         Typography
       }
     end
