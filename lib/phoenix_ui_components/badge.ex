@@ -5,7 +5,8 @@ defmodule PhoenixUiComponents.Badge do
   # attr :label, :string, default: nil
   # attr :size, :string, default: "md", values: ["sm", "md"]
   # attr :type, :string, default: "neutral", values: ["neutral", "success", "error", "info", "warning"]
-  # attr :arrow_position, :string, default: 'start', values: ["start", "end"]
+  # attr :icon, :atom, default: nil
+  # attr :icon_position, :string, default: 'start', values: ["start", "end"]
   # attr :rest, :global
   def badge(assigns) do
     assigns =
@@ -14,8 +15,9 @@ defmodule PhoenixUiComponents.Badge do
       |> assign_attr(:label)
       |> assign_attr(:size, "md")
       |> assign_attr(:type, "neutral")
-      |> assign_attr(:arrow_position, "start")
-      |> assign_rest([:label, :size, :type])
+      |> assign_attr(:icon)
+      |> assign_attr(:icon_position, "start")
+      |> assign_rest([:label, :size, :type, :icon, :icon_position])
 
     ~H"""
     <div
@@ -34,20 +36,26 @@ defmodule PhoenixUiComponents.Badge do
     """
   end
 
+  defp content(%{icon: icon} = assigns) when is_nil(icon) do
+    ~H"""
+    <%= @label %>
+    """
+  end
+
   defp content(%{label: label} = assigns) when is_nil(label) do
     ~H"""
-    <MaterialIcons.icon icon={:keyboard_arrow_down} class="text-[24px]" />
+    <MaterialIcons.icon icon={@icon} class="text-[24px]" />
     """
   end
 
   defp content(assigns) do
     ~H"""
-    <%= if @arrow_position == "start" do %>
-      <MaterialIcons.icon icon={:keyboard_arrow_down} class="text-[16px] -ml-2 mr-0.5" />
+    <%= if @icon_position == "start" do %>
+      <MaterialIcons.icon icon={@icon} class="text-[16px] -ml-2 mr-0.5" />
     <% end %>
     <%= @label %>
-    <%= if @arrow_position == "end" do %>
-      <MaterialIcons.icon icon={:keyboard_arrow_down} class="text-[16px] -mr-2 ml-0.5" />
+    <%= if @icon_position == "end" do %>
+      <MaterialIcons.icon icon={@icon} class="text-[16px] -mr-2 ml-0.5" />
     <% end %>
     """
   end
