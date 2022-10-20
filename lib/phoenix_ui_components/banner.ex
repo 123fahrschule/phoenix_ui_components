@@ -1,71 +1,54 @@
 defmodule PhoenixUiComponents.Banner do
   use PhoenixUiComponents, :component
 
-  # attr :class, :string, default: nil
-  # attr :type, :string, doc: ~s'options: ["info", "success", "warning", "error"]'
-  # attr :size :string, default: "md", doc: ~s'options: ["sm", "md", "lg"]'
-  # attr :message, :string, required: true
-  # attr :label, :string, default: nil
-  # attr :close_button_attributes, :global
-  # attr :rest, :global
-  def banner(assigns) do
-    assigns =
-      assigns
-      |> assign_class
-      |> assign_attr(:type, "info")
-      |> assign_attr(:size, "md")
-      |> assign_attr(:label)
-      |> assign_attr(:close_button_attributes)
-      |> assign_rest([:type, :size, :class, :close_button_attributes, :label])
+  attr(:class, :string, default: nil)
+  attr(:type, :string, values: ["info", "success", "warning", "error"], default: "info")
+  attr(:size, :string, values: ["sm", "md", "lg"], default: "md")
+  attr(:message, :string, required: true)
+  attr(:label, :string, default: nil)
+  attr(:close_button_attributes, :any, default: nil)
+  attr(:rest, :global)
 
+  def banner(assigns) do
     ~H"""
     <div
       role="alert"
-      class={
-        [
-          "rounded-lg flex items-center",
-          get_color_classes(@type),
-          get_size_classes(@size),
-          @class
-        ]
-      }
+      class={[
+        "rounded-lg flex items-center",
+        get_color_classes(@type),
+        get_size_classes(@size),
+        @class
+      ]}
       {@rest}
     >
-      <div class={
-        [
-          "rounded-lg mr-2 flex items-center justify-center",
-          get_icon_container_color_classes(@type),
-          get_icon_container_size_classes(@size)
-        ]
-      }>
+      <div class={[
+        "rounded-lg mr-2 flex items-center justify-center",
+        get_icon_container_color_classes(@type),
+        get_icon_container_size_classes(@size)
+      ]}>
         <MaterialIcons.icon
           icon={get_icon(@type)}
           class={["text-white ", get_icon_size_classes(@size)]}
         />
       </div>
       <div class="mr-2">
-        <%= if @label do %>
-          <p class="font-bold">
-            <%= @label %>
-          </p>
-        <% end %>
+        <p :if={@label} class="font-bold">
+          <%= @label %>
+        </p>
         <p class="text-neutral-900">
           <%= @message %>
         </p>
       </div>
-      <%= if @close_button_attributes do %>
-        <button
-          class={
-            [
-              "p-2 ml-auto rounded-full flex items-center content-center",
-              get_close_icon_color_classes(@type)
-            ]
-          }
-          {@close_button_attributes}
-        >
-          <MaterialIcons.icon icon={:close} class="text-[16px]" />
-        </button>
-      <% end %>
+      <button
+        :if={@close_button_attributes}
+        class={[
+          "p-2 ml-auto rounded-full flex items-center content-center",
+          get_close_icon_color_classes(@type)
+        ]}
+        {@close_button_attributes}
+      >
+        <MaterialIcons.icon icon={:close} class="text-[16px]" />
+      </button>
     </div>
     """
   end

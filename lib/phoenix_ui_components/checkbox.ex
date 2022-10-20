@@ -2,15 +2,12 @@ defmodule PhoenixUiComponents.Checkbox do
   use PhoenixUiComponents, :component
   import Phoenix.HTML.Form
 
-  # attr :form, :any, required: true
-  # attr :field, :atom, required: true
-  # attr :label, :string, required: true
-  # attr :class, :string, default: nil
-  def checkbox(assigns) do
-    assigns =
-      assigns
-      |> assign_class
+  attr(:form, :any, required: true)
+  attr(:field, :atom, required: true)
+  attr(:label, :string, required: true)
+  attr(:class, :string, default: nil)
 
+  def checkbox(assigns) do
     ~H"""
     <div class={["relative flex items-start", @class]}>
       <%= checkbox(@form, @field,

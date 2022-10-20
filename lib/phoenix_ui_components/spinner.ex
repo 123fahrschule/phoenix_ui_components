@@ -2,20 +2,19 @@ defmodule PhoenixUiComponents.Spinner do
   use PhoenixUiComponents, :component
   import PhoenixUiComponents.Backdrop
 
-  # attr class, :string, default: nil
-  # attr rest, :global
-  def spinner(%{full_screen: true} = assigns) do
-    assigns =
-      assigns
-      |> assign_class
-      |> assign_rest([:class])
+  attr(:class, :string, default: nil)
+  attr(:full_screen, :boolean, default: false)
+  attr(:backdrop_attrs, :any, default: [])
+  attr(:rest, :global)
 
+  def spinner(%{full_screen: true} = assigns) do
     ~H"""
-    <.backdrop>
+    <.backdrop {@backdrop_attrs}>
       <div
-        class={
-          ["w-28 h-28 fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-white", @class]
-        }
+        class={[
+          "w-28 h-28 fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-white",
+          @class
+        ]}
         {@rest}
       >
         <.spinner_icon />
@@ -24,14 +23,10 @@ defmodule PhoenixUiComponents.Spinner do
     """
   end
 
-  # attr class, :string, default: nil
-  # attr rest, :global
-  def spinner_icon(assigns) do
-    assigns =
-      assigns
-      |> assign_class
-      |> assign_rest([:class])
+  attr(:class, :string, default: nil)
+  attr(:rest, :global)
 
+  def spinner_icon(assigns) do
     ~H"""
     <svg
       xmlns="http://www.w3.org/2000/svg"

@@ -1,14 +1,12 @@
 defmodule PhoenixUiComponents.TopNav do
   use PhoenixUiComponents, :component
 
-  def top_nav_container(assigns) do
-    assigns =
-      assigns
-      |> assign_class()
-      |> assign_slot(:user_section)
-      |> assign_slot(:inner_block)
-      |> assign_rest()
+  attr(:class, :string, default: nil)
+  attr(:rest, :global)
 
+  slot(:inner_block, default: [])
+
+  def top_nav_container(assigns) do
     ~H"""
     <div class={["h-16 border-b border-b-neutral-300 flex items-center", @class]} {@rest}>
       <%= render_slot(@inner_block) %>
@@ -16,11 +14,11 @@ defmodule PhoenixUiComponents.TopNav do
     """
   end
 
-  def sunrise_sunset(assigns) do
-    assigns =
-      assigns
-      |> assign_class()
+  attr(:class, :string, default: nil)
+  attr(:sunrise, :string, required: true)
+  attr(:sunset, :string, required: true)
 
+  def sunrise_sunset(assigns) do
     ~H"""
     <div class={["flex space-x-2 text-xs text-gray-500", @class]}>
       <div>

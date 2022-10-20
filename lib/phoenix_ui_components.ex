@@ -1,7 +1,9 @@
 defmodule PhoenixUiComponents do
   def component() do
     quote do
-      use Phoenix.Component
+      import Phoenix.Component
+      use Phoenix.Component, global_prefixes: ~w(x-)
+
       import PhoenixUiComponents.Helpers
       alias PhoenixUiComponents.Icons.MaterialIcons
     end
@@ -23,9 +25,9 @@ defmodule PhoenixUiComponents do
         Button,
         Card,
         Checkbox,
+        CustomLink,
         Form,
         Layout,
-        Link,
         SideNav,
         Spinner,
         TopNav,

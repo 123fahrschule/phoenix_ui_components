@@ -1,63 +1,54 @@
 defmodule PhoenixUiComponents.Badge do
   use PhoenixUiComponents, :component
 
-  # attr :class :string, default: nil
-  # attr :label, :string, default: nil
-  # attr :size, :string, default: "md", values: ["sm", "md"]
-  # attr :type, :string, default: "neutral", values: ["neutral", "success", "error", "info", "warning"]
-  # attr :icon, :atom, default: nil
-  # attr :icon_position, :string, default: 'start', values: ["start", "end"]
-  # attr :rest, :global
-  def badge(assigns) do
-    assigns =
-      assigns
-      |> assign_class()
-      |> assign_attr(:label)
-      |> assign_attr(:size, "md")
-      |> assign_attr(:type, "neutral")
-      |> assign_attr(:icon)
-      |> assign_attr(:icon_position, "start")
-      |> assign_rest([:label, :size, :type, :icon, :icon_position])
+  attr(:class, :string, default: nil)
+  attr(:label, :string, default: nil)
+  attr(:size, :string, values: ["sm", "md"], default: "md")
 
+  attr(:type, :string,
+    values: ["neutral", "success", "error", "info", "warning"],
+    default: "neutral"
+  )
+
+  attr(:icon, :atom, default: nil)
+  attr(:icon_position, :string, values: ["start", "end"], default: "start")
+  attr(:rest, :global)
+
+  def badge(%{icon: nil} = assigns) do
     ~H"""
-    <div
-      class={
-        [
-          "rounded-full text-sm font-semibold hover:shadow-sm-3 inline-flex items-center cursor-pointer align-middle",
-          get_size_classes(@size, @label),
-          get_color_classes(@type),
-          @class
-        ]
-      }
-      {@rest}
-    >
-      <.content {assigns} />
+    <div class={[get_classes(assigns), get_size_classes(@size, @label)]} {@rest}>
+      <%= @label %>
     </div>
     """
   end
 
-  defp content(%{icon: icon} = assigns) when is_nil(icon) do
+  def badge(%{label: nil} = assigns) do
     ~H"""
-    <%= @label %>
+    <div class={[get_classes(assigns), get_size_classes(@size, @label)]} {@rest}>
+      <MaterialIcons.icon icon={@icon} class="text-[24px]" />
+    </div>
     """
   end
 
-  defp content(%{label: label} = assigns) when is_nil(label) do
+  def badge(assigns) do
     ~H"""
-    <MaterialIcons.icon icon={@icon} class="text-[24px]" />
+    <div class={[get_classes(assigns), get_size_classes(@size, @label)]} {@rest}>
+      <MaterialIcons.icon
+        :if={@icon_position == "start"}
+        icon={@icon}
+        class="text-[16px] -ml-2 mr-0.5"
+      />
+      <%= @label %>
+      <MaterialIcons.icon :if={@icon_position == "end"} icon={@icon} class="text-[16px] -mr-2 ml-0.5" />
+    </div>
     """
   end
 
-  defp content(assigns) do
-    ~H"""
-    <%= if @icon_position == "start" do %>
-      <MaterialIcons.icon icon={@icon} class="text-[16px] -ml-2 mr-0.5" />
-    <% end %>
-    <%= @label %>
-    <%= if @icon_position == "end" do %>
-      <MaterialIcons.icon icon={@icon} class="text-[16px] -mr-2 ml-0.5" />
-    <% end %>
-    """
+  defp get_classes(%{type: type}) do
+    [
+      "rounded-full text-sm font-semibold hover:shadow-sm-3 inline-flex items-center cursor-pointer align-middle",
+      get_color_classes(type)
+    ]
   end
 
   defp get_size_classes("sm", label) do

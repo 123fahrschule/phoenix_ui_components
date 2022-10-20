@@ -2,25 +2,20 @@ defmodule PhoenixUiComponents.Form do
   use PhoenixUiComponents, :component
   import Phoenix.HTML.Form
 
-  # attr :form, :any, required: true
-  # attr :field, :atom, required: true
-  # attr :label, :string, default: nil
-  # attr :placeholder, :string, default: nil
-  # attr :class, :string, default: nil
-  # attr :wrapper_class, :string, default: nil
-  # attr :type, :string, default: "text"
-  # attr :size, :string, default: "md", doc: ~s'Available options: "sm", "md", "lg"'
-  # attr :rest, :global
+  attr(:form, :any, required: true)
+  attr(:field, :atom, required: true)
+  attr(:label, :string, default: nil)
+  attr(:placeholder, :string, default: nil)
+  attr(:class, :string, default: nil)
+  attr(:wrapper_class, :string, default: nil)
+  attr(:type, :string, default: "text")
+  attr(:size, :string, values: ["sm", "md", "lg"], default: "md")
+
   def text_field(assigns) do
     # TODO: Handle valid/invalid states
     assigns =
       assigns
-      |> assign_class
-      |> assign_attr(:wrapper_class)
-      |> assign_attr(:label)
-      |> assign_attr(:type, "text")
-      |> assign_attr(:size, "md")
-      |> assign_rest([:form, :field, :class, :wrapper_class, :label, :size])
+      |> assign_rest([:form, :field, :label, :class, :wrapper_class, :size])
 
     ~H"""
     <div class={@wrapper_class}>
@@ -47,23 +42,19 @@ defmodule PhoenixUiComponents.Form do
     """
   end
 
-  # attr :form, :any, required: true
-  # attr :field, :atom, required: true
-  # attr :options, :list, required: true
-  # attr :label, :string, default: nil
-  # attr :placeholder, :string, default: nil
-  # attr :class, :string, default: nil
-  # attr :wrapper_class, :string, default: nil
-  # attr :size, :string, default: "md", doc: ~s'Available options: "sm", "md", "lg"'
-  # attr :rest, :global
+  attr(:form, :any, required: true)
+  attr(:field, :atom, required: true)
+  attr(:options, :list, required: true)
+  attr(:label, :string, default: nil)
+  attr(:class, :string, default: nil)
+  attr(:wrapper_class, :string, default: nil)
+  attr(:size, :string, values: ["sm", "md", "lg"], default: "md")
+  attr(:native, :boolean, default: true)
+
   def select(%{native: true} = assigns) do
     assigns =
       assigns
-      |> assign_class
-      |> assign_attr(:wrapper_class)
-      |> assign_attr(:label)
-      |> assign_attr(:size, "md")
-      |> assign_rest([:form, :field, :options, :class, :wrapper_class, :label, :size])
+      |> assign_rest([:form, :field, :label, :options, :class, :wrapper_class, :size, :native])
 
     ~H"""
     <div class={@wrapper_class}>
@@ -91,23 +82,16 @@ defmodule PhoenixUiComponents.Form do
     """
   end
 
-  # attr :form, :any, required: true
-  # attr :field, :atom, required: true
-  # attr :label, :string, default: nil
-  # attr :wrapper_class, :string, default: nil
-  # attr :size, :string, default: "md", doc: ~s'Available options: "sm", "md", "lg"'
-  # attr :rest, :global
-  def field_container(assigns) do
-    assigns =
-      assigns
-      |> assign_class
-      |> assign_attr(:wrapper_class)
-      |> assign_attr(:label)
-      |> assign_attr(:size, "md")
-      |> assign_rest([:form, :field, :wrapper_class, :label, :size])
+  attr(:form, :any, required: true)
+  attr(:field, :atom, required: true)
+  attr(:label, :string, default: nil)
+  attr(:wrapper_class, :string, default: nil)
+  attr(:size, :string, values: ["sm", "md", "lg"], default: "md")
+  attr(:rest, :global)
 
+  def field_container(assigns) do
     ~H"""
-    <div class={@wrapper_class}>
+    <div class={@wrapper_class} {@rest}>
       <%= label(@form, @field, @label,
         class: ["block text-neutral-900 font-semibold mb-1", get_text_size_classes(@size)]
       ) %>
@@ -118,16 +102,14 @@ defmodule PhoenixUiComponents.Form do
     """
   end
 
-  # attr :form, :any, required: true
-  # attr :field, :atom, required: true
-  # attr :class, :string, default: nil
-  # attr :size, :string, default: "md", doc: ~s'Available options: "sm", "md", "lg"'
-  # attr :rest, :global
+  attr(:form, :any, required: true)
+  attr(:field, :atom, required: true)
+  attr(:class, :string, default: nil)
+  attr(:size, :string, values: ["sm", "md", "lg"], default: "md")
+
   def file_input(assigns) do
     assigns =
       assigns
-      |> assign_class
-      |> assign_attr(:size, "md")
       |> assign_rest([:form, :field, :class, :size])
 
     ~H"""
@@ -150,16 +132,12 @@ defmodule PhoenixUiComponents.Form do
     """
   end
 
-  # attr :form, :any, required: true
-  # attr :field, :atom, required: true
-  # attr :wrapper_class, :string, default: nil
-  def date_select(assigns) do
-    assigns =
-      assigns
-      |> assign_attr(:wrapper_class)
-      |> assign_attr(:size, "md")
-      |> assign_rest([:form, :field, :wrapper_class, :size])
+  attr(:form, :any, required: true)
+  attr(:field, :atom, required: true)
+  attr(:size, :string, values: ["sm", "md", "lg"], default: "md")
+  attr(:wrapper_class, :string, default: nil)
 
+  def date_select(assigns) do
     ~H"""
     <div class={["flex space-x-4", @wrapper_class]}>
       <%= date_select @form, @field, builder: fn b -> %>

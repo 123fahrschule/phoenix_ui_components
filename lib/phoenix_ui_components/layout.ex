@@ -1,11 +1,10 @@
 defmodule PhoenixUiComponents.Layout do
   use PhoenixUiComponents, :component
 
-  # slot :head, default: []
-  # slot :inner_block, required: true
-  def root_layout(assigns) do
-    assigns = assigns |> assign_slot(:head)
+  slot(:head, default: [])
+  slot(:inner_block, required: true)
 
+  def root_layout(assigns) do
     ~H"""
     <!DOCTYPE html>
     <html lang="de" class="h-full">
@@ -23,15 +22,12 @@ defmodule PhoenixUiComponents.Layout do
     """
   end
 
-  # attr :class, :string, default: nil
-  # attr :rest, :global
-  # slot :inner_block, required: true
-  def page_content(assigns) do
-    assigns =
-      assigns
-      |> assign_class
-      |> assign_rest([:class])
+  attr(:class, :string, default: nil)
+  attr(:rest, :global)
 
+  slot(:inner_block, required: true)
+
+  def page_content(assigns) do
     ~H"""
     <div class={["ml-64", @class]} {@rest}>
       <%= render_slot(@inner_block) %>
@@ -44,10 +40,10 @@ defmodule PhoenixUiComponents.Layout do
     <style>
       [x-cloak] { display: none !important; }
       .material-icons, .material-icons-outlined {
-          min-width: 1em;
-          max-width: 1em;
-          overflow: hidden;
-        }
+        min-width: 1em;
+        max-width: 1em;
+        overflow: hidden;
+      }
     </style>
     """
   end

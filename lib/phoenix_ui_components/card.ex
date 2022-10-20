@@ -1,33 +1,42 @@
 defmodule PhoenixUiComponents.Card do
   use PhoenixUiComponents, :component
 
-  # attr :class :string, default: nil
-  # attr :rounded :string, default: "md", values: ["xs", "sm", "md", "lg", "xl"]
-  # attr :shadow :string, default: "md", values: ["sm", "sm-2", "sm-3", "sm-4", "md", "md-2", "md-3", "md-4", "lg", "lg-2", "lg-3", "lg-4"]
-  # attr :border :boolean, default: false
-  # attr :background :string, default: "white", values: ["white", "neutral"]
-  # attr :rest, :global
-  # slot :inner_block, required: true
-  def card(assigns) do
-    assigns =
-      assigns
-      |> assign_class()
-      |> assign_attr(:rounded, "md")
-      |> assign_attr(:shadow, "md")
-      |> assign_attr(:border, false)
-      |> assign_attr(:background, "white")
-      |> assign_rest([:rounded, :shadow, :border])
+  attr(:class, :string, default: nil)
+  attr(:rounded, :string, values: ["xs", "sm", "md", "lg", "xl"], default: "md")
 
+  attr(:shadow, :string,
+    values: [
+      "sm",
+      "sm-2",
+      "sm-3",
+      "sm-4",
+      "md",
+      "md-2",
+      "md-3",
+      "md-4",
+      "lg",
+      "lg-2",
+      "lg-3",
+      "lg-4"
+    ],
+    default: "md"
+  )
+
+  attr(:border, :boolean, default: false)
+  attr(:background, :string, values: ["white", "neutral"], default: "white")
+  attr(:rest, :global)
+
+  slot(:inner_block, required: true)
+
+  def card(assigns) do
     ~H"""
     <div
-      class={
-        [
-          get_border_radius_classes(@rounded),
-          get_shadow_classes(@shadow),
-          get_border_classes(@border),
-          @class
-        ]
-      }
+      class={[
+        get_border_radius_classes(@rounded),
+        get_shadow_classes(@shadow),
+        get_border_classes(@border),
+        @class
+      ]}
       {@rest}
     >
       <%= render_slot(@inner_block) %>
