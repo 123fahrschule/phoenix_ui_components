@@ -7,7 +7,7 @@ The package can be installed by adding `phoenix_ui_components` to your list of d
 ```elixir
 def deps do
   [
-    {:phoenix_ui_components, github: "123fahrschule/phoenix_ui_components", tag: "0.2.0"}
+    {:phoenix_ui_components, github: "123fahrschule/phoenix_ui_components", tag: "0.3.0"}
   ]
 end
 ```
@@ -94,6 +94,8 @@ Change dependency from `github` to `local` in `mix.exs`
 -{:phoenix_ui_components, github: "123fahrschule/phoenix_ui_components" }
 +{:phoenix_ui_components, path: "local_path/to/phoenix_ui_components" }
 ```
+
+Add absolute path to package in `mix.exs` to `elixirc_paths` section.
 
 Update esbuild config
 

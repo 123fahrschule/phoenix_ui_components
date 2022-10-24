@@ -2,26 +2,34 @@ defmodule PhoenixUiComponents.Checkbox do
   use PhoenixUiComponents, :component
   import Phoenix.HTML.Form
 
-  # attr :form, :any, required: true
-  # attr :field, :atom, required: true
-  # attr :label, :string, required: true
-  # attr :class, :string, default: nil
-  def checkbox(assigns) do
-    assigns =
-      assigns
-      |> assign_class
+  attr(:form, :any, required: true)
+  attr(:field, :atom, required: true)
+  attr(:label, :string, required: true)
+  attr(:class, :string, default: nil)
+  attr(:size, :string, values: ["sm", "md", "lg"], default: "md")
 
+  def checkbox(assigns) do
     ~H"""
-    <div class={["relative flex items-start", @class]}>
+    <div class={["relative flex items-center px-2", get_size_classes(@size), @class]}>
       <%= checkbox(@form, @field,
-        class:
-          "peer h-4 w-4 rounded border-2 border-neutral-700 text-primary-300 focus:ring-primary-300 mr-3 cursor-pointer"
+        class: [
+          "peer rounded border-2 border-neutral-700 text-primary-300 focus:ring-primary-300 mr-2 cursor-pointer",
+          get_checkbox_size_classes(@size)
+        ]
       ) %>
       <%= label(@form, @field, @label,
         class:
-          "text-sm cursor-pointer text-neutral-700 peer-checked:font-semibold peer-checked:text-neutral-900"
+          "cursor-pointer text-neutral-700 peer-checked:font-semibold peer-checked:text-neutral-900"
       ) %>
     </div>
     """
   end
+
+  defp get_size_classes("sm"), do: "text-xs py-3"
+  defp get_size_classes("md"), do: "text-sm py-4"
+  defp get_size_classes("lg"), do: "text-base py-4"
+
+  defp get_checkbox_size_classes("sm"), do: "h-4 w-4"
+  defp get_checkbox_size_classes("md"), do: "h-4 w-4"
+  defp get_checkbox_size_classes("lg"), do: "h-6 w-6"
 end

@@ -1,5 +1,5 @@
 defmodule PhoenixUiComponents.Helpers do
-  use Phoenix.Component
+  import Phoenix.Component
 
   def assign_attr(assigns, attr, default_value \\ nil) do
     assign_new(assigns, attr, fn -> default_value end)

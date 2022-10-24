@@ -81,29 +81,29 @@ var require_tailwind_preset = __commonJS({
               400: "#01627E",
               500: "#003444"
             }
+          },
+          boxShadow: {
+            sm: "0px 2px 4px -2px rgba(31, 41, 51, 0.08)",
+            "sm-2": "0px 2px 4px -2px rgba(31, 41, 51, 0.08)",
+            "sm-3": "0px 4px 8px -2px rgba(31, 41, 51, 0.08)",
+            "sm-4": "0px 4px 12px -4px rgba(31, 41, 51, 0.16)",
+            md: "0px 12px 24px -8px rgba(31, 41, 51, 0.12)",
+            "md-2": "0px 16px 24px -8px rgba(31, 41, 51, 0.16)",
+            "md-3": "0px 24px 28px -12px rgba(31, 41, 51, 0.18)",
+            "md-4": "0px 28px 40px -8px rgba(31, 41, 51, 0.2)",
+            lg: "0px 32px 48px -24px rgba(31, 41, 51, 0.2)",
+            "lg-2": "0px 36px 56px -24px rgba(31, 41, 51, 0.28)",
+            "lg-3": "0px 40px 64px -24px rgba(31, 41, 51, 0.36)",
+            "lg-4": "0px 48px 84px -32px rgba(31, 41, 51, 0.48)",
+            input: "inset 0px 2px 2px rgba(224, 229, 235, 0.64)",
+            "input-focus": "inset 0px 2px 2px rgba(42, 96, 118, 0.24)",
+            "input-disabled": "inset 0px 2px 2px rgba(121, 135, 150, 0.24)",
+            "input-success": "inset 0px 2px 2px rgba(28, 184, 84, 0.24)",
+            "input-error": "inset 0px 2px 2px rgba(255, 87, 34, 0.24)"
+          },
+          fontFamily: {
+            sans: ["Open Sans", "sans-serif"]
           }
-        },
-        boxShadow: {
-          sm: "0px 2px 4px -2px rgba(31, 41, 51, 0.08)",
-          "sm-2": "0px 2px 4px -2px rgba(31, 41, 51, 0.08)",
-          "sm-3": "0px 4px 8px -2px rgba(31, 41, 51, 0.08)",
-          "sm-4": "0px 4px 12px -4px rgba(31, 41, 51, 0.16)",
-          md: "0px 12px 24px -8px rgba(31, 41, 51, 0.12)",
-          "md-2": "0px 16px 24px -8px rgba(31, 41, 51, 0.16)",
-          "md-3": "0px 24px 28px -12px rgba(31, 41, 51, 0.18)",
-          "md-4": "0px 28px 40px -8px rgba(31, 41, 51, 0.2)",
-          lg: "0px 32px 48px -24px rgba(31, 41, 51, 0.2)",
-          "lg-2": "0px 36px 56px -24px rgba(31, 41, 51, 0.28)",
-          "lg-3": "0px 40px 64px -24px rgba(31, 41, 51, 0.36)",
-          "lg-4": "0px 48px 84px -32px rgba(31, 41, 51, 0.48)",
-          input: "inset 0px 2px 2px rgba(224, 229, 235, 0.64)",
-          "input-focus": "inset 0px 2px 2px rgba(42, 96, 118, 0.24)",
-          "input-disabled": "inset 0px 2px 2px rgba(121, 135, 150, 0.24)",
-          "input-success": "inset 0px 2px 2px rgba(28, 184, 84, 0.24)",
-          "input-error": "inset 0px 2px 2px rgba(255, 87, 34, 0.24)"
-        },
-        fontFamily: {
-          sans: ["Open Sans", "sans-serif"]
         }
       }
     };

@@ -4,7 +4,7 @@ defmodule PhoenixUiComponents.MixProject do
   def project do
     [
       app: :phoenix_ui_components,
-      version: "0.2.0",
+      version: "0.3.0",
       elixir: "~> 1.13",
       start_permanent: Mix.env() == :prod,
       deps: deps(),
@@ -25,7 +25,7 @@ defmodule PhoenixUiComponents.MixProject do
       # Productive. Reliable. Fast. A productive web framework that does not compromise speed and maintainability.
       {:phoenix, "~> 1.6"},
       # Rich, real-time user experiences with server-rendered HTML
-      {:phoenix_live_view, "~> 0.17.11"},
+      {:phoenix_live_view, "~> 0.18.2"},
 
       # Dev dependencies
       {:esbuild, "~> 0.5", only: :dev}
@@ -35,7 +35,7 @@ defmodule PhoenixUiComponents.MixProject do
   defp aliases do
     [
       "assets.build": ["esbuild module", "esbuild main"],
-      "assets.watch": "esbuild module --watch"
+      "assets.watch": "esbuild main --watch"
     ]
   end
 end

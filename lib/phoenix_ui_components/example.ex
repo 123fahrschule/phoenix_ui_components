@@ -4,112 +4,184 @@ defmodule PhoenixUiComponents.Example do
 
   def example(assigns) do
     ~H"""
-    <%= # <.spinner full_screen /> %>
+    <.side_nav sections={side_nav_sections()} />
 
-    <.side_nav sections={
-      [
-        General: [
-          %{
-            label: "Dashboard",
-            icon: :dashboard,
-            items: [
-              %{label: "Label 1", href: "#"},
-              %{label: "Label 2", navigate: "#"},
-              %{label: "Label 3", patch: "#"}
-            ]
-          },
-          %{label: "Calendar", icon: :calendar_month, href: "#"},
-          %{label: "Lessons", icon: :menu_book, href: "#"},
-          %{label: "Notifications", icon: :notifications, href: "#"},
-          %{label: "Students", icon: :badge, href: "#"}
-        ],
-        Other: [
-          %{label: "Configurations", icon: :tune, href: "#"},
-          %{label: "Settings", icon: :settings, href: "#"},
-          %{label: "Label", icon: :image, href: "#"}
-        ]
-      ]
-    } />
-
-    <div class="py-10">
-      <div class="px-10 space-y-4">
-        <div>
-          <h1>h1 Lorem ipsum dolor sit amet, consectet</h1>
-          <h2>h2 Lorem ipsum dolor sit amet, consectet</h2>
-          <h3>h3 Lorem ipsum dolor sit amet, consectet</h3>
-          <h4>h4 Lorem ipsum dolor sit amet, consectet</h4>
-          <h5>h5 Lorem ipsum dolor sit amet, consectet</h5>
-          <h6>h6 Lorem ipsum dolor sit amet, consectet</h6>
-        </div>
-
-        <div>
-          <p class="text-base">
-            base Lorem <span class="font-semibold">ipsum</span> <span class="font-bold">dolor</span>
-            <span class="italic">sit</span> amet, consectet
-          </p>
-          <p class="text-sm">
-            sm Lorem <span class="font-semibold">ipsum</span> <span class="font-bold">dolor</span>
-            <span class="italic">sit</span> amet, consectet
-          </p>
-          <p class="text-xs">
-            xs Lorem <span class="font-semibold">ipsum</span> <span class="font-bold">dolor</span>
-            <span class="italic">sit</span> amet, consectet
-          </p>
-        </div>
-
-        <div>
-          <.button label="button" size="sm" />
-          <.button label="button" />
-          <.button label="button" size="lg" />
-          <.button label="button" disabled />
-        </div>
-
-        <div>
-          <.button label="button" variant="secondary" size="sm" />
-          <.button label="button" variant="secondary" />
-          <.button label="button" variant="secondary" size="lg" />
-          <.button label="button" variant="secondary" disabled />
-        </div>
-
-        <div>
-          <.button label="button" variant="tertiary" size="sm" />
-          <.button label="button" variant="tertiary" />
-          <.button label="button" variant="tertiary" size="lg" />
-          <.button label="button" variant="tertiary" disabled />
-        </div>
-
-        <div>
-          <.button label="button" left_icon={:error} />
-          <.button label="button" right_icon={:error} />
-          <.button label="button" left_icon={:error} right_icon={:error} />
-        </div>
-
-        <div>
-          <.button icon={:error} size="sm" />
-          <.button icon={:error} />
-          <.button icon={:error} size="lg" />
-        </div>
-      </div>
-
-      <div class="px-10 mb-4 space-y-4">
-        <.form for={:input} let={f}>
-          <.text_field form={f} field={:sm} label="Input sm" placeholder="Placeholder" size="sm" />
-          <.text_field form={f} field={:md} label="Input md" placeholder="Placeholder" />
-          <.text_field form={f} field={:lg} label="Input lg" placeholder="Placeholder" size="lg" />
+    <.page_content>
+      <.top_nav_container>
+        <.form :let={f} for={:search} class="mx-auto">
+          <.form_field form={f} field={:search} placeholder="Search ..." />
         </.form>
-      </div>
+        <.sunrise_sunset sunrise="08:00" sunset="22:00" class="ml-auto mr-6" />
+        <div class="flex mr-14 rounded-full p-1">
+          <.avatar />
+        </div>
+      </.top_nav_container>
 
-      <div class="px-10 mb-4 space-y-4">
-        <.form for={:select} let={f}>
-          <.select native form={f} field={:sm} label="Select sm" size="sm" options={[]} />
-          <.select native form={f} field={:md} label="Select md" options={[]} />
-          <.select native form={f} field={:lg} label="Select lg" size="lg" options={[]} />
-        </.form>
-      </div>
+      <div class="p-10">
+        <div
+          x-data="{ showSpinner: false }"
+          x-on:keyup.escape.window="showSpinner = false"
+          class="mb-4"
+        >
+          <.button label="Toggle spinner" x-on:click="showSpinner = true" />
+          <.spinner
+            full_screen
+            x-on:click.outside="showSpinner = false"
+            backdrop_attrs={["x-show": "showSpinner", "x-cloak": true]}
+          />
+        </div>
 
-      <div class="px-10 mb-4 space-y-4">
-        <%= for size <- ["sm", "md", "lg"] do %>
-          <%= for type <- ["info", "success", "warning", "error"] do %>
+        <div class="space-y-4">
+          <div>
+            <.h1>h1 Lorem ipsum dolor sit amet, consectet</.h1>
+            <.h2>h2 Lorem ipsum dolor sit amet, consectet</.h2>
+            <.h3>h3 Lorem ipsum dolor sit amet, consectet</.h3>
+            <.h4>h4 Lorem ipsum dolor sit amet, consectet</.h4>
+            <.h5>h5 Lorem ipsum dolor sit amet, consectet</.h5>
+            <.h6>h6 Lorem ipsum dolor sit amet, consectet</.h6>
+          </div>
+
+          <div>
+            <p class="text-base">
+              base Lorem <span class="font-semibold">ipsum</span> <span class="font-bold">dolor</span>
+              <span class="italic">sit</span> amet, consectet
+            </p>
+            <p class="text-sm">
+              sm Lorem <span class="font-semibold">ipsum</span> <span class="font-bold">dolor</span>
+              <span class="italic">sit</span> amet, consectet
+            </p>
+            <p class="text-xs">
+              xs Lorem <span class="font-semibold">ipsum</span> <span class="font-bold">dolor</span>
+              <span class="italic">sit</span> amet, consectet
+            </p>
+          </div>
+
+          <div class="mb-4 space-x-2">
+            <%= for size <- ["sm", "md"], type <- ["neutral", "info", "success", "warning", "error"] do %>
+              <.badge label={type} size={size} type={type} icon={:keyboard_arrow_down} />
+            <% end %>
+          </div>
+          <div class="mb-4 space-x-2">
+            <%= for size <- ["sm", "md"], type <- ["neutral", "info", "success", "warning", "error"] do %>
+              <.badge
+                label={type}
+                size={size}
+                type={type}
+                icon_position="end"
+                icon={:keyboard_arrow_down}
+              />
+            <% end %>
+          </div>
+          <div class="mb-4 space-x-2">
+            <%= for size <- ["sm", "md"], type <- ["neutral", "info", "success", "warning", "error"] do %>
+              <.badge size={size} type={type} icon={:keyboard_arrow_down} />
+            <% end %>
+          </div>
+          <div class="w-fit grid grid-cols-2 gap-4 mb-4">
+            <.avatar src="https://i.pravatar.cc/300" />
+            <.avatar src="https://i.pravatar.cc/300" shape="square" />
+            <.avatar initials="AB" />
+            <.avatar initials="AB" shape="square" />
+            <.avatar />
+            <.avatar shape="square" />
+          </div>
+
+          <div>
+            <.button label="button" size="sm" href="#" />
+            <.button label="button" size="sm" href="/" />
+            <.button label="button" size="sm" patch="/" />
+            <.button label="button" size="sm" navigate="/" />
+          </div>
+
+          <div>
+            <.button label="button" size="sm" />
+            <.button label="button" />
+            <.button label="button" size="lg" />
+            <.button label="button" disabled />
+          </div>
+
+          <div>
+            <.button label="button" variant="secondary" size="sm" />
+            <.button label="button" variant="secondary" />
+            <.button label="button" variant="secondary" size="lg" />
+            <.button label="button" variant="secondary" disabled />
+          </div>
+
+          <div>
+            <.button label="button" variant="tertiary" size="sm" />
+            <.button label="button" variant="tertiary" />
+            <.button label="button" variant="tertiary" size="lg" />
+            <.button label="button" variant="tertiary" disabled />
+          </div>
+
+          <div>
+            <.button label="button" left_icon={:error} />
+            <.button label="button" right_icon={:error} />
+            <.button label="button" left_icon={:error} right_icon={:error} />
+          </div>
+
+          <div>
+            <.button icon={:error} size="sm" />
+            <.button icon={:error} />
+            <.button icon={:error} size="lg" />
+          </div>
+        </div>
+
+        <div>
+          <.form :let={f} for={:checkbox}>
+            <.checkbox form={f} field={:sm} label="checkbox sm" size="sm" />
+            <.checkbox form={f} field={:md} label="checkbox md" />
+            <.checkbox form={f} field={:lg} label="checkbox lg" size="lg" />
+          </.form>
+        </div>
+
+        <div class="mb-4">
+          <.form :let={f} for={:input} multipart class="space-y-4">
+            <.form_field form={f} field={:text} label="text" placeholder="text" />
+
+            <.form_field type="email" form={f} field={:email} label="email" placeholder="email" />
+
+            <.form_field
+              type="password"
+              form={f}
+              field={:password}
+              label="password"
+              placeholder="password"
+            />
+
+            <.form_field
+              type="textarea"
+              form={f}
+              field={:textarea}
+              label="textarea"
+              placeholder="textarea"
+            />
+
+            <.form_field
+              type="select"
+              form={f}
+              field={:select}
+              label="select"
+              placeholder="select"
+              options={[One: :one, Two: :two, Three: :three]}
+            />
+
+            <.form_field
+              type="file"
+              form={f}
+              field={:file_input}
+              label="file_input"
+              placeholder="file_input"
+            />
+
+            <.form_field type="date_select" form={f} field={:date_select} label="date_select" />
+
+            <.form_field type="number" form={f} field={:number} label="number_field" />
+          </.form>
+        </div>
+
+        <div class="mb-4 space-y-4">
+          <%= for size <- ["sm", "md", "lg"], type <- ["info", "success", "warning", "error"]  do %>
             <.banner
               type={type}
               size={size}
@@ -118,9 +190,34 @@ defmodule PhoenixUiComponents.Example do
               close_button_attributes={[]}
             />
           <% end %>
-        <% end %>
+        </div>
       </div>
-    </div>
+    </.page_content>
     """
+  end
+
+  defp side_nav_sections() do
+    [
+      General: [
+        %{
+          label: "Dashboard",
+          icon: :dashboard,
+          items: [
+            %{label: "Label 1", href: "#"},
+            %{label: "Label 2", navigate: "#"},
+            %{label: "Label 3", patch: "#"}
+          ]
+        },
+        %{label: "Calendar", icon: :calendar_month, href: "#"},
+        %{label: "Lessons", icon: :menu_book, href: "#"},
+        %{label: "Notifications", icon: :notifications, href: "#"},
+        %{label: "Students", icon: :badge, href: "#"}
+      ],
+      Other: [
+        %{label: "Configurations", icon: :tune, href: "#"},
+        %{label: "Settings", icon: :settings, href: "#"},
+        %{label: "Label", icon: :image, href: "#"}
+      ]
+    ]
   end
 end
