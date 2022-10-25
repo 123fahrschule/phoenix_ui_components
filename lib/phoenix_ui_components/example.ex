@@ -18,6 +18,8 @@ defmodule PhoenixUiComponents.Example do
       </.top_nav_container>
 
       <div class="p-10">
+        <.breadcrumbs icon={:image} breadcrumbs={breadcrumbs()} class="mb-4" />
+
         <div
           x-data="{ showSpinner: false }"
           x-on:keyup.escape.window="showSpinner = false"
@@ -224,6 +226,15 @@ defmodule PhoenixUiComponents.Example do
         %{label: "Settings", icon: :settings, href: "#"},
         %{label: "Label", icon: :image, href: "#"}
       ]
+    ]
+  end
+
+  defp breadcrumbs() do
+    [
+      %{label: "Link", href: "#", icon: :image},
+      %{label: "Live patch", patch: "#"},
+      %{label: "Live redirect", navigate: "#"},
+      %{label: "Active"}
     ]
   end
 end
