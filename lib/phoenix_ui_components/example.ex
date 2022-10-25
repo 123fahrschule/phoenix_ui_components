@@ -191,6 +191,12 @@ defmodule PhoenixUiComponents.Example do
             />
           <% end %>
         </div>
+        <div class="flex space-x-4">
+          <.icon icon={:info} class="text-[20px] text-primary-200" />
+          <.icon icon={:overland_lesson_icon} class="h-8 w-8 text-secondary-200" />
+          <.icon icon={:night_lesson_icon} />
+          <.icon icon={:highway_lesson_icon} />
+        </div>
       </div>
     </.page_content>
     """
