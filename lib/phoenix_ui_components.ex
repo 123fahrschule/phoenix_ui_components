@@ -19,6 +19,7 @@ defmodule PhoenixUiComponents do
         Backdrop,
         Badge,
         Banner,
+        Breadcrumbs,
         Button,
         Card,
         Checkbox,
