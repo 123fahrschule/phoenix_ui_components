@@ -1,5 +1,6 @@
 defmodule PhoenixUiComponents.Badge do
   use PhoenixUiComponents, :component
+  import PhoenixUiComponents.Icon
 
   attr(:class, :string, default: nil)
   attr(:label, :string, default: nil)
@@ -25,7 +26,7 @@ defmodule PhoenixUiComponents.Badge do
   def badge(%{label: nil} = assigns) do
     ~H"""
     <div class={[get_classes(assigns), get_size_classes(@size, @label)]} {@rest}>
-      <MaterialIcons.icon icon={@icon} class="text-[24px]" />
+      <.icon icon={@icon} class="text-[24px]" />
     </div>
     """
   end
@@ -33,13 +34,9 @@ defmodule PhoenixUiComponents.Badge do
   def badge(assigns) do
     ~H"""
     <div class={[get_classes(assigns), get_size_classes(@size, @label)]} {@rest}>
-      <MaterialIcons.icon
-        :if={@icon_position == "start"}
-        icon={@icon}
-        class="text-[16px] -ml-2 mr-0.5"
-      />
+      <.icon :if={@icon_position == "start"} icon={@icon} class="text-[16px] -ml-2 mr-0.5" />
       <%= @label %>
-      <MaterialIcons.icon :if={@icon_position == "end"} icon={@icon} class="text-[16px] -mr-2 ml-0.5" />
+      <.icon :if={@icon_position == "end"} icon={@icon} class="text-[16px] -mr-2 ml-0.5" />
     </div>
     """
   end

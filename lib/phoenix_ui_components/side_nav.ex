@@ -1,5 +1,6 @@
 defmodule PhoenixUiComponents.SideNav do
   use PhoenixUiComponents, :component
+  import PhoenixUiComponents.Icon
   import PhoenixUiComponents.CustomLink
   import PhoenixUiComponents.Logo
 
@@ -88,11 +89,10 @@ defmodule PhoenixUiComponents.SideNav do
         x-bind="toggler"
         {@rest}
       >
-        <MaterialIcons.icon outlined icon={@icon} class="flex-shrink-0 mr-2" />
+        <.icon outlined icon={@icon} class="flex-shrink-0 mr-2" />
         <%= @label %>
-        <MaterialIcons.icon
+        <.icon
           outlined
-          <
           icon={:keyboard_arrow_down}
           class="ml-auto transition-transform duration-300"
           x-bind="arrowIcon"
@@ -118,7 +118,7 @@ defmodule PhoenixUiComponents.SideNav do
         ]}
         {@rest}
       >
-        <MaterialIcons.icon outlined icon={@icon} class="flex-shrink-0 mr-2" />
+        <.icon outlined icon={@icon} class="flex-shrink-0 mr-2" />
         <%= @label %>
       </.custom_link>
     </li>

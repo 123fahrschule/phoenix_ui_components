@@ -1,5 +1,6 @@
 defmodule PhoenixUiComponents.Button do
   use PhoenixUiComponents, :component
+  import PhoenixUiComponents.Icon
   import PhoenixUiComponents.CustomLink
 
   attr(:type, :string, default: "button")
@@ -24,23 +25,15 @@ defmodule PhoenixUiComponents.Button do
 
   defp content(%{icon: icon} = assigns) when not is_nil(icon) do
     ~H"""
-    <MaterialIcons.icon icon={@icon} class={get_icon_size_classes(@size)} />
+    <.icon icon={@icon} class={get_icon_size_classes(@size)} />
     """
   end
 
   defp content(assigns) do
     ~H"""
-    <MaterialIcons.icon
-      :if={@left_icon}
-      icon={@left_icon}
-      class={["mr-1 -ml-2 ", get_icon_size_classes(@size)]}
-    />
+    <.icon :if={@left_icon} icon={@left_icon} class={["mr-1 -ml-2 ", get_icon_size_classes(@size)]} />
     <%= if @label, do: @label, else: render_slot(@inner_block) %>
-    <MaterialIcons.icon
-      :if={@right_icon}
-      icon={@right_icon}
-      class={["-mr-2 ml-1 ", get_icon_size_classes(@size)]}
-    />
+    <.icon :if={@right_icon} icon={@right_icon} class={["-mr-2 ml-1 ", get_icon_size_classes(@size)]} />
     """
   end
 

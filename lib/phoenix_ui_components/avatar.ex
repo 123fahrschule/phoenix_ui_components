@@ -1,5 +1,6 @@
 defmodule PhoenixUiComponents.Avatar do
   use PhoenixUiComponents, :component
+  import PhoenixUiComponents.Icon
 
   attr(:class, :string, default: nil)
   attr(:src, :string)
@@ -27,7 +28,7 @@ defmodule PhoenixUiComponents.Avatar do
   def avatar(assigns) do
     ~H"""
     <div class={["flex items-center justify-center", get_classes(assigns)]} {@rest}>
-      <MaterialIcons.icon icon={:account_circle} class="text-[20px]" />
+      <.icon icon={:account_circle} class="text-[20px]" />
     </div>
     """
   end
