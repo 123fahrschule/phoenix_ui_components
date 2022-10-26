@@ -28,8 +28,6 @@ defmodule PhoenixUiComponents.Icon do
   end
 
   def icon(%{icon: :night_lesson_icon} = assigns) do
-    assigns = assigns |> assign_class
-
     ~H"""
     <svg
       class={@class}
@@ -51,8 +49,6 @@ defmodule PhoenixUiComponents.Icon do
   end
 
   def icon(%{icon: :highway_lesson_icon} = assigns) do
-    assigns = assigns |> assign_class
-
     ~H"""
     <svg
       class={@class}
