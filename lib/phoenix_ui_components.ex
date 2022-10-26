@@ -5,7 +5,6 @@ defmodule PhoenixUiComponents do
       use Phoenix.Component, global_prefixes: ~w(x-)
 
       import PhoenixUiComponents.Helpers
-      alias PhoenixUiComponents.Icons.MaterialIcons
     end
   end
 
@@ -15,18 +14,18 @@ defmodule PhoenixUiComponents do
 
   defmacro __using__(_) do
     quote do
-      alias PhoenixUiComponents.Icons.MaterialIcons
-
       import PhoenixUiComponents.{
         Avatar,
         Backdrop,
         Badge,
         Banner,
+        Breadcrumbs,
         Button,
         Card,
         Checkbox,
         CustomLink,
         Form,
+        Icon,
         Layout,
         SideNav,
         Spinner,

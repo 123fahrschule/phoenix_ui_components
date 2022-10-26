@@ -1,5 +1,6 @@
 defmodule PhoenixUiComponents.TopNav do
   use PhoenixUiComponents, :component
+  import PhoenixUiComponents.Icon
 
   attr(:class, :string, default: nil)
   attr(:rest, :global)
@@ -22,13 +23,13 @@ defmodule PhoenixUiComponents.TopNav do
     ~H"""
     <div class={["flex space-x-2 text-xs text-gray-500", @class]}>
       <div>
-        <MaterialIcons.icon icon={:wb_sunny} class="text-[16px] text-warning-300 align-middle" />
+        <.icon icon={:wb_sunny} class="text-[16px] text-warning-300 align-middle" />
         <span>
           <%= @sunset %>
         </span>
       </div>
       <div>
-        <MaterialIcons.icon icon={:dark_mode} class="text-[16px] text-info-500 align-middle" />
+        <.icon icon={:dark_mode} class="text-[16px] text-info-500 align-middle" />
         <span>
           <%= @sunrise %>
         </span>
