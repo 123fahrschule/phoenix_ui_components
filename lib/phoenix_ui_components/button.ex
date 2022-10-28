@@ -17,9 +17,51 @@ defmodule PhoenixUiComponents.Button do
   attr(:icon, :atom, default: nil)
   attr(:left_icon, :atom, default: nil)
   attr(:right_icon, :atom, default: nil)
+  attr(:primary, :boolean, default: false)
+  attr(:secondary, :boolean, default: false)
+  attr(:tertiary, :boolean, default: false)
   attr(:rest, :global)
 
   slot(:inner_block)
+
+  def button(%{primary: true} = assigns) do
+    assigns =
+      assigns
+      |> assign(:variant, "filled")
+      |> assign(:color, "secondary")
+
+    ~H"""
+    <.custom_link type={@type} class={get_classes(assigns)} {@rest}>
+      <.content {assigns} />
+    </.custom_link>
+    """
+  end
+
+  def button(%{secondary: true} = assigns) do
+    assigns =
+      assigns
+      |> assign(:variant, "outlined")
+      |> assign(:color, "neutral")
+
+    ~H"""
+    <.custom_link type={@type} class={get_classes(assigns)} {@rest}>
+      <.content {assigns} />
+    </.custom_link>
+    """
+  end
+
+  def button(%{tertiary: true} = assigns) do
+    assigns =
+      assigns
+      |> assign(:variant, "text")
+      |> assign(:color, "secondary")
+
+    ~H"""
+    <.custom_link type={@type} class={get_classes(assigns)} {@rest}>
+      <.content {assigns} />
+    </.custom_link>
+    """
+  end
 
   def button(assigns) do
     ~H"""

@@ -121,6 +121,12 @@ defmodule PhoenixUiComponents.Example do
           </div>
 
           <div>
+            <.button primary label="primary" />
+            <.button secondary label="secondary" />
+            <.button tertiary label="tertiary" />
+          </div>
+
+          <div>
             <.button icon={:error} size="sm" />
             <.button icon={:error} />
             <.button icon={:error} size="lg" />
