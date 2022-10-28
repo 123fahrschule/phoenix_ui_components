@@ -143,7 +143,11 @@ defmodule PhoenixUiComponents.Example do
 
         <div class="mb-4">
           <.form :let={f} for={:input} multipart class="space-y-4">
-            <.form_field form={f} field={:text} label="text" placeholder="text" />
+            <.form_field form={f} field={:text} label="text" placeholder="text">
+              <:secondary_label>
+                (Optional) <.icon icon={:info} class="text-[16px] align-middle" />
+              </:secondary_label>
+            </.form_field>
 
             <.form_field type="email" form={f} field={:email} label="email" placeholder="email" />
 

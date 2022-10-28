@@ -30,11 +30,16 @@ defmodule PhoenixUiComponents.Form do
   attr(:label, :string, default: nil)
   attr(:size, :string, values: ["sm", "md", "lg"], default: "md")
 
+  slot(:secondary_label)
+
   def field_label(assigns) do
     ~H"""
-    <%= label(@form, @field, @label,
-      class: ["block text-neutral-900 font-semibold mb-1", get_text_size_classes(@size)]
-    ) %>
+    <%= label @form, @field, class: ["block text-neutral-900 font-semibold mb-1", get_text_size_classes(@size)] do %>
+      <%= @label %>
+      <span :if={@secondary_label != []} class="text-xs text-neutral-600 font-normal">
+        <%= render_slot(@secondary_label) %>
+      </span>
+    <% end %>
     """
   end
 
@@ -57,10 +62,16 @@ defmodule PhoenixUiComponents.Form do
   attr(:size, :string, values: ["sm", "md", "lg"], default: "md")
   attr(:rest, :global)
 
+  slot(:secondary_label)
+
   def form_field(assigns) do
     ~H"""
     <.field_container {@container_attrs}>
-      <.field_label form={@form} field={@field} label={@label} size={@size} />
+      <.field_label form={@form} field={@field} label={@label} size={@size}>
+        <:secondary_label :if={@secondary_label != []}>
+          <%= render_slot(@secondary_label) %>
+        </:secondary_label>
+      </.field_label>
       <.input_container>
         <.field_input
           type={@type}
