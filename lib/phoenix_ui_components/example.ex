@@ -88,6 +88,19 @@ defmodule PhoenixUiComponents.Example do
             <.avatar shape="square" />
           </div>
 
+          <div class="w-fit grid grid-cols-3 gap-4">
+            <%= for  color <- ["primary", "secondary", "neutral", "info", "success", "warning", "error"], variant <-["filled", "outlined", "text"] do %>
+              <.button variant={variant} color={color} label={"#{variant}-#{color}"} />
+            <% end %>
+          </div>
+
+          <div class="p-2 bg-primary-500">
+            <.button variant="filled" color="white" label="filled-white" text_color="neutral" />
+            <%= for  variant <-["outlined", "text"] do %>
+              <.button variant={variant} color="white" label={"#{variant}-white"} />
+            <% end %>
+          </div>
+
           <div>
             <.button label="button" size="sm" href="#" />
             <.button label="button" size="sm" href="/" />
@@ -96,30 +109,15 @@ defmodule PhoenixUiComponents.Example do
           </div>
 
           <div>
-            <.button label="button" size="sm" />
-            <.button label="button" />
-            <.button label="button" size="lg" />
-            <.button label="button" disabled />
+            <.button label="left icon" left_icon={:error} />
+            <.button label="right icon" right_icon={:error} />
+            <.button label="left and right icons" left_icon={:error} right_icon={:error} />
           </div>
 
           <div>
-            <.button label="button" variant="secondary" size="sm" />
-            <.button label="button" variant="secondary" />
-            <.button label="button" variant="secondary" size="lg" />
-            <.button label="button" variant="secondary" disabled />
-          </div>
-
-          <div>
-            <.button label="button" variant="tertiary" size="sm" />
-            <.button label="button" variant="tertiary" />
-            <.button label="button" variant="tertiary" size="lg" />
-            <.button label="button" variant="tertiary" disabled />
-          </div>
-
-          <div>
-            <.button label="button" left_icon={:error} />
-            <.button label="button" right_icon={:error} />
-            <.button label="button" left_icon={:error} right_icon={:error} />
+            <%= for size <- ["sm", "md", "lg"] do %>
+              <.button label={"size: #{size}"} size={size} />
+            <% end %>
           </div>
 
           <div>
