@@ -17,6 +17,9 @@ defmodule PhoenixUiComponents.Button do
   attr(:icon, :atom, default: nil)
   attr(:left_icon, :atom, default: nil)
   attr(:right_icon, :atom, default: nil)
+  attr(:icon_attrs, :list, default: [])
+  attr(:left_icon_attrs, :list, default: [])
+  attr(:right_icon_attrs, :list, default: [])
   attr(:primary, :boolean, default: false)
   attr(:secondary, :boolean, default: false)
   attr(:tertiary, :boolean, default: false)
@@ -73,15 +76,36 @@ defmodule PhoenixUiComponents.Button do
 
   defp content(%{icon: icon} = assigns) when not is_nil(icon) do
     ~H"""
-    <.icon icon={@icon} class={get_icon_size_classes(@size)} />
+    <.button_icon icon={@icon} default_class={get_icon_size_classes(@size)} {@icon_attrs} />
     """
   end
 
   defp content(assigns) do
     ~H"""
-    <.icon :if={@left_icon} icon={@left_icon} class={["mr-1 -ml-2 ", get_icon_size_classes(@size)]} />
+    <.button_icon
+      :if={@left_icon}
+      icon={@left_icon}
+      default_class={["mr-1 -ml-2 ", get_icon_size_classes(@size)]}
+      {@left_icon_attrs}
+    />
     <%= if @label, do: @label, else: render_slot(@inner_block) %>
-    <.icon :if={@right_icon} icon={@right_icon} class={["-mr-2 ml-1 ", get_icon_size_classes(@size)]} />
+    <.button_icon
+      :if={@right_icon}
+      icon={@right_icon}
+      default_class={["-mr-2 ml-1 ", get_icon_size_classes(@size)]}
+      {@right_icon_attrs}
+    />
+    """
+  end
+
+  attr(:icon, :atom, required: true)
+  attr(:class, :string, default: nil)
+  attr(:default_class, :string, default: nil)
+  attr(:rest, :global)
+
+  defp button_icon(assigns) do
+    ~H"""
+    <.icon icon={@icon} class={[@default_class, @class]} {@rest} />
     """
   end
 
