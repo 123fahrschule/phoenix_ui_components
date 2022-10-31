@@ -187,6 +187,12 @@ defmodule PhoenixUiComponents.Example do
             <.form_field type="date_select" form={f} field={:date_select} label="date_select" />
 
             <.form_field type="number" form={f} field={:number} label="number_field" />
+
+            <.form_field form={f} field={:success_state} label="success_state" state="success" />
+
+            <.form_field form={f} field={:error_state} label="error_state" state="error" />
+
+            <.form_field form={f} field={:with_error} label="with_error" error_message="Error!" />
           </.form>
         </div>
 
