@@ -201,6 +201,12 @@ defmodule PhoenixUiComponents.Example do
             />
           <% end %>
         </div>
+
+        <div class="mb-4">
+          <.tag label="TAG" />
+          <.tag label="looooooooooooooooooooooooooooong" class="w-20" />
+        </div>
+
         <div class="flex space-x-4">
           <.icon icon={:info} class="text-[20px] text-primary-200" />
           <.icon icon={:overland_lesson_icon} class="h-8 w-8 text-secondary-200" />

@@ -1,6 +1,7 @@
 defmodule PhoenixUiComponents.Form do
   use PhoenixUiComponents, :component
   import Phoenix.HTML.Form
+  import PhoenixUiComponents.Icon
 
   attr(:rest, :global)
 
@@ -202,6 +203,28 @@ defmodule PhoenixUiComponents.Form do
     """
   end
 
+  attr(:class, :string, default: nil)
+  attr(:label, :string, default: nil)
+  attr(:size, :string, values: ["sm", "md"], default: "md")
+  attr(:close_button_attrs, :list, default: [])
+
+  def tag(assigns) do
+    ~H"""
+    <div class={[
+      "rounded-full inline-flex items-center bg-neutral-300 text-sm text-neutral-700 font-semibold",
+      get_tag_size_classes(@size),
+      @class
+    ]}>
+      <span class="text-ellipsis overflow-hidden">
+        <%= @label %>
+      </span>
+      <button class="leading-[0] ml-1" {@close_button_attrs}>
+        <.icon icon={:close} class="text-[16px]" />
+      </button>
+    </div>
+    """
+  end
+
   defp get_input_vertical_size_classes("sm"), do: "py-2"
   defp get_input_vertical_size_classes("md"), do: "py-2.5"
   defp get_input_vertical_size_classes("lg"), do: "py-3"
@@ -243,4 +266,7 @@ defmodule PhoenixUiComponents.Form do
   def get_textarea_size_classes("sm"), do: "!rounded-lg"
   def get_textarea_size_classes("md"), do: "!rounded-2xl"
   def get_textarea_size_classes("lg"), do: "!rounded-3xl"
+
+  defp get_tag_size_classes("sm"), do: "py-1 pl-3 pr-2"
+  defp get_tag_size_classes("md"), do: "py-1.5 pl-4 pr-2"
 end
