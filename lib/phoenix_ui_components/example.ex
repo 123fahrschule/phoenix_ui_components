@@ -193,6 +193,10 @@ defmodule PhoenixUiComponents.Example do
             <.form_field form={f} field={:error_state} label="error_state" state="error" />
 
             <.form_field form={f} field={:with_error} label="with_error" error_message="Error!" />
+
+            <.form_field form={f} field={:left_icon} label="left_icon" left_icon={:info} />
+
+            <.form_field form={f} field={:right_icon} label="right_icon" right_icon={:info} />
           </.form>
         </div>
 

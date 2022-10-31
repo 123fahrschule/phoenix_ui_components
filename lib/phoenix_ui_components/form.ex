@@ -20,7 +20,7 @@ defmodule PhoenixUiComponents.Form do
 
   def input_container(assigns) do
     ~H"""
-    <div class={["mb-1 group", @class]} {@rest}>
+    <div class={["mb-1 group relative", @class]} {@rest}>
       <%= render_slot(@inner_block) %>
     </div>
     """
@@ -63,6 +63,10 @@ defmodule PhoenixUiComponents.Form do
   attr(:size, :string, values: ["sm", "md", "lg"], default: "md")
   attr(:error_message, :string, default: nil)
   attr(:state, :string, values: ["default", "success", "error"], default: "default")
+  attr(:left_icon, :atom, default: nil)
+  attr(:right_icon, :atom, default: nil)
+  attr(:left_icon_attrs, :list, default: [])
+  attr(:right_icon_attrs, :list, default: [])
   attr(:rest, :global)
 
   slot(:secondary_label)
@@ -76,6 +80,13 @@ defmodule PhoenixUiComponents.Form do
         </:secondary_label>
       </.field_label>
       <.input_container>
+        <div class={[
+          "flex items-center justify-center absolute top-0 bottom-0 left-3",
+          get_icon_state_classes(@state),
+          get_icon_size_classes(@size)
+        ]}>
+          <.icon :if={@left_icon} icon={@left_icon} {@left_icon_attrs} />
+        </div>
         <.field_input
           type={@type}
           form={@form}
@@ -88,10 +99,19 @@ defmodule PhoenixUiComponents.Form do
             disabled_classes(),
             get_text_size_classes(@size),
             get_input_size_classes(@size),
+            if(@left_icon, do: "!pl-10"),
+            if(@right_icon, do: "!pr-10"),
             @class
           ]}
           {@rest}
         />
+        <div class={[
+          "flex items-center justify-center absolute top-0 bottom-0 right-3",
+          get_icon_state_classes(@state),
+          get_icon_size_classes(@size)
+        ]}>
+          <.icon :if={@right_icon} icon={@right_icon} {@right_icon_attrs} />
+        </div>
       </.input_container>
       <.field_error :if={@error_message} error_message={@error_message} />
     </.field_container>
@@ -275,4 +295,11 @@ defmodule PhoenixUiComponents.Form do
 
   defp get_tag_size_classes("sm"), do: "py-1 pl-3 pr-2"
   defp get_tag_size_classes("md"), do: "py-1.5 pl-4 pr-2"
+
+  def get_icon_size_classes("sm"), do: "text-[16px]"
+  def get_icon_size_classes(_), do: "text-[24px]"
+
+  def get_icon_state_classes("success"), do: "text-primary-300"
+  def get_icon_state_classes("error"), do: "text-error-300"
+  def get_icon_state_classes(_), do: "text-primary-300"
 end
