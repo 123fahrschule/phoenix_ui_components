@@ -4,7 +4,18 @@ defmodule PhoenixUiComponents.Example do
 
   def example(assigns) do
     ~H"""
-    <.side_nav sections={side_nav_sections()} />
+    <.side_nav sections={side_nav_sections()} root_path="#">
+      <:header>
+        <span class="text-white">
+          Header
+        </span>
+      </:header>
+      <:footer>
+        <span class="text-white">
+          Footer
+        </span>
+      </:footer>
+    </.side_nav>
 
     <.page_content>
       <.top_nav_container>
