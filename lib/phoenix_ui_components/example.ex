@@ -31,6 +31,16 @@ defmodule PhoenixUiComponents.Example do
       <div class="p-10">
         <.breadcrumbs icon={:image} breadcrumbs={breadcrumbs()} class="mb-4" />
 
+        <.tabs class="mb-4">
+          <.tab active label="Active Tab" />
+          <.tab>
+            Inactive Tab
+          </.tab>
+          <.tab icon={:image}>
+            Tab with icon
+          </.tab>
+        </.tabs>
+
         <div
           x-data="{ showSpinner: false }"
           x-on:keyup.escape.window="showSpinner = false"
