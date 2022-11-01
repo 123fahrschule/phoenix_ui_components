@@ -1,6 +1,7 @@
 defmodule PhoenixUiComponents.Form do
   use PhoenixUiComponents, :component
   import Phoenix.HTML.Form
+  import PhoenixUiComponents.Icon
 
   attr(:rest, :global)
 
@@ -19,7 +20,7 @@ defmodule PhoenixUiComponents.Form do
 
   def input_container(assigns) do
     ~H"""
-    <div class={["mb-1 group", @class]} {@rest}>
+    <div class={["mb-1 group relative", @class]} {@rest}>
       <%= render_slot(@inner_block) %>
     </div>
     """
@@ -30,20 +31,25 @@ defmodule PhoenixUiComponents.Form do
   attr(:label, :string, default: nil)
   attr(:size, :string, values: ["sm", "md", "lg"], default: "md")
 
+  slot(:secondary_label)
+
   def field_label(assigns) do
     ~H"""
-    <%= label(@form, @field, @label,
-      class: ["block text-neutral-900 font-semibold mb-1", get_text_size_classes(@size)]
-    ) %>
+    <%= label @form, @field, class: ["block text-neutral-900 font-semibold mb-1", get_text_size_classes(@size)] do %>
+      <%= @label %>
+      <span :if={@secondary_label != []} class="text-xs text-neutral-600 font-normal">
+        <%= render_slot(@secondary_label) %>
+      </span>
+    <% end %>
     """
   end
 
-  attr(:error, :string, default: nil)
+  attr(:error_message, :string, default: nil)
 
   def field_error(assigns) do
     ~H"""
     <p class="text-error-300 text-[11px] leading-[1.09]">
-      <%= @error %>
+      <%= @error_message %>
     </p>
     """
   end
@@ -55,30 +61,59 @@ defmodule PhoenixUiComponents.Form do
   attr(:container_attrs, :list, default: [])
   attr(:type, :string, values: ["text"], default: "text")
   attr(:size, :string, values: ["sm", "md", "lg"], default: "md")
+  attr(:error_message, :string, default: nil)
+  attr(:state, :string, values: ["default", "success", "error"], default: "default")
+  attr(:left_icon, :atom, default: nil)
+  attr(:right_icon, :atom, default: nil)
+  attr(:left_icon_attrs, :list, default: [])
+  attr(:right_icon_attrs, :list, default: [])
   attr(:rest, :global)
+
+  slot(:secondary_label)
 
   def form_field(assigns) do
     ~H"""
     <.field_container {@container_attrs}>
-      <.field_label form={@form} field={@field} label={@label} size={@size} />
+      <.field_label form={@form} field={@field} label={@label} size={@size}>
+        <:secondary_label :if={@secondary_label != []}>
+          <%= render_slot(@secondary_label) %>
+        </:secondary_label>
+      </.field_label>
       <.input_container>
+        <div class={[
+          "flex items-center justify-center absolute top-0 bottom-0 left-3",
+          get_icon_state_classes(@state),
+          get_icon_size_classes(@size)
+        ]}>
+          <.icon :if={@left_icon} icon={@left_icon} {@left_icon_attrs} />
+        </div>
         <.field_input
           type={@type}
           form={@form}
           field={@field}
           size={@size}
           class={[
-            default_classes(),
+            get_default_classes(),
+            get_state_classes(@state),
             focus_classes(),
             disabled_classes(),
             get_text_size_classes(@size),
             get_input_size_classes(@size),
+            if(@left_icon, do: "!pl-10"),
+            if(@right_icon, do: "!pr-10"),
             @class
           ]}
           {@rest}
         />
+        <div class={[
+          "flex items-center justify-center absolute top-0 bottom-0 right-3",
+          get_icon_state_classes(@state),
+          get_icon_size_classes(@size)
+        ]}>
+          <.icon :if={@right_icon} icon={@right_icon} {@right_icon_attrs} />
+        </div>
       </.input_container>
-      <.field_error />
+      <.field_error :if={@error_message} error_message={@error_message} />
     </.field_container>
     """
   end
@@ -150,7 +185,7 @@ defmodule PhoenixUiComponents.Form do
           "file:bg-neutral-400 file:px-4 file:py-2.5 file:rounded-full file:border-0 file:mr-4 file:cursor-pointer cursor-pointer pr-3",
           get_file_button_size_classes(@size)
         ]
-      ] ++ assigns_to_attributes(@rest)
+      ] ++ assigns_to_attributes(@rest, [:class])
     ) %>
     """
   end
@@ -191,6 +226,28 @@ defmodule PhoenixUiComponents.Form do
     """
   end
 
+  attr(:class, :string, default: nil)
+  attr(:label, :string, default: nil)
+  attr(:size, :string, values: ["sm", "md"], default: "md")
+  attr(:close_button_attrs, :list, default: [])
+
+  def tag(assigns) do
+    ~H"""
+    <div class={[
+      "rounded-full inline-flex items-center bg-neutral-300 text-sm text-neutral-700 font-semibold",
+      get_tag_size_classes(@size),
+      @class
+    ]}>
+      <span class="text-ellipsis overflow-hidden">
+        <%= @label %>
+      </span>
+      <button class="leading-[0] ml-1" {@close_button_attrs}>
+        <.icon icon={:close} class="text-[16px]" />
+      </button>
+    </div>
+    """
+  end
+
   defp get_input_vertical_size_classes("sm"), do: "py-2"
   defp get_input_vertical_size_classes("md"), do: "py-2.5"
   defp get_input_vertical_size_classes("lg"), do: "py-3"
@@ -203,12 +260,22 @@ defmodule PhoenixUiComponents.Form do
   defp get_text_size_classes("md"), do: "text-sm leading-[1.429]"
   defp get_text_size_classes("lg"), do: "text-base leading-normal"
 
-  defp default_classes(),
+  defp get_default_classes(), do: "w-full border rounded-full"
+
+  defp get_state_classes("success"),
     do:
-      "w-full bg-neutral-200 border rounded-full text-neutral-900 placeholder:text-neutral-600 border-neutral-300 shadow-input"
+      "border-success-300 bg-success-100 shadow-input-success focus:border-success-300 focus:ring-success-300"
+
+  defp get_state_classes("error"),
+    do:
+      "border-error-300 bg-error-100 shadow-input-error shadow-input-error focus:border-error-300 focus:ring-error-300"
+
+  defp get_state_classes(_),
+    do:
+      "bg-neutral-200 text-neutral-900 placeholder:text-neutral-600 border-neutral-300 shadow-input focus:border-primary-300 focus:ring-primary-300"
 
   defp focus_classes(),
-    do: "focus:border-primary-300 focus:ring-primary-300 focus:shadow-input-focus"
+    do: " focus:shadow-input-focus"
 
   defp focus_visible_classes(),
     do:
@@ -218,13 +285,6 @@ defmodule PhoenixUiComponents.Form do
     do:
       "disabled:bg-neutral-300 disabled:text-neutral-700 disabled:border-neutral-500 disabled:shadow-input-disabled"
 
-  defp success_classes(),
-    do: "valid:border-success-300 valid:bg-success-100 valid:shadow-input-success"
-
-  defp error_classes(),
-    do:
-      "invalid:border-error-300 invalid:bg-error-100 invalid:shadow-input-error invalid:shadow-input-error"
-
   defp get_file_button_size_classes("sm"), do: "file:py-2"
   defp get_file_button_size_classes("md"), do: "file:py-2.5"
   defp get_file_button_size_classes("lg"), do: "file:py-3"
@@ -232,4 +292,14 @@ defmodule PhoenixUiComponents.Form do
   def get_textarea_size_classes("sm"), do: "!rounded-lg"
   def get_textarea_size_classes("md"), do: "!rounded-2xl"
   def get_textarea_size_classes("lg"), do: "!rounded-3xl"
+
+  defp get_tag_size_classes("sm"), do: "py-1 pl-3 pr-2"
+  defp get_tag_size_classes("md"), do: "py-1.5 pl-4 pr-2"
+
+  def get_icon_size_classes("sm"), do: "text-[16px]"
+  def get_icon_size_classes(_), do: "text-[24px]"
+
+  def get_icon_state_classes("success"), do: "text-primary-300"
+  def get_icon_state_classes("error"), do: "text-error-300"
+  def get_icon_state_classes(_), do: "text-primary-300"
 end

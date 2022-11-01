@@ -88,6 +88,19 @@ defmodule PhoenixUiComponents.Example do
             <.avatar shape="square" />
           </div>
 
+          <div class="w-fit grid grid-cols-3 gap-4">
+            <%= for  color <- ["primary", "secondary", "neutral", "info", "success", "warning", "error"], variant <-["filled", "outlined", "text"] do %>
+              <.button variant={variant} color={color} label={"#{variant}-#{color}"} />
+            <% end %>
+          </div>
+
+          <div class="p-2 bg-primary-500">
+            <.button variant="filled" color="white" label="filled-white" text_color="neutral" />
+            <%= for  variant <-["outlined", "text"] do %>
+              <.button variant={variant} color="white" label={"#{variant}-white"} />
+            <% end %>
+          </div>
+
           <div>
             <.button label="button" size="sm" href="#" />
             <.button label="button" size="sm" href="/" />
@@ -96,30 +109,21 @@ defmodule PhoenixUiComponents.Example do
           </div>
 
           <div>
-            <.button label="button" size="sm" />
-            <.button label="button" />
-            <.button label="button" size="lg" />
-            <.button label="button" disabled />
+            <.button label="left icon" left_icon={:error} />
+            <.button label="right icon" right_icon={:error} />
+            <.button label="left and right icons" left_icon={:error} right_icon={:error} />
           </div>
 
           <div>
-            <.button label="button" variant="secondary" size="sm" />
-            <.button label="button" variant="secondary" />
-            <.button label="button" variant="secondary" size="lg" />
-            <.button label="button" variant="secondary" disabled />
+            <%= for size <- ["sm", "md", "lg"] do %>
+              <.button label={"size: #{size}"} size={size} />
+            <% end %>
           </div>
 
           <div>
-            <.button label="button" variant="tertiary" size="sm" />
-            <.button label="button" variant="tertiary" />
-            <.button label="button" variant="tertiary" size="lg" />
-            <.button label="button" variant="tertiary" disabled />
-          </div>
-
-          <div>
-            <.button label="button" left_icon={:error} />
-            <.button label="button" right_icon={:error} />
-            <.button label="button" left_icon={:error} right_icon={:error} />
+            <.button primary label="primary" />
+            <.button secondary label="secondary" />
+            <.button tertiary label="tertiary" />
           </div>
 
           <div>
@@ -133,13 +137,29 @@ defmodule PhoenixUiComponents.Example do
           <.form :let={f} for={:checkbox}>
             <.checkbox form={f} field={:sm} label="checkbox sm" size="sm" />
             <.checkbox form={f} field={:md} label="checkbox md" />
-            <.checkbox form={f} field={:lg} label="checkbox lg" size="lg" />
+            <.checkbox form={f} field={:lg} size="lg">
+              checkbox lg
+            </.checkbox>
+          </.form>
+        </div>
+
+        <div>
+          <.form :let={f} for={:radio_button}>
+            <.radio_button form={f} field={:radio} value="sm" label="radio_button sm" size="sm" />
+            <.radio_button form={f} field={:radio} value="md" label="radio_button md" />
+            <.radio_button form={f} field={:radio} value="lg" size="lg">
+              radio_button lg
+            </.radio_button>
           </.form>
         </div>
 
         <div class="mb-4">
           <.form :let={f} for={:input} multipart class="space-y-4">
-            <.form_field form={f} field={:text} label="text" placeholder="text" />
+            <.form_field form={f} field={:text} label="text" placeholder="text">
+              <:secondary_label>
+                (Optional) <.icon icon={:info} class="text-[16px] align-middle" />
+              </:secondary_label>
+            </.form_field>
 
             <.form_field type="email" form={f} field={:email} label="email" placeholder="email" />
 
@@ -179,6 +199,16 @@ defmodule PhoenixUiComponents.Example do
             <.form_field type="date_select" form={f} field={:date_select} label="date_select" />
 
             <.form_field type="number" form={f} field={:number} label="number_field" />
+
+            <.form_field form={f} field={:success_state} label="success_state" state="success" />
+
+            <.form_field form={f} field={:error_state} label="error_state" state="error" />
+
+            <.form_field form={f} field={:with_error} label="with_error" error_message="Error!" />
+
+            <.form_field form={f} field={:left_icon} label="left_icon" left_icon={:info} />
+
+            <.form_field form={f} field={:right_icon} label="right_icon" right_icon={:info} />
           </.form>
         </div>
 
@@ -193,6 +223,22 @@ defmodule PhoenixUiComponents.Example do
             />
           <% end %>
         </div>
+
+        <div class="mb-4">
+          <.tag label="TAG" />
+          <.tag label="looooooooooooooooooooooooooooong" class="w-20" />
+        </div>
+
+        <div>
+          <.dropdown_item label="Dropdown item" />
+          <.dropdown_item label="Dropdown item selected" selected />
+          <.dropdown_item selected check_icon_position="right">
+            <div>
+              Dropdown item selected
+            </div>
+          </.dropdown_item>
+        </div>
+
         <div class="flex space-x-4">
           <.icon icon={:info} class="text-[20px] text-primary-200" />
           <.icon icon={:overland_lesson_icon} class="h-8 w-8 text-secondary-200" />
