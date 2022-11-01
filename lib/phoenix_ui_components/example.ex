@@ -137,7 +137,15 @@ defmodule PhoenixUiComponents.Example do
           <.form :let={f} for={:checkbox}>
             <.checkbox form={f} field={:sm} label="checkbox sm" size="sm" />
             <.checkbox form={f} field={:md} label="checkbox md" />
-            <.checkbox form={f} field={:lg} label="checkbox lg" size="lg" />
+        </div>
+
+        <div>
+          <.form :let={f} for={:radio_button}>
+            <.radio_button form={f} field={:radio} value="sm" label="radio_button sm" size="sm" />
+            <.radio_button form={f} field={:radio} value="md" label="radio_button md" />
+            <.radio_button form={f} field={:radio} value="lg" size="lg">
+              radio_button lg
+            </.radio_button>
           </.form>
         </div>
 

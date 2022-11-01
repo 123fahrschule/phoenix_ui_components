@@ -28,6 +28,7 @@ defmodule PhoenixUiComponents do
         Form,
         Icon,
         Layout,
+        RadioButton,
         SideNav,
         Spinner,
         TopNav,
