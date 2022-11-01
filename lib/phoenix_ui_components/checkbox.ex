@@ -4,9 +4,11 @@ defmodule PhoenixUiComponents.Checkbox do
 
   attr(:form, :any, required: true)
   attr(:field, :atom, required: true)
-  attr(:label, :string, required: true)
+  attr(:label, :string, default: nil)
   attr(:class, :string, default: nil)
   attr(:size, :string, values: ["sm", "md", "lg"], default: "md")
+
+  slot(:inner_block)
 
   def checkbox(assigns) do
     ~H"""
@@ -17,10 +19,12 @@ defmodule PhoenixUiComponents.Checkbox do
           get_checkbox_size_classes(@size)
         ]
       ) %>
-      <%= label(@form, @field, @label,
-        class:
-          "cursor-pointer text-neutral-700 peer-checked:font-semibold peer-checked:text-neutral-900"
-      ) %>
+      <label
+        for={input_id(@form, @field)}
+        class="cursor-pointer text-neutral-700 peer-checked:font-semibold peer-checked:text-neutral-900"
+      >
+        <%= if @label, do: @label, else: render_slot(@inner_block) %>
+      </label>
     </div>
     """
   end

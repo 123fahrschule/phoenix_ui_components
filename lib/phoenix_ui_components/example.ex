@@ -137,6 +137,10 @@ defmodule PhoenixUiComponents.Example do
           <.form :let={f} for={:checkbox}>
             <.checkbox form={f} field={:sm} label="checkbox sm" size="sm" />
             <.checkbox form={f} field={:md} label="checkbox md" />
+            <.checkbox form={f} field={:lg} size="lg">
+              checkbox lg
+            </.checkbox>
+          </.form>
         </div>
 
         <div>
