@@ -24,6 +24,7 @@ defmodule PhoenixUiComponents do
         Card,
         Checkbox,
         CustomLink,
+        DropdownItem,
         Form,
         Icon,
         Layout,

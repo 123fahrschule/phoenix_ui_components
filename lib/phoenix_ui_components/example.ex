@@ -217,6 +217,16 @@ defmodule PhoenixUiComponents.Example do
           <.tag label="looooooooooooooooooooooooooooong" class="w-20" />
         </div>
 
+        <div>
+          <.dropdown_item label="Dropdown item" />
+          <.dropdown_item label="Dropdown item selected" selected />
+          <.dropdown_item selected check_icon_position="right">
+            <div>
+              Dropdown item selected
+            </div>
+          </.dropdown_item>
+        </div>
+
         <div class="flex space-x-4">
           <.icon icon={:info} class="text-[20px] text-primary-200" />
           <.icon icon={:overland_lesson_icon} class="h-8 w-8 text-secondary-200" />
