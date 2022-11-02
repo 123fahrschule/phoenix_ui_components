@@ -174,6 +174,16 @@ defmodule PhoenixUiComponents.Example do
           </.form>
         </div>
 
+        <div>
+          <.form :let={f} for={:switch}>
+            <.switch form={f} field={:switch} />
+            <.switch form={f} field={:icon} icon={:check} checked />
+            <.switch form={f} field={:disabled} disabled />
+            <.switch form={f} field={:checked_disabled} checked disabled />
+            <.switch form={f} field={:checked_disabled_icon} icon={:close} checked disabled />
+          </.form>
+        </div>
+
         <div class="mb-4">
           <.form :let={f} for={:input} multipart class="space-y-4">
             <.form_field form={f} field={:text} label="text" placeholder="text">

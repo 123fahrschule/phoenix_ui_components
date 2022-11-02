@@ -31,6 +31,7 @@ defmodule PhoenixUiComponents do
         RadioButton,
         SideNav,
         Spinner,
+        Switch,
         Tabs,
         TopNav,
         Typography
