@@ -276,6 +276,12 @@ defmodule PhoenixUiComponents.Example do
           <.icon icon={:night_lesson_icon} />
           <.icon icon={:highway_lesson_icon} />
         </div>
+
+        <div class="grid gap-4 p-4 grid-cols-3 bg-neutral-900">
+          <%= for progress <- [12.0, 23.0, 56.0, 78.0], color <- ["info", "driving", "theory"] do %>
+            <.timer text="60:00" progress={progress} color={color} />
+          <% end %>
+        </div>
       </div>
     </.page_content>
     """
