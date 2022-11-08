@@ -28,9 +28,13 @@ defmodule PhoenixUiComponents do
         Form,
         Icon,
         Layout,
+        Progress,
         RadioButton,
         SideNav,
         Spinner,
+        Switch,
+        Tabs,
+        Timer,
         TopNav,
         Typography
       }

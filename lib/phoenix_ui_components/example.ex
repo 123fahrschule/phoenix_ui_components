@@ -4,7 +4,18 @@ defmodule PhoenixUiComponents.Example do
 
   def example(assigns) do
     ~H"""
-    <.side_nav sections={side_nav_sections()} />
+    <.side_nav sections={side_nav_sections()} root_path="#">
+      <:header>
+        <span class="text-white">
+          Header
+        </span>
+      </:header>
+      <:footer>
+        <span class="text-white">
+          Footer
+        </span>
+      </:footer>
+    </.side_nav>
 
     <.page_content>
       <.top_nav_container>
@@ -19,6 +30,16 @@ defmodule PhoenixUiComponents.Example do
 
       <div class="p-10">
         <.breadcrumbs icon={:image} breadcrumbs={breadcrumbs()} class="mb-4" />
+
+        <.tabs class="mb-4">
+          <.tab active label="Active Tab" />
+          <.tab>
+            Inactive Tab
+          </.tab>
+          <.tab icon={:image}>
+            Tab with icon
+          </.tab>
+        </.tabs>
 
         <div
           x-data="{ showSpinner: false }"
@@ -153,6 +174,16 @@ defmodule PhoenixUiComponents.Example do
           </.form>
         </div>
 
+        <div>
+          <.form :let={f} for={:switch}>
+            <.switch form={f} field={:switch} />
+            <.switch form={f} field={:icon} icon={:check} checked />
+            <.switch form={f} field={:disabled} disabled />
+            <.switch form={f} field={:checked_disabled} checked disabled />
+            <.switch form={f} field={:checked_disabled_icon} icon={:close} checked disabled />
+          </.form>
+        </div>
+
         <div class="mb-4">
           <.form :let={f} for={:input} multipart class="space-y-4">
             <.form_field form={f} field={:text} label="text" placeholder="text">
@@ -244,6 +275,12 @@ defmodule PhoenixUiComponents.Example do
           <.icon icon={:overland_lesson_icon} class="h-8 w-8 text-secondary-200" />
           <.icon icon={:night_lesson_icon} />
           <.icon icon={:highway_lesson_icon} />
+        </div>
+
+        <div class="grid gap-4 p-4 grid-cols-3 bg-neutral-900">
+          <%= for progress <- [12.0, 23.0, 56.0, 78.0], color <- ["info", "driving", "theory"] do %>
+            <.timer text="60:00" progress={progress} color={color} />
+          <% end %>
         </div>
       </div>
     </.page_content>

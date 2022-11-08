@@ -24,36 +24,55 @@ defmodule PhoenixUiComponents.SideNav do
     ]
   )
 
+  attr(:root_path, :string, default: nil)
+
+  slot(:header)
+  slot(:footer)
+
   def side_nav(assigns) do
     ~H"""
+    <% IO.inspect(@header) %>
     <div class="fixed inset-y-0 left-0 flex flex-col w-64">
       <div class="flex flex-col flex-1 min-h-0 bg-neutral-900 rounded-r-3xl">
-        <.side_nav_header />
+        <.side_nav_header root_path={@root_path}>
+          <%= render_slot(@header) %>
+        </.side_nav_header>
         <nav class="flex flex-col flex-1 px-4 overflow-y-auto">
           <.side_nav_section :for={{label, items} <- @sections} label={label} items={items} />
         </nav>
-        <.side_nav_footer />
+        <.side_nav_footer>
+          <%= render_slot(@footer) %>
+        </.side_nav_footer>
       </div>
     </div>
     """
   end
 
+  attr(:root_path, :string, default: nil)
+  slot(:inner_block)
+
   def side_nav_header(assigns) do
     ~H"""
     <div class="flex items-center flex-shrink-0 px-4 py-3">
       <.custom_link
-        href="#"
+        :if={@root_path}
+        href={@root_path}
         class="flex items-center justify-center w-10 h-10 mr-2 bg-white rounded-lg"
       >
         <.logo class="w-6 h-6" />
       </.custom_link>
+      <%= render_slot(@inner_block) %>
     </div>
     """
   end
 
+  slot(:inner_block)
+
   def side_nav_footer(assigns) do
     ~H"""
-    <div class="flex items-center flex-shrink-0 px-4 mt-3 mb-6"></div>
+    <div class="flex items-center flex-shrink-0 px-4 mt-3 mb-6">
+      <%= render_slot(@inner_block) %>
+    </div>
     """
   end
 
