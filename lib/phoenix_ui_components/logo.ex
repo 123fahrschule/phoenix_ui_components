@@ -1,7 +1,7 @@
 defmodule PhoenixUiComponents.Logo do
   use PhoenixUiComponents, :component
 
-  def log(%{white: true} = assigns) do
+  def logo(%{white: true} = assigns) do
     ~H"""
     <svg xmlns="http://www.w3.org/2000/svg" width="72" height="70" viewBox="0 0 72 70" fill="none">
       <path
