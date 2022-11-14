@@ -226,6 +226,12 @@ defmodule PhoenixUiComponents.Form do
     """
   end
 
+  def field_input(%{type: "date"} = assigns) do
+    ~H"""
+    <%= date_input(@form, @field, assigns_to_attributes(@rest)) %>
+    """
+  end
+
   attr(:class, :string, default: nil)
   attr(:label, :string, default: nil)
   attr(:size, :string, values: ["sm", "md"], default: "md")

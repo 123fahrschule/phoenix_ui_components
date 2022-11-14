@@ -229,6 +229,8 @@ defmodule PhoenixUiComponents.Example do
 
             <.form_field type="date_select" form={f} field={:date_select} label="date_select" />
 
+            <.form_field type="date" form={f} field={:date} label="date" />
+
             <.form_field type="number" form={f} field={:number} label="number_field" />
 
             <.form_field form={f} field={:success_state} label="success_state" state="success" />
