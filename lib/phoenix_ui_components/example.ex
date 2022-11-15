@@ -219,6 +219,13 @@ defmodule PhoenixUiComponents.Example do
               options={[One: :one, Two: :two, Three: :three]}
             />
 
+            <.multiselect
+              form={f}
+              field={:multiselect}
+              label="multiselect"
+              options={[One: :one, Two: :two, Three: :three]}
+            />
+
             <.form_field
               type="file"
               form={f}
