@@ -41,6 +41,12 @@ defmodule PhoenixUiComponents.Example do
           </.tab>
         </.tabs>
 
+        <.stepper class="mb-4">
+          <.step index={1} label="One" state="active" />
+          <.step index={2} label="Two" />
+          <.step index={3} label="Three" state="completed" />
+        </.stepper>
+
         <div
           x-data="{ showSpinner: false }"
           x-on:keyup.escape.window="showSpinner = false"

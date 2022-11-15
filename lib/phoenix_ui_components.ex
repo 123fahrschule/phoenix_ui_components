@@ -32,6 +32,7 @@ defmodule PhoenixUiComponents do
         RadioButton,
         SideNav,
         Spinner,
+        Stepper,
         Switch,
         Tabs,
         Timer,
