@@ -47,6 +47,14 @@ defmodule PhoenixUiComponents.Example do
           <.step index={3} label="Three" state="completed" />
         </.stepper>
 
+        <.pagination
+          current_page={5}
+          total_pages={10}
+          total_records={100}
+          current_records={50}
+          navigation_type="patch"
+        />
+
         <div
           x-data="{ showSpinner: false }"
           x-on:keyup.escape.window="showSpinner = false"
