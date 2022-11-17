@@ -92,17 +92,14 @@ defmodule PhoenixUiComponents.Form do
           form={@form}
           field={@field}
           size={@size}
-          class={[
-            get_default_classes(),
-            get_state_classes(@state),
-            focus_classes(),
-            disabled_classes(),
-            get_text_size_classes(@size),
-            get_input_size_classes(@size),
-            if(@left_icon, do: "!pl-10"),
-            if(@right_icon, do: "!pr-10"),
-            @class
-          ]}
+          class={
+            List.flatten([
+              get_input_classes(@size, @state),
+              if(@left_icon, do: "!pl-10"),
+              if(@right_icon, do: "!pr-10"),
+              @class
+            ])
+          }
           {@rest}
         />
         <div class={[
@@ -331,15 +328,7 @@ defmodule PhoenixUiComponents.Form do
         >
           <input
             x-model.debounce="filterString"
-            class={[
-              get_state_classes(@state),
-              focus_classes(),
-              focus_visible_classes(),
-              disabled_classes(),
-              get_text_size_classes(@size),
-              get_input_size_classes(@size),
-              "w-full border rounded-full mb-2"
-            ]}
+            class={List.flatten([get_input_classes(@size, @state), focus_visible_classes(), "mb-2"])}
           />
           <div class="max-h-72 overflow-auto">
             <template x-for="group in filteredOptionsGroups">
@@ -365,6 +354,17 @@ defmodule PhoenixUiComponents.Form do
       </div>
     </.field_container>
     """
+  end
+
+  def get_input_classes(size, state) do
+    [
+      get_default_classes(),
+      get_state_classes(state),
+      focus_classes(),
+      disabled_classes(),
+      get_text_size_classes(size),
+      get_input_size_classes(size)
+    ]
   end
 
   defp get_input_vertical_size_classes("sm"), do: "py-2"
@@ -396,7 +396,7 @@ defmodule PhoenixUiComponents.Form do
   defp focus_classes(),
     do: " focus:shadow-input-focus"
 
-  defp focus_visible_classes(),
+  def focus_visible_classes(),
     do:
       "focus-visible:border-primary-300 focus-visible:outline-primary-300 focus-visible:shadow-input-focus"
 
