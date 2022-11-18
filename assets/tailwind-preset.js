@@ -91,6 +91,7 @@ module.exports = {
         'lg-3': '0px 40px 64px -24px rgba(31, 41, 51, 0.36)',
         'lg-4': '0px 48px 84px -32px rgba(31, 41, 51, 0.48)',
         input: 'inset 0px 2px 2px rgba(224, 229, 235, 0.64)',
+        inner: 'inset 1px 0px 0px #E0E5EB',
         'input-focus': 'inset 0px 2px 2px rgba(42, 96, 118, 0.24)',
         'input-disabled': 'inset 0px 2px 2px rgba(121, 135, 150, 0.24)',
         'input-success': 'inset 0px 2px 2px rgba(28, 184, 84, 0.24)',
