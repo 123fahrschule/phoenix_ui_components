@@ -70,6 +70,11 @@ defmodule PhoenixUiComponents.Example do
           </:footer>
         </.flyout>
 
+        <div class="flex mb-4 space-x-4">
+          <.data_table_label arrows label="Label" />
+          <.data_table_label arrows active label="Active" />
+        </div>
+
         <div
           x-data="{ showSpinner: false }"
           x-on:keyup.escape.window="showSpinner = false"
