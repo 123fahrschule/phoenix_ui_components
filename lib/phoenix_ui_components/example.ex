@@ -55,6 +55,21 @@ defmodule PhoenixUiComponents.Example do
           navigation_type="patch"
         />
 
+        <.flyout
+          class="mb-4"
+          title="TItle"
+          description="lorem ipsum dolor sit amet, consectet"
+          close_button_attrs={[]}
+          new_tab_url="/"
+        >
+          <:footer>
+            <div class="flex justify-between">
+              <.button label="Cancel" tertiary />
+              <.button label="Confirm" primary />
+            </div>
+          </:footer>
+        </.flyout>
+
         <div
           x-data="{ showSpinner: false }"
           x-on:keyup.escape.window="showSpinner = false"

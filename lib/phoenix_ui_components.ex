@@ -25,6 +25,7 @@ defmodule PhoenixUiComponents do
         Checkbox,
         CustomLink,
         DropdownItem,
+        Flyout,
         Form,
         Icon,
         Layout,
