@@ -46,7 +46,10 @@ var multiselect_default = () => ({
     if (!this.normalizedFilterString) {
       return this.groupedOptions;
     }
-    return this.groupedOptions.map((group) => group.filter(({ normalizedLabel }) => normalizedLabel.includes(this.normalizedFilterString))).filter((group) => group.length);
+    return this.groupedOptions.map((group) => ({
+      ...group,
+      options: group.options.filter(({ normalizedLabel }) => normalizedLabel.includes(this.normalizedFilterString))
+    })).filter((group) => group.options.length);
   },
   get tags() {
     return this.selectedValues.map((value) => this.allOptions[value]);
@@ -62,6 +65,26 @@ var multiselect_default = () => ({
   deselectOption(value) {
     this.selectedValues.splice(this.selectedValues.indexOf(value), 1);
   },
+  toggleGroup(group) {
+    const selectedValues = new Set(this.selectedValues);
+    const values = group.options.map(({ value }) => value);
+    const allSelected = values.length && values.every((value) => selectedValues.has(value));
+    if (allSelected) {
+      values.forEach((value) => {
+        selectedValues.delete(value);
+      });
+    } else {
+      values.forEach((value) => {
+        selectedValues.add(value);
+      });
+    }
+    this.selectedValues = [...selectedValues];
+  },
+  scrollToOptions() {
+    this.$nextTick(() => {
+      this.$root.querySelector('[x-bind="panel"]').scrollIntoView();
+    });
+  },
   init() {
     const options = Array.from(this.$root.querySelectorAll("option"));
     const groups = Array.from(this.$root.querySelectorAll("optgroup"));
@@ -72,11 +95,20 @@ var multiselect_default = () => ({
     this.selectedValues = options.filter(({ selected }) => selected).map(({ value }) => value);
     let groupedOptions = [];
     if (groups.length) {
-      groupedOptions = Array.from(groups).map((group) => Array.from(group.querySelectorAll("option")));
+      groupedOptions = Array.from(groups).map((group) => {
+        const options2 = Array.from(group.querySelectorAll("option"));
+        return {
+          options: options2,
+          label: group.label
+        };
+      });
     } else {
-      groupedOptions = [options];
+      groupedOptions = [{ options }];
     }
-    this.groupedOptions = groupedOptions.map((optionsGroup) => optionsGroup.map(({ value }) => this.allOptions[value]));
+    this.groupedOptions = groupedOptions.map((optionsGroup) => ({
+      ...optionsGroup,
+      options: optionsGroup.options.map(({ value }) => this.allOptions[value])
+    }));
   }
 });
 export {

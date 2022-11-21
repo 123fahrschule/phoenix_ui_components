@@ -333,7 +333,16 @@ defmodule PhoenixUiComponents.Form do
           <div class="max-h-72 overflow-auto">
             <template x-for="group in filteredOptionsGroups">
               <div class="border-b-2 last:border-b-0">
-                <template x-for="option in group">
+                <template x-if="group.label">
+                  <button
+                    x-on:click="toggleGroup(group)"
+                    type="button"
+                    class="w-full px-3 py-4 text-left text-sm font-semibold rounded-lg bg-neutral-100 hover:bg-neutral-200 group focus-visible:outline-0 focus-visible:bg-neutral-200"
+                  >
+                    <span x-text="group.label" />
+                  </button>
+                </template>
+                <template x-for="option in group.options">
                   <button
                     type="button"
                     class="flex items-center justify-between w-full px-3 py-4 text-sm rounded-lg bg-neutral-100 hover:bg-neutral-200 group focus-visible:outline-0 focus-visible:bg-neutral-200"
