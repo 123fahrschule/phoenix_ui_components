@@ -92,17 +92,14 @@ defmodule PhoenixUiComponents.Form do
           form={@form}
           field={@field}
           size={@size}
-          class={[
-            get_default_classes(),
-            get_state_classes(@state),
-            focus_classes(),
-            disabled_classes(),
-            get_text_size_classes(@size),
-            get_input_size_classes(@size),
-            if(@left_icon, do: "!pl-10"),
-            if(@right_icon, do: "!pr-10"),
-            @class
-          ]}
+          class={
+            List.flatten([
+              get_input_classes(@size, @state),
+              if(@left_icon, do: "!pl-10"),
+              if(@right_icon, do: "!pr-10"),
+              @class
+            ])
+          }
           {@rest}
         />
         <div class={[
@@ -226,6 +223,12 @@ defmodule PhoenixUiComponents.Form do
     """
   end
 
+  def field_input(%{type: "date"} = assigns) do
+    ~H"""
+    <%= date_input(@form, @field, assigns_to_attributes(@rest)) %>
+    """
+  end
+
   attr(:class, :string, default: nil)
   attr(:label, :string, default: nil)
   attr(:size, :string, values: ["sm", "md"], default: "md")
@@ -246,6 +249,131 @@ defmodule PhoenixUiComponents.Form do
       </button>
     </div>
     """
+  end
+
+  attr(:form, :any, required: true)
+  attr(:field, :atom, required: true)
+  attr(:options, :list, required: true)
+  attr(:selected, :list, default: [])
+  attr(:label, :string, default: nil)
+  attr(:placeholder, :string, default: "")
+  attr(:class, :string, default: nil)
+  attr(:container_attrs, :list, default: [])
+  attr(:size, :string, values: ["sm", "md", "lg"], default: "md")
+  attr(:error_message, :string, default: nil)
+  attr(:state, :string, values: ["default", "success", "error"], default: "default")
+
+  attr(:rest, :global)
+
+  def multiselect(assigns) do
+    ~H"""
+    <.field_container x-data="multiselect" {@container_attrs}>
+      <%= multiple_select(@form, @field, @options,
+        class: "hidden",
+        "x-model": "selectedValues",
+        selected: @selected
+      ) %>
+
+      <div x-data="dropdown" class="relative">
+        <%= label(@form, @field, @label, class: "block text-neutral-900 font-semibold mb-1 text-sm") %>
+        <div class="mb-2">
+          <button
+            x-bind="toggler"
+            type="button"
+            class={[
+              get_state_classes(@state),
+              focus_classes(),
+              focus_visible_classes(),
+              disabled_classes(),
+              "w-full border rounded-[24px] relative text-left pl-4 pr-8 ",
+              @class
+            ]}
+            x-bind:class="tags.length === 0 ? 'py-3' : 'py-2'"
+          >
+            <span x-show="tags.length === 0" class="inline-block h-[1em]">
+              <%= @placeholder %>
+            </span>
+
+            <div class="flex flex-wrap gap-x-1 gap-y-2">
+              <template x-for="tag in tags">
+                <div class="max-w-full rounded-full inline-flex items-center bg-neutral-300 text-sm text-neutral-700 font-semibold py-1.5 pl-4 pr-2 mr-1">
+                  <span x-text="tag.label" class="text-ellipsis overflow-hidden" />
+                  <button
+                    @click.stop="deselectOption(tag.value)"
+                    type="button"
+                    class="leading-[0] ml-1"
+                  >
+                    <.icon icon={:close} class="text-[16px]" />
+                  </button>
+                </div>
+              </template>
+            </div>
+
+            <div class={[
+              "flex items-center justify-center absolute top-0 bottom-0 right-3",
+              get_icon_state_classes(@state),
+              get_icon_size_classes(@size)
+            ]}>
+              <.icon icon={:keyboard_arrow_down} class="text-primary-300 text-[24px]" />
+            </div>
+          </button>
+        </div>
+
+        <div
+          x-bind="panel"
+          x-on:click.away="close"
+          x-on:keyup.escape.window="close"
+          x-cloak
+          class="w-full absolute z-10 bg-neutral-100 border border-neutral-300 rounded-2xl shadow-[0px_4px_12px_-4px_rgba(31,41,51,0.16)] p-2"
+        >
+          <input
+            x-model.debounce="filterString"
+            class={List.flatten([get_input_classes(@size, @state), focus_visible_classes(), "mb-2"])}
+          />
+          <div class="max-h-72 overflow-auto">
+            <template x-for="group in filteredOptionsGroups">
+              <div class="border-b-2 last:border-b-0">
+                <template x-if="group.label">
+                  <button
+                    x-on:click="toggleGroup(group)"
+                    type="button"
+                    class="w-full px-3 py-4 text-left text-sm font-semibold rounded-lg bg-neutral-100 hover:bg-neutral-200 group focus-visible:outline-0 focus-visible:bg-neutral-200"
+                  >
+                    <span x-text="group.label" />
+                  </button>
+                </template>
+                <template x-for="option in group.options">
+                  <button
+                    type="button"
+                    class="flex items-center justify-between w-full px-3 py-4 text-sm rounded-lg bg-neutral-100 hover:bg-neutral-200 group focus-visible:outline-0 focus-visible:bg-neutral-200"
+                    x-on:click="toggleOption(option.value)"
+                    x-bind:class="selectedValues.includes(option.value) && 'selected'"
+                  >
+                    <span x-text="option.label" />
+                    <.icon
+                      icon={:check}
+                      class="text-[16px] ml-2 text-primary-300 hidden group-selected:inline-block"
+                    />
+                  </button>
+                </template>
+              </div>
+            </template>
+          </div>
+        </div>
+      </div>
+    </.field_container>
+    """
+  end
+
+  def get_input_classes(size, state) do
+    [
+      get_default_classes(),
+      get_state_classes(state),
+      focus_classes(),
+      disabled_classes(),
+      get_text_size_classes(size),
+      get_input_size_classes(size)
+    ]
   end
 
   defp get_input_vertical_size_classes("sm"), do: "py-2"
@@ -277,7 +405,7 @@ defmodule PhoenixUiComponents.Form do
   defp focus_classes(),
     do: " focus:shadow-input-focus"
 
-  defp focus_visible_classes(),
+  def focus_visible_classes(),
     do:
       "focus-visible:border-primary-300 focus-visible:outline-primary-300 focus-visible:shadow-input-focus"
 

@@ -96,6 +96,7 @@ var require_tailwind_preset = __commonJS({
             "lg-3": "0px 40px 64px -24px rgba(31, 41, 51, 0.36)",
             "lg-4": "0px 48px 84px -32px rgba(31, 41, 51, 0.48)",
             input: "inset 0px 2px 2px rgba(224, 229, 235, 0.64)",
+            inner: "inset 1px 0px 0px #E0E5EB",
             "input-focus": "inset 0px 2px 2px rgba(42, 96, 118, 0.24)",
             "input-disabled": "inset 0px 2px 2px rgba(121, 135, 150, 0.24)",
             "input-success": "inset 0px 2px 2px rgba(28, 184, 84, 0.24)",
@@ -113,42 +114,45 @@ var require_tailwind_preset = __commonJS({
 // tailwind-plugin.js
 var require_tailwind_plugin = __commonJS({
   "tailwind-plugin.js"(exports2, module2) {
-    module2.exports = ({ addBase, theme }) => addBase({
-      h1: {
-        fontSize: theme("fontSize.5xl"),
-        lineHeight: theme("lineHeight.tight"),
-        fontWeight: "bold",
-        letterSpacing: "0.24px"
-      },
-      h2: {
-        fontSize: "2rem",
-        lineHeight: theme("lineHeight.normal"),
-        fontWeight: "bold",
-        letterSpacing: "0.16px"
-      },
-      h3: {
-        fontSize: theme("fontSize.2xl"),
-        lineHeight: 1.333333,
-        fontWeight: "bold"
-      },
-      h4: {
-        fontSize: theme("fontSize.xl"),
-        lineHeight: 1.4,
-        fontWeight: "bold"
-      },
-      h5: {
-        fontSize: theme("fontSize.normal"),
-        lineHeight: theme("lineHeight.tight"),
-        fontWeight: "bold"
-      },
-      h6: {
-        fontSize: theme("fontSize.sm"),
-        lineHeight: 1.333333,
-        fontWeight: "bold",
-        letterSpacing: "0.48px",
-        textTransform: "uppercase"
-      }
-    });
+    module2.exports = ({ addBase, addVariant, theme }) => {
+      addBase({
+        h1: {
+          fontSize: theme("fontSize.5xl"),
+          lineHeight: theme("lineHeight.tight"),
+          fontWeight: "bold",
+          letterSpacing: "0.24px"
+        },
+        h2: {
+          fontSize: "2rem",
+          lineHeight: theme("lineHeight.normal"),
+          fontWeight: "bold",
+          letterSpacing: "0.16px"
+        },
+        h3: {
+          fontSize: theme("fontSize.2xl"),
+          lineHeight: 1.333333,
+          fontWeight: "bold"
+        },
+        h4: {
+          fontSize: theme("fontSize.xl"),
+          lineHeight: 1.4,
+          fontWeight: "bold"
+        },
+        h5: {
+          fontSize: theme("fontSize.normal"),
+          lineHeight: theme("lineHeight.tight"),
+          fontWeight: "bold"
+        },
+        h6: {
+          fontSize: theme("fontSize.sm"),
+          lineHeight: 1.333333,
+          fontWeight: "bold",
+          letterSpacing: "0.48px",
+          textTransform: "uppercase"
+        }
+      });
+      addVariant("group-selected", ":merge(.group).selected &");
+    };
   }
 });
 

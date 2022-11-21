@@ -41,6 +41,40 @@ defmodule PhoenixUiComponents.Example do
           </.tab>
         </.tabs>
 
+        <.stepper class="mb-4">
+          <.step index={1} label="One" state="active" />
+          <.step index={2} label="Two" />
+          <.step index={3} label="Three" state="completed" />
+        </.stepper>
+
+        <.pagination
+          current_page={5}
+          total_pages={10}
+          total_records={100}
+          current_records={50}
+          navigation_type="patch"
+        />
+
+        <.flyout
+          class="mb-4"
+          title="TItle"
+          description="lorem ipsum dolor sit amet, consectet"
+          close_button_attrs={[]}
+          new_tab_url="/"
+        >
+          <:footer>
+            <div class="flex justify-between">
+              <.button label="Cancel" tertiary />
+              <.button label="Confirm" primary />
+            </div>
+          </:footer>
+        </.flyout>
+
+        <div class="flex mb-4 space-x-4">
+          <.data_table_label arrows label="Label" />
+          <.data_table_label arrows active label="Active" />
+        </div>
+
         <div
           x-data="{ showSpinner: false }"
           x-on:keyup.escape.window="showSpinner = false"
@@ -219,6 +253,13 @@ defmodule PhoenixUiComponents.Example do
               options={[One: :one, Two: :two, Three: :three]}
             />
 
+            <.multiselect
+              form={f}
+              field={:multiselect}
+              label="multiselect"
+              options={[One: :one, Two: :two, Three: :three]}
+            />
+
             <.form_field
               type="file"
               form={f}
@@ -228,6 +269,8 @@ defmodule PhoenixUiComponents.Example do
             />
 
             <.form_field type="date_select" form={f} field={:date_select} label="date_select" />
+
+            <.form_field type="date" form={f} field={:date} label="date" />
 
             <.form_field type="number" form={f} field={:number} label="number_field" />
 
