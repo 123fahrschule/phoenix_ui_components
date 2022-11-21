@@ -50,11 +50,12 @@ import "material-icons/iconfont/outlined.css";
 
 import Alpine from "alpinejs";
 
-import { dropdown } from "phoenix_ui_components";
+import { dropdown, multiselect } from "phoenix_ui_components";
 
 window.Alpine = Alpine;
 
 Alpine.data("dropdown", dropdown);
+Alpine.data("multiselect", multiselect);
 
 Alpine.start();
 ```
