@@ -7,7 +7,7 @@ The package can be installed by adding `phoenix_ui_components` to your list of d
 ```elixir
 def deps do
   [
-    {:phoenix_ui_components, github: "123fahrschule/phoenix_ui_components", tag: "1.0.0"}
+    {:phoenix_ui_components, github: "123fahrschule/phoenix_ui_components", tag: "1.0.1"}
   ]
 end
 ```
@@ -42,11 +42,14 @@ module.exports = {
 };
 ```
 
-Import icons and add required components for Alpine in main `*.js` file
+Import icons, styles and add required components for Alpine in main `*.js` file
 
 ```js
 import "material-icons/iconfont/filled.css";
 import "material-icons/iconfont/outlined.css";
+
+import "phoenix_ui_components/priv/static/style.css";
+import "phoenix_ui_components/priv/static/fonts.css";
 
 import Alpine from "alpinejs";
 
