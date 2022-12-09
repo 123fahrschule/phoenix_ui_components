@@ -1,4 +1,8 @@
-export default () => ({
+import dropdown from './dropdown';
+import { isElementInViewport } from '../helpers/isElementInViewport';
+
+export default ({ scrollOptionsIntoView = true }) => ({
+  ...dropdown(),
   allOptions: {},
   groupedOptions: [],
   selectedValues: [],
@@ -57,7 +61,11 @@ export default () => ({
   },
   scrollToOptions() {
     this.$nextTick(() => {
-      this.$root.querySelector('[x-bind="panel"]').scrollIntoView();
+      const optionsElement = this.$root.querySelector('[x-bind="panel"]');
+
+      if (!isElementInViewport(optionsElement)) {
+        optionsElement.scrollIntoView();
+      }
     });
   },
 
@@ -91,5 +99,13 @@ export default () => ({
       ...optionsGroup,
       options: optionsGroup.options.map(({ value }) => this.allOptions[value])
     }));
+
+    if (scrollOptionsIntoView) {
+      this.$watch('isOpen', (isOpen) => {
+        if (isOpen) {
+          this.scrollToOptions();
+        }
+      });
+    }
   }
 });
