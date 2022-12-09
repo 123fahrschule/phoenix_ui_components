@@ -33,8 +33,15 @@ var dropdown_default = (isOpen = false) => ({
   }
 });
 
+// js/helpers/isElementInViewport.js
+function isElementInViewport(element) {
+  const rect = element.getBoundingClientRect();
+  return rect.top >= 0 && rect.left >= 0 && rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) && rect.right <= (window.innerWidth || document.documentElement.clientWidth);
+}
+
 // js/phoenix-ui-components/multiselect.js
-var multiselect_default = () => ({
+var multiselect_default = ({ scrollOptionsIntoView = true }) => ({
+  ...dropdown_default(),
   allOptions: {},
   groupedOptions: [],
   selectedValues: [],
@@ -82,7 +89,10 @@ var multiselect_default = () => ({
   },
   scrollToOptions() {
     this.$nextTick(() => {
-      this.$root.querySelector('[x-bind="panel"]').scrollIntoView();
+      const optionsElement = this.$root.querySelector('[x-bind="panel"]');
+      if (!isElementInViewport(optionsElement)) {
+        optionsElement.scrollIntoView();
+      }
     });
   },
   init() {
@@ -109,6 +119,13 @@ var multiselect_default = () => ({
       ...optionsGroup,
       options: optionsGroup.options.map(({ value }) => this.allOptions[value])
     }));
+    if (scrollOptionsIntoView) {
+      this.$watch("isOpen", (isOpen) => {
+        if (isOpen) {
+          this.scrollToOptions();
+        }
+      });
+    }
   }
 });
 export {

@@ -262,19 +262,23 @@ defmodule PhoenixUiComponents.Form do
   attr(:size, :string, values: ["sm", "md", "lg"], default: "md")
   attr(:error_message, :string, default: nil)
   attr(:state, :string, values: ["default", "success", "error"], default: "default")
+  attr(:scroll_options_into_view, :boolean, default: true)
 
   attr(:rest, :global)
 
   def multiselect(assigns) do
     ~H"""
-    <.field_container x-data="multiselect" {@container_attrs}>
+    <.field_container
+      x-data={"multiselect({scrollOptionsIntoView :#{scroll_options_into_view}})"}
+      {@container_attrs}
+    >
       <%= multiple_select(@form, @field, @options,
         class: "hidden",
         "x-model": "selectedValues",
         selected: @selected
       ) %>
 
-      <div x-data="dropdown" class="relative">
+      <div class="relative">
         <%= label(@form, @field, @label, class: "block text-neutral-900 font-semibold mb-1 text-sm") %>
         <div class="mb-2">
           <button
