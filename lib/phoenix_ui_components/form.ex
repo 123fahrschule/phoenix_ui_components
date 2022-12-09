@@ -269,7 +269,7 @@ defmodule PhoenixUiComponents.Form do
   def multiselect(assigns) do
     ~H"""
     <.field_container
-      x-data={"multiselect({scrollOptionsIntoView :#{scroll_options_into_view}})"}
+      x-data={"multiselect({scrollOptionsIntoView :#{@scroll_options_into_view}})"}
       {@container_attrs}
     >
       <%= multiple_select(@form, @field, @options,
