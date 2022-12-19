@@ -44,11 +44,13 @@ defmodule PhoenixUiComponents.Form do
     """
   end
 
+  attr(:class, :string, default: nil)
   attr(:error_message, :string, default: nil)
+  attr(:rest, :global)
 
   def field_error(assigns) do
     ~H"""
-    <p class="text-error-300 text-[11px] leading-[1.09]">
+    <p class={["text-error-300 text-[11px] leading-[1.09]", @class]} {@rest}>
       <%= @error_message %>
     </p>
     """
@@ -67,6 +69,7 @@ defmodule PhoenixUiComponents.Form do
   attr(:right_icon, :atom, default: nil)
   attr(:left_icon_attrs, :list, default: [])
   attr(:right_icon_attrs, :list, default: [])
+  attr(:error_attrs, :list, default: [])
   attr(:rest, :global)
 
   slot(:secondary_label)
@@ -110,7 +113,7 @@ defmodule PhoenixUiComponents.Form do
           <.icon :if={@right_icon} icon={@right_icon} {@right_icon_attrs} />
         </div>
       </.input_container>
-      <.field_error :if={@error_message} error_message={@error_message} />
+      <.field_error :if={@error_message} error_message={@error_message} {@error_attrs} />
     </.field_container>
     """
   end
