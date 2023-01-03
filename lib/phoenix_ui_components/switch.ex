@@ -8,7 +8,7 @@ defmodule PhoenixUiComponents.Switch do
   attr(:class, :string, default: nil)
   attr(:container_class, :string, default: nil)
   attr(:icon, :atom, default: nil)
-  attr(:rest, :global)
+  attr(:rest, :global, include: ["required", "checked", "disabled"])
 
   slot(:inner_block)
 

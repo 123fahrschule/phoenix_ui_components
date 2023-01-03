@@ -68,6 +68,6 @@ defmodule PhoenixUiComponents.Card do
   defp get_border_classes(true), do: "border border-neutral-300"
   defp get_border_classes(_), do: ""
 
-  defp get_background_classes("white"), do: "bg-white"
-  defp get_background_classes("neutral"), do: "bg-neutral-300"
+  # defp get_background_classes("white"), do: "bg-white"
+  # defp get_background_classes("neutral"), do: "bg-neutral-300"
 end

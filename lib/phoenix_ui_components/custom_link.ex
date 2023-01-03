@@ -3,7 +3,7 @@ defmodule PhoenixUiComponents.CustomLink do
 
   attr(:label, :string, default: nil)
   attr(:type, :string, default: "button")
-  attr(:rest, :global)
+  attr(:rest, :global, include: ["href", "navigate", "patch"])
 
   slot(:inner_block)
 

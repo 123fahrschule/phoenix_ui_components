@@ -23,7 +23,7 @@ defmodule PhoenixUiComponents.Button do
   attr(:primary, :boolean, default: false)
   attr(:secondary, :boolean, default: false)
   attr(:tertiary, :boolean, default: false)
-  attr(:rest, :global)
+  attr(:rest, :global, include: ["href", "navigate", "patch"])
 
   slot(:inner_block)
 
@@ -109,15 +109,13 @@ defmodule PhoenixUiComponents.Button do
     """
   end
 
-  defp get_classes(
-         %{
-           class: class,
-           variant: variant,
-           color: color,
-           size: size,
-           icon: icon
-         } = assigns
-       ) do
+  defp get_classes(%{
+         class: class,
+         variant: variant,
+         color: color,
+         size: size,
+         icon: icon
+       }) do
     [
       "inline-flex items-center justify-center rounded-full transition duration-150 ease-in-out font-bold uppercase align-middle",
       if(icon, do: get_icon_button_size_classes(size), else: get_size_classes(size)),
