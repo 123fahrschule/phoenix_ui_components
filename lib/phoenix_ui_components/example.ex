@@ -29,7 +29,7 @@ defmodule PhoenixUiComponents.Example do
       </.top_nav_container>
 
       <div class="p-10">
-        <.breadcrumbs icon={:image} breadcrumbs={breadcrumbs()} class="mb-4" />
+        <.breadcrumbs breadcrumbs={breadcrumbs()} class="mb-4" />
 
         <.tabs class="mb-4">
           <.tab active label="Active Tab" />
@@ -150,7 +150,7 @@ defmodule PhoenixUiComponents.Example do
           </div>
 
           <div class="p-2 bg-primary-500">
-            <.button variant="filled" color="white" label="filled-white" text_color="neutral" />
+            <.button variant="filled" color="white" label="filled-white" />
             <%= for  variant <-["outlined", "text"] do %>
               <.button variant={variant} color="white" label={"#{variant}-white"} />
             <% end %>

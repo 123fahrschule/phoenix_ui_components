@@ -28,9 +28,9 @@ defmodule PhoenixUiComponents.DropdownItem do
     """
   end
 
-  defp get_size_classes("sm"), do: "text-xs"
-  defp get_size_classes("md"), do: "text-sm"
-  defp get_size_classes("lg"), do: "text-base"
+  # defp get_size_classes("sm"), do: "text-xs"
+  # defp get_size_classes("md"), do: "text-sm"
+  # defp get_size_classes("lg"), do: "text-base"
 
   defp get_icon_size_classes("lg"), do: "text-[24px]"
   defp get_icon_size_classes(_), do: "text-[16px]"

@@ -18,6 +18,8 @@ defmodule PhoenixUiComponents.Form do
   attr(:class, :string, default: nil)
   attr(:rest, :global)
 
+  slot(:inner_block, required: true)
+
   def input_container(assigns) do
     ~H"""
     <div class={["mb-1 group relative", @class]} {@rest}>
@@ -61,7 +63,22 @@ defmodule PhoenixUiComponents.Form do
   attr(:label, :string, default: nil)
   attr(:class, :string, default: nil)
   attr(:container_attrs, :list, default: [])
-  attr(:type, :string, values: ["text"], default: "text")
+
+  attr(:type, :string,
+    values: [
+      "text",
+      "email",
+      "password",
+      "number",
+      "textarea",
+      "select",
+      "file",
+      "date_select",
+      "date"
+    ],
+    default: "text"
+  )
+
   attr(:size, :string, values: ["sm", "md", "lg"], default: "md")
   attr(:error_message, :string, default: nil)
   attr(:state, :string, values: ["default", "success", "error"], default: "default")
@@ -70,7 +87,10 @@ defmodule PhoenixUiComponents.Form do
   attr(:left_icon_attrs, :list, default: [])
   attr(:right_icon_attrs, :list, default: [])
   attr(:error_attrs, :list, default: [])
-  attr(:rest, :global)
+
+  attr(:rest, :global,
+    include: ["required", "disabled", "checked", "options", "min", "max", "step"]
+  )
 
   slot(:secondary_label)
 
@@ -123,7 +143,8 @@ defmodule PhoenixUiComponents.Form do
   attr(:field, :atom, required: true)
   attr(:size, :string, values: ["sm", "md", "lg"], default: "md")
   attr(:options, :list, default: [])
-  attr(:rest, :global)
+
+  attr(:rest, :global, include: ["value", "required", "disabled", "checked", "min", "max", "step"])
 
   def field_input(%{type: "text"} = assigns) do
     ~H"""

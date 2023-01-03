@@ -1,6 +1,5 @@
 defmodule PhoenixUiComponents.Tabs do
   use PhoenixUiComponents, :component
-  import PhoenixUiComponents.Button
   import PhoenixUiComponents.Icon
 
   attr(:class, :string, default: nil)
@@ -22,7 +21,7 @@ defmodule PhoenixUiComponents.Tabs do
   attr(:icon, :atom, default: nil)
   attr(:rest, :global)
 
-  slot(:inner_block, required: true)
+  slot(:inner_block, default: [])
 
   def tab(assigns) do
     ~H"""

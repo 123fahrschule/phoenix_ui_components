@@ -1,7 +1,6 @@
 defmodule PhoenixUiComponents do
   def component() do
     quote do
-      import Phoenix.Component
       use Phoenix.Component, global_prefixes: ~w(x-)
 
       import PhoenixUiComponents.Helpers

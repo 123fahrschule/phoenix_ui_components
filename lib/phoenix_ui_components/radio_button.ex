@@ -8,7 +8,7 @@ defmodule PhoenixUiComponents.RadioButton do
   attr(:label, :string, default: nil)
   attr(:class, :string, default: nil)
   attr(:size, :string, values: ["sm", "md", "lg"], default: "md")
-  attr(:rest, :global)
+  attr(:rest, :global, include: ["required", "checked", "disabled"])
 
   slot(:inner_block)
 

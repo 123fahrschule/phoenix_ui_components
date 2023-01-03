@@ -3,7 +3,7 @@ defmodule PhoenixUiComponents.Pagination do
   import Phoenix.HTML.Form
   import PhoenixUiComponents.Icon
   import PhoenixUiComponents.CustomLink
-  import PhoenixUiComponents.Form
+  import PhoenixUiComponents.Form, only: [field_input: 1, get_input_classes: 2]
 
   attr(:class, :string, default: nil)
   attr(:total_records, :integer, default: nil)
