@@ -1,6 +1,5 @@
 defmodule PhoenixUiComponents.Pagination do
   use PhoenixUiComponents, :component
-  import Phoenix.HTML.Form
   import PhoenixUiComponents.Icon
   import PhoenixUiComponents.CustomLink
   import PhoenixUiComponents.Form, only: [field_input: 1, get_input_classes: 2]
