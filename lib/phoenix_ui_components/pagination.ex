@@ -1,6 +1,5 @@
 defmodule PhoenixUiComponents.Pagination do
   use PhoenixUiComponents, :component
-  import Phoenix.HTML.Form
   import PhoenixUiComponents.Icon
   import PhoenixUiComponents.CustomLink
   import PhoenixUiComponents.Form, only: [field_input: 1, get_input_classes: 2]
@@ -45,7 +44,7 @@ defmodule PhoenixUiComponents.Pagination do
               ]}
               {get_navigation_attrs(@path, 1 , @navigation_type)}
             >
-              <.icon icon={:keyboard_double_arrow_left} class={["text-[16px]"]} />
+              <.icon icon={:keyboard_double_arrow_left} class="text-[16px]" />
             </.custom_link>
             <.custom_link
               class={[
@@ -75,7 +74,7 @@ defmodule PhoenixUiComponents.Pagination do
               ]}
               {get_navigation_attrs(@path, min(@current_page +  1, @total_pages), @navigation_type)}
             >
-              <.icon icon={:keyboard_arrow_right} class={["text-[16px]"]} />
+              <.icon icon={:keyboard_arrow_right} class="text-[16px]" />
             </.custom_link>
             <.custom_link
               class={[
@@ -84,7 +83,7 @@ defmodule PhoenixUiComponents.Pagination do
               ]}
               {get_navigation_attrs(@path, @total_pages , @navigation_type)}
             >
-              <.icon icon={:keyboard_double_arrow_right} class={["text-[16px]"]} />
+              <.icon icon={:keyboard_double_arrow_right} class="text-[16px]" />
             </.custom_link>
           </div>
 

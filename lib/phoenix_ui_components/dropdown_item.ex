@@ -16,13 +16,13 @@ defmodule PhoenixUiComponents.DropdownItem do
       <.icon
         :if={@selected && @check_icon_position == "left"}
         icon={:check}
-        class={["mr-2", get_icon_size_classes(@size)]}
+        class={list_class_value(["mr-2", get_icon_size_classes(@size)])}
       />
       <%= if @label, do: @label, else: render_slot(@inner_block) %>
       <.icon
         :if={@selected && @check_icon_position == "right"}
         icon={:check}
-        class={["ml-2", get_icon_size_classes(@size)]}
+        class={list_class_value(["ml-2", get_icon_size_classes(@size)])}
       />
     </div>
     """

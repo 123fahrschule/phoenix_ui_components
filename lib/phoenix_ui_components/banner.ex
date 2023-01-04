@@ -27,7 +27,10 @@ defmodule PhoenixUiComponents.Banner do
         get_icon_container_color_classes(@type),
         get_icon_container_size_classes(@size)
       ]}>
-        <.icon icon={get_icon(@type)} class={["text-white ", get_icon_size_classes(@size)]} />
+        <.icon
+          icon={get_icon(@type)}
+          class={list_class_value(["text-white ", get_icon_size_classes(@size)])}
+        />
       </div>
       <div class="mr-2">
         <p :if={@label} class="font-bold">
