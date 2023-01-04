@@ -16,4 +16,15 @@ defmodule PhoenixUiComponents.Helpers do
   def assign_slot(assigns, slot, default_value \\ []) do
     assign_new(assigns, slot, fn -> default_value end)
   end
+
+  def list_class_value(value) do
+    value
+    |> Enum.flat_map(fn
+      nil -> []
+      false -> []
+      inner when is_list(inner) -> [list_class_value(inner)]
+      other -> [other]
+    end)
+    |> Enum.join(" ")
+  end
 end
