@@ -29,6 +29,7 @@ defmodule PhoenixUiComponents do
         Form,
         Icon,
         Layout,
+        Page,
         Pagination,
         Progress,
         RadioButton,
