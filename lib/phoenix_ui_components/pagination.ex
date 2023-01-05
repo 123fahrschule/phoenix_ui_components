@@ -16,27 +16,30 @@ defmodule PhoenixUiComponents.Pagination do
   attr(:per_page_options, :list, default: [15, 30, 45, 60])
   attr(:path, :string, default: "/:page")
   attr(:navigation_type, :string, values: ["href", "navigate", "patch"], default: "href")
+  attr(:with_count, :boolean, default: false)
+  attr(:with_limit, :boolean, default: false)
 
   def pagination(assigns) do
     ~H"""
     <div class={["bg-neutral-100 text-xs py-4 px-9", @class]}>
       <.form :let={f} for={:pagination} {@form_attrs}>
-        <div class="flex items-center justify-between">
-          <div>
-            <div :if={@total_records && @current_records}>
-              Showing
-              <span class="font-bold">
-                <%= @current_records %>
-              </span>
-              out of
-              <span class="font-bold">
-                <%= @total_records %>
-              </span>
-              items.
-            </div>
+        <div class="grid grid-cols-3">
+          <div
+            :if={@with_count && @current_page && @per_page && @current_records && @total_records}
+            class="flex items-center"
+          >
+            Showing
+            <span class="font-bold px-1">
+              <%= (@current_page - 1) * @per_page + @current_records %>
+            </span>
+            out of
+            <span class="font-bold px-1">
+              <%= @total_records %>
+            </span>
+            items.
           </div>
 
-          <div class="flex items-center">
+          <div class="col-col-start-2 grid-col-end-3 flex items-center justify-center">
             <.custom_link
               class={[
                 "flex items-center justify-center p-1",
@@ -57,13 +60,16 @@ defmodule PhoenixUiComponents.Pagination do
             </.custom_link>
             Page
             <.field_input
-              type="text"
+              required
+              type="number"
               form={f}
               field={:current_page}
               value={@current_page}
               class={
                 List.flatten([get_input_classes("sm", "default"), "!w-10 !px-1 text-center mx-2"])
               }
+              min={1}
+              max={@total_pages}
               {@page_input_attrs}
             />
             <span>out of <span class="font-bold"><%= @total_pages %></span></span>
@@ -87,7 +93,7 @@ defmodule PhoenixUiComponents.Pagination do
             </.custom_link>
           </div>
 
-          <div>
+          <div :if={@with_limit} class="flex items-center">
             Display
             <.field_input
               type="select"
@@ -109,7 +115,7 @@ defmodule PhoenixUiComponents.Pagination do
   defp get_button_classes(_), do: "text-neutral-900"
 
   defp get_path(path, page) do
-    String.replace(path, ":page", Integer.to_string(page))
+    String.replace(path, "page_number", Integer.to_string(page))
   end
 
   defp get_navigation_attrs(path, page, navigation_type) do
