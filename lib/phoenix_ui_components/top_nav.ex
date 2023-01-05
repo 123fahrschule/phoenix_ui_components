@@ -9,7 +9,7 @@ defmodule PhoenixUiComponents.TopNav do
 
   def top_nav_container(assigns) do
     ~H"""
-    <div class={["h-16 border-b border-b-neutral-300 flex items-center", @class]} {@rest}>
+    <div class={["border-b border-b-neutral-300 flex items-center", @class]} {@rest}>
       <%= render_slot(@inner_block) %>
     </div>
     """

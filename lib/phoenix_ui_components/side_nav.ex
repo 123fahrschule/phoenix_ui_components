@@ -25,18 +25,16 @@ defmodule PhoenixUiComponents.SideNav do
   )
 
   attr(:root_path, :string, default: nil)
+  attr(:app_name, :string, default: nil)
+  attr(:class, :string, default: nil)
 
-  slot(:header)
   slot(:footer)
 
   def side_nav(assigns) do
     ~H"""
-    <% IO.inspect(@header) %>
-    <div class="fixed inset-y-0 left-0 flex flex-col w-64">
+    <div class={["flex flex-col", @class]}>
       <div class="flex flex-col flex-1 min-h-0 bg-neutral-900 rounded-r-3xl">
-        <.side_nav_header root_path={@root_path}>
-          <%= render_slot(@header) %>
-        </.side_nav_header>
+        <.side_nav_header app_name={@app_name} root_path={@root_path} />
         <nav class="flex flex-col flex-1 px-4 overflow-y-auto">
           <.side_nav_section :for={{label, items} <- @sections} label={label} items={items} />
         </nav>
@@ -49,7 +47,7 @@ defmodule PhoenixUiComponents.SideNav do
   end
 
   attr(:root_path, :string, default: nil)
-  slot(:inner_block)
+  attr(:app_name, :string, default: nil)
 
   def side_nav_header(assigns) do
     ~H"""
@@ -61,7 +59,9 @@ defmodule PhoenixUiComponents.SideNav do
       >
         <.logo class="w-6 h-6" />
       </.custom_link>
-      <%= render_slot(@inner_block) %>
+      <span class="text-neutral-100">
+        <%= @app_name %>
+      </span>
     </div>
     """
   end
