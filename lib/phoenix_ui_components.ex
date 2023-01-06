@@ -37,6 +37,7 @@ defmodule PhoenixUiComponents do
         Spinner,
         Stepper,
         Switch,
+        Table,
         Tabs,
         Timer,
         TopNav,
