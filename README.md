@@ -7,7 +7,7 @@ The package can be installed by adding `phoenix_ui_components` to your list of d
 ```elixir
 def deps do
   [
-    {:phoenix_ui_components, github: "123fahrschule/phoenix_ui_components", tag: "1.0.7"}
+    {:phoenix_ui_components, github: "123fahrschule/phoenix_ui_components", tag: "1.0.8"}
   ]
 end
 ```
