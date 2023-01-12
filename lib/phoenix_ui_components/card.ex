@@ -44,6 +44,22 @@ defmodule PhoenixUiComponents.Card do
     """
   end
 
+  attr(:class, :string, default: nil)
+  attr(:rest, :global)
+
+  slot(:inner_block, required: true)
+
+  def info_card(assigns) do
+    ~H"""
+    <div
+      class={["bg-neutral-100 overflow-hidden border border-neutral-300 rounded-2xl", @class]}
+      {@rest}
+    >
+      <%= render_slot(@inner_block) %>
+    </div>
+    """
+  end
+
   defp get_border_radius_classes("xs"), do: "rounded"
   defp get_border_radius_classes("sm"), do: "rounded-lg"
   defp get_border_radius_classes("md"), do: "rounded-2xl"

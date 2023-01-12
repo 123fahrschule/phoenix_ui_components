@@ -1,22 +1,22 @@
 defmodule PhoenixUiComponents.Table do
   use PhoenixUiComponents, :component
+  import PhoenixUiComponents.Card
 
   attr(:rows, :list, required: true)
   attr(:container_class, :string, default: nil)
   attr(:table_class, :string, default: nil)
+  attr(:rest, :global)
 
   slot :col, required: true do
     attr(:label, :string)
+    attr(:field, :string)
   end
 
   slot(:action, doc: "the slot for showing user actions in the last table column")
 
   def table(assigns) do
     ~H"""
-    <div class={[
-      "overflow-hidden border border-neutral-300 rounded-2xl text-sm leading-tight",
-      @container_class
-    ]}>
+    <.info_card class={["text-sm leading-tight", @container_class]} {@rest}>
       <table class={["w-full text-left bg-neutral-100", @table_class]}>
         <thead class="bg-neutral-200">
           <tr>
@@ -29,11 +29,15 @@ defmodule PhoenixUiComponents.Table do
 
         <tbody class="divide-y divide-neural-300">
           <tr :for={row <- @rows}>
-            <td :for={{col, i} <- Enum.with_index(@col)} class="py-3 px-6">
-              <%= render_slot(col, row) %>
+            <td :for={col <- @col} class="py-3 px-6">
+              <%= if col[:field] do %>
+                <%= Map.get(row, col[:field]) %>
+              <% else %>
+                <%= render_slot(col, row) %>
+              <% end %>
             </td>
             <td :if={@action != []} class="px-6">
-              <div class="flex items-center">
+              <div class="flex items-center space-x-2">
                 <span :for={action <- @action}>
                   <%= render_slot(action, row) %>
                 </span>
@@ -42,7 +46,7 @@ defmodule PhoenixUiComponents.Table do
           </tr>
         </tbody>
       </table>
-    </div>
+    </.info_card>
     """
   end
 end

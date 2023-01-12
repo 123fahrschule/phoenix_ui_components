@@ -352,41 +352,46 @@ defmodule PhoenixUiComponents.Form do
           x-on:click.away="close"
           x-on:keyup.escape.window="close"
           x-cloak
-          class="w-full absolute z-10 bg-neutral-100 border border-neutral-300 rounded-2xl shadow-[0px_4px_12px_-4px_rgba(31,41,51,0.16)] p-2"
+          class="w-full absolute z-10"
         >
-          <input
-            x-model.debounce="filterString"
-            class={List.flatten([get_input_classes(@size, @state), focus_visible_classes(), "mb-2"])}
-          />
-          <div class="max-h-72 overflow-auto">
-            <template x-for="group in filteredOptionsGroups">
-              <div class="border-b-2 last:border-b-0">
-                <template x-if="group.label">
-                  <button
-                    x-on:click="toggleGroup(group)"
-                    type="button"
-                    class="w-full px-3 py-4 text-left text-sm font-semibold rounded-lg bg-neutral-100 hover:bg-neutral-200 group focus-visible:outline-0 focus-visible:bg-neutral-200"
-                  >
-                    <span x-text="group.label" />
-                  </button>
-                </template>
-                <template x-for="option in group.options">
-                  <button
-                    type="button"
-                    class="flex items-center justify-between w-full px-3 py-4 text-sm rounded-lg bg-neutral-100 hover:bg-neutral-200 group focus-visible:outline-0 focus-visible:bg-neutral-200"
-                    x-on:click="toggleOption(option.value)"
-                    x-bind:class="selectedValues.includes(option.value) && 'selected'"
-                  >
-                    <span x-text="option.label" />
-                    <.icon
-                      icon={:check}
-                      class="text-[16px] ml-2 text-primary-300 hidden group-selected:inline-block"
-                    />
-                  </button>
-                </template>
-              </div>
-            </template>
+          <div class="bg-neutral-100 border border-neutral-300 rounded-2xl shadow-[0px_4px_12px_-4px_rgba(31,41,51,0.16)] p-2">
+            <input
+              x-model.debounce="filterString"
+              class={
+                List.flatten([get_input_classes(@size, @state), focus_visible_classes(), "mb-2"])
+              }
+            />
+            <div class="max-h-72 overflow-auto">
+              <template x-for="group in filteredOptionsGroups">
+                <div class="border-b-2 last:border-b-0">
+                  <template x-if="group.label">
+                    <button
+                      x-on:click="toggleGroup(group)"
+                      type="button"
+                      class="w-full px-3 py-4 text-left text-sm font-semibold rounded-lg bg-neutral-100 hover:bg-neutral-200 group focus-visible:outline-0 focus-visible:bg-neutral-200"
+                    >
+                      <span x-text="group.label" />
+                    </button>
+                  </template>
+                  <template x-for="option in group.options">
+                    <button
+                      type="button"
+                      class="flex items-center justify-between w-full px-3 py-4 text-sm rounded-lg bg-neutral-100 hover:bg-neutral-200 group focus-visible:outline-0 focus-visible:bg-neutral-200"
+                      x-on:click="toggleOption(option.value)"
+                      x-bind:class="selectedValues.includes(option.value) && 'selected'"
+                    >
+                      <span x-text="option.label" />
+                      <.icon
+                        icon={:check}
+                        class="text-[16px] ml-2 text-primary-300 hidden group-selected:inline-block"
+                      />
+                    </button>
+                  </template>
+                </div>
+              </template>
+            </div>
           </div>
+          <div class="h-6" />
         </div>
       </div>
     </.field_container>

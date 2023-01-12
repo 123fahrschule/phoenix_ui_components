@@ -3,13 +3,15 @@ defmodule PhoenixUiComponents.Layout do
   import PhoenixUiComponents.SideNav
   import PhoenixUiComponents.TopNav
 
+  attr(:lang, :string, default: "de")
+
   slot(:head, default: [])
   slot(:inner_block, required: true)
 
   def root_layout(assigns) do
     ~H"""
     <!DOCTYPE html>
-    <html lang="de" class="h-full">
+    <html lang={@lang} class="h-full">
       <head>
         <meta charset="utf-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -29,14 +31,6 @@ defmodule PhoenixUiComponents.Layout do
 
   slot(:inner_block, required: true)
 
-  def page_content(assigns) do
-    ~H"""
-    <div class={["ml-64", @class]} {@rest}>
-      <%= render_slot(@inner_block) %>
-    </div>
-    """
-  end
-
   def critical_styles(assigns) do
     ~H"""
     <style>
@@ -55,6 +49,8 @@ defmodule PhoenixUiComponents.Layout do
   attr(:nav_sections, :list, required: true)
 
   slot(:inner_block, required: true)
+  slot(:top_nav_content, default: nil)
+  slot(:side_nav_footer, default: nil)
 
   def admin_layout(assigns) do
     ~H"""
@@ -65,8 +61,13 @@ defmodule PhoenixUiComponents.Layout do
         sections={@nav_sections}
         class="row-span-2"
       >
+        <:footer>
+          <%= render_slot(@side_nav_footer) %>
+        </:footer>
       </PhoenixUiComponents.SideNav.side_nav>
-      <PhoenixUiComponents.TopNav.top_nav_container />
+      <PhoenixUiComponents.TopNav.top_nav_container>
+        <%= render_slot(@top_nav_content) %>
+      </PhoenixUiComponents.TopNav.top_nav_container>
       <main class="overflow-auto">
         <%= render_slot(@inner_block) %>
       </main>
