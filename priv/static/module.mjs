@@ -128,8 +128,22 @@ var multiselect_default = ({ scrollOptionsIntoView = true }) => ({
     }
   }
 });
+
+// js/phoenix-ui-components/pagination.js
+var pagination_default = () => ({
+  updateQueryParams(event) {
+    const page = event.target.elements.page.value.replace(/\D/g, "");
+    if (!page) {
+      return;
+    }
+    const params = new URLSearchParams(window.location.search);
+    params.set("page", page.value);
+    window.location.search = params;
+  }
+});
 export {
   dropdown_default as dropdown,
-  multiselect_default as multiselect
+  multiselect_default as multiselect,
+  pagination_default as pagination
 };
 //# sourceMappingURL=module.mjs.map

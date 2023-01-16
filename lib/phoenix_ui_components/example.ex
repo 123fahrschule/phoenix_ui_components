@@ -4,21 +4,13 @@ defmodule PhoenixUiComponents.Example do
 
   def example(assigns) do
     ~H"""
-    <.side_nav sections={side_nav_sections()} root_path="#">
-      <:header>
-        <span class="text-white">
-          Header
-        </span>
-      </:header>
-      <:footer>
+    <.admin_layout app_name="Example" root_path="#" nav_sections={side_nav_sections()}>
+      <:side_nav_footer>
         <span class="text-white">
           Footer
         </span>
-      </:footer>
-    </.side_nav>
-
-    <.page_content>
-      <.top_nav_container>
+      </:side_nav_footer>
+      <:top_nav_content>
         <.form :let={f} for={:search} class="mx-auto">
           <.form_field form={f} field={:search} placeholder="Search ..." />
         </.form>
@@ -26,8 +18,7 @@ defmodule PhoenixUiComponents.Example do
         <div class="flex mr-14 rounded-full p-1">
           <.avatar />
         </div>
-      </.top_nav_container>
-
+      </:top_nav_content>
       <div class="p-10">
         <.breadcrumbs breadcrumbs={breadcrumbs()} class="mb-4" />
 
@@ -326,7 +317,7 @@ defmodule PhoenixUiComponents.Example do
           <% end %>
         </div>
       </div>
-    </.page_content>
+    </.admin_layout>
     """
   end
 

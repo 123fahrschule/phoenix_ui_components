@@ -24,6 +24,7 @@ defmodule PhoenixUiComponents do
         Checkbox,
         CustomLink,
         DataTable,
+        DetailsList,
         DropdownItem,
         Flyout,
         Form,
