@@ -60,14 +60,14 @@ defmodule PhoenixUiComponents.Tabs do
     do:
       "font-bold after:border-t-2 after:absolute after:bottom-0 after:left-0 after:w-full after:border-neutral-900 after:rounded-t-[3px]"
 
-  defp get_active_classes(true), do: active_classes
+  defp get_active_classes(true), do: active_classes()
 
   defp get_active_classes(false), do: nil
 
   defp set_active_tab(js \\ %JS{}, target, group) do
     js
-    |> JS.remove_class(active_classes, to: "[data-tab='#{group}']")
-    |> JS.add_class(active_classes)
+    |> JS.remove_class(active_classes(), to: "[data-tab='#{group}']")
+    |> JS.add_class(active_classes())
     |> JS.hide(to: "[data-tab-content='#{group}']")
     |> JS.show(to: target)
   end

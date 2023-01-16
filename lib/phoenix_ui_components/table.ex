@@ -16,7 +16,7 @@ defmodule PhoenixUiComponents.Table do
 
   def table(assigns) do
     ~H"""
-    <.info_card class={["text-sm leading-tight", @container_class]} {@rest}>
+    <.info_card class={List.flatten(["text-sm leading-tight", @container_class])} {@rest}>
       <table class={["w-full text-left bg-neutral-100", @table_class]}>
         <thead class="bg-neutral-200">
           <tr>

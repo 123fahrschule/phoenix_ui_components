@@ -22,7 +22,7 @@ defmodule PhoenixUiComponents.Example do
       <div class="p-10">
         <.breadcrumbs breadcrumbs={breadcrumbs()} class="mb-4" />
 
-        <.tabs class="mb-4">
+        <%!-- <.tabs class="mb-4">
           <.tab active label="Active Tab" />
           <.tab>
             Inactive Tab
@@ -30,7 +30,7 @@ defmodule PhoenixUiComponents.Example do
           <.tab icon={:image}>
             Tab with icon
           </.tab>
-        </.tabs>
+        </.tabs> --%>
 
         <.stepper class="mb-4">
           <.step index={1} label="One" state="active" />
@@ -38,13 +38,13 @@ defmodule PhoenixUiComponents.Example do
           <.step index={3} label="Three" state="completed" />
         </.stepper>
 
-        <.pagination
+        <%!-- <.pagination
           current_page={5}
           total_pages={10}
           total_records={100}
           current_records={50}
           navigation_type="patch"
-        />
+        /> --%>
 
         <.flyout
           class="mb-4"
