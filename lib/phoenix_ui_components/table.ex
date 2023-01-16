@@ -36,7 +36,7 @@ defmodule PhoenixUiComponents.Table do
                 <%= render_slot(col, row) %>
               <% end %>
             </td>
-            <td :if={@action != []} class="px-6">
+            <td :if={@action != []} class="py-3 px-6">
               <div class="flex items-center space-x-2">
                 <span :for={action <- @action}>
                   <%= render_slot(action, row) %>
