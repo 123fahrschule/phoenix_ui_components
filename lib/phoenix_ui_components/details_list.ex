@@ -4,9 +4,9 @@ defmodule PhoenixUiComponents.DetailsList do
   attr(:class, :string, default: nil)
 
   slot :item, default: nil do
-    attr(:class, :string, default: nil)
+    attr(:class, :string)
     attr(:term, :string, required: true)
-    attr(:details, :string, default: nil)
+    attr(:details, :string)
   end
 
   def details_list(assigns) do
