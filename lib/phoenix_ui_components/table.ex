@@ -9,7 +9,7 @@ defmodule PhoenixUiComponents.Table do
 
   slot :col, required: true do
     attr(:label, :string)
-    attr(:field, :string)
+    attr(:field, :any)
   end
 
   slot(:action, doc: "the slot for showing user actions in the last table column")

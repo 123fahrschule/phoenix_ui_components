@@ -23,7 +23,7 @@ defmodule PhoenixUiComponents.Button do
   attr(:primary, :boolean, default: false)
   attr(:secondary, :boolean, default: false)
   attr(:tertiary, :boolean, default: false)
-  attr(:rest, :global, include: ["href", "navigate", "patch"])
+  attr(:rest, :global, include: ["href", "navigate", "patch", "form"])
 
   slot(:inner_block)
 
