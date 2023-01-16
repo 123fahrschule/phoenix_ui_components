@@ -1,12 +1,13 @@
 defmodule PhoenixUiComponents.Pagination do
   use PhoenixUiComponents, :component
+  import Phoenix.HTML.Form
   import PhoenixUiComponents.Icon
   import PhoenixUiComponents.CustomLink
   import PhoenixUiComponents.Form, only: [field_input: 1, get_input_classes: 2]
 
   attr(:class, :string, default: nil)
-  attr(:total_records, :integer, default: nil)
-  attr(:current_records, :integer, default: nil)
+  attr(:total_entries, :integer, default: nil)
+  attr(:current_entries, :integer, default: nil)
   attr(:current_page, :integer, required: true)
   attr(:total_pages, :integer, required: true)
   attr(:form_attrs, :list, default: [])
@@ -14,38 +15,48 @@ defmodule PhoenixUiComponents.Pagination do
   attr(:select_attrs, :list, default: [])
   attr(:per_page, :integer, default: 15)
   attr(:per_page_options, :list, default: [15, 30, 45, 60])
-  attr(:path, :string, default: "/:page")
   attr(:navigation_type, :string, values: ["href", "navigate", "patch"], default: "href")
-  attr(:with_count, :boolean, default: false)
   attr(:with_limit, :boolean, default: false)
+  attr(:conn, :any, required: true)
 
   def pagination(assigns) do
+    assigns =
+      assigns
+      |> assign(:current_page, get_page(assigns.current_page))
+
     ~H"""
-    <div class={["bg-neutral-100 text-xs py-4 px-9", @class]}>
-      <.form :let={f} for={:pagination} {@form_attrs}>
-        <div class="grid grid-cols-3">
+    <div class={["bg-neutral-100 text-xs w-full", @class]}>
+      <.form
+        :let={f}
+        for={@conn}
+        method="get"
+        {@form_attrs}
+        x-data="pagination"
+        x-on:submit.prevent="updateQueryParams"
+      >
+        <div class="grid grid-cols-4 gap-2">
           <div
-            :if={@with_count && @current_page && @per_page && @current_records && @total_records}
+            :if={@current_page && @per_page && @current_entries && @total_entries}
             class="flex items-center"
           >
             Showing
             <span class="font-bold px-1">
-              <%= (@current_page - 1) * @per_page + @current_records %>
+              <%= (@current_page - 1) * @per_page + @current_entries %>
             </span>
             out of
             <span class="font-bold px-1">
-              <%= @total_records %>
+              <%= @total_entries %>
             </span>
             items.
           </div>
 
-          <div class="col-col-start-2 grid-col-end-3 flex items-center justify-center">
+          <div class="col-start-2 col-end-4 flex items-center justify-center">
             <.custom_link
               class={[
                 "flex items-center justify-center p-1",
                 get_button_classes(@current_page == 1)
               ]}
-              {get_navigation_attrs(@path, 1 , @navigation_type)}
+              {get_navigation_attrs(@conn, 1 , @navigation_type)}
             >
               <.icon icon={:keyboard_double_arrow_left} class="text-[16px]" />
             </.custom_link>
@@ -54,7 +65,7 @@ defmodule PhoenixUiComponents.Pagination do
                 "flex items-center justify-center p-1",
                 get_button_classes(@current_page == 1)
               ]}
-              {get_navigation_attrs(@path, max(@current_page - 1, 1), @navigation_type)}
+              {get_navigation_attrs(@conn, max(@current_page - 1, 1), @navigation_type)}
             >
               <.icon icon={:keyboard_arrow_left} class="text-[16px]" />
             </.custom_link>
@@ -63,10 +74,13 @@ defmodule PhoenixUiComponents.Pagination do
               required
               type="number"
               form={f}
-              field={:current_page}
+              field={:page}
               value={@current_page}
               class={
-                List.flatten([get_input_classes("sm", "default"), "!w-10 !px-1 text-center mx-2"])
+                List.flatten([
+                  get_input_classes("sm", "default"),
+                  "!w-min min-w-max !px-1 text-center mx-2"
+                ])
               }
               min={1}
               max={@total_pages}
@@ -78,7 +92,7 @@ defmodule PhoenixUiComponents.Pagination do
                 "flex items-center justify-center p-1",
                 get_button_classes(@current_page == @total_pages)
               ]}
-              {get_navigation_attrs(@path, min(@current_page +  1, @total_pages), @navigation_type)}
+              {get_navigation_attrs(@conn, min(@current_page +  1, @total_pages), @navigation_type)}
             >
               <.icon icon={:keyboard_arrow_right} class="text-[16px]" />
             </.custom_link>
@@ -87,7 +101,7 @@ defmodule PhoenixUiComponents.Pagination do
                 "flex items-center justify-center p-1",
                 get_button_classes(@current_page == @total_pages)
               ]}
-              {get_navigation_attrs(@path, @total_pages , @navigation_type)}
+              {get_navigation_attrs(@conn, @total_pages , @navigation_type)}
             >
               <.icon icon={:keyboard_double_arrow_right} class="text-[16px]" />
             </.custom_link>
@@ -111,14 +125,19 @@ defmodule PhoenixUiComponents.Pagination do
     """
   end
 
+  defp get_page(page) when is_binary(page), do: String.to_integer(page)
+  defp get_page(page) when is_integer(page), do: page
+  defp get_page(nil), do: 1
+
   defp get_button_classes(true), do: "text-neutral-500 pointer-events-none"
   defp get_button_classes(_), do: "text-neutral-900"
 
-  defp get_path(path, page) do
-    String.replace(path, "page_number", Integer.to_string(page))
-  end
+  defp get_navigation_attrs(conn, page, navigation_type) do
+    query_string =
+      conn.query_params
+      |> Map.put("page", page)
+      |> Plug.Conn.Query.encode()
 
-  defp get_navigation_attrs(path, page, navigation_type) do
-    Map.new("#{navigation_type}": get_path(path, page))
+    Map.new("#{navigation_type}": "#{conn.request_path}?#{query_string}")
   end
 end
