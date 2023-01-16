@@ -2,6 +2,7 @@ defmodule PhoenixUiComponents.Layout do
   use PhoenixUiComponents, :component
   import PhoenixUiComponents.SideNav
   import PhoenixUiComponents.TopNav
+  import PhoenixUiComponents.Banner
 
   attr(:lang, :string, default: "de")
 
@@ -47,6 +48,7 @@ defmodule PhoenixUiComponents.Layout do
   attr(:app_name, :string, default: nil)
   attr(:root_path, :string, default: nil)
   attr(:nav_sections, :list, required: true)
+  attr(:flash, :map, default: %{})
 
   slot(:inner_block, required: true)
   slot(:top_nav_content, default: nil)
@@ -54,8 +56,24 @@ defmodule PhoenixUiComponents.Layout do
 
   def admin_layout(assigns) do
     ~H"""
+    <div class="fixed left-[240px] right-0 top-[70px] z-50 space-y-4 px-14 pointer-events-none">
+      <div
+        :for={{flash_type, flash_message} <- @flash}
+        x-data={"flashMessage(\"#{flash_type}\")"}
+        x-show="show"
+        class="pointer-events-auto w-1/2 min-w-min mx-auto"
+      >
+        <.banner
+          message={flash_message}
+          type={flash_type}
+          close_button_attributes={["@click": "close"]}
+          class="shadow-sm-3"
+        />
+      </div>
+    </div>
+
     <div class="grid grid-cols-[240px_auto] grid-rows-[64px_auto] h-full bg-neutral-100">
-      <PhoenixUiComponents.SideNav.side_nav
+      <.side_nav
         app_name={@app_name}
         root_path={@root_path}
         sections={@nav_sections}
@@ -64,10 +82,10 @@ defmodule PhoenixUiComponents.Layout do
         <:footer>
           <%= render_slot(@side_nav_footer) %>
         </:footer>
-      </PhoenixUiComponents.SideNav.side_nav>
-      <PhoenixUiComponents.TopNav.top_nav_container>
+      </.side_nav>
+      <.top_nav_container>
         <%= render_slot(@top_nav_content) %>
-      </PhoenixUiComponents.TopNav.top_nav_container>
+      </.top_nav_container>
       <main class="overflow-auto">
         <%= render_slot(@inner_block) %>
       </main>

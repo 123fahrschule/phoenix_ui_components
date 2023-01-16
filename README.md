@@ -53,12 +53,19 @@ import "phoenix_ui_components/priv/static/fonts.css";
 
 import Alpine from "alpinejs";
 
-import { dropdown, multiselect } from "phoenix_ui_components";
+import {
+  dropdown,
+  multiselect,
+  pagination,
+  flashMessage,
+} from "phoenix_ui_components";
 
 window.Alpine = Alpine;
 
 Alpine.data("dropdown", dropdown);
 Alpine.data("multiselect", multiselect);
+Alpine.data("pagination", pagination);
+Alpine.data("flashMessage", flashMessage);
 
 Alpine.start();
 ```

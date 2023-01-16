@@ -141,8 +141,26 @@ var pagination_default = () => ({
     window.location.search = params;
   }
 });
+
+// js/phoenix-ui-components/flash_message.js
+var DEFAULT_FLASH_HIDE_DELAY = 5e3;
+var flash_message_default = (type) => ({
+  show: true,
+  close() {
+    this.show = false;
+  },
+  init() {
+    if (type === "error") {
+      return;
+    }
+    setTimeout(() => {
+      this.close();
+    }, DEFAULT_FLASH_HIDE_DELAY);
+  }
+});
 export {
   dropdown_default as dropdown,
+  flash_message_default as flashMessage,
   multiselect_default as multiselect,
   pagination_default as pagination
 };
