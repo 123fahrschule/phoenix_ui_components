@@ -36,7 +36,7 @@ defmodule PhoenixUiComponents.Banner do
         <p :if={@label} class="font-bold">
           <%= @label %>
         </p>
-        <p class="text-neutral-900">
+        <p class="text-neutral-900 whitespace-pre">
           <%= @message %>
         </p>
       </div>
