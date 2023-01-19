@@ -99,54 +99,18 @@ use PhoenixUiComponents in layout view and change root layout
 
 ## Local development
 
-Change dependency from `github` to `local` in `mix.exs`
+1. Add `phoenix_ui_components` as dependency to the existing project.
+2. Change `mix.exs` to track changes inside `deps/phoenix_ui_components`.
+   ```diff
+   -defp elixirc_paths(_), do: ["lib"]
+   +defp elixirc_paths(_),
+   +  do: ["lib", "deps/phoenix_ui_components/lib", "deps/phoenix_ui_components/priv/static/assets"]
+   ```
+3. Update any components inside `deps/phoenix_ui_components`.
+4. Check new UI in the project web pages.
+5. `deps/phoenix_ui_components` is a git repository, so you can commit changes directly from this directory and push it to GH.
 
-```diff
--{:phoenix_ui_components, github: "123fahrschule/phoenix_ui_components" }
-+{:phoenix_ui_components, path: "local_path/to/phoenix_ui_components" }
-```
-
-Add absolute path to package in `mix.exs` to `elixirc_paths` section.
-
-Update esbuild config
-
-New `NODE_PATH` should point to the directory with the package
-
-```diff
-config :esbuild,
-  [name]: [
-    args:
-      ~w(js/index.js --bundle --target=es2017 --outdir=../priv/static/assets --loader:.woff=file --loader:.woff2=file),
-    cd: Path.expand("../assets", __DIR__),
--    env: %{"NODE_PATH" => Path.expand("../deps", __DIR__)}
-+    env: %{
-+      "NODE_PATH" =>
-+        Enum.join([Path.expand("../deps", __DIR__), Path.expand("local_path/to/directory_with_phoenix_ui_components", __DIR__)], ":")
-+    }
-  ]
-```
-
-Update tailwind config
-
-```diff
-module.exports = {
--  presets: [require("../deps/phoenix_ui_components").preset],
-+  presets: [require("local_path/to/phoenix_ui_components").preset],
-  content: [
--    "../deps/phoenix_ui_components/**/*.*ex",
-+    "local_path/to/phoenix_ui_components/**/*.*ex",
--    "../deps/phoenix_ui_components/priv/static/**/*.*js",
-+    "local_path/to/phoenix_ui_components/priv/static/**/*.*js",
-  ],
-  plugins: [
-    // ...
--    plugin(require("../deps/phoenix_ui_components").plugin),
-+    plugin(require("local_path/to/phoenix_ui_components").plugin),
-  ],
-};
-```
-
-If you want to change assets, then inside your local package run
+If you want to change assets, then run inside `deps/phoenix_ui_components`
 
 ```term
 mix assets.watch
