@@ -3,6 +3,8 @@ defmodule PhoenixUiComponents.Layout do
   import PhoenixUiComponents.SideNav
   import PhoenixUiComponents.TopNav
   import PhoenixUiComponents.Banner
+  import PhoenixUiComponents.Button
+  import PhoenixUiComponents.Logo
 
   attr(:lang, :string, default: "de")
 
@@ -89,6 +91,39 @@ defmodule PhoenixUiComponents.Layout do
       <main class="overflow-auto">
         <%= render_slot(@inner_block) %>
       </main>
+    </div>
+    """
+  end
+
+  attr(:class, :string, default: nil)
+  attr(:rest, :global)
+
+  slot(:inner_block, default: nil)
+
+  def admin_login(assigns) do
+    ~H"""
+    <div class={["h-full bg-gradient-to-b from-primary-300 to-primary-500 pt-14", @class]} {@rest}>
+      <.logo text_white class="w-[153px] mx-auto" />
+      <%= render_slot(@inner_block) %>
+    </div>
+    """
+  end
+
+  attr(:class, :string, default: nil)
+  attr(:title, :string, default: "Hello 👋")
+  attr(:description, :string, default: "Welcome to 123Fahrschule Admin Panel.")
+  attr(:button_text, :string, default: "Login with microsoft")
+  attr(:button_attrs, :list, default: [])
+  attr(:rest, :global)
+
+  def admin_login_form(assigns) do
+    ~H"""
+    <div class={["mt-[186px]", @class]} {@rest}>
+      <div class="bg-neutral-100 rounded-3xl shadow-sm-3 p-10 max-w-[480px] mx-auto">
+        <h2 class="mb-4"><%= @title %></h2>
+        <p class="mb-6"><%= @description %></p>
+        <.button primary label={@button_text} left_icon={:microsoft} class="w-full" {@button_attrs} />
+      </div>
     </div>
     """
   end

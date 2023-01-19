@@ -80,6 +80,25 @@ defmodule PhoenixUiComponents.Icon do
     """
   end
 
+  def icon(%{icon: :microsoft} = assigns) do
+    ~H"""
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="24"
+      height="24"
+      viewBox="0 0 24 24"
+      fill="none"
+      class={@class}
+      {@rest}
+    >
+      <path
+        d="M3.5 3.5V11.6585H11.6205V3.5H3.5ZM12.3415 3.5V11.6585H20.5V3.5H12.3415ZM3.5 12.3795V20.5H11.6205V12.3795H3.5ZM12.3415 12.3795V20.5H20.5V12.3795H12.3415Z"
+        fill="white"
+      />
+    </svg>
+    """
+  end
+
   def icon(assigns) do
     ~H"""
     <span class={[get_material_icon_class(assigns), @class]} {@rest}>
