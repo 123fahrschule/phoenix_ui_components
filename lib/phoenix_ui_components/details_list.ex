@@ -13,7 +13,7 @@ defmodule PhoenixUiComponents.DetailsList do
     ~H"""
     <dl class="divide-y divide-gray-200 ">
       <.details_list_item :for={item <- @item} {item}>
-        <%= render_slot(item) %>
+        <%= if item[:inner_block], do: render_slot(item) %>
       </.details_list_item>
     </dl>
     """
