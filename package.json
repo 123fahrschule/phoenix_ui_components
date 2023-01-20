@@ -5,7 +5,17 @@
   "module": "./priv/static/module.mjs",
   "main": "./priv/static/main.cjs.js",
   "exports": {
-    "import": "./priv/static/module.mjs",
-    "require": "./priv/static/main.cjs.js"
+    ".": {
+      "import": "./priv/static/module.mjs",
+      "require": "./priv/static/main.cjs.js"
+    },
+    "./style.css": {
+      "import": "./priv/static/style.css",
+      "require": "./priv/static/style.css"
+    },
+    "./fonts.css": {
+      "import": "./priv/static/fonts.css",
+      "require": "./priv/static/fonts.css"
+    }
   }
 }
