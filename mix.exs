@@ -4,7 +4,7 @@ defmodule PhoenixUiComponents.MixProject do
   def project do
     [
       app: :phoenix_ui_components,
-      version: "1.1.9",
+      version: "1.1.10",
       elixir: "~> 1.13",
       start_permanent: Mix.env() == :prod,
       deps: deps(),
