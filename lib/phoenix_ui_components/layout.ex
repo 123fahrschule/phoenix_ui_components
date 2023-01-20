@@ -32,8 +32,6 @@ defmodule PhoenixUiComponents.Layout do
   attr(:class, :string, default: nil)
   attr(:rest, :global)
 
-  slot(:inner_block, required: true)
-
   def critical_styles(assigns) do
     ~H"""
     <style>

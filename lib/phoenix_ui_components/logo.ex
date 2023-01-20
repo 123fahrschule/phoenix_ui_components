@@ -3,10 +3,11 @@ defmodule PhoenixUiComponents.Logo do
 
   attr(:white, :boolean, default: false)
   attr(:text_white, :boolean, default: false)
+  attr(:rest, :global)
 
   def logo(%{white: true} = assigns) do
     ~H"""
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 72 70" fill="none" {assigns}>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 72 70" fill="none" {@rest}>
       <path
         d="M46.5624 18.4074H28.3882L28.3967 8.55631L28.3882 0H46.5765V18.4074H46.5624Z"
         fill="white"
@@ -73,7 +74,7 @@ defmodule PhoenixUiComponents.Logo do
 
   def logo(%{text_white: true} = assigns) do
     ~H"""
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 153 148" fill="none" {assigns}>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 153 148" fill="none" {@rest}>
       <g clip-path="url(#clip0_1487_28673)">
         <path
           d="M98.6953 38.9184H60.1727L60.1907 18.0905L60.1727 0H98.7252V38.9184H98.6953Z"
@@ -144,7 +145,7 @@ defmodule PhoenixUiComponents.Logo do
 
   def logo(assigns) do
     ~H"""
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 72 70" fill="none" {assigns}>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 72 70" fill="none" {@rest}>
       <path
         d="M47.5624 18.4074H27.3882L27.3967 8.55631L27.3882 0H47.5765V18.4074H47.5624Z"
         fill="#E15028"
