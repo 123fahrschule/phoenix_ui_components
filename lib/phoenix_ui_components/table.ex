@@ -16,37 +16,43 @@ defmodule PhoenixUiComponents.Table do
 
   def table(assigns) do
     ~H"""
-    <.info_card class={List.flatten(["text-sm leading-tight", @container_class])} {@rest}>
-      <table class={["w-full text-left bg-neutral-100", @table_class]}>
-        <thead class="bg-neutral-200">
-          <tr>
-            <th :for={col <- @col} class="py-3 px-6">
-              <%= col[:label] %>
-            </th>
-            <th :if={@action != []} class="w-px"></th>
-          </tr>
-        </thead>
+    <div class={List.flatten(["flow-root", @container_class])} {@rest}>
+      <div class="overflow-x-auto">
+        <div class="inline-block min-w-full">
+          <div class="text-sm leading-tight bg-neutral-100 overflow-hidden border border-neutral-300 rounded-2xl">
+            <table class={["w-full text-left bg-neutral-100", @table_class]}>
+              <thead class="bg-neutral-200">
+                <tr>
+                  <th :for={col <- @col} class="py-3 px-6">
+                    <%= col[:label] %>
+                  </th>
+                  <th :if={@action != []} class="w-px"></th>
+                </tr>
+              </thead>
 
-        <tbody class="divide-y divide-neural-300">
-          <tr :for={row <- @rows}>
-            <td :for={col <- @col} class="py-3 px-6">
-              <%= if col[:field] do %>
-                <%= Map.get(row, col[:field]) %>
-              <% else %>
-                <%= render_slot(col, row) %>
-              <% end %>
-            </td>
-            <td :if={@action != []} class="py-3 px-6">
-              <div class="flex items-center space-x-2">
-                <span :for={action <- @action}>
-                  <%= render_slot(action, row) %>
-                </span>
-              </div>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    </.info_card>
+              <tbody class="divide-y divide-neural-300">
+                <tr :for={row <- @rows}>
+                  <td :for={col <- @col} class="py-3 px-6">
+                    <%= if col[:field] do %>
+                      <%= Map.get(row, col[:field]) %>
+                    <% else %>
+                      <%= render_slot(col, row) %>
+                    <% end %>
+                  </td>
+                  <td :if={@action != []} class="py-3 px-6">
+                    <div class="flex items-center space-x-2">
+                      <span :for={action <- @action}>
+                        <%= render_slot(action, row) %>
+                      </span>
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
     """
   end
 end
