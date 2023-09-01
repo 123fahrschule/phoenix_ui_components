@@ -1,6 +1,5 @@
 defmodule PhoenixUiComponents.Table do
   use PhoenixUiComponents, :component
-  import PhoenixUiComponents.Card
 
   attr(:rows, :list, required: true)
   attr(:container_class, :string, default: nil)
