@@ -89,7 +89,7 @@ defmodule PhoenixUiComponents.Form do
   attr(:error_attrs, :list, default: [])
 
   attr(:rest, :global,
-    include: ["required", "disabled", "checked", "options", "min", "max", "step"]
+    include: ["required", "disabled", "checked", "options", "min", "max", "step", "name"]
   )
 
   slot(:secondary_label)
