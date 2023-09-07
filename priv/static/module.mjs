@@ -137,7 +137,7 @@ var pagination_default = () => ({
       return;
     }
     const params = new URLSearchParams(window.location.search);
-    params.set("page", page.value);
+    params.set("page", page);
     window.location.search = params;
   }
 });
