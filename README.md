@@ -42,7 +42,7 @@ module.exports = {
 };
 ```
 
-Import icons, styles and add required components for Alpine in main `*.js` file
+Import icons, styles and add required components for Alpine and Phoenix hooks in main `*.js` file
 
 ```js
 import "material-icons/iconfont/filled.css";
@@ -51,13 +51,16 @@ import "material-icons/iconfont/outlined.css";
 import "phoenix_ui_components/style.css";
 import "phoenix_ui_components/fonts.css";
 
+import { Socket } from "phoenix";
+import { LiveSocket } from "phoenix_live_view";
+
 import Alpine from "alpinejs";
 
 import {
   dropdown,
   multiselect,
   pagination,
-  flashMessage,
+  FlashMessage,
 } from "phoenix_ui_components";
 
 window.Alpine = Alpine;
@@ -65,9 +68,15 @@ window.Alpine = Alpine;
 Alpine.data("dropdown", dropdown);
 Alpine.data("multiselect", multiselect);
 Alpine.data("pagination", pagination);
-Alpine.data("flashMessage", flashMessage);
 
 Alpine.start();
+
+let liveSocket = new LiveSocket("/live", Socket, {
+  params: { _csrf_token: csrfToken },
+  hooks: {
+    FlashMessage,
+  },
+});
 ```
 
 Set required options for esbuild in `config/config.exs` (target and loaders for fonts)
