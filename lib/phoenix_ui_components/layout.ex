@@ -59,14 +59,17 @@ defmodule PhoenixUiComponents.Layout do
     <div class="fixed left-[240px] right-0 top-[70px] z-50 space-y-4 px-14 pointer-events-none">
       <div
         :for={{flash_type, flash_message} <- @flash}
-        x-data={"flashMessage(\"#{flash_type}\")"}
-        x-show="show"
+        id={"flash_#{flash_type}"}
+        phx-hook="FlashMessage"
+        data-type={flash_type}
         class="pointer-events-auto w-1/2 min-w-min mx-auto"
       >
         <.banner
           message={flash_message}
           type={flash_type}
-          close_button_attributes={["@click": "close"]}
+          close_button_attributes={[
+            "data-type": "close-btn"
+          ]}
           class="shadow-sm-3"
         />
       </div>
