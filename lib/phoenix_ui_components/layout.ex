@@ -53,6 +53,7 @@ defmodule PhoenixUiComponents.Layout do
   slot(:inner_block, required: true)
   slot(:top_nav_content, default: nil)
   slot(:side_nav_footer, default: nil)
+  slot(:dev_tools)
 
   def admin_layout(assigns) do
     ~H"""
@@ -82,6 +83,7 @@ defmodule PhoenixUiComponents.Layout do
         sections={@nav_sections}
         class="row-span-2"
       >
+        <%= render_slot(@dev_tools) %>
         <:footer>
           <%= render_slot(@side_nav_footer) %>
         </:footer>

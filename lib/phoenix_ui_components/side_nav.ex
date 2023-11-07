@@ -38,6 +38,9 @@ defmodule PhoenixUiComponents.SideNav do
         <nav class="flex flex-col flex-1 px-4 overflow-y-auto">
           <.side_nav_section :for={{label, items} <- @sections} label={label} items={items} />
         </nav>
+
+        <%= render_slot(@inner_block) %>
+
         <.side_nav_footer>
           <%= render_slot(@footer) %>
         </.side_nav_footer>
@@ -167,6 +170,95 @@ defmodule PhoenixUiComponents.SideNav do
     </li>
     """
   end
+
+  attr(:label, :string, default: "Dev tools")
+
+  slot(:item)
+
+  def side_nav_dev_tools(assigns) do
+    ~H"""
+    <div class="px-4">
+      <p class="mb-2 text-sm font-bold uppercase text-neutral-600">
+        <%= @label %>
+      </p>
+      <ul>
+        <.dev_tools_item :for={item <- @item} {(item)} />
+      </ul>
+    </div>
+    """
+  end
+
+  attr(:primary, :string, required: true)
+  attr(:secondary, :string)
+  attr(:show_secondary, :boolean, default: true)
+  attr(:icon, :atom, required: true)
+  attr(:status, :string, values: ["default", "warning", "error"])
+  attr(:errors_count, :integer, default: 0)
+  attr(:warnings_count, :integer, default: 0)
+  attr(:rest, :global, include: ["href", "navigate", "patch"])
+
+  def dev_tools_item(assigns) do
+    assigns =
+      assigns
+      |> assign_new(:status, &dev_tools_item_status/1)
+      |> assign_new(:secondary, &secondary_text/1)
+
+    ~H"""
+    <li class="mb-2 overflow-hidden text-sm">
+      <.custom_link
+        class={[
+          "flex items-center py-1.5 pl-4 pr-2 rounded-lg text-start bg-neutral-900 outline-offset-[-2px] w-full border min-h-[50px]",
+          dev_tools_item_color(@status),
+          "hover:bg-neutral-800 focus:bg-neutral-800"
+        ]}
+        {@rest}
+      >
+        <.icon icon={devtools_icon(@status, @icon)} class="flex-shrink-0 mr-2" />
+        <div>
+          <p>
+            <%= @primary %>
+          </p>
+
+          <p :if={@show_secondary && @secondary} class="text-xs">
+            <%= @secondary %>
+          </p>
+        </div>
+        <.icon outlined icon={:chevron_right} class="flex-shrink-0 ml-auto" />
+      </.custom_link>
+    </li>
+    """
+  end
+
+  defp dev_tools_item_status(%{errors_count: errors_count}) when errors_count > 0,
+    do: "error"
+
+  defp dev_tools_item_status(%{warnings_count: warnings_count}) when warnings_count > 0,
+    do: "warning"
+
+  defp dev_tools_item_status(_),
+    do: "default"
+
+  defp dev_tools_item_color("warning"),
+    do: "text-warning-300 border-warning-300 outline-warning-300"
+
+  defp dev_tools_item_color("error"), do: "text-error-400 border-error-400 outline-error-400"
+  defp dev_tools_item_color(_), do: "text-neutral-500 border-neutral-500"
+
+  defp devtools_icon("warning", _icon), do: :warning_amber
+  defp devtools_icon("error", _icon), do: :error_outline
+  defp devtools_icon(_status, icon), do: icon
+
+  defp secondary_text(%{secondary: secondary}),
+    do: secondary
+
+  defp secondary_text(%{errors_count: errors_count}) when errors_count > 0,
+    do: "#{errors_count} Errors"
+
+  defp secondary_text(%{warnings_count: warnings_count}) when warnings_count > 0,
+    do: "#{warnings_count} Warnings"
+
+  defp secondary_text(_),
+    do: "0 Errors"
 
   defp active_link_classes(),
     do: "hover:bg-neutral-800 focus:bg-neutral-800 focus:text-neutral-200 hover:text-neutral-200"
