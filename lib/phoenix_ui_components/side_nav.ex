@@ -173,7 +173,7 @@ defmodule PhoenixUiComponents.SideNav do
 
   attr(:label, :string, default: "Dev tools")
 
-  slot(:item)
+  slot(:inner_block)
 
   def side_nav_dev_tools(assigns) do
     ~H"""
@@ -182,7 +182,7 @@ defmodule PhoenixUiComponents.SideNav do
         <%= @label %>
       </p>
       <ul>
-        <.dev_tools_item :for={item <- @item} {(item)} />
+        <%= render_slot(@inner_block) %>
       </ul>
     </div>
     """
