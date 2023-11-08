@@ -22,11 +22,11 @@ defmodule PhoenixUiComponents.Example do
 
       <:dev_tools>
         <.side_nav_dev_tools label="test">
-          <:item primary="Service 1" icon={:image} />
-          <:item primary="Service 2" icon={:image} warnings_count={5} />
-          <:item primary="Service 3" icon={:image} errors_count={10} />
-          <:item primary="Service 4" icon={:image} show_secondary={false}  />
-          <:item primary="Service 5" icon={:image} status="warning" secondary="Custom text" />
+          <.dev_tools_item primary="Service 1" icon={:image} />
+          <.dev_tools_item primary="Service 2" icon={:image} warnings_count={5} />
+          <.dev_tools_item primary="Service 3" icon={:image} errors_count={10} />
+          <.dev_tools_item primary="Service 4" icon={:image} show_secondary={false} />
+          <.dev_tools_item primary="Service 5" icon={:image} status="warning" secondary="Custom text" />
         </.side_nav_dev_tools>
       </:dev_tools>
 
