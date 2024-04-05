@@ -20,9 +20,9 @@ defmodule PhoenixUiComponents do
         Banner,
         Button,
         Checkbox,
+        CustomLink,
         Form,
         Layout,
-        Link,
         SideNav,
         Spinner
       }

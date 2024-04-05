@@ -1,6 +1,6 @@
 defmodule PhoenixUiComponents.Button do
   use PhoenixUiComponents, :component
-  import PhoenixUiComponents.Link
+  import PhoenixUiComponents.CustomLink
 
   # attr :type :string, default: "button"
   # attr :class :string, default: nil
@@ -27,7 +27,7 @@ defmodule PhoenixUiComponents.Button do
       |> assign_rest([:type, :class, :label, :variant, :size, :icon, :left_icon, :right_icon])
 
     ~H"""
-    <.link
+    <.custom_link
       type={@type}
       class={
         [
@@ -40,7 +40,7 @@ defmodule PhoenixUiComponents.Button do
       {@rest}
     >
       <.content {assigns} />
-    </.link>
+    </.custom_link>
     """
   end
 

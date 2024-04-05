@@ -92,7 +92,7 @@ defmodule PhoenixUiComponents.Example do
       </div>
 
       <div class="px-10 mb-4 space-y-4">
-        <.form for={:input} let={f}>
+        <.form for={:input} :let={f}>
           <.text_field form={f} field={:sm} label="Input sm" placeholder="Placeholder" size="sm" />
           <.text_field form={f} field={:md} label="Input md" placeholder="Placeholder" />
           <.text_field form={f} field={:lg} label="Input lg" placeholder="Placeholder" size="lg" />
@@ -100,7 +100,7 @@ defmodule PhoenixUiComponents.Example do
       </div>
 
       <div class="px-10 mb-4 space-y-4">
-        <.form for={:select} let={f}>
+        <.form for={:select} :let={f}>
           <.select native form={f} field={:sm} label="Select sm" size="sm" options={[]} />
           <.select native form={f} field={:md} label="Select md" options={[]} />
           <.select native form={f} field={:lg} label="Select lg" size="lg" options={[]} />

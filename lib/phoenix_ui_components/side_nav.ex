@@ -1,6 +1,6 @@
 defmodule PhoenixUiComponents.SideNav do
   use PhoenixUiComponents, :component
-  import PhoenixUiComponents.Link
+  import PhoenixUiComponents.CustomLink
   import PhoenixUiComponents.Logo
 
   # attr :sections, :list, required: true, docs: "["Section name": [%{label: "Item label", icon: :info, ...link attributes}]]
@@ -23,9 +23,9 @@ defmodule PhoenixUiComponents.SideNav do
   def side_nav_header(assigns) do
     ~H"""
     <div class="flex items-center flex-shrink-0 px-4 py-3">
-      <.link href="#" class="flex items-center justify-center w-10 h-10 mr-2 bg-white rounded-lg">
+      <.custom_link href="#" class="flex items-center justify-center w-10 h-10 mr-2 bg-white rounded-lg">
         <.logo class="w-6 h-6" />
-      </.link>
+      </.custom_link>
     </div>
     """
   end
@@ -63,7 +63,7 @@ defmodule PhoenixUiComponents.SideNav do
 
     ~H"""
     <li class="mb-3 overflow-hidden text-sm text-neutral-500" x-data="dropdown">
-      <.link
+      <.custom_link
         class={
           [
             "flex items-center py-2 pl-4 pr-2 rounded-lg bg-neutral-900 outline-offset-[-2px] w-full",
@@ -81,7 +81,7 @@ defmodule PhoenixUiComponents.SideNav do
           class="ml-auto transition-transform duration-300"
           x-bind="arrowIcon"
         />
-      </.link>
+      </.custom_link>
 
       <ul class="pt-2 overflow-hidden" x-bind="panel" x-cloak>
         <%= for item <-@items do %>
@@ -102,7 +102,7 @@ defmodule PhoenixUiComponents.SideNav do
 
     ~H"""
     <li class="mb-3 overflow-hidden text-sm text-neutral-500">
-      <.link
+      <.custom_link
         class={
           [
             "flex items-center py-2 pl-4 pr-2 rounded-lg bg-neutral-900 outline-offset-[-2px] w-full",
@@ -113,7 +113,7 @@ defmodule PhoenixUiComponents.SideNav do
       >
         <MaterialIcons.icon outlined icon={@icon} class="flex-shrink-0 mr-2" />
         <%= @label %>
-      </.link>
+      </.custom_link>
     </li>
     """
   end
@@ -134,7 +134,7 @@ defmodule PhoenixUiComponents.SideNav do
           stroke-linecap="round"
         />
       </svg>
-      <.link
+      <.custom_link
         class={
           ["py-2.5 px-2 w-full rounded-lg relative outline-offset-[-2px]", active_link_classes()]
         }
