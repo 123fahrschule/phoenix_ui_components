@@ -23,9 +23,9 @@ defmodule PhoenixUiComponents.MixProject do
   defp deps do
     [
       # Productive. Reliable. Fast. A productive web framework that does not compromise speed and maintainability.
-      {:phoenix, "~> 1.6"},
+      {:phoenix, "~> 1.7"},
       # Rich, real-time user experiences with server-rendered HTML
-      {:phoenix_live_view, "~> 0.17"},
+      {:phoenix_live_view, "~> 0.20"},
 
       # Dev dependencies
       {:esbuild, "~> 0.5", only: :dev}
