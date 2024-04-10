@@ -19,48 +19,39 @@ defmodule PhoenixUiComponents.CustomLink do
   end
 
   defp link_component(%{href: _} = assigns) do
-    assigns =
-      assigns
-      |> assign_rest([:href])
 
     ~H"""
-    <.link {@rest}>
+    <.link  {assigns_to_attributes(assigns)}>
       <%= render_slot(@inner_block) %>
     </.link>
     """
   end
 
   defp link_component(%{patch: _} = assigns) do
-    assigns =
-      assigns
-      |> assign_rest([:patch])
+
 
     ~H"""
-    <.link {@rest}>
+    <.link {assigns_to_attributes(assigns)}>
       <%= render_slot(@inner_block) %>
     </.link>
     """
   end
 
   defp link_component(%{navigate: _} = assigns) do
-    assigns =
-      assigns
-      |> assign_rest()
+
 
     ~H"""
-    <.link {@rest}>
+    <.link {assigns_to_attributes(assigns)}>
       <%= render_slot(@inner_block) %>
     </.link>
     """
   end
 
   defp link_component(assigns) do
-    assigns =
-      assigns
-      |> assign_rest([])
+
 
     ~H"""
-    <button {@rest}>
+    <button {assigns_to_attributes(assigns)}>
       <%= render_slot(@inner_block) %>
     </button>
     """
