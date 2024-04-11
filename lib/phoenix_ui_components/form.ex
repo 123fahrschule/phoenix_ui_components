@@ -1,5 +1,6 @@
 defmodule PhoenixUiComponents.Form do
   use PhoenixUiComponents, :component
+  import Phoenix.HTML.Form
 
   @sizes ["sm", "md", "lg"]
 
@@ -28,14 +29,14 @@ defmodule PhoenixUiComponents.Form do
 
   attr(:size, :string, values: @sizes, default: "md", doc: ~s'Available options: "sm", "md", "lg"')
 
-  attr(:rest, :global)
+  attr(:rest, :global, include: ["form", "disabled", "min", "max"])
 
   def text_field(assigns) do
     assigns =
       assigns
-      |> assign_new(:id, fn -> Map.get(assigns.form[assigns.field], :id) end)
-      |> assign_new(:name, fn -> Map.get(assigns.form[assigns.field], :name) end)
-      |> assign_new(:value, fn -> Map.get(assigns.form[assigns.field], :value) end)
+      |> assign_new(:id, fn -> input_id(assigns.form, assigns.field) end)
+      |> assign_new(:name, fn -> input_name(assigns.form, assigns.field) end)
+      |> assign_new(:value, fn -> input_value(assigns.form, assigns.field) end)
 
     ~H"""
     <div class={@wrapper_class}>
@@ -75,14 +76,14 @@ defmodule PhoenixUiComponents.Form do
 
   attr(:size, :string, values: @sizes, default: "md", doc: ~s'Available options: "sm", "md", "lg"')
 
-  attr(:rest, :global)
+  attr(:rest, :global, include: ["form", "disabled"])
 
   def select(assigns) do
     assigns =
       assigns
-      |> assign_new(:id, fn -> Map.get(assigns.form[assigns.field], :id) end)
-      |> assign_new(:name, fn -> Map.get(assigns.form[assigns.field], :name) end)
-      |> assign_new(:value, fn -> Map.get(assigns.form[assigns.field], :value) end)
+      |> assign_new(:id, fn -> input_id(assigns.form, assigns.field) end)
+      |> assign_new(:name, fn -> input_name(assigns.form, assigns.field) end)
+      |> assign_new(:value, fn -> input_value(assigns.form, assigns.field) end)
 
     ~H"""
     <div class={@wrapper_class}>
@@ -105,7 +106,7 @@ defmodule PhoenixUiComponents.Form do
           {@rest}
         >
           <option :if={@prompt} value=""><%= @prompt %></option>
-          <%= Phoenix.HTML.Form.options_for_select(@options, @value) %>
+          <%= options_for_select(@options, @value) %>
         </select>
       </div>
     </div>
