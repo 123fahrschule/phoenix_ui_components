@@ -1,5 +1,7 @@
 defmodule PhoenixUiComponents.Checkbox do
   use PhoenixUiComponents, :component
+  use PhoenixHTMLHelpers
+
   import Phoenix.HTML.Form
 
   attr(:form, :any, required: true)
