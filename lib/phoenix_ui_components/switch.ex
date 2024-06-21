@@ -1,6 +1,7 @@
 defmodule PhoenixUiComponents.Switch do
   use PhoenixUiComponents, :component
-  import Phoenix.HTML.Form
+  use PhoenixHTMLHelpers
+
   import PhoenixUiComponents.Icon
 
   attr(:form, :any, required: true)

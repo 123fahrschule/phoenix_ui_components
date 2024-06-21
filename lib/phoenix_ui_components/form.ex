@@ -1,6 +1,7 @@
 defmodule PhoenixUiComponents.Form do
   use PhoenixUiComponents, :component
-  import Phoenix.HTML.Form
+  use PhoenixHTMLHelpers
+
   import PhoenixUiComponents.Icon
 
   attr(:rest, :global)
