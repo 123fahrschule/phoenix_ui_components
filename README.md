@@ -7,7 +7,7 @@ The package can be installed by adding `phoenix_ui_components` to your list of d
 ```elixir
 def deps do
   [
-    {:phoenix_ui_components, github: "123fahrschule/phoenix_ui_components", tag: "1.2.4"}
+    {:phoenix_ui_components, github: "123fahrschule/phoenix_ui_components", tag: "1.2.5"}
   ]
 end
 ```
@@ -20,13 +20,11 @@ Install required node modules inside `assets`
 npm install alpinejs@3.10.3 material-icons@1.11.11 --prefix ./assets --save-exact
 ```
 
-Add preset and plugin to the tailwind config file and add path to package in content section
+Add preset to the tailwind config file and add path to package in content section
 
 ```js
 // See the Tailwind configuration guide for advanced usage
 // https://tailwindcss.com/docs/configuration
-
-const plugin = require("tailwindcss/plugin");
 
 module.exports = {
   presets: [require("../deps/phoenix_ui_components").preset],
@@ -34,10 +32,6 @@ module.exports = {
     // ...
     "../deps/phoenix_ui_components/**/*.*ex",
     "../deps/phoenix_ui_components/priv/static/**/*.*js",
-  ],
-  plugins: [
-    // ...
-    plugin(require("../deps/phoenix_ui_components").plugin),
   ],
 };
 ```

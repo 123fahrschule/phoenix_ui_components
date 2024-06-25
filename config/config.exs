@@ -3,7 +3,7 @@ import Config
 if Mix.env() == :dev do
   esbuild = fn args ->
     [
-      args: args ++ ~w(--external:tailwind/plugin --external:@tailwind/forms),
+      args: args ++ ~w(--external:tailwindcss/plugin --external:@tailwindcss/forms),
       cd: Path.expand("../assets", __DIR__),
       env: %{"NODE_PATH" => Path.expand("../deps", __DIR__)}
     ]
