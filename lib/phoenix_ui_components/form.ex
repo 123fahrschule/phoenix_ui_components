@@ -4,6 +4,28 @@ defmodule PhoenixUiComponents.Form do
 
   import PhoenixUiComponents.Icon
 
+  @input_rest_attributes [
+    "accept",
+    "autocomplete",
+    "capture",
+    "cols",
+    "disabled",
+    "form",
+    "list",
+    "max",
+    "maxlength",
+    "min",
+    "minlength",
+    "multiple",
+    "pattern",
+    "placeholder",
+    "readonly",
+    "required",
+    "rows",
+    "size",
+    "step"
+  ]
+
   attr(:rest, :global)
 
   slot(:inner_block, required: true)
@@ -90,17 +112,13 @@ defmodule PhoenixUiComponents.Form do
   attr(:error_attrs, :list, default: [])
 
   attr(:rest, :global,
-    include: [
-      "required",
-      "disabled",
-      "checked",
-      "options",
-      "min",
-      "max",
-      "step",
-      "name",
-      "accept"
-    ]
+    include:
+      @input_rest_attributes ++
+        [
+          "checked",
+          "options",
+          "name"
+        ]
   )
 
   slot(:secondary_label)
@@ -155,7 +173,14 @@ defmodule PhoenixUiComponents.Form do
   attr(:size, :string, values: ["sm", "md", "lg"], default: "md")
   attr(:options, :list, default: [])
 
-  attr(:rest, :global, include: ["value", "required", "disabled", "checked", "min", "max", "step"])
+  attr(:rest, :global,
+    include:
+      @input_rest_attributes ++
+        [
+          "value",
+          "checked"
+        ]
+  )
 
   def field_input(%{type: "text"} = assigns) do
     ~H"""
