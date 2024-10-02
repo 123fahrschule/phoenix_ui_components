@@ -9,7 +9,7 @@ defmodule PhoenixUiComponents.Page do
 
   def page(assigns) do
     ~H"""
-    <div class={["h-full grid grid-rows-[auto_1fr_72px]", @class]} {@rest}>
+    <div class={["page", @class]} {@rest}>
       <%= render_slot(@inner_block) %>
     </div>
     """
@@ -21,23 +21,21 @@ defmodule PhoenixUiComponents.Page do
   attr(:rest, :global)
 
   slot(:inner_block, default: [])
+  slot(:title_content)
   slot(:action, default: nil)
 
   def page_header(assigns) do
     ~H"""
-    <div
-      class={[
-        "bg-neutral-200 border-b border-neutral-300 px-14 pt-5",
-        @class
-      ]}
-      {@rest}
-    >
+    <div class={["page-header", @class]} {@rest}>
       <.breadcrumbs :if={@breadcrumbs} breadcrumbs={@breadcrumbs} class="mb-4" />
 
       <div :if={@title || @action != []} class="flex items-center justify-between space-x-3 mb-5">
-        <p class="text-2xl leading-[1.334] font-bold tracking-normal">
-          <%= @title %>
-        </p>
+        <div class="flex">
+          <p class="text-h3">
+            <%= @title %>
+          </p>
+          <%= render_slot(@title_content) %>
+        </div>
 
         <div class="space-x-3 ml-auto">
           <%= render_slot(@action) %>
@@ -56,16 +54,8 @@ defmodule PhoenixUiComponents.Page do
 
   def page_content(assigns) do
     ~H"""
-    <div
-      class={[
-        "first:row-start-1 first:row-end-3 last:row-start-2 last:row-end-4 only:row-span-3 overflow-auto",
-        @class
-      ]}
-      {@rest}
-    >
-      <div class="px-14 pt-8 pb-6">
-        <%= render_slot(@inner_block) %>
-      </div>
+    <div class={["page-content", @class]} {@rest}>
+      <%= render_slot(@inner_block) %>
     </div>
     """
   end
@@ -78,7 +68,7 @@ defmodule PhoenixUiComponents.Page do
 
   def page_footer(assigns) do
     ~H"""
-    <div class={["flex items-center border-t border-neutral-300 px-14 py-4", @class]} {@rest}>
+    <div class={["page-footer", @class]} {@rest}>
       <%= render_slot(@inner_block) %>
       <div :if={@action != []} class="flex items-center space-x-4 ml-auto">
         <%= render_slot(@action) %>
