@@ -81,6 +81,37 @@ var require_typography = __commonJS({
   }
 });
 
+// tailwind_plugins/layout.js
+var require_layout = __commonJS({
+  "tailwind_plugins/layout.js"(exports2, module2) {
+    var plugin = require("tailwindcss/plugin");
+    module2.exports = plugin(function({ addComponents }) {
+      addComponents({
+        ".page": {
+          height: "100%",
+          display: "grid",
+          gridTemplateRows: "auto 1fr auto",
+          gridTemplateAreas: '"header" "content" "footer"'
+        },
+        ".page-header": {
+          "@apply bg-neutral-200 border-b border-neutral-300 px-14 pt-5": {},
+          gridArea: "header"
+        },
+        ".page-content": {
+          "@apply px-14 pt-8 pb-6": {},
+          overflow: "auto",
+          gridArea: "content"
+        },
+        ".page-footer": {
+          "@apply bg-neutral-100 flex items-center border-t border-neutral-300 px-14 py-4": {},
+          height: "72px",
+          gridArea: "footer"
+        }
+      });
+    });
+  }
+});
+
 // tailwind_plugins/variants.js
 var require_variants = __commonJS({
   "tailwind_plugins/variants.js"(exports2, module2) {
@@ -224,6 +255,7 @@ var require_tailwind_preset = __commonJS({
       plugins: [
         require("@tailwindcss/forms"),
         require_typography(),
+        require_layout(),
         require_variants()
       ]
     };
