@@ -97,7 +97,8 @@ defmodule PhoenixUiComponents.Form do
       "select",
       "file",
       "date_select",
-      "date"
+      "date",
+      "hidden"
     ],
     default: "text"
   )
