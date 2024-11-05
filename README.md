@@ -7,7 +7,7 @@ The package can be installed by adding `phoenix_ui_components` to your list of d
 ```elixir
 def deps do
   [
-    {:phoenix_ui_components, github: "123fahrschule/phoenix_ui_components", tag: "1.3.2"}
+    {:phoenix_ui_components, github: "123fahrschule/phoenix_ui_components", tag: "1.4.0"}
   ]
 end
 ```
@@ -17,7 +17,7 @@ Configure [Tailwind](https://github.com/phoenixframework/tailwind) and [Esbuild]
 Install required node modules inside `assets`
 
 ```term
-npm install alpinejs@3.10.3 material-icons@1.11.11 --prefix ./assets --save-exact
+npm install alpinejs@3.10.3 --prefix ./assets --save-exact
 ```
 
 Add preset to the tailwind config file and add path to package in content section
@@ -39,11 +39,9 @@ module.exports = {
 Import icons, styles and add required components for Alpine and Phoenix hooks in main `*.js` file
 
 ```js
-import "material-icons/iconfont/filled.css";
-import "material-icons/iconfont/outlined.css";
-
 import "phoenix_ui_components/style.css";
 import "phoenix_ui_components/fonts.css";
+import "phoenix_ui_components/material-icons.css";
 
 import { Socket } from "phoenix";
 import { LiveSocket } from "phoenix_live_view";
