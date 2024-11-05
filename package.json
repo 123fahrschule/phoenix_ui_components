@@ -16,6 +16,10 @@
     "./fonts.css": {
       "import": "./priv/static/fonts.css",
       "require": "./priv/static/fonts.css"
+    },
+    "./material-icons.css": {
+      "import": "./priv/static/material-icons.css",
+      "require": "./priv/static/material-icons.css"
     }
   }
 }
