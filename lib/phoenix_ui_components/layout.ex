@@ -8,7 +8,7 @@ defmodule PhoenixUiComponents.Layout do
 
   attr(:lang, :string, default: "de")
 
-  slot(:head, default: [])
+  slot(:head)
   slot(:inner_block, required: true)
 
   def root_layout(assigns) do
@@ -51,8 +51,8 @@ defmodule PhoenixUiComponents.Layout do
   attr(:flash, :map, default: %{})
 
   slot(:inner_block, required: true)
-  slot(:top_nav_content, default: nil)
-  slot(:side_nav_footer, default: nil)
+  slot(:top_nav_content)
+  slot(:side_nav_footer)
   slot(:dev_tools)
 
   def admin_layout(assigns) do
@@ -101,7 +101,7 @@ defmodule PhoenixUiComponents.Layout do
   attr(:class, :string, default: nil)
   attr(:rest, :global)
 
-  slot(:inner_block, default: nil)
+  slot(:inner_block)
 
   def admin_login(assigns) do
     ~H"""

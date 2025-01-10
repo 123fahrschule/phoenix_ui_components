@@ -5,7 +5,7 @@ defmodule PhoenixUiComponents.Page do
   attr(:class, :string, default: nil)
   attr(:rest, :global)
 
-  slot(:inner_block, default: [])
+  slot(:inner_block)
 
   def page(assigns) do
     ~H"""
@@ -20,9 +20,9 @@ defmodule PhoenixUiComponents.Page do
   attr(:title, :string, default: nil)
   attr(:rest, :global)
 
-  slot(:inner_block, default: [])
+  slot(:inner_block)
   slot(:title_content)
-  slot(:action, default: nil)
+  slot(:action)
 
   def page_header(assigns) do
     ~H"""
@@ -50,7 +50,7 @@ defmodule PhoenixUiComponents.Page do
   attr(:class, :string, default: nil)
   attr(:rest, :global)
 
-  slot(:inner_block, default: [])
+  slot(:inner_block)
 
   def page_content(assigns) do
     ~H"""
@@ -63,8 +63,8 @@ defmodule PhoenixUiComponents.Page do
   attr(:class, :string, default: nil)
   attr(:rest, :global)
 
-  slot(:inner_block, default: [])
-  slot(:action, default: nil)
+  slot(:inner_block)
+  slot(:action)
 
   def page_footer(assigns) do
     ~H"""

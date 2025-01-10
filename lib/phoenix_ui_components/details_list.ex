@@ -3,7 +3,7 @@ defmodule PhoenixUiComponents.DetailsList do
 
   attr(:class, :string, default: nil)
 
-  slot :item, default: nil do
+  slot :item do
     attr(:class, :string)
     attr(:term, :string, required: true)
     attr(:details, :string)
@@ -23,7 +23,7 @@ defmodule PhoenixUiComponents.DetailsList do
   attr(:term, :string, required: true)
   attr(:details, :string, default: nil)
 
-  slot(:inner_block, default: [])
+  slot(:inner_block)
 
   def details_list_item(assigns) do
     ~H"""

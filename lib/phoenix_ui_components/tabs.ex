@@ -24,7 +24,7 @@ defmodule PhoenixUiComponents.Tabs do
   attr(:group, :string, default: "tabs")
   attr(:rest, :global)
 
-  slot(:inner_block, default: [])
+  slot(:inner_block)
 
   def tab(assigns) do
     ~H"""

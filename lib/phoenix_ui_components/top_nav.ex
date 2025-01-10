@@ -5,7 +5,7 @@ defmodule PhoenixUiComponents.TopNav do
   attr(:class, :string, default: nil)
   attr(:rest, :global)
 
-  slot(:inner_block, default: [])
+  slot(:inner_block)
 
   def top_nav_container(assigns) do
     ~H"""
