@@ -29,6 +29,30 @@ defmodule PhoenixUiComponents.Layout do
     """
   end
 
+  attr(:rest, :global)
+
+  slot(:inner_block)
+
+  def layout(assigns) do
+    ~H"""
+    <div id="layout" {@rest}>
+      <%= render_slot(@inner_block) %>
+    </div>
+    """
+  end
+
+  attr(:rest, :global)
+
+  slot(:inner_block)
+
+  def layout_content(assigns) do
+    ~H"""
+    <div id="layout-content" {@rest}>
+      <%= render_slot(@inner_block) %>
+    </div>
+    """
+  end
+
   attr(:class, :string, default: nil)
   attr(:rest, :global)
 

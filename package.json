@@ -9,9 +9,9 @@
       "import": "./priv/static/module.mjs",
       "require": "./priv/static/main.cjs.js"
     },
-    "./style.css": {
-      "import": "./priv/static/style.css",
-      "require": "./priv/static/style.css"
+    "./styles.css": {
+      "import": "./priv/static/styles.css",
+      "require": "./priv/static/styles.css"
     },
     "./fonts.css": {
       "import": "./priv/static/fonts.css",

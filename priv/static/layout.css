@@ -1,0 +1,62 @@
+@layer base {
+  :root {
+    --topbar-height: 64px;
+    --sidebar-width: 240px;
+  }
+
+  html {
+    height: 100%;
+  }
+
+  body {
+    @apply antialiased bg-neutral-100;
+
+    height: 100%;
+  }
+
+  #layout {
+    height: 100%;
+
+    display: grid;
+    grid-template-areas:
+      "topbar"
+      "content";
+    grid-template-rows: var(--topbar-height) 1fr;
+    grid-template-columns: 1fr;
+  }
+
+  @screen md {
+    #layout {
+      display: grid;
+      grid-template-areas:
+        "sidebar topbar"
+        "sidebar content";
+      grid-template-rows: var(--topbar-height) 1fr;
+      grid-template-columns: var(--sidebar-width) 1fr;
+    }
+  }
+
+  #sidebar {
+    grid-area: sidebar;
+  }
+
+  #topbar {
+    grid-area: topbar;
+
+    @screen md {
+      position: static;
+    }
+  }
+
+  #layout-content {
+    grid-area: content;
+
+    overflow: auto;
+  }
+
+  [data-phx-main] {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+}
