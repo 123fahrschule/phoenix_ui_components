@@ -1,4 +1,8 @@
 defmodule PhoenixUiComponents.SideNav do
+  @moduledoc """
+  Deprecated use PhoenixUiComponents.Sidebar instead
+  """
+
   use PhoenixUiComponents, :component
   import PhoenixUiComponents.Icon
   import PhoenixUiComponents.CustomLink

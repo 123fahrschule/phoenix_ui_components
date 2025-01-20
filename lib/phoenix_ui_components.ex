@@ -34,6 +34,7 @@ defmodule PhoenixUiComponents do
         Pagination,
         Progress,
         RadioButton,
+        Sidebar,
         SideNav,
         Spinner,
         Stepper,
@@ -42,6 +43,7 @@ defmodule PhoenixUiComponents do
         Tabs,
         Timer,
         TopNav,
+        Topbar,
         Typography
       }
     end

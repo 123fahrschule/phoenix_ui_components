@@ -36,10 +36,17 @@ module.exports = {
 };
 ```
 
+Import `styles.css` at the top of the tailwind .css file
+
+```css
+@import "../../deps/phoenix_ui_components/priv/static/styles.css";
+
+// rest of tailwind config
+```
+
 Import icons, styles and add required components for Alpine and Phoenix hooks in main `*.js` file
 
 ```js
-import "phoenix_ui_components/style.css";
 import "phoenix_ui_components/fonts.css";
 import "phoenix_ui_components/material-icons.css";
 

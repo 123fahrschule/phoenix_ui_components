@@ -1,4 +1,8 @@
 defmodule PhoenixUiComponents.TopNav do
+  @moduledoc """
+  Deprecated use PhoenixUiComponents.Topbar instead
+  """
+
   use PhoenixUiComponents, :component
   import PhoenixUiComponents.Icon
 
