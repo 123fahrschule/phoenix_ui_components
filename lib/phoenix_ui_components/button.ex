@@ -120,7 +120,7 @@ defmodule PhoenixUiComponents.Button do
          icon: icon
        }) do
     [
-      "inline-flex items-center justify-center rounded-full transition duration-150 ease-in-out font-bold uppercase align-middle",
+      "inline-flex items-center justify-center rounded-full transition duration-150 ease-in-out font-bold align-middle",
       if(icon, do: get_icon_button_size_classes(size), else: get_size_classes(size)),
       get_active_state_classes(color, variant),
       get_text_color_classes(color, variant),
