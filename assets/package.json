@@ -10,5 +10,8 @@
     "eslint": "8.23.0",
     "eslint-config-prettier": "8.5.0",
     "prettier": "2.7.1"
+  },
+  "dependencies": {
+    "@floating-ui/dom": "^1.6.13"
   }
 }
