@@ -25,7 +25,7 @@ defmodule PhoenixUiComponents do
         CustomLink,
         DataTable,
         DetailsList,
-        DropdownItem,
+        Dropdown,
         Flyout,
         Form,
         Icon,
