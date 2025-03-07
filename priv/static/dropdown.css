@@ -1,0 +1,24 @@
+@layer components {
+  .dropdown-menu {
+    @apply hidden rounded-2xl border border-neutral-300 bg-neutral-100 shadow-small-400 p-2 text-nowrap min-w-24;
+    z-index: 10;
+
+    /* required styles */
+    width: max-content;
+    max-width: calc(100vw - 20px);
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+
+  .dropdown-menu.absolute {
+    position: absolute;
+  }
+
+  .dropdown-menu.fixed {
+    position: fixed;
+  }
+  .dropdown-menu a {
+    text-decoration: none;
+  }
+}
