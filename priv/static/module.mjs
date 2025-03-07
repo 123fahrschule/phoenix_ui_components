@@ -1554,7 +1554,10 @@ var DropdownMenu = {
       }).then(({ x, y }) => {
         Object.assign(this.menu.style, {
           left: `${x}px`,
-          top: `${y}px`
+          top: `${y}px`,
+          ..."fitReferenceWidth" in this.el.dataset && {
+            width: `${this.reference.clientWidth}px`
+          }
         });
       });
     });
