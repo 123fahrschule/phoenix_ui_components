@@ -3,7 +3,10 @@ Application.put_env(:example, Example.Endpoint,
   server: true,
   live_view: [signing_salt: "aaaaaaaa"],
   secret_key_base: String.duplicate("a", 64),
-  adapter: Bandit.PhoenixAdapter
+  adapter: Bandit.PhoenixAdapter,
+    watchers: [
+    esbuild: {Esbuild, :install_and_run, [:dev, ~w(--sourcemap=inline --watch)]},
+  ]
 )
 
 defmodule Example.ErrorView do
@@ -11,33 +14,46 @@ defmodule Example.ErrorView do
 end
 
 defmodule Example.HomeLive do
-  use Phoenix.LiveView, layout: {__MODULE__, :live}
-
-  defp phx_vsn, do: Application.spec(:phoenix, :vsn)
-  defp lv_vsn, do: Application.spec(:phoenix_live_view, :vsn)
-
-  def render("live.html", assigns) do
-    ~H"""
-    <script src={"https://cdn.jsdelivr.net/npm/phoenix@#{phx_vsn()}/priv/static/phoenix.min.js"}>
-    </script>
-    <script
-      src={"https://cdn.jsdelivr.net/npm/phoenix_live_view@#{lv_vsn()}/priv/static/phoenix_live_view.min.js"}
-    >
-    </script>
-    <script>
-      let liveSocket = new window.LiveView.LiveSocket("/live", window.Phoenix.Socket)
-      liveSocket.connect()
-    </script>
-    <style>
-      * { font-size: 1.1em; }
-    </style>
-    <%= @inner_content %>
-    """
-  end
+  use Phoenix.LiveView
 
   def render(assigns) do
     ~H"""
     Hello
+    """
+  end
+end
+
+defmodule ExampleWeb.Layouts do
+  use Phoenix.Component
+
+  # Import convenience functions from controllers
+  import Phoenix.Controller,
+    only: [get_csrf_token: 0, view_module: 1, view_template: 1]
+
+  def render("root.html", assigns) do
+    ~H"""
+    <!DOCTYPE html>
+    <html lang="en" class="[scrollbar-gutter:stable]">
+      <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta name="csrf-token" content={get_csrf_token()} />
+        <.live_title default="App" suffix=" · Phoenix Framework">
+          <%= assigns[:page_title] %>
+        </.live_title>
+        <script defer phx-track-static type="text/javascript" src={"/assets/dev.js"}>
+        </script>
+      </head>
+      <body class="bg-white">
+        <%= @inner_content %>
+      </body>
+    </html>
+    """
+  end
+
+  def render("live.html", assigns) do
+    ~H"""
+    <%= @inner_content %>
     """
   end
 end
@@ -48,6 +64,8 @@ defmodule Example.Router do
 
   pipeline :browser do
     plug(:accepts, ["html"])
+    plug :put_root_layout, html: {ExampleWeb.Layouts, :root}
+    plug :put_layout, html: {ExampleWeb.Layouts, :live}
   end
 
   scope "/", Example do
@@ -57,9 +75,24 @@ defmodule Example.Router do
   end
 end
 
+defmodule ExampleWeb do
+  def static_paths, do: ~w(assets fonts images favicon.ico robots.txt)
+end
+
 defmodule Example.Endpoint do
   use Phoenix.Endpoint, otp_app: :example
   socket("/live", Phoenix.LiveView.Socket)
+
+  # Serve at "/" the static files from "priv/static" directory.
+  #
+  # You should set gzip to true if you are running phx.digest
+  # when deploying your static files in production.
+  plug Plug.Static,
+    at: "/",
+    from: :phoenix_ui_components,
+    gzip: false,
+    only: ExampleWeb.static_paths()
+
   plug(Example.Router)
 end
 
