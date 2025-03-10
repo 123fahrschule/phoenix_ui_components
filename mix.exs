@@ -30,14 +30,17 @@ defmodule PhoenixUiComponents.MixProject do
       {:phoenix_html_helpers, "~> 1.0"},
 
       # Dev dependencies
-      {:esbuild, "~> 0.5", only: :dev}
+      {:esbuild, "~> 0.5", only: :dev},
+      {:jason, "~> 1.2", only: :dev},
+      {:bandit, "~> 1.5", only: :dev}
     ]
   end
 
   defp aliases do
     [
       "assets.build": ["esbuild module", "esbuild main"],
-      "assets.watch": "esbuild main --watch"
+      "assets.watch": "esbuild main --watch",
+      dev: "run dev.exs"
     ]
   end
 end
