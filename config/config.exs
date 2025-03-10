@@ -20,3 +20,15 @@ config :esbuild,
     ),
   main:
     esbuild.(~w(./main.js --bundle --format=cjs --sourcemap --outfile=../priv/static/main.cjs.js))
+
+# Configure tailwind (the version is required)
+config :tailwind,
+  version: "3.4.3",
+  dev: [
+    args: ~w(
+      --config=tailwind.dev.config.js
+      --input=css/dev.css
+      --output=../priv/static/assets/dev.css
+    ),
+    cd: Path.expand("../assets", __DIR__)
+  ]

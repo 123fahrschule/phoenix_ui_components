@@ -31,6 +31,7 @@ defmodule PhoenixUiComponents.MixProject do
 
       # Dev dependencies
       {:esbuild, "~> 0.5", only: :dev},
+      {:tailwind, "~> 0.2.0", only: :dev},
       {:jason, "~> 1.2", only: :dev},
       {:bandit, "~> 1.5", only: :dev}
     ]

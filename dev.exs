@@ -6,6 +6,7 @@ Application.put_env(:example, Example.Endpoint,
   adapter: Bandit.PhoenixAdapter,
     watchers: [
     esbuild: {Esbuild, :install_and_run, [:dev, ~w(--sourcemap=inline --watch)]},
+    tailwind: {Tailwind, :install_and_run, [:dev, ~w(--watch)]}
   ]
 )
 
