@@ -43,6 +43,15 @@ defmodule PhoenixUiComponents.MixProject do
 
   defp aliases do
     [
+      setup: [
+        "deps.get",
+        "assets.setup"
+      ],
+      "assets.setup": [
+        "cmd npm install --prefix assets",
+        "tailwind.install --if-missing",
+        "esbuild.install --if-missing"
+      ],
       "assets.build": ["esbuild module", "esbuild main"],
       "assets.watch": "esbuild main --watch",
       dev: "run dev.exs",
