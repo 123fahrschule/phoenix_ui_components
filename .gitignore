@@ -25,6 +25,12 @@ phoenix_ui_components-*.tar
 # Temporary files, for example, from tests.
 /tmp/
 
+# Ignore assets that are produced by build tools.
+/priv/static/assets/
+
+# Ignore digested assets cache.
+/priv/static/cache_manifest.json
+
 # The directory NPM downloads your dependencies sources to.
 /node_modules/
 /assets/node_modules/

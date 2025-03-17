@@ -1,10 +1,12 @@
 defmodule PhoenixUiComponents.MixProject do
   use Mix.Project
 
+  @version "1.5.0"
+
   def project do
     [
       app: :phoenix_ui_components,
-      version: "1.5.0",
+      version: @version,
       elixir: "~> 1.13",
       start_permanent: Mix.env() == :prod,
       deps: deps(),
@@ -15,7 +17,7 @@ defmodule PhoenixUiComponents.MixProject do
   # Run "mix help compile.app" to learn about applications.
   def application do
     [
-      extra_applications: [:logger]
+      extra_applications: [:logger, :inets]
     ]
   end
 
@@ -30,14 +32,34 @@ defmodule PhoenixUiComponents.MixProject do
       {:phoenix_html_helpers, "~> 1.0"},
 
       # Dev dependencies
-      {:esbuild, "~> 0.5", only: :dev}
+      {:esbuild, "~> 0.9", only: :dev},
+      {:tailwind, "~> 0.2.0", only: :dev},
+      {:jason, "~> 1.2", only: :dev},
+      {:bandit, "~> 1.5", only: :dev},
+      {:phoenix_live_reload, "~> 1.2", only: :dev},
+      {:phoenix_storybook, "~> 0.7.2", only: :dev}
     ]
   end
 
   defp aliases do
     [
+      setup: [
+        "deps.get",
+        "assets.setup"
+      ],
+      "assets.setup": [
+        "cmd npm install --prefix assets",
+        "tailwind.install --if-missing",
+        "esbuild.install --if-missing"
+      ],
       "assets.build": ["esbuild module", "esbuild main"],
-      "assets.watch": "esbuild main --watch"
+      "assets.watch": "esbuild main --watch",
+      dev: "run dev.exs",
+      release: [
+        "cmd git tag #{@version}",
+        "cmd git push",
+        "cmd git push --tags"
+      ]
     ]
   end
 end

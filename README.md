@@ -7,7 +7,7 @@ The package can be installed by adding `phoenix_ui_components` to your list of d
 ```elixir
 def deps do
   [
-    {:phoenix_ui_components, github: "123fahrschule/phoenix_ui_components", tag: "1.4.2"}
+    {:phoenix_ui_components, github: "123fahrschule/phoenix_ui_components", tag: "1.5.0"}
   ]
 end
 ```
@@ -107,22 +107,17 @@ use PhoenixUiComponents in layout view and change root layout
 
 ## Local development
 
-1. Add `phoenix_ui_components` as dependency to the existing project.
-2. Change `mix.exs` to track changes inside `deps/phoenix_ui_components`.
-   ```diff
-   -defp elixirc_paths(_), do: ["lib"]
-   +defp elixirc_paths(_),
-   +  do: ["lib", "deps/phoenix_ui_components/lib", "deps/phoenix_ui_components/priv/static/assets"]
+1. Install required dependencies
+   ```term
+   mix setup
    ```
-3. Update any components inside `deps/phoenix_ui_components`.
-4. Check new UI in the project web pages.
-5. `deps/phoenix_ui_components` is a git repository, so you can commit changes directly from this directory and push it to GH.
-
-If you want to change assets, then run inside `deps/phoenix_ui_components`
-
-```term
-mix assets.watch
-```
+1. Start dev server
+   ```term
+   mix dev
+   ```
+1. Open `localhost:4000`. In the root path you can find Storybook with components and their usages
+1. Update any components inside `lib/phoenix_ui_components` and/or update story for this component.
+1. Check update in the Storybook.
 
 If you wish to commit new assets, then bundle them and add to commit changes inside `priv/static/assets`
 
