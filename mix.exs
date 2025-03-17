@@ -1,10 +1,12 @@
 defmodule PhoenixUiComponents.MixProject do
   use Mix.Project
 
+  @version "1.5.0"
+
   def project do
     [
       app: :phoenix_ui_components,
-      version: "1.5.0",
+      version: @version,
       elixir: "~> 1.13",
       start_permanent: Mix.env() == :prod,
       deps: deps(),
@@ -43,7 +45,12 @@ defmodule PhoenixUiComponents.MixProject do
     [
       "assets.build": ["esbuild module", "esbuild main"],
       "assets.watch": "esbuild main --watch",
-      dev: "run dev.exs"
+      dev: "run dev.exs",
+      release: [
+        "cmd git tag #{@version}",
+        "cmd git push",
+        "cmd git push --tags"
+      ]
     ]
   end
 end
