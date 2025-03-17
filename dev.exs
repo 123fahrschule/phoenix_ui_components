@@ -1,5 +1,5 @@
 Application.put_env(:example, Example.Endpoint,
-  http: [ip: {127, 0, 0, 1}, port: 5001],
+  http: [ip: {127, 0, 0, 1}, port: System.get_env("PORT", "4000")],
   server: true,
   live_view: [signing_salt: "aaaaaaaa"],
   secret_key_base: String.duplicate("a", 64),
@@ -25,71 +25,21 @@ defmodule Example.ErrorView do
   def render(template, _), do: Phoenix.Controller.status_message_from_template(template)
 end
 
-defmodule Example.HomeLive do
-  use Phoenix.LiveView
-
-  def render(assigns) do
-    ~H"""
-    Hello
-    """
-  end
-end
-
-defmodule ExampleWeb.Layouts do
-  use Phoenix.Component
-
-  # Import convenience functions from controllers
-  import Phoenix.Controller,
-    only: [get_csrf_token: 0, view_module: 1, view_template: 1]
-
-  def render("root.html", assigns) do
-    ~H"""
-    <!DOCTYPE html>
-    <html lang="en" class="[scrollbar-gutter:stable]">
-      <head>
-        <meta charset="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <meta name="csrf-token" content={get_csrf_token()} />
-        <.live_title default="App" suffix=" · Phoenix Framework">
-          <%= assigns[:page_title] %>
-        </.live_title>
-        <script defer phx-track-static type="text/javascript" src={"/assets/dev.js"}>
-        </script>
-      </head>
-      <body class="bg-white example">
-        <%= @inner_content %>
-      </body>
-    </html>
-    """
-  end
-
-  def render("live.html", assigns) do
-    ~H"""
-    <%= @inner_content %>
-    """
-  end
-end
-
 defmodule Example.Router do
   use Phoenix.Router
+
   import Phoenix.LiveView.Router
   import PhoenixStorybook.Router
 
   pipeline :browser do
     plug(:accepts, ["html"])
-    plug :put_root_layout, html: {ExampleWeb.Layouts, :root}
-    plug :put_layout, html: {ExampleWeb.Layouts, :live}
   end
 
-    scope "/" do
-      storybook_assets()
-    end
-
   scope "/", Example do
+    storybook_assets()
     pipe_through(:browser)
 
-    live("/", HomeLive, :index)
-    live_storybook "/storybook", backend_module: Elixir.PhoenixUiComponentsWeb.Storybook
+    live_storybook "/", backend_module: Elixir.PhoenixUiComponentsWeb.Storybook
   end
 end
 
