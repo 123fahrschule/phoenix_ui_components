@@ -1,0 +1,18 @@
+@layer components {
+  .tooltip {
+    @apply hidden bg-neutral-900 text-neutral-100 text-body-sm px-3 py-2;
+    border-radius: 8px;
+    z-index: 1000;
+
+    /* required styles */
+    width: max-content;
+    max-width: calc(100vw - 20px);
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+
+  .tooltip-arrow {
+    @apply absolute bg-neutral-900 size-2 rotate-45;
+  }
+}
