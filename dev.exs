@@ -91,7 +91,15 @@ end
 
 defmodule Example.Endpoint do
   use Phoenix.Endpoint, otp_app: :example
-  socket("/live", Phoenix.LiveView.Socket)
+
+   @session_options [
+    store: :cookie,
+    key: "_live_view_key",
+    signing_salt: "/VEDsdfsffMnp5",
+    same_site: "Lax"
+  ]
+
+  socket "/live", Phoenix.LiveView.Socket, websocket: [connect_info: [session: @session_options]]
 
   # Serve at "/" the static files from "priv/static" directory.
   #
@@ -110,6 +118,8 @@ defmodule Example.Endpoint do
     plug Phoenix.LiveReloader
     plug Phoenix.CodeReloader
   end
+
+  plug Plug.Session, @session_options
 
   plug(Example.Router)
 end
