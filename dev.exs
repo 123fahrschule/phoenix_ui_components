@@ -5,8 +5,7 @@ Application.put_env(:example, Example.Endpoint,
   secret_key_base: String.duplicate("a", 64),
   adapter: Bandit.PhoenixAdapter,
     watchers: [
-    esbuild: {Esbuild, :install_and_run, [:dev, ~w(--sourcemap=inline --watch)]},
-    tailwind: {Tailwind, :install_and_run, [:dev, ~w(--watch)]},
+    esbuild: {Esbuild, :install_and_run, [:storybook, ~w(--sourcemap=inline --watch)]},
     storybook_tailwind: {Tailwind, :install_and_run, [:storybook, ~w(--watch)]}
   ],
   pubsub_server: Example.PubSub,
@@ -39,7 +38,7 @@ defmodule Example.Router do
     storybook_assets()
     pipe_through(:browser)
 
-    live_storybook "/", backend_module: Elixir.PhoenixUiComponentsWeb.Storybook
+    live_storybook "/", backend_module: Elixir.PhoenixUiComponents.Storybook
   end
 end
 
