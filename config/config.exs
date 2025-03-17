@@ -9,7 +9,7 @@ esbuild = fn args ->
 end
 
 config :esbuild,
-  version: "0.14.41",
+  version: "0.25.1",
   dev:
     esbuild.(
       ~w(js/dev.js js/storybook.js --bundle --target=es2017 --outdir=../priv/static/assets --loader:.woff2=file)

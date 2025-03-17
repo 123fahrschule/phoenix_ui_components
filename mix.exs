@@ -32,7 +32,7 @@ defmodule PhoenixUiComponents.MixProject do
       {:phoenix_html_helpers, "~> 1.0"},
 
       # Dev dependencies
-      {:esbuild, "~> 0.5", only: :dev},
+      {:esbuild, "~> 0.9", only: :dev},
       {:tailwind, "~> 0.2.0", only: :dev},
       {:jason, "~> 1.2", only: :dev},
       {:bandit, "~> 1.5", only: :dev},
