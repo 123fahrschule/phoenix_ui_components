@@ -34,7 +34,8 @@ defmodule PhoenixUiComponents.MixProject do
       {:tailwind, "~> 0.2.0", only: :dev},
       {:jason, "~> 1.2", only: :dev},
       {:bandit, "~> 1.5", only: :dev},
-      {:phoenix_live_reload, "~> 1.2", only: :dev}
+      {:phoenix_live_reload, "~> 1.2", only: :dev},
+      {:phoenix_storybook, "~> 0.7.2", only: :dev}
     ]
   end
 

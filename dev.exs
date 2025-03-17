@@ -6,7 +6,8 @@ Application.put_env(:example, Example.Endpoint,
   adapter: Bandit.PhoenixAdapter,
     watchers: [
     esbuild: {Esbuild, :install_and_run, [:dev, ~w(--sourcemap=inline --watch)]},
-    tailwind: {Tailwind, :install_and_run, [:dev, ~w(--watch)]}
+    tailwind: {Tailwind, :install_and_run, [:dev, ~w(--watch)]},
+    storybook_tailwind: {Tailwind, :install_and_run, [:storybook, ~w(--watch)]}
   ],
   pubsub_server: Example.PubSub,
   code_reloader: true,
@@ -15,6 +16,7 @@ Application.put_env(:example, Example.Endpoint,
     patterns: [
       ~r"priv/static/.*(js|css|png|jpeg|jpg|gif|svg)$",
       ~r"lib/.*/.*(ex)$",
+      ~r"storybook/.*(exs)$"
     ]
   ]
 )
@@ -54,7 +56,7 @@ defmodule ExampleWeb.Layouts do
         <script defer phx-track-static type="text/javascript" src={"/assets/dev.js"}>
         </script>
       </head>
-      <body class="bg-white">
+      <body class="bg-white example">
         <%= @inner_content %>
       </body>
     </html>
@@ -71,6 +73,7 @@ end
 defmodule Example.Router do
   use Phoenix.Router
   import Phoenix.LiveView.Router
+  import PhoenixStorybook.Router
 
   pipeline :browser do
     plug(:accepts, ["html"])
@@ -78,10 +81,15 @@ defmodule Example.Router do
     plug :put_layout, html: {ExampleWeb.Layouts, :live}
   end
 
+    scope "/" do
+      storybook_assets()
+    end
+
   scope "/", Example do
     pipe_through(:browser)
 
     live("/", HomeLive, :index)
+    live_storybook "/storybook", backend_module: Elixir.PhoenixUiComponentsWeb.Storybook
   end
 end
 

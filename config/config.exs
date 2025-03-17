@@ -12,7 +12,7 @@ config :esbuild,
   version: "0.14.41",
   dev:
     esbuild.(
-      ~w(js/dev.js --bundle --target=es2017 --outdir=../priv/static/assets --loader:.woff2=file)
+      ~w(js/dev.js js/storybook.js --bundle --target=es2017 --outdir=../priv/static/assets --loader:.woff2=file)
     ),
   module:
     esbuild.(
@@ -30,5 +30,13 @@ config :tailwind,
       --input=css/dev.css
       --output=../priv/static/assets/dev.css
     ),
+    cd: Path.expand("../assets", __DIR__)
+  ],
+  storybook: [
+    args: ~w(
+    --config=tailwind.dev.config.js
+    --input=css/storybook.css
+    --output=../priv/static/assets/storybook.css
+  ),
     cd: Path.expand("../assets", __DIR__)
   ]
