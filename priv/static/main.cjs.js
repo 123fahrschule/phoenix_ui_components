@@ -75,7 +75,11 @@ var require_typography = __commonJS({
       }
     };
     module2.exports = plugin(function({ addBase }) {
-      addBase(Object.fromEntries(Object.entries(textStyles).map(([name, styles]) => [`.text-${name}`, styles])));
+      addBase(
+        Object.fromEntries(
+          Object.entries(textStyles).map(([name, styles]) => [`.text-${name}`, styles])
+        )
+      );
     });
     module2.exports.textStyles = textStyles;
   }
@@ -118,6 +122,232 @@ var require_variants = __commonJS({
     var plugin = require("tailwindcss/plugin");
     module2.exports = plugin(function({ addVariant }) {
       addVariant("group-selected", ":merge(.group).selected &");
+    });
+  }
+});
+
+// tailwind_plugins/badge.js
+var require_badge = __commonJS({
+  "tailwind_plugins/badge.js"(exports2, module2) {
+    var plugin = require("tailwindcss/plugin");
+    module2.exports = plugin(function({ addComponents, theme }) {
+      addComponents({
+        ".badge": {
+          display: "inline-flex",
+          alignItems: "center",
+          justifyContent: "center",
+          gap: "2px",
+          borderRadius: "9999px",
+          fontWeight: "600",
+          boxShadow: theme("boxShadow.small-200"),
+          verticalAlign: "middle",
+          userSelect: "none",
+          maxWidth: "100%",
+          minWidth: "0px"
+        },
+        ".badge-label": {
+          "@apply truncate": {}
+        },
+        ".badge-remove-button": {
+          "@apply inline-flex rounded-full outline-current": {}
+        },
+        ".badge-neutral": {
+          color: theme("colors.neutral.700"),
+          backgroundColor: theme("colors.neutral.300"),
+          "& .badge-remove-button:hover, .badge-remove-button:focus": {
+            backgroundColor: theme("colors.neutral.400")
+          }
+        },
+        ".badge-info": {
+          color: theme("colors.info.400"),
+          backgroundColor: theme("colors.info.100"),
+          "& .badge-remove-button:hover, .badge-remove-button:focus": {
+            backgroundColor: theme("colors.info.200")
+          }
+        },
+        ".badge-success": {
+          color: theme("colors.success.400"),
+          backgroundColor: theme("colors.success.100"),
+          "& .badge-remove-button:hover, .badge-remove-button:focus": {
+            backgroundColor: theme("colors.success.200")
+          }
+        },
+        ".badge-warning": {
+          color: theme("colors.warning.500"),
+          backgroundColor: theme("colors.warning.100"),
+          "& .badge-remove-button:hover, .badge-remove-button:focus": {
+            backgroundColor: theme("colors.warning.200")
+          }
+        },
+        ".badge-error": {
+          color: theme("colors.error.400"),
+          backgroundColor: theme("colors.error.100"),
+          "& .badge-remove-button:hover, .badge-remove-button:focus": {
+            backgroundColor: theme("colors.error.200")
+          }
+        },
+        ".badge-xs": {
+          "@apply text-body-xs": {},
+          padding: "2px 6px",
+          "& .icon": { fontSize: "12px" },
+          "&:has(.icon:first-child)": { paddingLeft: "4px" },
+          "&:has(.icon:last-child)": { paddingRight: "4px" },
+          "&:has(> .icon:only-child)": { padding: "2px" }
+        },
+        ".badge-sm": {
+          "@apply text-body-xs": {},
+          padding: "4px 8px",
+          "& .icon": { fontSize: "16px" },
+          "&:has(> .icon:first-child)": { paddingLeft: "6px" },
+          "&:has(> .icon:last-child)": { paddingRight: "6px" },
+          "&:has(> .icon:only-child)": { padding: "4px" }
+        },
+        ".badge-md": {
+          "@apply text-body-sm": {},
+          padding: "6px 10px",
+          "& .icon": { fontSize: "20px" },
+          "&:has(> .icon:first-child)": { paddingLeft: "6px" },
+          "&:has(* ~ .icon)": { paddingRight: "6px" },
+          "&:has(> .icon:only-child)": { padding: "6px" }
+        },
+        ".badge-lg": {
+          "@apply text-body": {},
+          padding: "8px 12px",
+          "& .icon": { fontSize: "24px" },
+          "&:has(.icon:first-child)": { paddingLeft: "8px" },
+          "&:has(.icon:last-child)": { paddingRight: "8px" },
+          "&:has(> .icon:only-child)": { padding: "8px" }
+        }
+      });
+    });
+  }
+});
+
+// tailwind_plugins/banner.js
+var require_banner = __commonJS({
+  "tailwind_plugins/banner.js"(exports2, module2) {
+    var plugin = require("tailwindcss/plugin");
+    module2.exports = plugin(function({ addComponents, theme }) {
+      addComponents({
+        ".banner": {
+          width: "100%",
+          display: "flex",
+          alignItems: "center",
+          gap: "2px",
+          borderRadius: "12px",
+          color: theme("colors.neutral.900"),
+          "& .close-button": {
+            color: "currentColor",
+            padding: "8px",
+            borderRadius: "9999px",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center"
+          }
+        },
+        ".banner-icon-container": {
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          borderRadius: "8px",
+          boxShadow: theme("boxShadow.small-200"),
+          backgroundColor: "currentColor"
+        },
+        ".banner-icon": {
+          color: theme("colors.neutral.100")
+        },
+        ".banner-label": {
+          color: "currentColor",
+          fontWeight: "bold"
+        },
+        ".banner-info": {
+          backgroundColor: theme("colors.info.100")
+        },
+        ".banner-info .banner-label": {
+          color: theme("colors.info.400")
+        },
+        ".banner-info .banner-icon-container": {
+          backgroundColor: theme("colors.info.400")
+        },
+        ".banner-info .close-button": {
+          color: theme("colors.info.400")
+        },
+        ".banner-success": {
+          backgroundColor: theme("colors.success.100")
+        },
+        ".banner-success .banner-label": {
+          color: theme("colors.success.300")
+        },
+        ".banner-success .banner-icon-container": {
+          backgroundColor: theme("colors.success.300")
+        },
+        ".banner-success .close-button": {
+          color: theme("colors.success.300")
+        },
+        ".banner-warning": {
+          backgroundColor: theme("colors.warning.100")
+        },
+        ".banner-warning .banner-icon-container": {
+          backgroundColor: theme("colors.warning.300")
+        },
+        ".banner-warning .banner-label": {
+          color: theme("colors.warning.300")
+        },
+        ".banner-warning .close-button": {
+          backgroundColor: theme("colors.warning.300")
+        },
+        ".banner-error": {
+          backgroundColor: theme("colors.error.100")
+        },
+        ".banner-error .banner-icon-container": {
+          backgroundColor: theme("colors.error.300")
+        },
+        ".banner-error .banner-label": {
+          color: theme("colors.error.300")
+        },
+        ".banner-error .close-button": {
+          color: theme("colors.error.300")
+        },
+        ".banner-sm": {
+          "@apply text-body-xs": {},
+          padding: "8px",
+          gap: "8px",
+          "& .banner-icon-container": {
+            width: "24px",
+            height: "24px",
+            padding: "4px"
+          },
+          "& .banner-icon": {
+            fontSize: "16px"
+          }
+        },
+        ".banner-md": {
+          "@apply text-body-sm": {},
+          padding: "8px",
+          gap: "8px",
+          "& .banner-icon-container": {
+            width: "32px",
+            height: "32px",
+            padding: "4px"
+          },
+          "& .banner-icon": {
+            fontSize: "24px"
+          }
+        },
+        ".banner-lg": {
+          "@apply text-body-sm": {},
+          padding: "12px",
+          gap: "12px",
+          "& .banner-icon-container": {
+            width: "40px",
+            height: "40px",
+            padding: "8px"
+          },
+          "& .banner-icon": {
+            fontSize: "24px"
+          }
+        }
+      });
     });
   }
 });
@@ -249,6 +479,13 @@ var require_tailwind_preset = __commonJS({
           },
           fontFamily: {
             sans: ["Open Sans", "sans-serif"]
+          },
+          borderRadius: {
+            4: "4px",
+            8: "8px",
+            12: "12px",
+            16: "16px",
+            24: "24px"
           }
         }
       },
@@ -256,7 +493,9 @@ var require_tailwind_preset = __commonJS({
         require("@tailwindcss/forms"),
         require_typography(),
         require_layout(),
-        require_variants()
+        require_variants(),
+        require_badge(),
+        require_banner()
       ]
     };
   }
