@@ -7,6 +7,15 @@ Application.put_env(:example, Example.Endpoint,
     watchers: [
     esbuild: {Esbuild, :install_and_run, [:dev, ~w(--sourcemap=inline --watch)]},
     tailwind: {Tailwind, :install_and_run, [:dev, ~w(--watch)]}
+  ],
+  pubsub_server: Example.PubSub,
+  code_reloader: true,
+  debug_errors: true,
+  live_reload: [
+    patterns: [
+      ~r"priv/static/.*(js|css|png|jpeg|jpg|gif|svg)$",
+      ~r"lib/.*/.*(ex)$",
+    ]
   ]
 )
 
@@ -94,8 +103,19 @@ defmodule Example.Endpoint do
     gzip: false,
     only: ExampleWeb.static_paths()
 
+  # Code reloading can be explicitly enabled under the
+  # :code_reloader configuration of your endpoint.
+  if code_reloading? do
+    socket "/phoenix/live_reload/socket", Phoenix.LiveReloader.Socket
+    plug Phoenix.LiveReloader
+    plug Phoenix.CodeReloader
+  end
+
   plug(Example.Router)
 end
 
-{:ok, _} = Supervisor.start_link([Example.Endpoint], strategy: :one_for_one)
+{:ok, _} = Supervisor.start_link([
+  {Phoenix.PubSub, name: Example.PubSub},
+  Example.Endpoint
+], strategy: :one_for_one)
 Process.sleep(:infinity)
