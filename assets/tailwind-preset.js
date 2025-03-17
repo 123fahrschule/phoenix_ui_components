@@ -140,6 +140,7 @@ module.exports = {
     require('@tailwindcss/forms'),
     require('./tailwind_plugins/typography'),
     require('./tailwind_plugins/layout'),
-    require('./tailwind_plugins/variants')
+    require('./tailwind_plugins/variants'),
+    require('./tailwind_plugins/badge')
   ]
 };
