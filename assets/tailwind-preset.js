@@ -142,8 +142,8 @@ module.exports = {
     require('./tailwind_plugins/layout'),
     require('./tailwind_plugins/variants'),
     require('./tailwind_plugins/badge'),
-    require('./tailwind_plugins/banner')
     require('./tailwind_plugins/banner'),
-    require('./tailwind_plugins/phoenix')
+    require('./tailwind_plugins/phoenix'),
+    require('./tailwind_plugins/form_field')
   ]
 };
