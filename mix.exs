@@ -30,6 +30,7 @@ defmodule PhoenixUiComponents.MixProject do
       {:phoenix_live_view, "~> 0.20.0"},
       {:phoenix_html, "~> 4.0"},
       {:phoenix_html_helpers, "~> 1.0"},
+      {:gettext, "~> 0.26.0"},
 
       # Dev dependencies
       {:esbuild, "~> 0.9", only: :dev},

@@ -20,6 +20,12 @@ Application.put_env(:example, Example.Endpoint,
   ]
 )
 
+defmodule Example.Gettext do
+  use Gettext.Backend, otp_app: :example
+end
+
+Application.put_env(:phoenix_ui_components, :gettext_backend, Example.Gettext)
+
 defmodule Example.ErrorView do
   def render(template, _), do: Phoenix.Controller.status_message_from_template(template)
 end
