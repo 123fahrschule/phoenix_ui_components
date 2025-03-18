@@ -8,7 +8,7 @@ defmodule PhoenixUiComponents.Breadcrumbs do
       [
         %{label: "Link", icon: :info, href: "#"},
         %{label: "Live patch", patch: "#"},
-        %{label: "Live redirect", navigate: "#", active: true}
+        %{label: "Live redirect", navigate: "#"}
       ]
     ]
   )
