@@ -53,8 +53,12 @@ defmodule PhoenixUiComponents.MixProject do
         "tailwind.install --if-missing",
         "esbuild.install --if-missing"
       ],
-      "assets.build": ["esbuild module", "esbuild main"],
-      "assets.watch": "esbuild main --watch",
+      "assets.build": [
+        "esbuild module",
+        "esbuild main",
+        "cmd git add priv/static/{main,module}.*",
+        "cmd git commit -m \"Build\\\ assets\""
+      ],
       dev: "run dev.exs",
       release: [
         "cmd git tag #{@version}",
