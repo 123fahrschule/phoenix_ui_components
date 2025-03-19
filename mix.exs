@@ -1,7 +1,7 @@
 defmodule PhoenixUiComponents.MixProject do
   use Mix.Project
 
-  @version "1.5.0"
+  @version "1.6.0"
 
   def project do
     [
@@ -17,7 +17,7 @@ defmodule PhoenixUiComponents.MixProject do
   # Run "mix help compile.app" to learn about applications.
   def application do
     [
-      extra_applications: [:logger, :inets]
+      extra_applications: []
     ]
   end
 
@@ -30,6 +30,7 @@ defmodule PhoenixUiComponents.MixProject do
       {:phoenix_live_view, "~> 1.0.0"},
       {:phoenix_html, "~> 4.2"},
       {:phoenix_html_helpers, "~> 1.0"},
+      {:gettext, "~> 0.26.0"},
 
       # Dev dependencies
       {:esbuild, "~> 0.9", only: :dev},
@@ -52,8 +53,12 @@ defmodule PhoenixUiComponents.MixProject do
         "tailwind.install --if-missing",
         "esbuild.install --if-missing"
       ],
-      "assets.build": ["esbuild module", "esbuild main"],
-      "assets.watch": "esbuild main --watch",
+      "assets.build": [
+        "esbuild module",
+        "esbuild main",
+        "cmd git add priv/static/{main,module}.*",
+        "cmd git commit -m \"Build\\\ assets\""
+      ],
       dev: "run dev.exs",
       release: [
         "cmd git tag #{@version}",

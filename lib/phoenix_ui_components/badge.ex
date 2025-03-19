@@ -1,64 +1,127 @@
 defmodule PhoenixUiComponents.Badge do
+  @moduledoc """
+    Provides a flexible Badge component with multiple variations and customization options.
+
+    The Badge component supports:
+    - Different sizes (xs, sm, md, lg)
+    - Various color schemes (neutral, info, success, warning, error)
+    - Optional icons
+    - Removable badges
+    - Custom content
+  """
+
   use PhoenixUiComponents, :component
+
   import PhoenixUiComponents.Icon
 
-  attr(:class, :string, default: nil)
-  attr(:label, :string, default: nil)
-  attr(:size, :string, values: ["sm", "md"], default: "md")
+  @sizes ["xs", "sm", "md", "lg"]
+  @colors ["neutral", "info", "success", "warning", "error"]
 
-  attr(:type, :string,
-    values: ["neutral", "success", "error", "info", "warning"],
-    default: "neutral"
+  # Tailwind safelist
+  # badge-xs badge-sm badge-md badge-lg
+  # badge-neutral badge-info badge-success badge-warning badge-error
+
+  def badge_sizes(), do: @sizes
+  def badge_colors(), do: @colors
+
+  attr(:class, :any, default: nil)
+  attr(:label, :string, default: nil)
+  attr(:size, :string, values: @sizes, default: "md")
+  attr(:color, :string, values: @colors, default: "neutral")
+
+  attr(:type, :any,
+    values: [nil | @colors],
+    default: nil,
+    doc: "Deprecated. Use `color` instead"
   )
 
-  attr(:icon, :atom, default: nil)
-  attr(:icon_position, :string, values: ["start", "end"], default: "start")
+  attr(:left_icon, :atom, default: nil)
+  attr(:right_icon, :atom, default: nil)
+  attr(:on_remove, JS, default: nil)
   attr(:rest, :global)
 
-  def badge(%{icon: nil} = assigns) do
+  slot(:inner_block)
+
+  @doc """
+  Renders a badge component.
+
+  ## Examples
+      <.badge label="Verified" left_icon={:check} />
+      <.badge label="Important" color="warning" right_icon={:warning} />
+  """
+  def badge(%{on_remove: on_remove} = assigns) when not is_nil(on_remove) do
     ~H"""
-    <div class={[get_classes(assigns), get_size_classes(@size, @label)]} {@rest}>
-      <%= @label %>
-    </div>
+    <span class={["badge badge-#{@size} badge-#{@type || @color}", @class]} {@rest}>
+      <.badge_label text={@label} />
+      <button type="button" class="badge-remove-button" phx-click={@on_remove}>
+        <.icon icon={:close} />
+      </button>
+    </span>
     """
   end
 
-  def badge(%{label: nil} = assigns) do
+  def badge(%{label: label} = assigns) when not is_nil(label) do
     ~H"""
-    <div class={[get_classes(assigns), get_size_classes(@size, @label)]} {@rest}>
-      <.icon icon={@icon} class="text-[24px]" />
-    </div>
+    <span class={["badge badge-#{@size} badge-#{@color}", @class]} {@rest}>
+      <.icon :if={@left_icon} icon={@left_icon} />
+      <.badge_label text={@label} />
+      <.icon :if={@right_icon} icon={@right_icon} />
+    </span>
     """
   end
 
   def badge(assigns) do
     ~H"""
-    <div class={[get_classes(assigns), get_size_classes(@size, @label)]} {@rest}>
-      <.icon :if={@icon_position == "start"} icon={@icon} class="text-[16px] -ml-2 mr-0.5" />
-      <%= @label %>
-      <.icon :if={@icon_position == "end"} icon={@icon} class="text-[16px] -mr-2 ml-0.5" />
-    </div>
+    <span class={["badge badge-#{@size} badge-#{@color}", @class]} {@rest}>
+      <%= render_slot(@inner_block) %>
+    </span>
     """
   end
 
-  defp get_classes(%{type: type}) do
-    [
-      "rounded-full text-sm font-semibold hover:shadow-sm-3 inline-flex items-center cursor-pointer align-middle",
-      get_color_classes(type)
-    ]
+  attr(:text, :string, default: nil)
+  attr(:class, :any, default: nil)
+  attr(:rest, :global)
+
+  @doc """
+  Renders a badge component.
+
+  ## Examples
+      <.badge_label text="New" />
+      <.badge_label text="Custom" class="text-blue-500" />
+  """
+  def badge_label(assigns) do
+    ~H"""
+    <span class={["badge-label", @class]} {@rest}>
+      <%= @text %>
+    </span>
+    """
   end
 
-  defp get_size_classes("sm", label) do
-    if label, do: "py-0.5 px-3", else: "p-1"
-  end
+  attr(:class, :any, default: nil)
+  attr(:icon, :atom, default: nil)
+  attr(:size, :string, values: @sizes, default: "md")
+  attr(:color, :string, values: @colors, default: "neutral")
 
-  defp get_size_classes("md", label) do
-    if label, do: "py-1.5 px-4", else: "p-1"
-  end
+  slot(:inner_block)
 
-  defp get_color_classes("neutral"), do: "bg-neutral-300 text-neutral-700"
-  defp get_color_classes("success"), do: "bg-success-100 text-success-400"
-  defp get_color_classes("error"), do: "bg-error-100 text-error-400"
-  defp get_color_classes("info"), do: "bg-info-100 text-info-400"
-  defp get_color_classes("warning"), do: "bg-warning-100 text-warning-500"
+  @doc """
+  Renders a badge containing only an icon or custom content.
+
+  ## Examples
+      <.icon_badge icon={:star} color="warning" />
+      <.icon_badge>
+        <span>Custom Icon</span>
+      </.icon_badge>
+  """
+  def icon_badge(assigns) do
+    ~H"""
+    <.badge size={@size} color={@color} class={@class}>
+      <%= if @icon do %>
+        <.icon icon={@icon} />
+      <% else %>
+        <%= render_slot(@inner_block) %>
+      <% end %>
+    </.badge>
+    """
+  end
 end

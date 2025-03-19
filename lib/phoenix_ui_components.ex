@@ -30,6 +30,7 @@ defmodule PhoenixUiComponents do
         Form,
         Icon,
         Layout,
+        Modal,
         Page,
         Pagination,
         Progress,

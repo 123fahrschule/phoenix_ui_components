@@ -1,51 +1,50 @@
 defmodule PhoenixUiComponents.Banner do
-  use PhoenixUiComponents, :component
+  use Phoenix.Component
+
   import PhoenixUiComponents.Icon
 
+  @colors ["info", "success", "warning", "error"]
+  @sizes ["sm", "md", "lg"]
+
+  # Tailwind safelist
+  # banner-sm banner-md banner-lg
+  # banner-info banner-success banner-warning banner-error
+
   attr(:class, :string, default: nil)
-  attr(:type, :string, values: ["info", "success", "warning", "error"], default: "info")
-  attr(:size, :string, values: ["sm", "md", "lg"], default: "md")
-  attr(:message, :string, required: true)
+  attr(:color, :string, values: @colors, default: "info")
+
+  attr(:type, :any,
+    values: [nil | @colors],
+    default: nil,
+    doc: "Deprecated. Use `color` instead"
+  )
+
+  attr(:size, :string, values: @sizes, default: "md")
   attr(:label, :string, default: nil)
-  attr(:close_button_attributes, :any, default: nil)
+  attr(:message, :string, default: nil)
+  attr(:on_close, JS, default: nil)
+  attr(:close_button_attributes, :list, default: [])
   attr(:rest, :global)
 
   def banner(assigns) do
     ~H"""
-    <div
-      role="alert"
-      class={[
-        "rounded-lg flex items-center",
-        get_color_classes(@type),
-        get_size_classes(@size),
-        @class
-      ]}
-      {@rest}
-    >
-      <div class={[
-        "rounded-lg mr-2 flex items-center justify-center",
-        get_icon_container_color_classes(@type),
-        get_icon_container_size_classes(@size)
-      ]}>
-        <.icon
-          icon={get_icon(@type)}
-          class={list_class_value(["text-white ", get_icon_size_classes(@size)])}
-        />
+    <div role="alert" class={["banner banner-#{@type || @color} banner-#{@size}", @class]} {@rest}>
+      <div class="banner-icon-container">
+        <.icon icon={get_icon(@type || @color)} class="banner-icon" />
       </div>
-      <div class="mr-2">
-        <p :if={@label} class="font-bold">
+      <div class="flex-grow">
+        <p :if={@label} class="banner-label">
           <%= @label %>
         </p>
-        <p class="text-neutral-900">
+        <p :if={@message} class="banner-message">
           <%= @message %>
         </p>
       </div>
       <button
-        :if={@close_button_attributes}
-        class={[
-          "p-2 ml-auto rounded-full flex items-center content-center",
-          get_close_icon_color_classes(@type)
-        ]}
+        :if={@on_close}
+        type="button"
+        phx-click={@on_close}
+        class="close-button"
         {@close_button_attributes}
       >
         <.icon icon={:close} class="text-[16px]" />
@@ -53,32 +52,6 @@ defmodule PhoenixUiComponents.Banner do
     </div>
     """
   end
-
-  defp get_size_classes("sm"), do: "p-2 text-xs leading-[1.334]"
-  defp get_size_classes("md"), do: "p-2 text-sm leading-[1.429]"
-  defp get_size_classes("lg"), do: "p-3 text-sm leading-[1.429]"
-
-  defp get_color_classes("info"), do: "bg-info-100 text-info-400"
-  defp get_color_classes("success"), do: "bg-success-100 text-success-300"
-  defp get_color_classes("warning"), do: "bg-warning-100 text-warning-300"
-  defp get_color_classes("error"), do: "bg-error-100 text-error-300"
-
-  defp get_icon_container_size_classes("sm"), do: "w-6 h-6 p-1 text-base"
-  defp get_icon_container_size_classes("md"), do: "w-8 h-8 p-1 text-2xl"
-  defp get_icon_container_size_classes("lg"), do: "w-10 h-10 p-2 text-2xl"
-
-  defp get_icon_size_classes("sm"), do: "text-[16px]"
-  defp get_icon_size_classes(_), do: "text-[24px]"
-
-  defp get_icon_container_color_classes("info"), do: "bg-info-400"
-  defp get_icon_container_color_classes("success"), do: "bg-success-300"
-  defp get_icon_container_color_classes("warning"), do: "bg-warning-300"
-  defp get_icon_container_color_classes("error"), do: "bg-error-300"
-
-  defp get_close_icon_color_classes("info"), do: "text-info-400"
-  defp get_close_icon_color_classes("success"), do: "text-success-300"
-  defp get_close_icon_color_classes("warning"), do: "text-warning-300"
-  defp get_close_icon_color_classes("error"), do: "text-error-300"
 
   defp get_icon("info"), do: :info
   defp get_icon("success"), do: :check_circle
