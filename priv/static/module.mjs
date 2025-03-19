@@ -55,7 +55,9 @@ var multiselect_default = ({ scrollOptionsIntoView = true }) => ({
     }
     return this.groupedOptions.map((group) => ({
       ...group,
-      options: group.options.filter(({ normalizedLabel }) => normalizedLabel.includes(this.normalizedFilterString))
+      options: group.options.filter(
+        ({ normalizedLabel }) => normalizedLabel.includes(this.normalizedFilterString)
+      )
     })).filter((group) => group.options.length);
   },
   get tags() {
@@ -251,8 +253,7 @@ function getSideList(side, isStart, rtl) {
   switch (side) {
     case "top":
     case "bottom":
-      if (rtl)
-        return isStart ? rl : lr;
+      if (rtl) return isStart ? rl : lr;
       return isStart ? lr : rl;
     case "left":
     case "right":
@@ -644,7 +645,9 @@ var flip = function(options) {
               const placement2 = (_overflowsData$filter2 = overflowsData.filter((d) => {
                 if (hasFallbackAxisSideDirection) {
                   const currentSideAxis = getSideAxis(d.placement);
-                  return currentSideAxis === initialSideAxis || currentSideAxis === "y";
+                  return currentSideAxis === initialSideAxis || // Create a bias to the `y` side axis due to horizontal
+                  // reading directions favoring greater width.
+                  currentSideAxis === "y";
                 }
                 return true;
               }).map((d) => [d.placement, d.overflows.filter((overflow2) => overflow2 > 0).reduce((acc, overflow2) => acc + overflow2, 0)]).sort((a, b) => a[1] - b[1])[0]) == null ? void 0 : _overflowsData$filter2[0];
@@ -891,8 +894,7 @@ function getContainingBlock(element) {
   return null;
 }
 function isWebKit() {
-  if (typeof CSS === "undefined" || !CSS.supports)
-    return false;
+  if (typeof CSS === "undefined" || !CSS.supports) return false;
   return CSS.supports("-webkit-backdrop-filter", "none");
 }
 function isLastTraversableNode(node) {
@@ -917,7 +919,13 @@ function getParentNode(node) {
   if (getNodeName(node) === "html") {
     return node;
   }
-  const result = node.assignedSlot || node.parentNode || isShadowRoot(node) && node.host || getDocumentElement(node);
+  const result = (
+    // Step into the shadow DOM of the parent of a slotted node.
+    node.assignedSlot || // DOM Element detected.
+    node.parentNode || // ShadowRoot detected.
+    isShadowRoot(node) && node.host || // Fallback.
+    getDocumentElement(node)
+  );
   return isShadowRoot(result) ? result.host : result;
 }
 function getNearestOverflowAncestor(node) {
@@ -1081,7 +1089,10 @@ function getHTMLOffset(documentElement, scroll, ignoreScrollbarX) {
     ignoreScrollbarX = false;
   }
   const htmlRect = documentElement.getBoundingClientRect();
-  const x = htmlRect.left + scroll.scrollLeft - (ignoreScrollbarX ? 0 : getWindowScrollBarX(documentElement, htmlRect));
+  const x = htmlRect.left + scroll.scrollLeft - (ignoreScrollbarX ? 0 : (
+    // RTL <body> scrollbar.
+    getWindowScrollBarX(documentElement, htmlRect)
+  ));
   const y = htmlRect.top + scroll.scrollTop;
   return {
     x,
@@ -1442,6 +1453,7 @@ function observeMove(element, onMove) {
     try {
       io = new IntersectionObserver(handleObserve, {
         ...options,
+        // Handle <iframe>s
         root: root.ownerDocument
       });
     } catch (e) {
@@ -1591,8 +1603,7 @@ var Tooltip = {
   controller: null,
   autoUpdateCleanup: null,
   showTooltip() {
-    if (this.timer)
-      return;
+    if (this.timer) return;
     const delay = parseInt(this.el.dataset.delay) || 0;
     this.timer = setTimeout(() => {
       this.tooltip.style.display = "block";
