@@ -30,6 +30,17 @@ defmodule Example.ErrorView do
   def render(template, _), do: Phoenix.Controller.status_message_from_template(template)
 end
 
+defmodule Example.Storybook do
+  use PhoenixStorybook,
+    otp_app: :phoenix_ui_components_storybook,
+    content_path: Path.expand("./storybook", __DIR__),
+    # assets path are remote path, not local file-system paths
+    css_path: "/assets/storybook.css",
+    js_path: "/assets/storybook.js",
+    sandbox_class: "phoenix-ui-components"
+end
+
+
 defmodule Example.Router do
   use Phoenix.Router
 
@@ -44,7 +55,7 @@ defmodule Example.Router do
     storybook_assets()
     pipe_through(:browser)
 
-    live_storybook "/", backend_module: Elixir.PhoenixUiComponents.Storybook
+    live_storybook "/", backend_module: Example.Storybook
   end
 end
 
