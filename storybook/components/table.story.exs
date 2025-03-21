@@ -1,6 +1,7 @@
 defmodule Storybook.Components.Table do
   use PhoenixStorybook.Story, :component
 
+  alias PhoenixUiComponents.Button
   alias PhoenixUiComponents.Table
 
   def layout, do: :one_column
@@ -19,6 +20,8 @@ defmodule Storybook.Components.Table do
     %{id: 2, name: "Jane Smith", email: "jane@example.com", active: false},
     %{id: 3, name: "Bob Johnson", email: "bob@example.com", active: false}
   ]
+
+  def data, do: @data
 
   def variations do
     [
