@@ -77,6 +77,34 @@ defmodule Storybook.Components.Table do
         ]
       },
       %Variation{
+        id: :sortable,
+        description: "Table with sortable columns",
+        attributes: %{},
+        slots: [
+          """
+          <.thead on_sort={JS.dispatch("sort")} ordered_by={:name} direction="desc">
+            <:th label="ID" />
+            <:th label="Name" field={:name} />
+            <:th label="Email" field={:email} />
+          </.thead>
+
+          <.tbody>
+            <.tr :for={entry <- []}>
+              <.td><%= entry.id %></.td>
+              <.td><%= entry.name %></.td>
+              <.td><%= entry.email %></.td>
+            </.tr>
+
+            <:empty>
+              <div class="flex items-center justify-center h-[100px] text-h5">
+                TODO: Add a working example after PhoenixStorybook updates LiveView to 1.0.5
+               </div>
+             </:empty>
+          </.tbody>
+          """
+        ]
+      },
+      %Variation{
         id: :empty,
         description: "Table with no data",
         attributes: %{},
