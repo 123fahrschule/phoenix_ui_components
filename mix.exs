@@ -27,7 +27,7 @@ defmodule PhoenixUiComponents.MixProject do
       # Productive. Reliable. Fast. A productive web framework that does not compromise speed and maintainability.
       {:phoenix, "~> 1.7"},
       # Rich, real-time user experiences with server-rendered HTML
-      {:phoenix_live_view, "~> 1.0.0"},
+      {:phoenix_live_view, "~> 1.0.5"},
       {:phoenix_html, "~> 4.2"},
       {:phoenix_html_helpers, "~> 1.0"},
       {:gettext, "~> 0.26.0"},
