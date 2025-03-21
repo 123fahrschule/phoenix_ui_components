@@ -5,6 +5,13 @@ defmodule Storybook.Components.Table do
 
   def layout, do: :one_column
 
+  def imports,
+    do: [
+      {Button, button: 1},
+      {Table, thead: 1, th: 1, tbody: 1, tr: 1, td: 1},
+      {__MODULE__, data: 0}
+    ]
+
   def function, do: &Table.table/1
 
   @data [
@@ -16,8 +23,109 @@ defmodule Storybook.Components.Table do
   def variations do
     [
       %Variation{
-        id: :basic_table,
+        id: :base,
         description: "Basic table with simple data",
+        attributes: %{},
+        slots: [
+          """
+          <.thead>
+            <:th label="ID" />
+            <:th label="Name" />
+            <:th label="Email" />
+          </.thead>
+
+          <.tbody>
+            <.tr :for={entry <- data()}>
+              <.td><%= entry.id %></.td>
+              <.td><%= entry.name %></.td>
+              <.td><%= entry.email %></.td>
+            </.tr>
+          </.tbody>
+          """
+        ]
+      },
+      %Variation{
+        id: :table_with_actions,
+        description: "Table with action buttons",
+        attributes: %{},
+        slots: [
+          """
+          <.thead>
+            <:th label="ID" />
+            <:th label="Name" />
+            <:th label="Email" />
+            <:th />
+          </.thead>
+
+          <.tbody>
+            <.tr :for={entry <- data()}>
+              <.td><%= entry.id %></.td>
+              <.td><%= entry.name %></.td>
+              <.td><%= entry.email %></.td>
+              <.td>
+                <div class="flex items-center gap-1">
+                  <.link href="#">Edit</.link>
+                  <.button tertiary size="sm" label="Delete" />
+                </div>
+              </.td>
+            </.tr>
+          </.tbody>
+          """
+        ]
+      },
+      %Variation{
+        id: :empty,
+        description: "Table with no data",
+        attributes: %{},
+        slots: [
+          """
+          <.thead>
+            <:th label="ID" />
+            <:th label="Name" />
+            <:th label="Email" />
+          </.thead>
+
+          <.tbody>
+            <.tr :for={entry <- []}>
+              <.td><%= entry.id %></.td>
+              <.td><%= entry.name %></.td>
+              <.td><%= entry.email %></.td>
+            </.tr>
+
+            <:empty>
+              <div class="flex items-center justify-center h-[100px] text-h6">
+                EMPTY
+              </div>
+             </:empty>
+          </.tbody>
+          """
+        ]
+      },
+      %Variation{
+        id: :styled_cells,
+        description: "Custom styling",
+        attributes: %{},
+        slots: [
+          """
+          <.thead>
+            <:th label="ID" />
+            <:th label="Name" />
+            <:th label="Email" />
+          </.thead>
+
+          <.tbody>
+            <.tr :for={entry <- data()} >
+              <.td class="bg-success-100 text-success-400"><%= entry.id %></.td>
+              <.td class="w-full"><%= entry.name %></.td>
+              <.td class="bg-info-100 text-info-500"><%= entry.email %></.td>
+            </.tr>
+          </.tbody>
+          """
+        ]
+      },
+      %Variation{
+        id: :old_basic_table,
+        description: "Basic table with simple data (old)",
         attributes: %{
           rows: @data
         },
@@ -34,8 +142,8 @@ defmodule Storybook.Components.Table do
         ]
       },
       %Variation{
-        id: :table_with_actions,
-        description: "Table with action buttons",
+        id: :old_table_with_actions,
+        description: "Table with action buttons (old)",
         attributes: %{
           rows: @data
         },
@@ -62,8 +170,8 @@ defmodule Storybook.Components.Table do
         ]
       },
       %Variation{
-        id: :custom_column_rendering,
-        description: "Table with custom column rendering",
+        id: :old_custom_column_rendering,
+        description: "Table with custom column rendering (old)",
         attributes: %{
           rows: @data
         },
@@ -97,8 +205,8 @@ defmodule Storybook.Components.Table do
         ]
       },
       %Variation{
-        id: :empty_state,
-        description: "Table with no data (TODO: Add empty state)",
+        id: :old_empty_state,
+        description: "Table with no data (TODO: Add empty state)(old)",
         attributes: %{
           rows: [],
           col: [
