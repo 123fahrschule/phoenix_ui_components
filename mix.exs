@@ -31,6 +31,7 @@ defmodule PhoenixUiComponents.MixProject do
       {:phoenix_html, "~> 4.2"},
       {:phoenix_html_helpers, "~> 1.0"},
       {:gettext, "~> 0.26.0"},
+      {:scrivener_ecto, "~> 2.0"},
 
       # Dev dependencies
       {:esbuild, "~> 0.9", only: :dev},
