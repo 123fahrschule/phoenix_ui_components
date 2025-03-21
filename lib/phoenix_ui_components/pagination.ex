@@ -1,142 +1,193 @@
 defmodule PhoenixUiComponents.Pagination do
-  use PhoenixUiComponents, :component
-  import PhoenixUiComponents.Icon
-  import PhoenixUiComponents.CustomLink
-  import PhoenixUiComponents.Form, only: [field_input: 1, get_input_classes: 2]
+  use Phoenix.LiveComponent
 
-  attr(:class, :string, default: nil)
-  attr(:total_entries, :integer, default: nil)
-  attr(:current_entries, :integer, default: nil)
-  attr(:current_page, :integer, required: true)
-  attr(:total_pages, :integer, required: true)
-  attr(:form_attrs, :list, default: [])
-  attr(:page_input_attrs, :list, default: [])
-  attr(:select_attrs, :list, default: [])
-  attr(:per_page, :integer, default: 15)
-  attr(:per_page_options, :list, default: [15, 30, 45, 60])
-  attr(:navigation_type, :string, values: ["href", "navigate", "patch"], default: "href")
-  attr(:with_limit, :boolean, default: false)
-  attr(:conn, :any, required: true)
+  import Phoenix.HTML
+  import PhoenixUiComponents.Icon
+
+  alias Phoenix.LiveView.JS
+  alias Scrivener.Page
+
+  @doc """
+  Renders pagination component.
+  It handles updating of `page` and `page_size` query params via hook
+
+  A `Scrivener.Page` may be passed as argument, which is used to retrieve current_page,
+  total_pages, current_entries_count, total_entries, page_size.
+  Otherwise all attributes may be passed explicitly.
+
+  ## Examples
+
+      <.pagination paginated_entries={Repo.paginate(SomeModel, page: 1, page_size: 10)} />
+
+      <.pagination
+        current_page={10}
+        total_pages={50}
+        current_entries_count={15}
+        total_entries={500}
+        page_size={15}
+        page_size_options={[15, 30, 45]}
+      />
+  """
+
+  attr(:id, :string, default: "pagination")
+  attr(:class, :any, default: nil)
+  attr(:paginated_entries, Page, default: nil)
+  attr(:current_page, :integer, default: 1)
+  attr(:total_pages, :integer)
+  attr(:current_entries_count, :integer)
+  attr(:total_entries, :integer)
+  attr(:page_size, :integer, default: 1)
+  attr(:page_size_options, :list, default: Enum.to_list(10..50//10))
+  attr(:change_event, :string, default: nil)
+  attr(:target, :any, default: nil)
+
+  def pagination(%{paginated_entries: %Page{}} = assigns) do
+    paginated_entries = assigns.paginated_entries
+
+    assigns
+    |> assign(
+      paginated_entries: nil,
+      current_page: paginated_entries.page_number,
+      total_pages: paginated_entries.total_pages,
+      current_entries_count: Enum.count(paginated_entries.entries),
+      total_entries: paginated_entries.total_entries,
+      page_size: paginated_entries.page_size
+    )
+    |> pagination()
+  end
 
   def pagination(assigns) do
-    assigns =
-      assigns
-      |> assign(:current_page, get_page(assigns.current_page))
-
     ~H"""
-    <div class={["bg-neutral-100 text-xs w-full", @class]}>
-      <.form
-        :let={f}
-        for={@conn}
-        method="get"
-        {@form_attrs}
-        x-data="pagination"
-        x-on:submit.prevent="updateQueryParams"
-      >
-        <div class="grid grid-cols-4 gap-2">
-          <div
-            :if={@current_page && @per_page && @current_entries && @total_entries}
-            class="flex items-center"
-          >
-            Showing
-            <span class="font-bold px-1">
-              <%= (@current_page - 1) * @per_page + @current_entries %>
-            </span>
-            out of
-            <span class="font-bold px-1">
-              <%= @total_entries %>
-            </span>
-            items.
+    <div
+      id={@id}
+      phx-hook="Pagination"
+      class={["bg-neutral-100 w-full text-body-xs text-neutral-900", @class]}
+      data-change-event={@change_event}
+      data-target={@target}
+    >
+      <form>
+        <div class="grid grid-cols-4 gap-1">
+          <div class="flex items-center gap-1">
+            <%= pgettext(
+              "pagination, showing entries info",
+              "Showing %{number_of_entries} out of %{total_entries} items",
+              number_of_entries: @current_entries_count |> bold(),
+              total_entries: @total_entries |> bold()
+            )
+            |> raw() %>
           </div>
 
-          <div class="col-start-2 col-end-4 flex items-center justify-center">
-            <.custom_link
-              class={[
-                "flex items-center justify-center p-1",
-                get_button_classes(@current_page == 1)
-              ]}
-              {get_navigation_attrs(@conn, 1 , @navigation_type)}
-            >
-              <.icon icon={:keyboard_double_arrow_left} class="text-[16px]" />
-            </.custom_link>
-            <.custom_link
-              class={[
-                "flex items-center justify-center p-1",
-                get_button_classes(@current_page == 1)
-              ]}
-              {get_navigation_attrs(@conn, max(@current_page - 1, 1), @navigation_type)}
-            >
-              <.icon icon={:keyboard_arrow_left} class="text-[16px]" />
-            </.custom_link>
-            Page
-            <.field_input
-              required
-              type="number"
-              form={f}
-              field={:page}
-              value={@current_page}
-              class={
-                List.flatten([
-                  get_input_classes("sm", "default"),
-                  "!w-min min-w-max !px-1 text-center mx-2"
-                ])
+          <div class="col-span-2 flex items-center justify-center gap-2">
+            <.pagination_button
+              phx-click={
+                JS.dispatch("update-pagination-page",
+                  detail: %{page: 1, page_size: @page_size}
+                )
               }
-              min={1}
-              max={@total_pages}
-              {@page_input_attrs}
+              icon={:keyboard_double_arrow_left}
+              disabled={@current_page == 1}
             />
-            <span>out of <span class="font-bold"><%= @total_pages %></span></span>
-            <.custom_link
-              class={[
-                "flex items-center justify-center p-1",
-                get_button_classes(@current_page == @total_pages)
-              ]}
-              {get_navigation_attrs(@conn, min(@current_page +  1, @total_pages), @navigation_type)}
-            >
-              <.icon icon={:keyboard_arrow_right} class="text-[16px]" />
-            </.custom_link>
-            <.custom_link
-              class={[
-                "flex items-center justify-center p-1",
-                get_button_classes(@current_page == @total_pages)
-              ]}
-              {get_navigation_attrs(@conn, @total_pages , @navigation_type)}
-            >
-              <.icon icon={:keyboard_double_arrow_right} class="text-[16px]" />
-            </.custom_link>
+            <.pagination_button
+              phx-click={
+                JS.dispatch("update-pagination-page",
+                  detail: %{page: @current_page - 1, page_size: @page_size}
+                )
+              }
+              icon={:keyboard_arrow_left}
+              disabled={@current_page == 1}
+            />
+
+            <%= pgettext(
+              "pagination, text for showing which page number is being displayed",
+              "Page %{page_input} out of %{total_pages}",
+              page_input:
+                page_input(assigns)
+                |> Phoenix.HTML.Safe.to_iodata()
+                |> to_string(),
+              total_pages: @total_pages |> bold()
+            )
+            |> raw() %>
+
+            <.pagination_button
+              phx-click={
+                JS.dispatch("update-pagination-page",
+                  detail: %{page: @current_page + 1, page_size: @page_size}
+                )
+              }
+              icon={:keyboard_arrow_right}
+              disabled={@current_page == @total_pages}
+            />
+            <.pagination_button
+              phx-click={
+                JS.dispatch("update-pagination-page",
+                  detail: %{page: @total_pages, page_size: @page_size}
+                )
+              }
+              icon={:keyboard_double_arrow_right}
+              disabled={@current_page == @total_pages}
+            />
           </div>
 
-          <div :if={@with_limit} class="flex items-center">
-            Display
-            <.field_input
-              type="select"
-              form={f}
-              field={:per_page}
-              options={@per_page_options}
-              value={@per_page}
-              class={List.flatten([get_input_classes("sm", "default"), "w-14 mx-2"])}
-              {@select_attrs}
-            /> items.
+          <div class="flex items-center gap-2 justify-end">
+            <%= if @page_size_options != []  do %>
+              <%= pgettext(
+                "pagination, text for choosing how many items are shown per page",
+                "Display %{page_size_select} items",
+                page_size_select:
+                  page_size_select(assigns)
+                  |> Phoenix.HTML.Safe.to_iodata()
+                  |> to_string()
+              )
+              |> raw() %>
+            <% end %>
           </div>
         </div>
-      </.form>
+      </form>
     </div>
     """
   end
 
-  defp get_page(page) when is_binary(page), do: String.to_integer(page)
-  defp get_page(page) when is_integer(page), do: page
-  defp get_page(nil), do: 1
+  attr(:icon, :atom)
+  attr(:rest, :global, include: ["disabled"])
 
-  defp get_button_classes(true), do: "text-neutral-500 pointer-events-none"
-  defp get_button_classes(_), do: "text-neutral-900"
+  defp pagination_button(assigns) do
+    ~H"""
+    <button type="button" class="text-neutral-900 disabled:text-neutral-500 flex" {@rest}>
+      <.icon icon={@icon} class="text-[16px]" />
+    </button>
+    """
+  end
 
-  defp get_navigation_attrs(conn, page, navigation_type) do
-    query_string =
-      conn.query_params
-      |> Map.put("page", page)
-      |> Plug.Conn.Query.encode()
+  defp page_input(assigns) do
+    ~H"""
+    <input
+      type="text"
+      name="page"
+      value={Phoenix.HTML.Form.normalize_value("text", @current_page)}
+      class={[input_class(), "text-center w-[75px]"]}
+      data-max-value={@total_pages}
+    />
+    """
+  end
 
-    Map.new("#{navigation_type}": "#{conn.request_path}?#{query_string}")
+  defp page_size_select(assigns) do
+    ~H"""
+    <select name="page-size" class={[input_class(), "py-2 pl-4"]}>
+      <%= Phoenix.HTML.Form.options_for_select(@page_size_options, @page_size) %>
+    </select>
+    """
+  end
+
+  defp input_class(),
+    do:
+      "rounded-full shadow-input focus:shadow-input-focus focus:ring-0 border-neutral-300 focus:border-primary-300 bg-neutral-200/50 text-body-xs"
+
+  defp bold(str), do: "<b>#{str |> html_escape() |> safe_to_string()}</b>"
+
+  defp pgettext(msgctxt, msgid, bindings \\ %{}) do
+    gettext_backend =
+      Application.get_env(:phoenix_ui_components, :gettext_backend)
+
+    Gettext.pgettext(gettext_backend, msgctxt, msgid, bindings)
   end
 end
