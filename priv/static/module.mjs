@@ -161,27 +161,6 @@ var flash_message_default = (type) => ({
   }
 });
 
-// js/hooks/flash_message.js
-var DEFAULT_FLASH_HIDE_DELAY2 = 5e3;
-var FlashMessage = {
-  timer: null,
-  remove() {
-    this.el.remove();
-    clearTimeout(this.timer);
-  },
-  mounted() {
-    const type = this.el.dataset.type;
-    this.el.querySelector("[data-type='close-btn']")?.addEventListener("click", () => {
-      this.remove();
-    });
-    if (type !== "error") {
-      this.timer = setTimeout(() => {
-        this.remove();
-      }, DEFAULT_FLASH_HIDE_DELAY2);
-    }
-  }
-};
-
 // node_modules/@floating-ui/utils/dist/floating-ui.utils.mjs
 var min = Math.min;
 var max = Math.max;
@@ -1594,6 +1573,87 @@ var DropdownMenu = {
   }
 };
 
+// js/hooks/flash_message.js
+var DEFAULT_FLASH_HIDE_DELAY2 = 5e3;
+var FlashMessage = {
+  timer: null,
+  remove() {
+    this.el.remove();
+    clearTimeout(this.timer);
+  },
+  mounted() {
+    const type = this.el.dataset.type;
+    this.el.querySelector("[data-type='close-btn']")?.addEventListener("click", () => {
+      this.remove();
+    });
+    if (type !== "error") {
+      this.timer = setTimeout(() => {
+        this.remove();
+      }, DEFAULT_FLASH_HIDE_DELAY2);
+    }
+  }
+};
+
+// js/hooks/pagination.js
+var Pagination = {
+  submitting: false,
+  mounted() {
+    this.el.querySelector("input").addEventListener("input", (event) => {
+      const maxValue = parseInt(event.target.dataset.maxValue);
+      const nextValue = event.target.value.replace(/\D/, "");
+      event.target.value = nextValue;
+      const page = parseInt(nextValue);
+      if (!Number.isFinite(page)) return;
+      event.target.value = Math.min(page, maxValue);
+    });
+    this.el.querySelectorAll("input,select").forEach((element) => {
+      element.addEventListener("change", (event) => {
+        event.target.form.requestSubmit();
+      });
+    });
+    this.el.addEventListener("update-pagination-page", (event) => {
+      const { page, page_size } = event.detail;
+      this.updatePaginationParams(page, page_size);
+    });
+    this.el.querySelector("form").addEventListener("submit", (event) => {
+      event.preventDefault();
+      if (this.submitting) {
+        return;
+      }
+      this.submitting = true;
+      const formData = new FormData(event.currentTarget);
+      this.updatePaginationParams(
+        parseInt(formData.get("page")),
+        parseInt(formData.get("page-size"))
+      );
+      setTimeout(() => {
+        this.submitting = false;
+      }, 100);
+    });
+  },
+  updatePaginationParams(page, pageSize) {
+    const { changeEvent, target } = this.el.dataset;
+    const payload = { ...page && { page }, page_size: pageSize };
+    if (changeEvent) {
+      if (target) {
+        this.pushEventTo(target, changeEvent, payload);
+      } else {
+        this.pushEvent(changeEvent, payload);
+      }
+      return;
+    }
+    const url = new URL(window.location.href);
+    if (Number.isFinite(page)) {
+      url.searchParams.set("page", page);
+    }
+    if (Number.isFinite(pageSize)) {
+      url.searchParams.set("page_size", pageSize);
+    }
+    const encodedJS = '[["patch",{"replace":false,"href":"' + url + '"}]]';
+    this.liveSocket.execJS(document.body, encodedJS);
+  }
+};
+
 // js/hooks/tooltip.js
 var Tooltip = {
   tooltip: null,
@@ -1688,6 +1748,7 @@ var Tooltip = {
 export {
   DropdownMenu,
   FlashMessage,
+  Pagination,
   Tooltip,
   dropdown_default as dropdown,
   flash_message_default as flashMessage,
