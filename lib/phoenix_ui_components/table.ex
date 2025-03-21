@@ -1,13 +1,6 @@
 defmodule PhoenixUiComponents.Table do
   use PhoenixUiComponents, :component
 
-  import PhoenixUiComponents.Dropdown
-  import PhoenixUiComponents.Icon
-
-  alias PhoenixUiComponents.Dropdown
-  alias Phoenix.LiveView
-  alias Phoenix.LiveView.JS
-
   attr(:rows, :list, default: nil)
   attr(:container_class, :string, default: nil)
   attr(:table_class, :string, default: nil)
