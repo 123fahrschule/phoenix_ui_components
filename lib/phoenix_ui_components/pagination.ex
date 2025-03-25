@@ -184,7 +184,7 @@ defmodule PhoenixUiComponents.Pagination do
 
   defp bold(str), do: "<b>#{str |> html_escape() |> safe_to_string()}</b>"
 
-  defp pgettext(msgctxt, msgid, bindings \\ %{}) do
+  defp pgettext(msgctxt, msgid, bindings) do
     gettext_backend =
       Application.get_env(:phoenix_ui_components, :gettext_backend)
 
