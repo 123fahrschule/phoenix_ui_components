@@ -13,7 +13,7 @@ defmodule PhoenixUiComponents.Table do
 
   slot(:inner_block)
 
-  slot :col, required: true do
+  slot :col do
     attr(:label, :string)
     attr(:field, :any)
   end
