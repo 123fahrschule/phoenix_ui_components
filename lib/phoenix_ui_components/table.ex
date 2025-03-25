@@ -144,13 +144,13 @@ defmodule PhoenixUiComponents.Table do
     """
   end
 
-  def th(%{on_sort: %JS{}} = assigns) do
+  def th(%{on_sort: %JS{}, field: field} = assigns) when not is_nil(field) do
     ~H"""
     <th>
       <.dropdown
         id={"sort-options-#{@field}"}
         trigger_class={["table-label flex items-center", @field == @ordered_by && "active"]}
-        menu_class="left-0 !right-auto"
+        class="w-min"
       >
         <%= render_slot(@inner_block) %>
 
