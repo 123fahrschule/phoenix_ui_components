@@ -1,8 +1,8 @@
 defmodule PhoenixUiComponents.Icon do
   use PhoenixUiComponents, :component
 
-  attr(:class, :string, default: nil)
-  attr(:icon, :atom, required: true)
+  attr(:class, :any, default: nil)
+  attr(:icon, :any, required: true)
   attr(:outlined, :boolean, default: false)
   attr(:rest, :global)
 
