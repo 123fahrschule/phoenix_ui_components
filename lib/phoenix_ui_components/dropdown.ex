@@ -83,6 +83,7 @@ defmodule PhoenixUiComponents.Dropdown do
     ~H"""
     <div
       {@rest}
+      id={@id}
       class={["relative", @class]}
       data-dropdown
       phx-click={JS.show(to: {:inner, "[data-dropdown-menu]"})}
