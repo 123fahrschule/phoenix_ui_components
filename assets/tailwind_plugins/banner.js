@@ -73,7 +73,7 @@ module.exports = plugin(function ({ addComponents, theme }) {
       color: theme('colors.warning.300')
     },
     '.banner-warning .close-button': {
-      backgroundColor: theme('colors.warning.300')
+      color: theme('colors.warning.300')
     },
 
     '.banner-error': {

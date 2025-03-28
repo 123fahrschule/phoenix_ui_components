@@ -44,6 +44,20 @@ defmodule Storybook.Components.Banner do
         ]
       },
       %VariationGroup{
+        id: :close_button,
+        description: "With close button",
+        variations: [
+          %Variation{
+            id: :close_button,
+            attributes: %{
+              label: "Banner label",
+              message: @message,
+              on_close: %JS{}
+            }
+          }
+        ]
+      },
+      %VariationGroup{
         id: :predefined_colors,
         description: "With predefined colors",
         variations:
@@ -53,7 +67,8 @@ defmodule Storybook.Components.Banner do
               attributes: %{
                 label: "Banner label " <> color,
                 message: @message,
-                color: color
+                color: color,
+                on_close: %JS{}
               }
             }
           end
@@ -72,20 +87,6 @@ defmodule Storybook.Components.Banner do
               }
             }
           end
-      },
-      %VariationGroup{
-        id: :close_button,
-        description: "With close button",
-        variations: [
-          %Variation{
-            id: :close_button,
-            attributes: %{
-              label: "Banner label",
-              message: @message,
-              on_close: %JS{}
-            }
-          }
-        ]
       }
     ]
   end

@@ -20,6 +20,8 @@ defmodule PhoenixUiComponents.Banner do
   )
 
   attr(:size, :string, values: @sizes, default: "md")
+  attr(:icon, :any, default: nil)
+  attr(:icon_class, :string, default: nil)
   attr(:label, :string, default: nil)
   attr(:message, :string, default: nil)
   attr(:on_close, JS, default: nil)
@@ -28,9 +30,9 @@ defmodule PhoenixUiComponents.Banner do
 
   def banner(assigns) do
     ~H"""
-    <div role="alert" class={["banner banner-#{@type || @color} banner-#{@size}", @class]} {@rest}>
+    <div role="alert" class={["banner banner-#{@color} banner-#{@size}", @class]} {@rest}>
       <div class="banner-icon-container">
-        <.icon icon={get_icon(@type || @color)} class="banner-icon" />
+        <.icon icon={@icon || get_icon(@color)} class={["banner-icon", @icon_class]} />
       </div>
       <div class="flex-grow">
         <p :if={@label} class="banner-label">
