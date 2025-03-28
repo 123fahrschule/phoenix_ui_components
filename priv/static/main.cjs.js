@@ -294,7 +294,7 @@ var require_banner = __commonJS({
           color: theme("colors.warning.300")
         },
         ".banner-warning .close-button": {
-          backgroundColor: theme("colors.warning.300")
+          color: theme("colors.warning.300")
         },
         ".banner-error": {
           backgroundColor: theme("colors.error.100")
