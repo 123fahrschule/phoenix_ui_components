@@ -66,10 +66,11 @@ defmodule PhoenixUiComponents.Dropdown do
 
   attr(:id, :string, required: true)
   attr(:trigger_class, :any, default: nil)
-  attr :class, :any, default: nil
+  attr(:class, :any, default: nil)
   attr(:menu_class, :any, default: nil)
   attr(:placement, :string, values: @placement, default: "bottom")
   attr(:strategy, :string, values: @strategy, default: "absolute")
+  attr(:rest, :global)
 
   slot(:inner_block)
   slot(:trigger)
@@ -81,6 +82,7 @@ defmodule PhoenixUiComponents.Dropdown do
   def dropdown(assigns) do
     ~H"""
     <div
+      {@rest}
       class={["relative", @class]}
       data-dropdown
       phx-click={JS.show(to: {:inner, "[data-dropdown-menu]"})}
