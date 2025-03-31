@@ -162,6 +162,7 @@ var flash_message_default = (type) => ({
 });
 
 // node_modules/@floating-ui/utils/dist/floating-ui.utils.mjs
+var sides = ["top", "right", "bottom", "left"];
 var min = Math.min;
 var max = Math.max;
 var round = Math.round;
@@ -649,6 +650,66 @@ var flip = function(options) {
         }
       }
       return {};
+    }
+  };
+};
+function getSideOffsets(overflow, rect) {
+  return {
+    top: overflow.top - rect.height,
+    right: overflow.right - rect.width,
+    bottom: overflow.bottom - rect.height,
+    left: overflow.left - rect.width
+  };
+}
+function isAnySideFullyClipped(overflow) {
+  return sides.some((side) => overflow[side] >= 0);
+}
+var hide = function(options) {
+  if (options === void 0) {
+    options = {};
+  }
+  return {
+    name: "hide",
+    options,
+    async fn(state) {
+      const {
+        rects
+      } = state;
+      const {
+        strategy = "referenceHidden",
+        ...detectOverflowOptions
+      } = evaluate(options, state);
+      switch (strategy) {
+        case "referenceHidden": {
+          const overflow = await detectOverflow(state, {
+            ...detectOverflowOptions,
+            elementContext: "reference"
+          });
+          const offsets = getSideOffsets(overflow, rects.reference);
+          return {
+            data: {
+              referenceHiddenOffsets: offsets,
+              referenceHidden: isAnySideFullyClipped(offsets)
+            }
+          };
+        }
+        case "escaped": {
+          const overflow = await detectOverflow(state, {
+            ...detectOverflowOptions,
+            altBoundary: true
+          });
+          const offsets = getSideOffsets(overflow, rects.floating);
+          return {
+            data: {
+              escapedOffsets: offsets,
+              escaped: isAnySideFullyClipped(offsets)
+            }
+          };
+        }
+        default: {
+          return {};
+        }
+      }
     }
   };
 };
@@ -1514,6 +1575,7 @@ function autoUpdate(reference, floating, update, options) {
 var offset2 = offset;
 var shift2 = shift;
 var flip2 = flip;
+var hide2 = hide;
 var arrow2 = arrow;
 var computePosition2 = (reference, floating, options) => {
   const cache = /* @__PURE__ */ new Map();
@@ -1541,11 +1603,12 @@ var DropdownMenu = {
       computePosition2(this.reference, this.menu, {
         placement: this.el.dataset.placement,
         strategy: this.el.dataset.strategy,
-        middleware: [offset2(6), flip2(), shift2({ padding: 10 })]
-      }).then(({ x, y }) => {
+        middleware: [offset2(6), flip2(), shift2({ padding: 10 }), hide2()]
+      }).then(({ x, y, middlewareData }) => {
         Object.assign(this.menu.style, {
           left: `${x}px`,
           top: `${y}px`,
+          visibility: middlewareData.hide.referenceHidden ? "hidden" : "visible",
           ..."fitReferenceWidth" in this.el.dataset && {
             width: `${this.reference.clientWidth}px`
           }
@@ -1685,12 +1748,14 @@ var Tooltip = {
           offset2(6),
           flip2(),
           shift2({ padding: 10 }),
-          arrow2({ element: this.arrowElement })
+          arrow2({ element: this.arrowElement }),
+          hide2()
         ]
       }).then(({ x, y, placement, middlewareData }) => {
         Object.assign(this.tooltip.style, {
           left: `${x}px`,
-          top: `${y}px`
+          top: `${y}px`,
+          visibility: middlewareData.hide.referenceHidden ? "hidden" : "visible"
         });
         const { x: arrowX, y: arrowY } = middlewareData.arrow;
         const staticSide = {
