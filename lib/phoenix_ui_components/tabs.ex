@@ -20,19 +20,31 @@ defmodule PhoenixUiComponents.Tabs do
   attr(:label, :string, default: nil)
   attr(:active, :boolean, default: false)
   attr(:icon, :atom, default: nil)
-  attr(:target, :string, required: true)
+  attr(:target, :string, default: nil)
   attr(:group, :string, default: "tabs")
   attr(:rest, :global)
 
   slot(:inner_block)
 
-  def tab(assigns) do
+  def tab(%{target: target} = assigns) when not is_nil(target) do
     ~H"""
     <button
       phx-mounted={@active && set_active_tab(@target, @group)}
       phx-click={set_active_tab(@target, @group)}
       class={["px-4 py-2 text-sm flex items-center relative", get_active_classes(@active), @class]}
       data-tab={@group}
+      {@rest}
+    >
+      <.icon :if={@icon} outlined icon={@icon} class="text-[16px] mr-1" />
+      <%= if @label, do: @label, else: render_slot(@inner_block) %>
+    </button>
+    """
+  end
+
+  def tab(assigns) do
+    ~H"""
+    <button
+      class={["px-4 py-2 text-sm flex items-center relative", get_active_classes(@active), @class]}
       {@rest}
     >
       <.icon :if={@icon} outlined icon={@icon} class="text-[16px] mr-1" />
