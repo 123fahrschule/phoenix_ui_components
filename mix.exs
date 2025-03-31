@@ -1,7 +1,7 @@
 defmodule PhoenixUiComponents.MixProject do
   use Mix.Project
 
-  @version "2.0.0-rc.11"
+  @version "2.0.0-rc.12"
 
   def project do
     [
