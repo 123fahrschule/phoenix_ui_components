@@ -1,4 +1,4 @@
-import { arrow, autoUpdate, computePosition, flip, offset, shift } from '@floating-ui/dom';
+import { arrow, autoUpdate, computePosition, flip, hide, offset, shift } from '@floating-ui/dom';
 
 export const Tooltip = {
   tooltip: null,
@@ -33,12 +33,14 @@ export const Tooltip = {
           offset(6),
           flip(),
           shift({ padding: 10 }),
-          arrow({ element: this.arrowElement })
+          arrow({ element: this.arrowElement }),
+          hide()
         ]
       }).then(({ x, y, placement, middlewareData }) => {
         Object.assign(this.tooltip.style, {
           left: `${x}px`,
-          top: `${y}px`
+          top: `${y}px`,
+          visibility: middlewareData.hide.referenceHidden ? 'hidden' : 'visible'
         });
 
         const { x: arrowX, y: arrowY } = middlewareData.arrow;
