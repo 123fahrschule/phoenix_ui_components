@@ -32,6 +32,7 @@ defmodule PhoenixUiComponents.Pagination do
   attr(:id, :string, default: "pagination")
   attr(:class, :any, default: nil)
   attr(:paginated_entries, Page, default: nil)
+  attr(:pagination, :map, default: nil)
   attr(:current_page, :integer, default: 1)
   attr(:total_pages, :integer)
   attr(:current_entries_count, :integer)
@@ -41,18 +42,17 @@ defmodule PhoenixUiComponents.Pagination do
   attr(:change_event, :string, default: nil)
   attr(:target, :any, default: nil)
 
-  def pagination(%{paginated_entries: %Page{}} = assigns) do
-    paginated_entries = assigns.paginated_entries
-
+  def pagination(%{pagination: pagination} = assigns) when is_map(pagination) do
     assigns
-    |> assign(
-      paginated_entries: nil,
-      current_page: paginated_entries.page_number,
-      total_pages: paginated_entries.total_pages,
-      current_entries_count: Enum.count(paginated_entries.entries),
-      total_entries: paginated_entries.total_entries,
-      page_size: paginated_entries.page_size
-    )
+    |> assign(assigns.pagination)
+    |> assign(pagination: nil)
+    |> pagination()
+  end
+
+  def pagination(%{paginated_entries: %Page{}} = assigns) do
+    assigns
+    |> assign(to_pagination_attr(assigns.paginated_entries))
+    |> assign(paginated_entries: nil)
     |> pagination()
   end
 
@@ -189,5 +189,15 @@ defmodule PhoenixUiComponents.Pagination do
       Application.get_env(:phoenix_ui_components, :gettext_backend)
 
     Gettext.pgettext(gettext_backend, msgctxt, msgid, bindings)
+  end
+
+  def to_pagination_attr(paginated_entries) when is_map(paginated_entries) do
+    %{
+      current_page: paginated_entries.page_number,
+      total_pages: paginated_entries.total_pages,
+      current_entries_count: Enum.count(paginated_entries.entries),
+      total_entries: paginated_entries.total_entries,
+      page_size: paginated_entries.page_size
+    }
   end
 end
