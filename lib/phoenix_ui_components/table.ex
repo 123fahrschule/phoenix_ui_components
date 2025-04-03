@@ -205,7 +205,7 @@ defmodule PhoenixUiComponents.Table do
   def tbody(assigns) do
     ~H"""
     <tbody {@rest}>
-      <.tr :if={@empty != []} class="hidden only:table-row">
+      <.tr :if={@empty != []} class="hidden">
         <.td colspan="100" class={["text-center", @empty[:class]]}>
           <%= render_slot(@empty) %>
         </.td>

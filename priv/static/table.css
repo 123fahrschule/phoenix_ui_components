@@ -34,6 +34,10 @@
     @apply bg-neutral-100;
   }
 
+  table tbody:only-of-type tr:only-of-type {
+    display: table-row;
+  }
+
   td {
     @apply py-3 px-6 text-body-xs;
 
