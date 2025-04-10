@@ -10,23 +10,22 @@ defmodule PhoenixUiComponents.Banner do
   # banner-sm banner-md banner-lg
   # banner-info banner-success banner-warning banner-error
 
-  attr(:class, :string, default: nil)
-  attr(:color, :string, values: @colors, default: "info")
+  attr :class, :string, default: nil
+  attr :color, :string, values: @colors, default: "info"
 
-  attr(:type, :any,
+  attr :type, :any,
     values: [nil | @colors],
     default: nil,
     doc: "Deprecated. Use `color` instead"
-  )
 
-  attr(:size, :string, values: @sizes, default: "md")
-  attr(:icon, :any, default: nil)
-  attr(:icon_class, :string, default: nil)
-  attr(:label, :string, default: nil)
-  attr(:message, :string, default: nil)
-  attr(:on_close, JS, default: nil)
-  attr(:close_button_attributes, :list, default: [])
-  attr(:rest, :global)
+  attr :size, :string, values: @sizes, default: "md"
+  attr :icon, :any, default: nil
+  attr :icon_class, :string, default: nil
+  attr :label, :string, default: nil
+  attr :message, :string, default: nil
+  attr :on_close, JS, default: nil
+  attr :close_button_attributes, :list, default: []
+  attr :rest, :global
 
   def banner(assigns) do
     ~H"""

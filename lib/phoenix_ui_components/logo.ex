@@ -1,9 +1,9 @@
 defmodule PhoenixUiComponents.Logo do
   use PhoenixUiComponents, :component
 
-  attr(:white, :boolean, default: false)
-  attr(:text_white, :boolean, default: false)
-  attr(:rest, :global)
+  attr :white, :boolean, default: false
+  attr :text_white, :boolean, default: false
+  attr :rest, :global
 
   def logo(%{white: true} = assigns) do
     ~H"""

@@ -8,7 +8,7 @@ defmodule PhoenixUiComponents.SideNav do
   import PhoenixUiComponents.CustomLink
   import PhoenixUiComponents.Logo
 
-  attr(:sections, :list,
+  attr :sections, :list,
     required: true,
     examples: [
       [
@@ -26,13 +26,12 @@ defmodule PhoenixUiComponents.SideNav do
         }
       ]
     ]
-  )
 
-  attr(:root_path, :string, default: nil)
-  attr(:app_name, :string, default: nil)
-  attr(:class, :string, default: nil)
+  attr :root_path, :string, default: nil
+  attr :app_name, :string, default: nil
+  attr :class, :string, default: nil
 
-  slot(:footer)
+  slot :footer
 
   def side_nav(assigns) do
     ~H"""
@@ -53,8 +52,8 @@ defmodule PhoenixUiComponents.SideNav do
     """
   end
 
-  attr(:root_path, :string, default: nil)
-  attr(:app_name, :string, default: nil)
+  attr :root_path, :string, default: nil
+  attr :app_name, :string, default: nil
 
   def side_nav_header(assigns) do
     ~H"""
@@ -73,7 +72,7 @@ defmodule PhoenixUiComponents.SideNav do
     """
   end
 
-  slot(:inner_block)
+  slot :inner_block
 
   def side_nav_footer(assigns) do
     ~H"""
@@ -83,8 +82,8 @@ defmodule PhoenixUiComponents.SideNav do
     """
   end
 
-  attr(:label, :string, required: true)
-  attr(:items, :list, required: true)
+  attr :label, :string, required: true
+  attr :items, :list, required: true
 
   def side_nav_section(assigns) do
     ~H"""
@@ -99,10 +98,10 @@ defmodule PhoenixUiComponents.SideNav do
     """
   end
 
-  attr(:label, :string, required: true)
-  attr(:icon, :atom, required: true)
-  attr(:items, :list, default: nil)
-  attr(:rest, :global)
+  attr :label, :string, required: true
+  attr :icon, :atom, required: true
+  attr :items, :list, default: nil
+  attr :rest, :global
 
   def side_nav_item(%{items: items} = assigns) when not is_nil(items) do
     ~H"""
@@ -175,9 +174,9 @@ defmodule PhoenixUiComponents.SideNav do
     """
   end
 
-  attr(:label, :string, default: "Dev tools")
+  attr :label, :string, default: "Dev tools"
 
-  slot(:inner_block)
+  slot :inner_block
 
   def side_nav_dev_tools(assigns) do
     ~H"""
@@ -192,14 +191,14 @@ defmodule PhoenixUiComponents.SideNav do
     """
   end
 
-  attr(:primary, :string, required: true)
-  attr(:secondary, :string)
-  attr(:show_secondary, :boolean, default: true)
-  attr(:icon, :atom, required: true)
-  attr(:status, :string, values: ["default", "warning", "error"])
-  attr(:errors_count, :integer, default: 0)
-  attr(:warnings_count, :integer, default: 0)
-  attr(:rest, :global, include: ["href", "navigate", "patch"])
+  attr :primary, :string, required: true
+  attr :secondary, :string
+  attr :show_secondary, :boolean, default: true
+  attr :icon, :atom, required: true
+  attr :status, :string, values: ["default", "warning", "error"]
+  attr :errors_count, :integer, default: 0
+  attr :warnings_count, :integer, default: 0
+  attr :rest, :global, include: ["href", "navigate", "patch"]
 
   def dev_tools_item(assigns) do
     assigns =

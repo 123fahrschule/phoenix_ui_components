@@ -1,10 +1,10 @@
 defmodule PhoenixUiComponents.Backdrop do
   use PhoenixUiComponents, :component
 
-  attr(:class, :string, default: nil)
-  attr(:rest, :global)
+  attr :class, :string, default: nil
+  attr :rest, :global
 
-  slot(:inner_block)
+  slot :inner_block
 
   def backdrop(assigns) do
     ~H"""

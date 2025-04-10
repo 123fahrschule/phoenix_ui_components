@@ -5,10 +5,10 @@ defmodule PhoenixUiComponents.Topbar do
 
   alias Phoenix.LiveView.JS
 
-  attr(:class, :any, default: nil)
-  attr(:rest, :global)
+  attr :class, :any, default: nil
+  attr :rest, :global
 
-  slot(:inner_block)
+  slot :inner_block
 
   def topbar(assigns) do
     ~H"""

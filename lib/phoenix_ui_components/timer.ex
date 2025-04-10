@@ -2,11 +2,11 @@ defmodule PhoenixUiComponents.Timer do
   use PhoenixUiComponents, :component
   import PhoenixUiComponents.Progress
 
-  attr(:progress, :float, required: true)
-  attr(:text, :string, default: nil)
-  attr(:color, :string, values: ["info"], default: "info")
+  attr :progress, :float, required: true
+  attr :text, :string, default: nil
+  attr :color, :string, values: ["info"], default: "info"
 
-  slot(:inner_block)
+  slot :inner_block
 
   def timer(assigns) do
     ~H"""

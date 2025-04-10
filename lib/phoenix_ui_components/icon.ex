@@ -1,10 +1,10 @@
 defmodule PhoenixUiComponents.Icon do
   use PhoenixUiComponents, :component
 
-  attr(:class, :any, default: nil)
-  attr(:icon, :any, required: true)
-  attr(:outlined, :boolean, default: false)
-  attr(:rest, :global)
+  attr :class, :any, default: nil
+  attr :icon, :any, required: true
+  attr :outlined, :boolean, default: false
+  attr :rest, :global
 
   def icon(%{icon: :overland_lesson_icon} = assigns) do
     ~H"""

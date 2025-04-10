@@ -3,32 +3,30 @@ defmodule PhoenixUiComponents.Button do
   import PhoenixUiComponents.Icon
   import PhoenixUiComponents.CustomLink
 
-  attr(:type, :string, default: "button")
-  attr(:class, :string, default: nil)
-  attr(:label, :string, default: nil)
+  attr :type, :string, default: "button"
+  attr :class, :string, default: nil
+  attr :label, :string, default: nil
 
-  attr(:color, :string,
+  attr :color, :string,
     values: ["primary", "secondary", "neutral", "info", "success", "warning", "error", "white"],
     default: "primary"
-  )
 
-  attr(:variant, :string, values: ["filled", "outlined", "text"], default: "filled")
-  attr(:size, :string, values: ["sm", "md", "lg"], default: "md")
-  attr(:icon, :atom, default: nil)
-  attr(:left_icon, :atom, default: nil)
-  attr(:right_icon, :atom, default: nil)
-  attr(:icon_attrs, :list, default: [])
-  attr(:left_icon_attrs, :list, default: [])
-  attr(:right_icon_attrs, :list, default: [])
-  attr(:primary, :boolean, default: false)
-  attr(:secondary, :boolean, default: false)
-  attr(:tertiary, :boolean, default: false)
+  attr :variant, :string, values: ["filled", "outlined", "text"], default: "filled"
+  attr :size, :string, values: ["sm", "md", "lg"], default: "md"
+  attr :icon, :atom, default: nil
+  attr :left_icon, :atom, default: nil
+  attr :right_icon, :atom, default: nil
+  attr :icon_attrs, :list, default: []
+  attr :left_icon_attrs, :list, default: []
+  attr :right_icon_attrs, :list, default: []
+  attr :primary, :boolean, default: false
+  attr :secondary, :boolean, default: false
+  attr :tertiary, :boolean, default: false
 
-  attr(:rest, :global,
+  attr :rest, :global,
     include: ["href", "navigate", "patch", "form", "method", "name", "value", "disabled"]
-  )
 
-  slot(:inner_block)
+  slot :inner_block
 
   def button(%{primary: true} = assigns) do
     assigns =
@@ -101,10 +99,10 @@ defmodule PhoenixUiComponents.Button do
     """
   end
 
-  attr(:icon, :atom, required: true)
-  attr(:class, :string, default: nil)
-  attr(:default_class, :string, default: nil)
-  attr(:rest, :global)
+  attr :icon, :atom, required: true
+  attr :class, :string, default: nil
+  attr :default_class, :string, default: nil
+  attr :rest, :global
 
   defp button_icon(assigns) do
     ~H"""

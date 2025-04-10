@@ -6,19 +6,19 @@ defmodule PhoenixUiComponents.Table do
 
   alias Phoenix.LiveView.JS
 
-  attr(:rows, :list, default: nil)
-  attr(:container_class, :string, default: nil)
-  attr(:table_class, :string, default: nil)
-  attr(:rest, :global)
+  attr :rows, :list, default: nil
+  attr :container_class, :string, default: nil
+  attr :table_class, :string, default: nil
+  attr :rest, :global
 
-  slot(:inner_block)
+  slot :inner_block
 
   slot :col do
-    attr(:label, :string)
-    attr(:field, :any)
+    attr :label, :string
+    attr :field, :any
   end
 
-  slot(:action, doc: "the slot for showing user actions in the last table column")
+  slot :action, doc: "the slot for showing user actions in the last table column"
 
   def table(%{rows: nil} = assigns) do
     ~H"""
@@ -68,21 +68,20 @@ defmodule PhoenixUiComponents.Table do
     """
   end
 
-  attr(:ordered_by, :string, default: nil)
-  attr(:direction, :string, default: nil)
+  attr :ordered_by, :string, default: nil
+  attr :direction, :string, default: nil
 
-  attr(:on_sort, :any,
+  attr :on_sort, :any,
     default: nil,
     doc: "JS command executed on sorting change"
-  )
 
-  attr(:rest, :global)
+  attr :rest, :global
 
-  slot(:inner_block)
+  slot :inner_block
 
   slot :th do
-    attr(:label, :string)
-    attr(:sort_field, :any)
+    attr :label, :string
+    attr :sort_field, :any
   end
 
   def thead(%{th: []} = assigns) do
@@ -117,9 +116,9 @@ defmodule PhoenixUiComponents.Table do
     """
   end
 
-  attr(:rest, :global)
+  attr :rest, :global
 
-  slot(:inner_block)
+  slot :inner_block
 
   def tr(assigns) do
     ~H"""
@@ -129,14 +128,14 @@ defmodule PhoenixUiComponents.Table do
     """
   end
 
-  attr(:ordered_by, :string, default: nil)
-  attr(:direction, :string)
-  attr(:field, :string, default: nil)
-  attr(:on_sort, :any, default: nil)
+  attr :ordered_by, :string, default: nil
+  attr :direction, :string
+  attr :field, :string, default: nil
+  attr :on_sort, :any, default: nil
 
-  attr(:rest, :global, include: ["abbr", "colspan", "headers", "rowspan", "scope"])
+  attr :rest, :global, include: ["abbr", "colspan", "headers", "rowspan", "scope"]
 
-  slot(:inner_block)
+  slot :inner_block
 
   def th(%{inner_block: []} = assigns) do
     ~H"""
@@ -194,12 +193,12 @@ defmodule PhoenixUiComponents.Table do
     """
   end
 
-  attr(:rest, :global)
+  attr :rest, :global
 
-  slot(:inner_block)
+  slot :inner_block
 
   slot :empty do
-    attr(:class, :any)
+    attr :class, :any
   end
 
   def tbody(assigns) do
@@ -216,9 +215,9 @@ defmodule PhoenixUiComponents.Table do
     """
   end
 
-  attr(:rest, :global, include: ["colspan", "headers", "rowspan"])
+  attr :rest, :global, include: ["colspan", "headers", "rowspan"]
 
-  slot(:inner_block)
+  slot :inner_block
 
   def td(assigns) do
     ~H"""
@@ -228,8 +227,8 @@ defmodule PhoenixUiComponents.Table do
     """
   end
 
-  attr(:rest, :global)
-  slot(:inner_block)
+  attr :rest, :global
+  slot :inner_block
 
   def tfoot(assigns) do
     ~H"""
@@ -258,7 +257,7 @@ defmodule PhoenixUiComponents.Table do
     """
   end
 
-  attr(:selected_direction, :any)
+  attr :selected_direction, :any
 
   defp sort_icon(assigns) do
     ~H"""

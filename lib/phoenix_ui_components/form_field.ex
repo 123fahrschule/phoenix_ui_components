@@ -49,29 +49,28 @@ defmodule PhoenixUiComponents.FormField do
   # form-field-label-sm form-field-label-md form-field-label-lg
   # form-field-input-sm form-field-input-md form-field-input-lg
 
-  attr(:id, :any, default: nil)
-  attr(:name, :any)
-  attr(:label, :string, default: nil)
-  attr(:value, :any)
-  attr(:type, :string, default: "text", values: @types)
+  attr :id, :any, default: nil
+  attr :name, :any
+  attr :label, :string, default: nil
+  attr :value, :any
+  attr :type, :string, default: "text", values: @types
 
-  attr(:field, Phoenix.HTML.FormField,
+  attr :field, Phoenix.HTML.FormField,
     doc: "a form field struct retrieved from the form, for example: @form[:email]"
-  )
 
-  attr(:errors, :list, default: [])
+  attr :errors, :list, default: []
   # attr :checked, :boolean, doc: "the checked flag for checkbox inputs"
-  attr(:prompt, :string, default: nil, doc: "the prompt for select inputs")
-  attr(:options, :list, doc: "the options to pass to Phoenix.HTML.Form.options_for_select/2")
-  attr(:multiple, :boolean, default: false, doc: "the multiple flag for select inputs")
-  attr(:disabled, :boolean, default: false)
-  attr(:size, :string, values: @sizes, default: "md")
-  attr(:class, :any, default: nil)
-  attr(:input_class, :any, default: nil)
-  attr(:rest, :global, include: @rest_attributes)
+  attr :prompt, :string, default: nil, doc: "the prompt for select inputs"
+  attr :options, :list, doc: "the options to pass to Phoenix.HTML.Form.options_for_select/2"
+  attr :multiple, :boolean, default: false, doc: "the multiple flag for select inputs"
+  attr :disabled, :boolean, default: false
+  attr :size, :string, values: @sizes, default: "md"
+  attr :class, :any, default: nil
+  attr :input_class, :any, default: nil
+  attr :rest, :global, include: @rest_attributes
 
-  slot(:input_content)
-  slot(:label_content)
+  slot :input_content
+  slot :label_content
 
   def form_field(%{field: %Phoenix.HTML.FormField{} = field} = assigns) do
     # TODO: Update errors handling after update to LiveView 1.0
@@ -205,11 +204,11 @@ defmodule PhoenixUiComponents.FormField do
   @doc """
   Renders a label.
   """
-  attr(:for, :string, default: nil)
-  attr(:size, :string, values: @sizes, default: "md")
-  attr(:disabled, :boolean, default: false)
+  attr :for, :string, default: nil
+  attr :size, :string, values: @sizes, default: "md"
+  attr :disabled, :boolean, default: false
 
-  slot(:inner_block, required: true)
+  slot :inner_block, required: true
 
   def form_field_label(assigns) do
     ~H"""
@@ -222,8 +221,8 @@ defmodule PhoenixUiComponents.FormField do
   @doc """
   Generates a generic error message.
   """
-  attr(:class, :any, default: nil)
-  slot(:inner_block, required: true)
+  attr :class, :any, default: nil
+  slot :inner_block, required: true
 
   def form_field_error(assigns) do
     ~H"""

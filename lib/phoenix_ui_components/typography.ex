@@ -1,10 +1,10 @@
 defmodule PhoenixUiComponents.Typography do
   use PhoenixUiComponents, :component
 
-  attr(:class, :string, default: nil)
-  attr(:rest, :global)
+  attr :class, :string, default: nil
+  attr :rest, :global
 
-  slot(:inner_block, required: true)
+  slot :inner_block, required: true
 
   def h1(assigns) do
     ~H"""
@@ -12,10 +12,10 @@ defmodule PhoenixUiComponents.Typography do
     """
   end
 
-  attr(:class, :string, default: nil)
-  attr(:rest, :global)
+  attr :class, :string, default: nil
+  attr :rest, :global
 
-  slot(:inner_block, required: true)
+  slot :inner_block, required: true
 
   def h2(assigns) do
     ~H"""
@@ -23,10 +23,10 @@ defmodule PhoenixUiComponents.Typography do
     """
   end
 
-  attr(:class, :string, default: nil)
-  attr(:rest, :global)
+  attr :class, :string, default: nil
+  attr :rest, :global
 
-  slot(:inner_block, required: true)
+  slot :inner_block, required: true
 
   def h3(assigns) do
     ~H"""
@@ -34,10 +34,10 @@ defmodule PhoenixUiComponents.Typography do
     """
   end
 
-  attr(:class, :string, default: nil)
-  attr(:rest, :global)
+  attr :class, :string, default: nil
+  attr :rest, :global
 
-  slot(:inner_block, required: true)
+  slot :inner_block, required: true
 
   def h4(assigns) do
     ~H"""
@@ -45,10 +45,10 @@ defmodule PhoenixUiComponents.Typography do
     """
   end
 
-  attr(:class, :string, default: nil)
-  attr(:rest, :global)
+  attr :class, :string, default: nil
+  attr :rest, :global
 
-  slot(:inner_block, required: true)
+  slot :inner_block, required: true
 
   def h5(assigns) do
     ~H"""
@@ -56,10 +56,10 @@ defmodule PhoenixUiComponents.Typography do
     """
   end
 
-  attr(:class, :string, default: nil)
-  attr(:rest, :global)
+  attr :class, :string, default: nil
+  attr :rest, :global
 
-  slot(:inner_block, required: true)
+  slot :inner_block, required: true
 
   def h6(assigns) do
     ~H"""
@@ -67,11 +67,11 @@ defmodule PhoenixUiComponents.Typography do
     """
   end
 
-  attr(:class, :string, default: nil)
-  attr(:size, :string, values: ["md", "sm", "xs"], default: "md")
-  attr(:rest, :global)
+  attr :class, :string, default: nil
+  attr :size, :string, values: ["md", "sm", "xs"], default: "md"
+  attr :rest, :global
 
-  slot(:inner_block, required: true)
+  slot :inner_block, required: true
 
   def p(assigns) do
     assigns =

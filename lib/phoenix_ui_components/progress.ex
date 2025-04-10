@@ -1,11 +1,11 @@
 defmodule PhoenixUiComponents.Progress do
   use PhoenixUiComponents, :component
 
-  attr(:progress, :float, required: true)
-  attr(:class, :string, default: nil)
-  attr(:track_class, :string, default: nil)
-  attr(:bar_class, :string, default: nil)
-  attr(:rest, :global)
+  attr :progress, :float, required: true
+  attr :class, :string, default: nil
+  attr :track_class, :string, default: nil
+  attr :bar_class, :string, default: nil
+  attr :rest, :global
 
   def circular_progress(assigns) do
     ~H"""

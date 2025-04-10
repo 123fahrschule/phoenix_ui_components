@@ -43,13 +43,13 @@ defmodule PhoenixUiComponents.Modal do
 
   """
 
-  attr(:id, :string, required: true)
-  attr(:show, :boolean, default: true)
-  attr(:on_cancel, JS, default: %JS{})
-  attr(:sizes, :map, default: %{}, examples: [%{mobile: "fullscreen", desktop: "sm"}])
-  attr(:close_button_class, :any, default: nil)
-  attr(:class, :any, default: nil)
-  slot(:inner_block, required: true)
+  attr :id, :string, required: true
+  attr :show, :boolean, default: true
+  attr :on_cancel, JS, default: %JS{}
+  attr :sizes, :map, default: %{}, examples: [%{mobile: "fullscreen", desktop: "sm"}]
+  attr :close_button_class, :any, default: nil
+  attr :class, :any, default: nil
+  slot :inner_block, required: true
 
   def modal(assigns) do
     ~H"""
@@ -122,12 +122,12 @@ defmodule PhoenixUiComponents.Modal do
     """
   end
 
-  attr(:class, :any, default: nil)
-  attr(:title, :string)
-  attr(:on_close, JS, default: %JS{})
-  attr(:rest, :global)
+  attr :class, :any, default: nil
+  attr :title, :string
+  attr :on_close, JS, default: %JS{}
+  attr :rest, :global
 
-  slot(:inner_block)
+  slot :inner_block
 
   def fullscreen_modal_header(assigns) do
     ~H"""
@@ -154,9 +154,9 @@ defmodule PhoenixUiComponents.Modal do
     """
   end
 
-  attr(:icon, :any, default: nil)
-  attr(:class, :any, default: nil)
-  attr(:rest, :global, include: ["outlined"])
+  attr :icon, :any, default: nil
+  attr :class, :any, default: nil
+  attr :rest, :global, include: ["outlined"]
 
   def modal_header_icon(assigns) do
     ~H"""
@@ -166,9 +166,9 @@ defmodule PhoenixUiComponents.Modal do
     """
   end
 
-  attr(:class, :any, default: nil)
-  attr(:text, :string, default: nil)
-  attr(:rest, :global)
+  attr :class, :any, default: nil
+  attr :text, :string, default: nil
+  attr :rest, :global
 
   def modal_title(assigns) do
     ~H"""
@@ -178,9 +178,9 @@ defmodule PhoenixUiComponents.Modal do
     """
   end
 
-  attr(:class, :any, default: nil)
-  attr(:text, :string, default: nil)
-  attr(:rest, :global)
+  attr :class, :any, default: nil
+  attr :text, :string, default: nil
+  attr :rest, :global
 
   def modal_subtitle(assigns) do
     ~H"""
@@ -190,9 +190,9 @@ defmodule PhoenixUiComponents.Modal do
     """
   end
 
-  attr(:class, :any, default: nil)
-  attr(:rest, :global)
-  slot(:inner_block)
+  attr :class, :any, default: nil
+  attr :rest, :global
+  slot :inner_block
 
   def modal_actions(assigns) do
     ~H"""

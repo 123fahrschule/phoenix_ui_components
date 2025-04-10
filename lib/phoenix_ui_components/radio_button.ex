@@ -4,15 +4,15 @@ defmodule PhoenixUiComponents.RadioButton do
 
   import Phoenix.HTML.Form
 
-  attr(:form, :any, required: true)
-  attr(:field, :atom, required: true)
-  attr(:value, :string, required: true)
-  attr(:label, :string, default: nil)
-  attr(:class, :string, default: nil)
-  attr(:size, :string, values: ["sm", "md", "lg"], default: "md")
-  attr(:rest, :global, include: ["required", "checked", "disabled"])
+  attr :form, :any, required: true
+  attr :field, :atom, required: true
+  attr :value, :string, required: true
+  attr :label, :string, default: nil
+  attr :class, :string, default: nil
+  attr :size, :string, values: ["sm", "md", "lg"], default: "md"
+  attr :rest, :global, include: ["required", "checked", "disabled"]
 
-  slot(:inner_block)
+  slot :inner_block
 
   def radio_button(assigns) do
     ~H"""

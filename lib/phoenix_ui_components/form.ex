@@ -26,9 +26,9 @@ defmodule PhoenixUiComponents.Form do
     "step"
   ]
 
-  attr(:rest, :global)
+  attr :rest, :global
 
-  slot(:inner_block, required: true)
+  slot :inner_block, required: true
 
   def field_container(assigns) do
     ~H"""
@@ -38,10 +38,10 @@ defmodule PhoenixUiComponents.Form do
     """
   end
 
-  attr(:class, :string, default: nil)
-  attr(:rest, :global)
+  attr :class, :string, default: nil
+  attr :rest, :global
 
-  slot(:inner_block, required: true)
+  slot :inner_block, required: true
 
   def input_container(assigns) do
     ~H"""
@@ -51,12 +51,12 @@ defmodule PhoenixUiComponents.Form do
     """
   end
 
-  attr(:form, :any, required: true)
-  attr(:field, :atom, required: true)
-  attr(:label, :string, default: nil)
-  attr(:size, :string, values: ["sm", "md", "lg"], default: "md")
+  attr :form, :any, required: true
+  attr :field, :atom, required: true
+  attr :label, :string, default: nil
+  attr :size, :string, values: ["sm", "md", "lg"], default: "md"
 
-  slot(:secondary_label)
+  slot :secondary_label
 
   def field_label(assigns) do
     ~H"""
@@ -69,9 +69,9 @@ defmodule PhoenixUiComponents.Form do
     """
   end
 
-  attr(:class, :string, default: nil)
-  attr(:error_message, :string, default: nil)
-  attr(:rest, :global)
+  attr :class, :string, default: nil
+  attr :error_message, :string, default: nil
+  attr :rest, :global
 
   def field_error(assigns) do
     ~H"""
@@ -81,13 +81,13 @@ defmodule PhoenixUiComponents.Form do
     """
   end
 
-  attr(:form, :any, required: true)
-  attr(:field, :atom, required: true)
-  attr(:label, :string, default: nil)
-  attr(:class, :string, default: nil)
-  attr(:container_attrs, :list, default: [])
+  attr :form, :any, required: true
+  attr :field, :atom, required: true
+  attr :label, :string, default: nil
+  attr :class, :string, default: nil
+  attr :container_attrs, :list, default: []
 
-  attr(:type, :string,
+  attr :type, :string,
     values: [
       "text",
       "email",
@@ -100,18 +100,17 @@ defmodule PhoenixUiComponents.Form do
       "date"
     ],
     default: "text"
-  )
 
-  attr(:size, :string, values: ["sm", "md", "lg"], default: "md")
-  attr(:error_message, :string, default: nil)
-  attr(:state, :string, values: ["default", "success", "error"], default: "default")
-  attr(:left_icon, :atom, default: nil)
-  attr(:right_icon, :atom, default: nil)
-  attr(:left_icon_attrs, :list, default: [])
-  attr(:right_icon_attrs, :list, default: [])
-  attr(:error_attrs, :list, default: [])
+  attr :size, :string, values: ["sm", "md", "lg"], default: "md"
+  attr :error_message, :string, default: nil
+  attr :state, :string, values: ["default", "success", "error"], default: "default"
+  attr :left_icon, :atom, default: nil
+  attr :right_icon, :atom, default: nil
+  attr :left_icon_attrs, :list, default: []
+  attr :right_icon_attrs, :list, default: []
+  attr :error_attrs, :list, default: []
 
-  attr(:rest, :global,
+  attr :rest, :global,
     include:
       @input_rest_attributes ++
         [
@@ -119,9 +118,8 @@ defmodule PhoenixUiComponents.Form do
           "options",
           "name"
         ]
-  )
 
-  slot(:secondary_label)
+  slot :secondary_label
 
   def form_field(assigns) do
     ~H"""
@@ -167,20 +165,19 @@ defmodule PhoenixUiComponents.Form do
     """
   end
 
-  attr(:type, :string, required: true)
-  attr(:form, :any, required: true)
-  attr(:field, :atom, required: true)
-  attr(:size, :string, values: ["sm", "md", "lg"], default: "md")
-  attr(:options, :list, default: [])
+  attr :type, :string, required: true
+  attr :form, :any, required: true
+  attr :field, :atom, required: true
+  attr :size, :string, values: ["sm", "md", "lg"], default: "md"
+  attr :options, :list, default: []
 
-  attr(:rest, :global,
+  attr :rest, :global,
     include:
       @input_rest_attributes ++
         [
           "value",
           "checked"
         ]
-  )
 
   def field_input(%{type: "text"} = assigns) do
     ~H"""
@@ -289,10 +286,10 @@ defmodule PhoenixUiComponents.Form do
     """
   end
 
-  attr(:class, :string, default: nil)
-  attr(:label, :string, default: nil)
-  attr(:size, :string, values: ["sm", "md"], default: "md")
-  attr(:close_button_attrs, :list, default: [])
+  attr :class, :string, default: nil
+  attr :label, :string, default: nil
+  attr :size, :string, values: ["sm", "md"], default: "md"
+  attr :close_button_attrs, :list, default: []
 
   def tag(assigns) do
     ~H"""
@@ -311,20 +308,20 @@ defmodule PhoenixUiComponents.Form do
     """
   end
 
-  attr(:form, :any, required: true)
-  attr(:field, :atom, required: true)
-  attr(:options, :list, required: true)
-  attr(:selected, :list, default: [])
-  attr(:label, :string, default: nil)
-  attr(:placeholder, :string, default: "")
-  attr(:class, :string, default: nil)
-  attr(:container_attrs, :list, default: [])
-  attr(:size, :string, values: ["sm", "md", "lg"], default: "md")
-  attr(:error_message, :string, default: nil)
-  attr(:state, :string, values: ["default", "success", "error"], default: "default")
-  attr(:scroll_options_into_view, :boolean, default: true)
+  attr :form, :any, required: true
+  attr :field, :atom, required: true
+  attr :options, :list, required: true
+  attr :selected, :list, default: []
+  attr :label, :string, default: nil
+  attr :placeholder, :string, default: ""
+  attr :class, :string, default: nil
+  attr :container_attrs, :list, default: []
+  attr :size, :string, values: ["sm", "md", "lg"], default: "md"
+  attr :error_message, :string, default: nil
+  attr :state, :string, values: ["default", "success", "error"], default: "default"
+  attr :scroll_options_into_view, :boolean, default: true
 
-  attr(:rest, :global)
+  attr :rest, :global
 
   def multiselect(assigns) do
     ~H"""

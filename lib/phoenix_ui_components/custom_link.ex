@@ -1,11 +1,11 @@
 defmodule PhoenixUiComponents.CustomLink do
   use PhoenixUiComponents, :component
 
-  attr(:label, :string, default: nil)
-  attr(:type, :string, default: "button")
-  attr(:rest, :global, include: ["href", "navigate", "patch", "method"])
+  attr :label, :string, default: nil
+  attr :type, :string, default: "button"
+  attr :rest, :global, include: ["href", "navigate", "patch", "method"]
 
-  slot(:inner_block)
+  slot :inner_block
 
   def custom_link(%{rest: rest} = assigns)
       when is_map_key(rest, :href)

@@ -5,12 +5,12 @@ defmodule PhoenixUiComponents.Sidebar do
 
   alias Phoenix.LiveView.JS
 
-  attr(:class, :any, default: nil)
-  attr(:rest, :global)
+  attr :class, :any, default: nil
+  attr :rest, :global
 
-  slot(:header)
-  slot(:footer)
-  slot(:inner_block)
+  slot :header
+  slot :footer
+  slot :inner_block
 
   def sidebar(assigns) do
     ~H"""
@@ -87,11 +87,11 @@ defmodule PhoenixUiComponents.Sidebar do
     """
   end
 
-  attr(:class, :any, default: nil)
-  attr(:label, :string)
-  attr(:rest, :global)
+  attr :class, :any, default: nil
+  attr :label, :string
+  attr :rest, :global
 
-  slot(:inner_block)
+  slot :inner_block
 
   def navigation_group(assigns) do
     ~H"""
@@ -122,15 +122,15 @@ defmodule PhoenixUiComponents.Sidebar do
     ]
   end
 
-  attr(:class, :any, default: nil)
-  attr(:label, :string)
-  attr(:icon, :atom)
-  attr(:active, :boolean, default: false)
-  attr(:expanded, :boolean, default: false)
-  attr(:rest, :global, include: ["navigate", "patch", "href"])
+  attr :class, :any, default: nil
+  attr :label, :string
+  attr :icon, :atom
+  attr :active, :boolean, default: false
+  attr :expanded, :boolean, default: false
+  attr :rest, :global, include: ["navigate", "patch", "href"]
 
-  slot(:subitems)
-  slot(:inner_block)
+  slot :subitems
+  slot :inner_block
 
   def navigation_item(%{subitems: []} = assigns) do
     ~H"""
@@ -172,12 +172,12 @@ defmodule PhoenixUiComponents.Sidebar do
     """
   end
 
-  attr(:class, :any, default: nil)
-  attr(:label, :string)
-  attr(:active, :boolean, default: false)
-  attr(:rest, :global, include: ["navigate", "patch", "href"])
+  attr :class, :any, default: nil
+  attr :label, :string
+  attr :active, :boolean, default: false
+  attr :rest, :global, include: ["navigate", "patch", "href"]
 
-  slot(:inner_block)
+  slot :inner_block
 
   def navigation_subitem(assigns) do
     ~H"""
@@ -215,11 +215,11 @@ defmodule PhoenixUiComponents.Sidebar do
     """
   end
 
-  attr(:class, :any, default: nil)
-  attr(:text, :string, default: nil)
-  attr(:rest, :global)
+  attr :class, :any, default: nil
+  attr :text, :string, default: nil
+  attr :rest, :global
 
-  slot(:inner_block)
+  slot :inner_block
 
   def navigation_item_badge(assigns) do
     ~H"""

@@ -1,10 +1,10 @@
 defmodule PhoenixUiComponents.Card do
   use PhoenixUiComponents, :component
 
-  attr(:class, :string, default: nil)
-  attr(:rounded, :string, values: ["xs", "sm", "md", "lg", "xl"], default: "md")
+  attr :class, :string, default: nil
+  attr :rounded, :string, values: ["xs", "sm", "md", "lg", "xl"], default: "md"
 
-  attr(:shadow, :string,
+  attr :shadow, :string,
     values: [
       "sm",
       "sm-2",
@@ -20,13 +20,12 @@ defmodule PhoenixUiComponents.Card do
       "lg-4"
     ],
     default: "md"
-  )
 
-  attr(:border, :boolean, default: false)
-  attr(:background, :string, values: ["white", "neutral"], default: "white")
-  attr(:rest, :global)
+  attr :border, :boolean, default: false
+  attr :background, :string, values: ["white", "neutral"], default: "white"
+  attr :rest, :global
 
-  slot(:inner_block, required: true)
+  slot :inner_block, required: true
 
   def card(assigns) do
     ~H"""
@@ -44,10 +43,10 @@ defmodule PhoenixUiComponents.Card do
     """
   end
 
-  attr(:class, :string, default: nil)
-  attr(:rest, :global)
+  attr :class, :string, default: nil
+  attr :rest, :global
 
-  slot(:inner_block, required: true)
+  slot :inner_block, required: true
 
   def info_card(assigns) do
     ~H"""

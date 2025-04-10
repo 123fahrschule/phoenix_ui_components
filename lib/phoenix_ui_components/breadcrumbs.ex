@@ -2,7 +2,7 @@ defmodule PhoenixUiComponents.Breadcrumbs do
   use PhoenixUiComponents, :component
   import PhoenixUiComponents.Icon
 
-  attr(:breadcrumbs, :list,
+  attr :breadcrumbs, :list,
     required: true,
     examples: [
       [
@@ -11,10 +11,9 @@ defmodule PhoenixUiComponents.Breadcrumbs do
         %{label: "Live redirect", navigate: "#"}
       ]
     ]
-  )
 
-  attr(:class, :string, default: nil)
-  attr(:rest, :global)
+  attr :class, :string, default: nil
+  attr :rest, :global
 
   def breadcrumbs(assigns) do
     ~H"""
@@ -29,9 +28,9 @@ defmodule PhoenixUiComponents.Breadcrumbs do
     """
   end
 
-  attr(:icon, :atom, default: nil)
-  attr(:label, :string, required: true)
-  attr(:rest, :global)
+  attr :icon, :atom, default: nil
+  attr :label, :string, required: true
+  attr :rest, :global
 
   def breadcrumb(%{rest: rest} = assigns)
       when is_map_key(rest, :href)

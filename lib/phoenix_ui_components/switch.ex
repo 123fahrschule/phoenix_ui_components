@@ -4,14 +4,14 @@ defmodule PhoenixUiComponents.Switch do
 
   import PhoenixUiComponents.Icon
 
-  attr(:form, :any, required: true)
-  attr(:field, :atom, required: true)
-  attr(:class, :string, default: nil)
-  attr(:container_class, :string, default: nil)
-  attr(:icon, :atom, default: nil)
-  attr(:rest, :global, include: ["required", "checked", "disabled"])
+  attr :form, :any, required: true
+  attr :field, :atom, required: true
+  attr :class, :string, default: nil
+  attr :container_class, :string, default: nil
+  attr :icon, :atom, default: nil
+  attr :rest, :global, include: ["required", "checked", "disabled"]
 
-  slot(:inner_block)
+  slot :inner_block
 
   def switch(assigns) do
     ~H"""

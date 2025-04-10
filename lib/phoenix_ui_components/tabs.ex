@@ -3,10 +3,10 @@ defmodule PhoenixUiComponents.Tabs do
   import PhoenixUiComponents.Icon
   alias Phoenix.LiveView.JS
 
-  attr(:class, :string, default: nil)
-  attr(:rest, :global)
+  attr :class, :string, default: nil
+  attr :rest, :global
 
-  slot(:inner_block, required: true)
+  slot :inner_block, required: true
 
   def tabs(assigns) do
     ~H"""
@@ -16,15 +16,15 @@ defmodule PhoenixUiComponents.Tabs do
     """
   end
 
-  attr(:class, :string, default: nil)
-  attr(:label, :string, default: nil)
-  attr(:active, :boolean, default: false)
-  attr(:icon, :atom, default: nil)
-  attr(:target, :string, default: nil)
-  attr(:group, :string, default: "tabs")
-  attr(:rest, :global)
+  attr :class, :string, default: nil
+  attr :label, :string, default: nil
+  attr :active, :boolean, default: false
+  attr :icon, :atom, default: nil
+  attr :target, :string, default: nil
+  attr :group, :string, default: "tabs"
+  attr :rest, :global
 
-  slot(:inner_block)
+  slot :inner_block
 
   def tab(%{target: target} = assigns) when not is_nil(target) do
     ~H"""
@@ -53,12 +53,12 @@ defmodule PhoenixUiComponents.Tabs do
     """
   end
 
-  attr(:class, :string, default: nil)
-  attr(:id, :string, required: true)
-  attr(:group, :string, default: "tabs")
-  attr(:rest, :global)
+  attr :class, :string, default: nil
+  attr :id, :string, required: true
+  attr :group, :string, default: "tabs"
+  attr :rest, :global
 
-  slot(:inner_block, required: true)
+  slot :inner_block, required: true
 
   def tab_content(assigns) do
     ~H"""

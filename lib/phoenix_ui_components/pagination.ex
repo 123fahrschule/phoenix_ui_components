@@ -29,18 +29,18 @@ defmodule PhoenixUiComponents.Pagination do
       />
   """
 
-  attr(:id, :string, default: "pagination")
-  attr(:class, :any, default: nil)
-  attr(:paginated_entries, Page, default: nil)
-  attr(:pagination, :map, default: nil)
-  attr(:current_page, :integer, default: 1)
-  attr(:total_pages, :integer)
-  attr(:current_entries_count, :integer)
-  attr(:total_entries, :integer)
-  attr(:page_size, :integer, default: 1)
-  attr(:page_size_options, :list, default: Enum.to_list(10..50//10))
-  attr(:change_event, :string, default: nil)
-  attr(:target, :any, default: nil)
+  attr :id, :string, default: "pagination"
+  attr :class, :any, default: nil
+  attr :paginated_entries, Page, default: nil
+  attr :pagination, :map, default: nil
+  attr :current_page, :integer, default: 1
+  attr :total_pages, :integer
+  attr :current_entries_count, :integer
+  attr :total_entries, :integer
+  attr :page_size, :integer, default: 1
+  attr :page_size_options, :list, default: Enum.to_list(10..50//10)
+  attr :change_event, :string, default: nil
+  attr :target, :any, default: nil
 
   def pagination(%{pagination: pagination} = assigns) when is_map(pagination) do
     assigns
@@ -147,8 +147,8 @@ defmodule PhoenixUiComponents.Pagination do
     """
   end
 
-  attr(:icon, :atom)
-  attr(:rest, :global, include: ["disabled"])
+  attr :icon, :atom
+  attr :rest, :global, include: ["disabled"]
 
   defp pagination_button(assigns) do
     ~H"""

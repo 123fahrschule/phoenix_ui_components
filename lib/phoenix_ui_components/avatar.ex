@@ -18,17 +18,16 @@ defmodule PhoenixUiComponents.Avatar do
 
   import PhoenixUiComponents.Icon
 
-  attr(:class, :string, default: nil, doc: "Additional CSS classes to apply to the avatar")
-  attr(:src, :string, doc: "Image source URL for the avatar")
-  attr(:initials, :string, doc: "Text initials to display in the avatar")
+  attr :class, :string, default: nil, doc: "Additional CSS classes to apply to the avatar"
+  attr :src, :string, doc: "Image source URL for the avatar"
+  attr :initials, :string, doc: "Text initials to display in the avatar"
 
-  attr(:shape, :string,
+  attr :shape, :string,
     values: ["circle", "square"],
     default: "circle",
     doc: "Shape of the avatar (circle or square)"
-  )
 
-  attr(:rest, :global, doc: "Additional HTML attributes to pass to the underlying element")
+  attr :rest, :global, doc: "Additional HTML attributes to pass to the underlying element"
 
   @doc """
   Renders an avatar component

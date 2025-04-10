@@ -3,11 +3,11 @@ defmodule PhoenixUiComponents.DataTable do
   import PhoenixUiComponents.Icon
   import PhoenixUiComponents.Icon
 
-  attr(:class, :string, default: nil)
-  attr(:label, :string, required: true)
-  attr(:active, :boolean, default: false)
-  attr(:arrows, :boolean, default: false)
-  attr(:rest, :global)
+  attr :class, :string, default: nil
+  attr :label, :string, required: true
+  attr :active, :boolean, default: false
+  attr :arrows, :boolean, default: false
+  attr :rest, :global
 
   def data_table_label(assigns) do
     ~H"""

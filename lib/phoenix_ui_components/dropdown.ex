@@ -64,19 +64,19 @@ defmodule PhoenixUiComponents.Dropdown do
     "fixed"
   ]
 
-  attr(:id, :string, required: true)
-  attr(:trigger_class, :any, default: nil)
-  attr(:class, :any, default: nil)
-  attr(:menu_class, :any, default: nil)
-  attr(:placement, :string, values: @placement, default: "bottom")
-  attr(:strategy, :string, values: @strategy, default: "absolute")
-  attr(:rest, :global)
+  attr :id, :string, required: true
+  attr :trigger_class, :any, default: nil
+  attr :class, :any, default: nil
+  attr :menu_class, :any, default: nil
+  attr :placement, :string, values: @placement, default: "bottom"
+  attr :strategy, :string, values: @strategy, default: "absolute"
+  attr :rest, :global
 
-  slot(:inner_block)
-  slot(:trigger)
+  slot :inner_block
+  slot :trigger
 
   slot :menu do
-    attr(:class, :any)
+    attr :class, :any
   end
 
   def dropdown(assigns) do
@@ -118,11 +118,11 @@ defmodule PhoenixUiComponents.Dropdown do
     """
   end
 
-  attr(:class, :any, default: nil)
-  attr(:selected, :boolean, default: false)
-  attr(:rest, :global)
+  attr :class, :any, default: nil
+  attr :selected, :boolean, default: false
+  attr :rest, :global
 
-  slot(:inner_block)
+  slot :inner_block
 
   def dropdown_item(assigns) do
     ~H"""

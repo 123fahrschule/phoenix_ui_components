@@ -1,12 +1,12 @@
 defmodule PhoenixUiComponents.DetailsList do
   use PhoenixUiComponents, :component
 
-  attr(:class, :string, default: nil)
+  attr :class, :string, default: nil
 
   slot :item do
-    attr(:class, :string)
-    attr(:term, :string, required: true)
-    attr(:details, :string)
+    attr :class, :string
+    attr :term, :string, required: true
+    attr :details, :string
   end
 
   def details_list(assigns) do
@@ -19,11 +19,11 @@ defmodule PhoenixUiComponents.DetailsList do
     """
   end
 
-  attr(:class, :string, default: nil)
-  attr(:term, :string, required: true)
-  attr(:details, :string, default: nil)
+  attr :class, :string, default: nil
+  attr :term, :string, required: true
+  attr :details, :string, default: nil
 
-  slot(:inner_block)
+  slot :inner_block
 
   def details_list_item(assigns) do
     ~H"""

@@ -50,18 +50,18 @@ defmodule PhoenixUiComponents.Tooltip do
     "fixed"
   ]
 
-  attr(:text, :string, default: nil)
-  attr(:delay, :any, default: 500)
-  attr(:id, :string, default: nil)
-  attr(:class, :any, default: nil)
-  attr(:arrow_class, :any, default: nil)
-  attr(:reference, :string, default: nil)
-  attr(:placement, :string, values: @placement, default: "top")
-  attr(:strategy, :string, values: @strategy, default: "absolute")
-  attr(:disable_hover, :boolean, default: false)
-  attr(:hide_arrow, :boolean, default: false)
-  attr(:rest, :global)
-  slot(:inner_block)
+  attr :text, :string, default: nil
+  attr :delay, :any, default: 500
+  attr :id, :string, default: nil
+  attr :class, :any, default: nil
+  attr :arrow_class, :any, default: nil
+  attr :reference, :string, default: nil
+  attr :placement, :string, values: @placement, default: "top"
+  attr :strategy, :string, values: @strategy, default: "absolute"
+  attr :disable_hover, :boolean, default: false
+  attr :hide_arrow, :boolean, default: false
+  attr :rest, :global
+  slot :inner_block
 
   def tooltip(assigns) do
     ~H"""

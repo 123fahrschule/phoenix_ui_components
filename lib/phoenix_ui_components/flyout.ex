@@ -4,15 +4,15 @@ defmodule PhoenixUiComponents.Flyout do
   import PhoenixUiComponents.Icon
   import PhoenixUiComponents.CustomLink
 
-  attr(:class, :string, default: nil)
-  attr(:title, :string, default: nil)
-  attr(:description, :string, default: nil)
-  attr(:close_button_attrs, :list, default: nil)
-  attr(:new_tab_url, :string, default: nil)
+  attr :class, :string, default: nil
+  attr :title, :string, default: nil
+  attr :description, :string, default: nil
+  attr :close_button_attrs, :list, default: nil
+  attr :new_tab_url, :string, default: nil
 
-  slot(:inner_block)
-  slot(:header)
-  slot(:footer)
+  slot :inner_block
+  slot :header
+  slot :footer
 
   # TODO: Fix shadow
   def flyout(assigns) do
@@ -61,9 +61,9 @@ defmodule PhoenixUiComponents.Flyout do
     """
   end
 
-  attr(:class, :string, default: nil)
+  attr :class, :string, default: nil
 
-  slot(:inner_block)
+  slot :inner_block
 
   def flyout_header(assigns) do
     ~H"""
@@ -73,7 +73,7 @@ defmodule PhoenixUiComponents.Flyout do
     """
   end
 
-  slot(:inner_block)
+  slot :inner_block
 
   def flyout_body(assigns) do
     ~H"""
@@ -83,7 +83,7 @@ defmodule PhoenixUiComponents.Flyout do
     """
   end
 
-  slot(:inner_block)
+  slot :inner_block
 
   def flyout_footer(assigns) do
     ~H"""

@@ -2,10 +2,10 @@ defmodule PhoenixUiComponents.Page do
   use PhoenixUiComponents, :component
   import PhoenixUiComponents.Breadcrumbs
 
-  attr(:class, :string, default: nil)
-  attr(:rest, :global)
+  attr :class, :string, default: nil
+  attr :rest, :global
 
-  slot(:inner_block)
+  slot :inner_block
 
   def page(assigns) do
     ~H"""
@@ -15,14 +15,14 @@ defmodule PhoenixUiComponents.Page do
     """
   end
 
-  attr(:class, :string, default: nil)
-  attr(:breadcrumbs, :list, default: nil)
-  attr(:title, :string, default: nil)
-  attr(:rest, :global)
+  attr :class, :string, default: nil
+  attr :breadcrumbs, :list, default: nil
+  attr :title, :string, default: nil
+  attr :rest, :global
 
-  slot(:inner_block)
-  slot(:title_content)
-  slot(:action)
+  slot :inner_block
+  slot :title_content
+  slot :action
 
   def page_header(assigns) do
     ~H"""
@@ -47,10 +47,10 @@ defmodule PhoenixUiComponents.Page do
     """
   end
 
-  attr(:class, :string, default: nil)
-  attr(:rest, :global)
+  attr :class, :string, default: nil
+  attr :rest, :global
 
-  slot(:inner_block)
+  slot :inner_block
 
   def page_content(assigns) do
     ~H"""
@@ -60,11 +60,11 @@ defmodule PhoenixUiComponents.Page do
     """
   end
 
-  attr(:class, :string, default: nil)
-  attr(:rest, :global)
+  attr :class, :string, default: nil
+  attr :rest, :global
 
-  slot(:inner_block)
-  slot(:action)
+  slot :inner_block
+  slot :action
 
   def page_footer(assigns) do
     ~H"""

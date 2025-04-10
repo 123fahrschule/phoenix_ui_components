@@ -2,10 +2,10 @@ defmodule PhoenixUiComponents.Stepper do
   use PhoenixUiComponents, :component
   import PhoenixUiComponents.Icon
 
-  attr(:class, :string, default: nil)
-  attr(:rest, :global)
+  attr :class, :string, default: nil
+  attr :rest, :global
 
-  slot(:inner_block)
+  slot :inner_block
 
   def stepper(assigns) do
     ~H"""
@@ -13,10 +13,10 @@ defmodule PhoenixUiComponents.Stepper do
     """
   end
 
-  attr(:label, :string, default: nil)
-  attr(:index, :integer, required: true)
-  attr(:state, :string, values: ["inactive", "active", "completed"], default: "inactive")
-  attr(:rest, :global)
+  attr :label, :string, default: nil
+  attr :index, :integer, required: true
+  attr :state, :string, values: ["inactive", "active", "completed"], default: "inactive"
+  attr :rest, :global
 
   def step(%{state: "inactive"} = assigns) do
     ~H"""

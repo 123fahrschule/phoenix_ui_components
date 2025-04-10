@@ -4,13 +4,13 @@ defmodule PhoenixUiComponents.Checkbox do
 
   import Phoenix.HTML.Form
 
-  attr(:form, :any, required: true)
-  attr(:field, :atom, required: true)
-  attr(:label, :string, default: nil)
-  attr(:class, :string, default: nil)
-  attr(:size, :string, values: ["sm", "md", "lg"], default: "md")
+  attr :form, :any, required: true
+  attr :field, :atom, required: true
+  attr :label, :string, default: nil
+  attr :class, :string, default: nil
+  attr :size, :string, values: ["sm", "md", "lg"], default: "md"
 
-  slot(:inner_block)
+  slot :inner_block
 
   def checkbox(assigns) do
     ~H"""

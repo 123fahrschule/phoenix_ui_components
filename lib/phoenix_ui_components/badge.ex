@@ -24,23 +24,22 @@ defmodule PhoenixUiComponents.Badge do
   def badge_sizes(), do: @sizes
   def badge_colors(), do: @colors
 
-  attr(:class, :any, default: nil)
-  attr(:label, :string, default: nil)
-  attr(:size, :string, values: @sizes, default: "md")
-  attr(:color, :string, values: @colors, default: "neutral")
+  attr :class, :any, default: nil
+  attr :label, :string, default: nil
+  attr :size, :string, values: @sizes, default: "md"
+  attr :color, :string, values: @colors, default: "neutral"
 
-  attr(:type, :any,
+  attr :type, :any,
     values: [nil | @colors],
     default: nil,
     doc: "Deprecated. Use `color` instead"
-  )
 
-  attr(:left_icon, :atom, default: nil)
-  attr(:right_icon, :atom, default: nil)
-  attr(:on_remove, JS, default: nil)
-  attr(:rest, :global)
+  attr :left_icon, :atom, default: nil
+  attr :right_icon, :atom, default: nil
+  attr :on_remove, JS, default: nil
+  attr :rest, :global
 
-  slot(:inner_block)
+  slot :inner_block
 
   @doc """
   Renders a badge component.
@@ -78,9 +77,9 @@ defmodule PhoenixUiComponents.Badge do
     """
   end
 
-  attr(:text, :string, default: nil)
-  attr(:class, :any, default: nil)
-  attr(:rest, :global)
+  attr :text, :string, default: nil
+  attr :class, :any, default: nil
+  attr :rest, :global
 
   @doc """
   Renders a badge component.
@@ -97,12 +96,12 @@ defmodule PhoenixUiComponents.Badge do
     """
   end
 
-  attr(:class, :any, default: nil)
-  attr(:icon, :atom, default: nil)
-  attr(:size, :string, values: @sizes, default: "md")
-  attr(:color, :string, values: @colors, default: "neutral")
+  attr :class, :any, default: nil
+  attr :icon, :atom, default: nil
+  attr :size, :string, values: @sizes, default: "md"
+  attr :color, :string, values: @colors, default: "neutral"
 
-  slot(:inner_block)
+  slot :inner_block
 
   @doc """
   Renders a badge containing only an icon or custom content.

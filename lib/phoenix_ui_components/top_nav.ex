@@ -6,10 +6,10 @@ defmodule PhoenixUiComponents.TopNav do
   use PhoenixUiComponents, :component
   import PhoenixUiComponents.Icon
 
-  attr(:class, :string, default: nil)
-  attr(:rest, :global)
+  attr :class, :string, default: nil
+  attr :rest, :global
 
-  slot(:inner_block)
+  slot :inner_block
 
   def top_nav_container(assigns) do
     ~H"""
@@ -19,9 +19,9 @@ defmodule PhoenixUiComponents.TopNav do
     """
   end
 
-  attr(:class, :string, default: nil)
-  attr(:sunrise, :string, required: true)
-  attr(:sunset, :string, required: true)
+  attr :class, :string, default: nil
+  attr :sunrise, :string, required: true
+  attr :sunset, :string, required: true
 
   def sunrise_sunset(assigns) do
     ~H"""

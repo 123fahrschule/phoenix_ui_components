@@ -6,10 +6,10 @@ defmodule PhoenixUiComponents.Layout do
   import PhoenixUiComponents.Button
   import PhoenixUiComponents.Logo
 
-  attr(:lang, :string, default: "de")
+  attr :lang, :string, default: "de"
 
-  slot(:head)
-  slot(:inner_block, required: true)
+  slot :head
+  slot :inner_block, required: true
 
   def root_layout(assigns) do
     ~H"""
@@ -29,9 +29,9 @@ defmodule PhoenixUiComponents.Layout do
     """
   end
 
-  attr(:rest, :global)
+  attr :rest, :global
 
-  slot(:inner_block)
+  slot :inner_block
 
   def layout(assigns) do
     ~H"""
@@ -41,9 +41,9 @@ defmodule PhoenixUiComponents.Layout do
     """
   end
 
-  attr(:rest, :global)
+  attr :rest, :global
 
-  slot(:inner_block)
+  slot :inner_block
 
   def layout_content(assigns) do
     ~H"""
@@ -53,8 +53,8 @@ defmodule PhoenixUiComponents.Layout do
     """
   end
 
-  attr(:class, :string, default: nil)
-  attr(:rest, :global)
+  attr :class, :string, default: nil
+  attr :rest, :global
 
   def critical_styles(assigns) do
     ~H"""
@@ -69,15 +69,15 @@ defmodule PhoenixUiComponents.Layout do
     """
   end
 
-  attr(:app_name, :string, default: nil)
-  attr(:root_path, :string, default: nil)
-  attr(:nav_sections, :list, required: true)
-  attr(:flash, :map, default: %{})
+  attr :app_name, :string, default: nil
+  attr :root_path, :string, default: nil
+  attr :nav_sections, :list, required: true
+  attr :flash, :map, default: %{}
 
-  slot(:inner_block, required: true)
-  slot(:top_nav_content)
-  slot(:side_nav_footer)
-  slot(:dev_tools)
+  slot :inner_block, required: true
+  slot :top_nav_content
+  slot :side_nav_footer
+  slot :dev_tools
 
   def admin_layout(assigns) do
     ~H"""
@@ -122,10 +122,10 @@ defmodule PhoenixUiComponents.Layout do
     """
   end
 
-  attr(:class, :string, default: nil)
-  attr(:rest, :global)
+  attr :class, :string, default: nil
+  attr :rest, :global
 
-  slot(:inner_block)
+  slot :inner_block
 
   def admin_login(assigns) do
     ~H"""
@@ -136,12 +136,12 @@ defmodule PhoenixUiComponents.Layout do
     """
   end
 
-  attr(:class, :string, default: nil)
-  attr(:title, :string, default: "Hello 👋")
-  attr(:description, :string, default: "Welcome to 123Fahrschule Admin Panel.")
-  attr(:button_text, :string, default: "Login with microsoft")
-  attr(:button_attrs, :list, default: [])
-  attr(:rest, :global)
+  attr :class, :string, default: nil
+  attr :title, :string, default: "Hello 👋"
+  attr :description, :string, default: "Welcome to 123Fahrschule Admin Panel."
+  attr :button_text, :string, default: "Login with microsoft"
+  attr :button_attrs, :list, default: []
+  attr :rest, :global
 
   def admin_login_form(assigns) do
     ~H"""
