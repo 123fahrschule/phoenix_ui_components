@@ -62,6 +62,7 @@ defmodule PhoenixUiComponents.MixProject do
       ],
       dev: "run dev.exs",
       release: [
+        "cmd mix format --check-formatted",
         "cmd git tag #{@version}",
         "cmd git push",
         "cmd git push --tags"
