@@ -50,7 +50,7 @@ defmodule PhoenixUiComponents.MixProject do
         "assets.setup"
       ],
       "assets.setup": [
-        "cmd npm install --prefix assets",
+        "cmd npm install",
         "tailwind.install --if-missing",
         "esbuild.install --if-missing"
       ],
