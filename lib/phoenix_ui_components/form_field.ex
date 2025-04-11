@@ -18,11 +18,11 @@ defmodule PhoenixUiComponents.FormField do
     "select",
     "textarea",
     "hidden",
-    "color"
+    "color",
+    "checkbox"
     # TODO: add all possible types
     # "file",
     # "range"
-    # "checkbox"
   ]
   @rest_attributes [
     "accept",
@@ -59,7 +59,7 @@ defmodule PhoenixUiComponents.FormField do
     doc: "a form field struct retrieved from the form, for example: @form[:email]"
 
   attr :errors, :list, default: []
-  # attr :checked, :boolean, doc: "the checked flag for checkbox inputs"
+  attr :checked, :boolean, doc: "the checked flag for checkbox inputs"
   attr :prompt, :string, default: nil, doc: "the prompt for select inputs"
   attr :options, :list, doc: "the options to pass to Phoenix.HTML.Form.options_for_select/2"
   attr :multiple, :boolean, default: false, doc: "the multiple flag for select inputs"
@@ -69,6 +69,7 @@ defmodule PhoenixUiComponents.FormField do
   attr :input_class, :any, default: nil
   attr :rest, :global, include: @rest_attributes
 
+  slot :inner_block
   slot :input_content
   slot :label_content
 
@@ -159,6 +160,37 @@ defmodule PhoenixUiComponents.FormField do
       value={Phoenix.HTML.Form.normalize_value(@type, @value)}
       {@rest}
     />
+    """
+  end
+
+  def form_field(%{type: "checkbox"} = assigns) do
+    assigns =
+      assign_new(assigns, :checked, fn ->
+        Phoenix.HTML.Form.normalize_value("checkbox", assigns[:value])
+      end)
+
+    ~H"""
+    <div class={["form-field", @class]}>
+      <div class="checkbox-container">
+        <input type="hidden" name={@name} value="false" disabled={@disabled} />
+        <input
+          type="checkbox"
+          id={@id}
+          name={@name}
+          value="true"
+          checked={@checked}
+          class="checkbox peer"
+          disabled={@disabled}
+          {@rest}
+        />
+        <label :if={label = @label || render_slot(@inner_block)} for={@id} class="checkbox-label">
+          {label}
+        </label>
+      </div>
+      <.form_field_error :for={msg <- @errors}>
+        <%= msg %>
+      </.form_field_error>
+    </div>
     """
   end
 
