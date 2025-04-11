@@ -49,5 +49,10 @@ export default defineConfig([
     language: 'css/css',
     extends: ['css/recommended']
   },
+  {
+    rules: {
+      '@typescript-eslint/no-require-imports': 'off'
+    }
+  },
   eslintConfigPrettier
 ]);
