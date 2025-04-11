@@ -73,9 +73,7 @@ defmodule PhoenixUiComponents.FormField do
   slot :label_content
 
   def form_field(%{field: %Phoenix.HTML.FormField{} = field} = assigns) do
-    # TODO: Update errors handling after update to LiveView 1.0
-    # errors = if Phoenix.Component.used_input?(field), do: field.errors, else: []
-    errors = field.errors
+    errors = if Phoenix.Component.used_input?(field), do: field.errors, else: []
 
     assigns
     |> assign(field: nil, id: assigns.id || field.id)
@@ -87,7 +85,7 @@ defmodule PhoenixUiComponents.FormField do
 
   def form_field(%{type: "select"} = assigns) do
     ~H"""
-    <div class={["form-field", @class]} phx-feedback-for={@name}>
+    <div class={["form-field", @class]}>
       <div class="relative w-full flex flex-col">
         <.form_field_label
           :if={@label || @label_content != []}
@@ -122,7 +120,7 @@ defmodule PhoenixUiComponents.FormField do
 
   def form_field(%{type: "textarea"} = assigns) do
     ~H"""
-    <div class={["form-field", @class]} phx-feedback-for={@name}>
+    <div class={["form-field", @class]}>
       <div class="relative w-full flex flex-col">
         <.form_field_label
           :if={@label || @label_content != []}
@@ -166,7 +164,7 @@ defmodule PhoenixUiComponents.FormField do
 
   def form_field(assigns) do
     ~H"""
-    <div class={["form-field", @class]} phx-feedback-for={@name}>
+    <div class={["form-field", @class]}>
       <div class="relative w-full flex flex-col">
         <.form_field_label
           :if={@label || @label_content != []}
@@ -226,7 +224,7 @@ defmodule PhoenixUiComponents.FormField do
 
   def form_field_error(assigns) do
     ~H"""
-    <p class={["form-field-error phx-no-feedback:hidden", @class]}>
+    <p class={["form-field-error", @class]}>
       <%= render_slot(@inner_block) %>
     </p>
     """
