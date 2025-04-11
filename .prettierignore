@@ -1,0 +1,6 @@
+/config/
+/lib/
+/storybook/
+/priv/static/assets
+/priv/static/main*cjs*
+/priv/static/module*mjs*

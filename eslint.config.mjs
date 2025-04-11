@@ -1,4 +1,4 @@
-import { defineConfig } from 'eslint/config';
+import { defineConfig, globalIgnores } from 'eslint/config';
 import js from '@eslint/js';
 import globals from 'globals';
 import tseslint from 'typescript-eslint';
@@ -8,6 +8,17 @@ import css from '@eslint/css';
 import eslintConfigPrettier from 'eslint-config-prettier/flat';
 
 export default defineConfig([
+  globalIgnores([
+    'config/',
+    'deps/',
+    'lib/',
+    'storybook/',
+    'priv/static/assets/',
+    'priv/static/main*cjs*',
+    'priv/static/module*mjs*',
+    'package.json',
+    'package-lock.json'
+  ]),
   {
     files: ['**/*.{js,mjs,cjs,ts}'],
     plugins: { js },
