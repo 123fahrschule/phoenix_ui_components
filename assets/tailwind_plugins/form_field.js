@@ -135,6 +135,32 @@ module.exports = plugin(function ({ addComponents, theme }) {
   });
 
   addComponents({
+    '.radio-container': {
+      '@apply flex items-center gap-2 text-neutral-700 text-body-sm': {}
+    },
+
+    '.radio': {
+      '@apply  border-neutral-700 text-primary-300 focus:ring-primary-300 focus-visible:ring-2 focus-visible:ring-primary-300 cursor-pointer':
+        {},
+
+      '&:disabled': {
+        '@apply border-neutral-400 text-neutral-400 cursor-not-allowed': {}
+      }
+    },
+
+    '.radio-label': {
+      '@apply flex items-start gap-2 cursor-pointer': {},
+
+      '.radio:checked ~ &': {
+        '@apply font-semibold text-neutral-900': {}
+      },
+      '.radio:disabled ~ &': {
+        '@apply text-neutral-400 cursor-not-allowed': {}
+      }
+    }
+  });
+
+  addComponents({
     '.form-field-error': {
       '@apply text-helper': {},
       color: theme('colors.error.300'),

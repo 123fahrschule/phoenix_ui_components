@@ -19,7 +19,8 @@ defmodule PhoenixUiComponents.FormField do
     "textarea",
     "hidden",
     "color",
-    "checkbox"
+    "checkbox",
+    "radio"
     # TODO: add all possible types
     # "file",
     # "range"
@@ -194,6 +195,34 @@ defmodule PhoenixUiComponents.FormField do
     """
   end
 
+  def form_field(%{type: "radio"} = assigns) do
+    assigns =
+      assign_new(assigns, :checked, fn ->
+        Phoenix.HTML.Form.normalize_value("radio", assigns[:value])
+      end)
+      |> assign(:id, "#{assigns[:id]}_#{assigns[:value]}")
+
+    ~H"""
+    <div class={["form-field", @class]}>
+      <div class="radio-container">
+        <input
+          type="radio"
+          id={@id}
+          name={@name}
+          value={@value}
+          checked={@checked}
+          class="radio peer"
+          disabled={@disabled}
+          {@rest}
+        />
+        <label :if={label = @label || render_slot(@inner_block)} for={@id} class="radio-label">
+          {label}
+        </label>
+      </div>
+    </div>
+    """
+  end
+
   def form_field(assigns) do
     ~H"""
     <div class={["form-field", @class]}>
@@ -259,6 +288,40 @@ defmodule PhoenixUiComponents.FormField do
     <p class={["form-field-error", @class]}>
       <%= render_slot(@inner_block) %>
     </p>
+    """
+  end
+
+  attr :label, :string, default: nil
+
+  attr :field, Phoenix.HTML.FormField,
+    doc: "a form field struct retrieved from the form, for example: @form[:email]"
+
+  attr :size, :string, values: @sizes, default: "md"
+  attr :disabled, :boolean, default: false
+  attr :rest, :global
+
+  slot :inner_block
+
+  def radio_group(assigns) do
+    errors =
+      if Phoenix.Component.used_input?(assigns[:field]), do: assigns[:field].errors, else: []
+
+    assigns =
+      assign(assigns, :errors, Enum.map(errors, &translate_error(&1)))
+
+    ~H"""
+    <fieldset {@rest}>
+      <legend
+        :if={@label}
+        class={["form-field-label form-field-label-#{@size} mb-1", @disabled && "disabled"]}
+      >
+        {@label}
+      </legend>
+      {render_slot(@inner_block)}
+      <.form_field_error :for={msg <- @errors}>
+        {msg}
+      </.form_field_error>
+    </fieldset>
     """
   end
 
