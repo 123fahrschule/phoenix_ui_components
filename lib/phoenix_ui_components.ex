@@ -27,7 +27,9 @@ defmodule PhoenixUiComponents do
         DetailsList,
         Dropdown,
         Flyout,
-        Form,
+        # TODO: Remove Form module after migration
+        # Form,
+        FormField,
         Icon,
         Layout,
         Modal,
