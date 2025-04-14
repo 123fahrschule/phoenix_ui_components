@@ -12,7 +12,7 @@ defmodule PhoenixUiComponents.Breadcrumbs do
       ]
     ]
 
-  attr :class, :string, default: nil
+  attr :class, :any, default: nil
   attr :rest, :global
 
   def breadcrumbs(assigns) do

@@ -18,7 +18,7 @@ defmodule PhoenixUiComponents.Avatar do
 
   import PhoenixUiComponents.Icon
 
-  attr :class, :string, default: nil, doc: "Additional CSS classes to apply to the avatar"
+  attr :class, :any, default: nil, doc: "Additional CSS classes to apply to the avatar"
   attr :src, :string, doc: "Image source URL for the avatar"
   attr :initials, :string, doc: "Text initials to display in the avatar"
 

@@ -10,7 +10,7 @@ defmodule PhoenixUiComponents.Banner do
   # banner-sm banner-md banner-lg
   # banner-info banner-success banner-warning banner-error
 
-  attr :class, :string, default: nil
+  attr :class, :any, default: nil
   attr :color, :string, values: @colors, default: "info"
 
   attr :type, :any,

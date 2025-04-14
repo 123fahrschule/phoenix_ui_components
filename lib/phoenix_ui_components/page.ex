@@ -2,7 +2,7 @@ defmodule PhoenixUiComponents.Page do
   use PhoenixUiComponents, :component
   import PhoenixUiComponents.Breadcrumbs
 
-  attr :class, :string, default: nil
+  attr :class, :any, default: nil
   attr :rest, :global
 
   slot :inner_block
@@ -15,7 +15,7 @@ defmodule PhoenixUiComponents.Page do
     """
   end
 
-  attr :class, :string, default: nil
+  attr :class, :any, default: nil
   attr :breadcrumbs, :list, default: nil
   attr :title, :string, default: nil
   attr :rest, :global
@@ -47,7 +47,7 @@ defmodule PhoenixUiComponents.Page do
     """
   end
 
-  attr :class, :string, default: nil
+  attr :class, :any, default: nil
   attr :rest, :global
 
   slot :inner_block
@@ -60,7 +60,7 @@ defmodule PhoenixUiComponents.Page do
     """
   end
 
-  attr :class, :string, default: nil
+  attr :class, :any, default: nil
   attr :rest, :global
 
   slot :inner_block

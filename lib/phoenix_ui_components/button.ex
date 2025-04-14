@@ -4,7 +4,7 @@ defmodule PhoenixUiComponents.Button do
   import PhoenixUiComponents.CustomLink
 
   attr :type, :string, default: "button"
-  attr :class, :string, default: nil
+  attr :class, :any, default: nil
   attr :label, :string, default: nil
 
   attr :color, :string,
@@ -100,7 +100,7 @@ defmodule PhoenixUiComponents.Button do
   end
 
   attr :icon, :atom, required: true
-  attr :class, :string, default: nil
+  attr :class, :any, default: nil
   attr :default_class, :string, default: nil
   attr :rest, :global
 

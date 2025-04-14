@@ -6,7 +6,7 @@ defmodule PhoenixUiComponents.Switch do
 
   attr :form, :any, required: true
   attr :field, :atom, required: true
-  attr :class, :string, default: nil
+  attr :class, :any, default: nil
   attr :container_class, :string, default: nil
   attr :icon, :atom, default: nil
   attr :rest, :global, include: ["required", "checked", "disabled"]

@@ -6,7 +6,7 @@ defmodule PhoenixUiComponents.TopNav do
   use PhoenixUiComponents, :component
   import PhoenixUiComponents.Icon
 
-  attr :class, :string, default: nil
+  attr :class, :any, default: nil
   attr :rest, :global
 
   slot :inner_block
@@ -19,7 +19,7 @@ defmodule PhoenixUiComponents.TopNav do
     """
   end
 
-  attr :class, :string, default: nil
+  attr :class, :any, default: nil
   attr :sunrise, :string, required: true
   attr :sunset, :string, required: true
 

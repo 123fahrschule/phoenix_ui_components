@@ -53,7 +53,7 @@ defmodule PhoenixUiComponents.Layout do
     """
   end
 
-  attr :class, :string, default: nil
+  attr :class, :any, default: nil
   attr :rest, :global
 
   def critical_styles(assigns) do
@@ -122,7 +122,7 @@ defmodule PhoenixUiComponents.Layout do
     """
   end
 
-  attr :class, :string, default: nil
+  attr :class, :any, default: nil
   attr :rest, :global
 
   slot :inner_block
@@ -136,7 +136,7 @@ defmodule PhoenixUiComponents.Layout do
     """
   end
 
-  attr :class, :string, default: nil
+  attr :class, :any, default: nil
   attr :title, :string, default: "Hello 👋"
   attr :description, :string, default: "Welcome to 123Fahrschule Admin Panel."
   attr :button_text, :string, default: "Login with microsoft"

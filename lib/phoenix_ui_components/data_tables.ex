@@ -3,7 +3,7 @@ defmodule PhoenixUiComponents.DataTable do
   import PhoenixUiComponents.Icon
   import PhoenixUiComponents.Icon
 
-  attr :class, :string, default: nil
+  attr :class, :any, default: nil
   attr :label, :string, required: true
   attr :active, :boolean, default: false
   attr :arrows, :boolean, default: false

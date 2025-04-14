@@ -2,7 +2,7 @@ defmodule PhoenixUiComponents.Spinner do
   use PhoenixUiComponents, :component
   import PhoenixUiComponents.Backdrop
 
-  attr :class, :string, default: nil
+  attr :class, :any, default: nil
   attr :full_screen, :boolean, default: false
   attr :backdrop_attrs, :any, default: []
   attr :rest, :global
@@ -23,7 +23,7 @@ defmodule PhoenixUiComponents.Spinner do
     """
   end
 
-  attr :class, :string, default: nil
+  attr :class, :any, default: nil
   attr :rest, :global
 
   def spinner_icon(assigns) do

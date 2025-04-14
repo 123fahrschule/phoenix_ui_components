@@ -29,7 +29,7 @@ defmodule PhoenixUiComponents.SideNav do
 
   attr :root_path, :string, default: nil
   attr :app_name, :string, default: nil
-  attr :class, :string, default: nil
+  attr :class, :any, default: nil
 
   slot :footer
 

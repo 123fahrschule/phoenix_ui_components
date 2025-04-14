@@ -1,7 +1,7 @@
 defmodule PhoenixUiComponents.Card do
   use PhoenixUiComponents, :component
 
-  attr :class, :string, default: nil
+  attr :class, :any, default: nil
   attr :rounded, :string, values: ["xs", "sm", "md", "lg", "xl"], default: "md"
 
   attr :shadow, :string,
@@ -43,7 +43,7 @@ defmodule PhoenixUiComponents.Card do
     """
   end
 
-  attr :class, :string, default: nil
+  attr :class, :any, default: nil
   attr :rest, :global
 
   slot :inner_block, required: true

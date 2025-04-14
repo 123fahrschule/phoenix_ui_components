@@ -1,10 +1,10 @@
 defmodule PhoenixUiComponents.DetailsList do
   use PhoenixUiComponents, :component
 
-  attr :class, :string, default: nil
+  attr :class, :any, default: nil
 
   slot :item do
-    attr :class, :string
+    attr :class, :any
     attr :term, :string, required: true
     attr :details, :string
   end
@@ -19,7 +19,7 @@ defmodule PhoenixUiComponents.DetailsList do
     """
   end
 
-  attr :class, :string, default: nil
+  attr :class, :any, default: nil
   attr :term, :string, required: true
   attr :details, :string, default: nil
 

@@ -1,7 +1,7 @@
 defmodule PhoenixUiComponents.Backdrop do
   use PhoenixUiComponents, :component
 
-  attr :class, :string, default: nil
+  attr :class, :any, default: nil
   attr :rest, :global
 
   slot :inner_block

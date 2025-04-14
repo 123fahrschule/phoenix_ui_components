@@ -1,7 +1,7 @@
 defmodule PhoenixUiComponents.Typography do
   use PhoenixUiComponents, :component
 
-  attr :class, :string, default: nil
+  attr :class, :any, default: nil
   attr :rest, :global
 
   slot :inner_block, required: true
@@ -12,7 +12,7 @@ defmodule PhoenixUiComponents.Typography do
     """
   end
 
-  attr :class, :string, default: nil
+  attr :class, :any, default: nil
   attr :rest, :global
 
   slot :inner_block, required: true
@@ -23,7 +23,7 @@ defmodule PhoenixUiComponents.Typography do
     """
   end
 
-  attr :class, :string, default: nil
+  attr :class, :any, default: nil
   attr :rest, :global
 
   slot :inner_block, required: true
@@ -34,7 +34,7 @@ defmodule PhoenixUiComponents.Typography do
     """
   end
 
-  attr :class, :string, default: nil
+  attr :class, :any, default: nil
   attr :rest, :global
 
   slot :inner_block, required: true
@@ -45,7 +45,7 @@ defmodule PhoenixUiComponents.Typography do
     """
   end
 
-  attr :class, :string, default: nil
+  attr :class, :any, default: nil
   attr :rest, :global
 
   slot :inner_block, required: true
@@ -56,7 +56,7 @@ defmodule PhoenixUiComponents.Typography do
     """
   end
 
-  attr :class, :string, default: nil
+  attr :class, :any, default: nil
   attr :rest, :global
 
   slot :inner_block, required: true
@@ -67,7 +67,7 @@ defmodule PhoenixUiComponents.Typography do
     """
   end
 
-  attr :class, :string, default: nil
+  attr :class, :any, default: nil
   attr :size, :string, values: ["md", "sm", "xs"], default: "md"
   attr :rest, :global
 

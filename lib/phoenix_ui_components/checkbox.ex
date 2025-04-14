@@ -7,7 +7,7 @@ defmodule PhoenixUiComponents.Checkbox do
   attr :form, :any, required: true
   attr :field, :atom, required: true
   attr :label, :string, default: nil
-  attr :class, :string, default: nil
+  attr :class, :any, default: nil
   attr :size, :string, values: ["sm", "md", "lg"], default: "md"
 
   slot :inner_block

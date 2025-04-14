@@ -38,7 +38,7 @@ defmodule PhoenixUiComponents.Form do
     """
   end
 
-  attr :class, :string, default: nil
+  attr :class, :any, default: nil
   attr :rest, :global
 
   slot :inner_block, required: true
@@ -69,7 +69,7 @@ defmodule PhoenixUiComponents.Form do
     """
   end
 
-  attr :class, :string, default: nil
+  attr :class, :any, default: nil
   attr :error_message, :string, default: nil
   attr :rest, :global
 
@@ -84,7 +84,7 @@ defmodule PhoenixUiComponents.Form do
   attr :form, :any, required: true
   attr :field, :atom, required: true
   attr :label, :string, default: nil
-  attr :class, :string, default: nil
+  attr :class, :any, default: nil
   attr :container_attrs, :list, default: []
 
   attr :type, :string,
@@ -286,7 +286,7 @@ defmodule PhoenixUiComponents.Form do
     """
   end
 
-  attr :class, :string, default: nil
+  attr :class, :any, default: nil
   attr :label, :string, default: nil
   attr :size, :string, values: ["sm", "md"], default: "md"
   attr :close_button_attrs, :list, default: []
@@ -314,7 +314,7 @@ defmodule PhoenixUiComponents.Form do
   attr :selected, :list, default: []
   attr :label, :string, default: nil
   attr :placeholder, :string, default: ""
-  attr :class, :string, default: nil
+  attr :class, :any, default: nil
   attr :container_attrs, :list, default: []
   attr :size, :string, values: ["sm", "md", "lg"], default: "md"
   attr :error_message, :string, default: nil

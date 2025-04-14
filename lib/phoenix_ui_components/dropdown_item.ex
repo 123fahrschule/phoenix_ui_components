@@ -2,7 +2,7 @@ defmodule PhoenixUiComponents.DropdownItem do
   use PhoenixUiComponents, :component
   import PhoenixUiComponents.Icon
 
-  attr :class, :string, default: nil
+  attr :class, :any, default: nil
   attr :label, :string, default: nil
   attr :selected, :boolean, default: false
   attr :size, :string, values: ["sm", "md", "lg"], default: "md"
