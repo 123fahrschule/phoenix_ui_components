@@ -45,8 +45,7 @@ defmodule PhoenixUiComponents do
         Timer,
         Tooltip,
         TopNav,
-        Topbar,
-        Typography
+        Topbar
       }
     end
   end
