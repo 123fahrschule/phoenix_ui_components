@@ -59,6 +59,18 @@ defmodule Storybook.Components.FormField.Checkbox do
             <.psb-variation type="checkbox" field={f[:field]}/>
           </.form>
         """
+      },
+      %Variation{
+        id: :legacy,
+        description: "Legacy form",
+        attributes: %{
+          label: "Legacy form"
+        },
+        template: """
+        <.form for={%{}} :let={f} class="w-full">
+          <.psb-variation type="checkbox" form={f} field={:legacy} />
+        </.form>
+        """
       }
     ]
 end

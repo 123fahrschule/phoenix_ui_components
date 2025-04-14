@@ -100,6 +100,18 @@ defmodule Storybook.Components.FormField.FormField do
           </:label_content>
           """
         ]
+      },
+      %Variation{
+        id: :legacy,
+        description: "Legacy form",
+        attributes: %{
+          label: "Legacy form"
+        },
+        template: """
+        <.form for={%{}} :let={f} class="w-full">
+          <.psb-variation form={f} field={:legacy} />
+        </.form>
+        """
       }
     ]
 end

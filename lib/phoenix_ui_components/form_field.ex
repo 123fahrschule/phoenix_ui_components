@@ -56,8 +56,12 @@ defmodule PhoenixUiComponents.FormField do
   attr :value, :any
   attr :type, :string, default: "text", values: @types
 
-  attr :field, Phoenix.HTML.FormField,
-    doc: "a form field struct retrieved from the form, for example: @form[:email]"
+  # attr :field, Phoenix.HTML.FormField,
+  #   doc: "a form field struct retrieved from the form, for example: @form[:email]"
+
+  attr :field, :any,
+    doc:
+      "a form field struct retrieved from the form, for example: @form[:email] or atom for legeacy form"
 
   attr :errors, :list, default: []
   attr :checked, :boolean, doc: "the checked flag for checkbox inputs"
@@ -68,11 +72,23 @@ defmodule PhoenixUiComponents.FormField do
   attr :size, :string, values: @sizes, default: "md"
   attr :class, :any, default: nil
   attr :input_class, :any, default: nil
+
+  attr :form, :any,
+    default: nil,
+    doc: "String with form id or 'Phoenix.HTML.Form' struct for legacy forms"
+
   attr :rest, :global, include: @rest_attributes
 
   slot :inner_block
   slot :input_content
   slot :label_content
+
+  def form_field(%{form: %Phoenix.HTML.Form{} = form, field: field} = assigns) do
+    assigns
+    |> assign(:form, nil)
+    |> assign(:field, form[field])
+    |> form_field()
+  end
 
   def form_field(%{field: %Phoenix.HTML.FormField{} = field} = assigns) do
     assigns

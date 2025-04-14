@@ -62,6 +62,18 @@ defmodule Storybook.Components.FormField.NativeSelect do
             <.psb-variation type="select" field={f[:field]} prompt="Please select" options={[foo: "foo", bar: "bar"]} />
           </.form>
         """
+      },
+      %Variation{
+        id: :legacy,
+        description: "Legacy form",
+        attributes: %{
+          label: "Legacy form"
+        },
+        template: """
+        <.form for={%{}} :let={f} class="w-full">
+          <.psb-variation type="select" form={f} field={:legacy} prompt="Please select" options={[foo: "foo", bar: "bar"]} />
+        </.form>
+        """
       }
     ]
 end

@@ -71,6 +71,18 @@ defmodule Storybook.Components.FormField.Textarea do
             <.psb-variation type="textarea" field={f[:field]} label="Label" />
           </.form>
         """
+      },
+      %Variation{
+        id: :legacy,
+        description: "Legacy form",
+        attributes: %{
+          label: "Legacy form"
+        },
+        template: """
+        <.form for={%{}} :let={f} class="w-full">
+          <.psb-variation type="textarea" form={f} field={:legacy} />
+        </.form>
+        """
       }
     ]
 end
