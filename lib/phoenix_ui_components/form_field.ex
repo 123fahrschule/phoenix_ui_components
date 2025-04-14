@@ -75,11 +75,9 @@ defmodule PhoenixUiComponents.FormField do
   slot :label_content
 
   def form_field(%{field: %Phoenix.HTML.FormField{} = field} = assigns) do
-    errors = if Phoenix.Component.used_input?(field), do: field.errors, else: []
-
     assigns
+    |> assign_errors()
     |> assign(field: nil, id: assigns.id || field.id)
-    |> assign(:errors, Enum.map(errors, &translate_error(&1)))
     |> assign_new(:name, fn -> if assigns.multiple, do: field.name <> "[]", else: field.name end)
     |> assign_new(:value, fn -> field.value end)
     |> form_field()
@@ -303,11 +301,8 @@ defmodule PhoenixUiComponents.FormField do
   slot :inner_block
 
   def radio_group(assigns) do
-    errors =
-      if Phoenix.Component.used_input?(assigns[:field]), do: assigns[:field].errors, else: []
-
     assigns =
-      assign(assigns, :errors, Enum.map(errors, &translate_error(&1)))
+      assign_errors(assigns)
 
     ~H"""
     <fieldset {@rest}>
@@ -357,4 +352,11 @@ defmodule PhoenixUiComponents.FormField do
   end
 
   def form_field_sizes, do: @sizes
+
+  def assign_errors(%{field: %Phoenix.HTML.FormField{} = field} = assigns) do
+    errors = if Phoenix.Component.used_input?(field), do: field.errors, else: []
+
+    assigns
+    |> assign(:errors, Enum.map(errors, &translate_error(&1)))
+  end
 end
