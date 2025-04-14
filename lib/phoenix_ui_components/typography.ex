@@ -8,7 +8,7 @@ defmodule PhoenixUiComponents.Typography do
 
   def h1(assigns) do
     ~H"""
-    <h1 class={[get_title_classes("h1"), @class]} {@rest}><%= render_slot(@inner_block) %></h1>
+    <h1 class={[get_title_classes("h1"), @class]} {@rest}>{render_slot(@inner_block)}</h1>
     """
   end
 
@@ -19,7 +19,7 @@ defmodule PhoenixUiComponents.Typography do
 
   def h2(assigns) do
     ~H"""
-    <h2 class={[get_title_classes("h2"), @class]} {@rest}><%= render_slot(@inner_block) %></h2>
+    <h2 class={[get_title_classes("h2"), @class]} {@rest}>{render_slot(@inner_block)}</h2>
     """
   end
 
@@ -30,7 +30,7 @@ defmodule PhoenixUiComponents.Typography do
 
   def h3(assigns) do
     ~H"""
-    <h3 class={[get_title_classes("h3"), @class]} {@rest}><%= render_slot(@inner_block) %></h3>
+    <h3 class={[get_title_classes("h3"), @class]} {@rest}>{render_slot(@inner_block)}</h3>
     """
   end
 
@@ -41,7 +41,7 @@ defmodule PhoenixUiComponents.Typography do
 
   def h4(assigns) do
     ~H"""
-    <h4 class={[get_title_classes("h4"), @class]} {@rest}><%= render_slot(@inner_block) %></h4>
+    <h4 class={[get_title_classes("h4"), @class]} {@rest}>{render_slot(@inner_block)}</h4>
     """
   end
 
@@ -52,7 +52,7 @@ defmodule PhoenixUiComponents.Typography do
 
   def h5(assigns) do
     ~H"""
-    <h5 class={[get_title_classes("h5"), @class]} {@rest}><%= render_slot(@inner_block) %></h5>
+    <h5 class={[get_title_classes("h5"), @class]} {@rest}>{render_slot(@inner_block)}</h5>
     """
   end
 
@@ -63,7 +63,7 @@ defmodule PhoenixUiComponents.Typography do
 
   def h6(assigns) do
     ~H"""
-    <h6 class={[get_title_classes("h6"), @class]} {@rest}><%= render_slot(@inner_block) %></h6>
+    <h6 class={[get_title_classes("h6"), @class]} {@rest}>{render_slot(@inner_block)}</h6>
     """
   end
 
@@ -81,7 +81,7 @@ defmodule PhoenixUiComponents.Typography do
       |> assign_rest([:class, :rest])
 
     ~H"""
-    <p class={[get_body_classes(@size), @class]} {@rest}><%= render_slot(@inner_block) %></p>
+    <p class={[get_body_classes(@size), @class]} {@rest}>{render_slot(@inner_block)}</p>
     """
   end
 

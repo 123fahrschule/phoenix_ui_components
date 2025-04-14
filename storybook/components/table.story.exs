@@ -39,9 +39,9 @@ defmodule Storybook.Components.Table do
 
           <.tbody>
             <.tr :for={entry <- data()}>
-              <.td><%= entry.id %></.td>
-              <.td><%= entry.name %></.td>
-              <.td><%= entry.email %></.td>
+              <.td>{entry.id}</.td>
+              <.td>{entry.name}</.td>
+              <.td>{entry.email}</.td>
             </.tr>
           </.tbody>
           """
@@ -62,9 +62,9 @@ defmodule Storybook.Components.Table do
 
           <.tbody>
             <.tr :for={entry <- data()}>
-              <.td><%= entry.id %></.td>
-              <.td><%= entry.name %></.td>
-              <.td><%= entry.email %></.td>
+              <.td>{entry.id}</.td>
+              <.td>{entry.name}</.td>
+              <.td>{entry.email}</.td>
               <.td>
                 <div class="flex items-center gap-1">
                   <.link href="#">Edit</.link>
@@ -90,9 +90,9 @@ defmodule Storybook.Components.Table do
 
           <.tbody>
             <.tr :for={entry <- []}>
-              <.td><%= entry.id %></.td>
-              <.td><%= entry.name %></.td>
-              <.td><%= entry.email %></.td>
+              <.td>{entry.id}</.td>
+              <.td>{entry.name}</.td>
+              <.td>{entry.email}</.td>
             </.tr>
 
             <:empty>
@@ -118,9 +118,9 @@ defmodule Storybook.Components.Table do
 
           <.tbody>
             <.tr :for={entry <- []}>
-              <.td><%= entry.id %></.td>
-              <.td><%= entry.name %></.td>
-              <.td><%= entry.email %></.td>
+              <.td>{entry.id}</.td>
+              <.td>{entry.name}</.td>
+              <.td>{entry.email}</.td>
             </.tr>
 
             <:empty>
@@ -146,9 +146,9 @@ defmodule Storybook.Components.Table do
 
           <.tbody>
             <.tr :for={entry <- data()} >
-              <.td class="bg-success-100 text-success-400"><%= entry.id %></.td>
-              <.td class="w-full"><%= entry.name %></.td>
-              <.td class="bg-info-100 text-info-500"><%= entry.email %></.td>
+              <.td class="bg-success-100 text-success-400">{entry.id}</.td>
+              <.td class="w-full">{entry.name}</.td>
+              <.td class="bg-info-100 text-info-500">{entry.email}</.td>
             </.tr>
           </.tbody>
           """
@@ -210,7 +210,7 @@ defmodule Storybook.Components.Table do
           """
           <:col label="ID" :let={entry} >
             <.link navigate="#" class="underline">
-              <%= entry.id %>
+              {entry.id}
             </.link>
           </:col>
           """,

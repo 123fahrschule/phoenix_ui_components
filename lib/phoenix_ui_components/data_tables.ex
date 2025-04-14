@@ -19,7 +19,7 @@ defmodule PhoenixUiComponents.DataTable do
       ]}
       {@rest}
     >
-      <%= @label %>
+      {@label}
       <.icon :if={@arrows} icon={:sort} class="text-[16px]" />
     </div>
     """

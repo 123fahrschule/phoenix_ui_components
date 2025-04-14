@@ -126,10 +126,10 @@ defmodule Storybook.Foundation.Colors do
     ~H"""
     <section>
       <h1 class="border-b-2 border-neutral-400 text-h2 mb-4">
-        <%= @title %>
+        {@title}
       </h1>
       <div class="space-y-4 pb-4">
-        <%= render_slot(@inner_block) %>
+        {render_slot(@inner_block)}
       </div>
     </section>
     """
@@ -138,7 +138,7 @@ defmodule Storybook.Foundation.Colors do
   defp colors_row(assigns) do
     ~H"""
     <div class="flex gap-4 flex-wrap">
-      <%= render_slot(@inner_block) %>
+      {render_slot(@inner_block)}
     </div>
     """
   end
@@ -148,7 +148,7 @@ defmodule Storybook.Foundation.Colors do
     <div class="bg-neutral-100 shadow-medium-100">
       <div class={["w-44 h-32", @class]} />
       <p class="text-body-sm text-center px-4 py-3">
-        <%= @name %>
+        {@name}
       </p>
     </div>
     """

@@ -130,7 +130,7 @@ defmodule PhoenixUiComponents.Dropdown do
       class={["flex w-full hover:bg-neutral-200 rounded-lg", @selected && "bg-neutral-200 ", @class]}
       {@rest}
     >
-      <%= render_slot(@inner_block) %>
+      {render_slot(@inner_block)}
     </div>
     """
   end

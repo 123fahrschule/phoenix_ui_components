@@ -24,7 +24,7 @@ defmodule PhoenixUiComponents.Table do
     ~H"""
     <div class={["table-container", @container_class]} {@rest}>
       <table class={["", @table_class]}>
-        <%= render_slot(@inner_block) %>
+        {render_slot(@inner_block)}
       </table>
     </div>
     """
@@ -38,7 +38,7 @@ defmodule PhoenixUiComponents.Table do
           <tr>
             <th :for={col <- @col}>
               <div class="table-label">
-                <%= col[:label] %>
+                {col[:label]}
               </div>
             </th>
             <th :if={@action != []}></th>
@@ -49,15 +49,15 @@ defmodule PhoenixUiComponents.Table do
           <tr :for={row <- @rows}>
             <td :for={col <- @col}>
               <%= if col[:field] do %>
-                <%= Map.get(row, col[:field]) %>
+                {Map.get(row, col[:field])}
               <% else %>
-                <%= render_slot(col, row) %>
+                {render_slot(col, row)}
               <% end %>
             </td>
             <td :if={@action != []}>
               <div class="flex items-center space-x-2">
                 <span :for={action <- @action}>
-                  <%= render_slot(action, row) %>
+                  {render_slot(action, row)}
                 </span>
               </div>
             </td>
@@ -87,7 +87,7 @@ defmodule PhoenixUiComponents.Table do
   def thead(%{th: []} = assigns) do
     ~H"""
     <thead {@rest}>
-      <%= render_slot(@inner_block) %>
+      {render_slot(@inner_block)}
     </thead>
     """
   end
@@ -105,7 +105,7 @@ defmodule PhoenixUiComponents.Table do
                 direction={@direction}
                 ordered_by={@ordered_by}
               >
-                <%= label %>
+                {label}
               </.th>
             <% _ -> %>
               <.th />
@@ -123,7 +123,7 @@ defmodule PhoenixUiComponents.Table do
   def tr(assigns) do
     ~H"""
     <tr {@rest}>
-      <%= render_slot(@inner_block) %>
+      {render_slot(@inner_block)}
     </tr>
     """
   end
@@ -151,7 +151,7 @@ defmodule PhoenixUiComponents.Table do
         trigger_class={["table-label flex items-center", @field == @ordered_by && "active"]}
         class="w-min"
       >
-        <%= render_slot(@inner_block) %>
+        {render_slot(@inner_block)}
 
         <.sort_icon selected_direction={@field == @ordered_by && @direction} />
 
@@ -187,7 +187,7 @@ defmodule PhoenixUiComponents.Table do
     ~H"""
     <th {@rest}>
       <div class="table-label">
-        <%= render_slot(@inner_block) %>
+        {render_slot(@inner_block)}
       </div>
     </th>
     """
@@ -206,11 +206,11 @@ defmodule PhoenixUiComponents.Table do
     <tbody {@rest}>
       <.tr :if={@empty != []} class="hidden">
         <.td colspan="100" class={["text-center", @empty[:class]]}>
-          <%= render_slot(@empty) %>
+          {render_slot(@empty)}
         </.td>
       </.tr>
 
-      <%= render_slot(@inner_block) %>
+      {render_slot(@inner_block)}
     </tbody>
     """
   end
@@ -222,7 +222,7 @@ defmodule PhoenixUiComponents.Table do
   def td(assigns) do
     ~H"""
     <td {@rest}>
-      <%= render_slot(@inner_block) %>
+      {render_slot(@inner_block)}
     </td>
     """
   end
@@ -233,7 +233,7 @@ defmodule PhoenixUiComponents.Table do
   def tfoot(assigns) do
     ~H"""
     <tfoot {@rest}>
-      <%= render_slot(@inner_block) %>
+      {render_slot(@inner_block)}
     </tfoot>
     """
   end
@@ -252,7 +252,7 @@ defmodule PhoenixUiComponents.Table do
       data-close-menu={@close_menu}
     >
       <.icon icon={@icon} class="text-[16px]" />
-      <%= @text %>
+      {@text}
     </.dropdown_item>
     """
   end

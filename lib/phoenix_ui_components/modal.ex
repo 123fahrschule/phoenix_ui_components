@@ -113,7 +113,7 @@ defmodule PhoenixUiComponents.Modal do
             </button>
 
             <div id={"#{@id}-content"} class={["space-y-4", @class]}>
-              <%= render_slot(@inner_block) %>
+              {render_slot(@inner_block)}
             </div>
           </.focus_wrap>
         </div>
@@ -146,7 +146,7 @@ defmodule PhoenixUiComponents.Modal do
         <.icon icon={:arrow_back} class="text-neutral-900 text-[24px]" />
       </button>
       <p class="text-h5 text-neutral-900 flex-grow text-center">
-        <%= @title %>
+        {@title}
       </p>
 
       <div class="w-10" />
@@ -173,7 +173,7 @@ defmodule PhoenixUiComponents.Modal do
   def modal_title(assigns) do
     ~H"""
     <p class={["text-h4", @class]} {@rest}>
-      <%= @text %>
+      {@text}
     </p>
     """
   end
@@ -185,7 +185,7 @@ defmodule PhoenixUiComponents.Modal do
   def modal_subtitle(assigns) do
     ~H"""
     <p class={["text-body-sm text-neutral-700", @class]} {@rest}>
-      <%= @text %>
+      {@text}
     </p>
     """
   end
@@ -197,7 +197,7 @@ defmodule PhoenixUiComponents.Modal do
   def modal_actions(assigns) do
     ~H"""
     <div class={["flex flex-col gap-4 md:flex-row md:justify-end pb-8 md:pb-0", @class]} {@rest}>
-      <%= render_slot(@inner_block) %>
+      {render_slot(@inner_block)}
     </div>
     """
   end

@@ -26,10 +26,10 @@ defmodule Storybook.Foundation.Shadows do
     ~H"""
     <section>
       <h1 class="border-b-2 border-neutral-400 text-h2 mb-4">
-        <%= @title %>
+        {@title}
       </h1>
       <div class="space-y-10 pb-4">
-        <%= render_slot(@inner_block) %>
+        {render_slot(@inner_block)}
       </div>
     </section>
     """
@@ -40,7 +40,7 @@ defmodule Storybook.Foundation.Shadows do
     <div>
       <div class={["bg-neutral-100 size-40", @shadow]} />
       <p class="text-body-sm text-center px-1 py-3">
-        <%= @name %>
+        {@name}
       </p>
     </div>
     """

@@ -15,7 +15,7 @@ defmodule Storybook.Foundation.BorderRadius do
       }>
         <div class={["bg-neutral-100 size-40 border border-neutral-300", class]} />
         <p class="text-body-sm text-center px-2 py-1">
-          <%= name %>
+          {name}
         </p>
       </div>
     </div>

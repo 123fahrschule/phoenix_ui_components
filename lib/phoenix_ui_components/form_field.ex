@@ -109,8 +109,8 @@ defmodule PhoenixUiComponents.FormField do
           size={@size}
           disabled={@disabled}
         >
-          <%= @label %>
-          <%= render_slot(@label_content) %>
+          {@label}
+          {render_slot(@label_content)}
         </.form_field_label>
         <select
           id={@id}
@@ -123,12 +123,12 @@ defmodule PhoenixUiComponents.FormField do
           ]}
           {@rest}
         >
-          <option :if={@prompt} value=""><%= @prompt %></option>
-          <%= Phoenix.HTML.Form.options_for_select(@options, @value) %>
+          <option :if={@prompt} value="">{@prompt}</option>
+          {Phoenix.HTML.Form.options_for_select(@options, @value)}
         </select>
       </div>
       <.form_field_error :for={msg <- @errors}>
-        <%= msg %>
+        {msg}
       </.form_field_error>
     </div>
     """
@@ -144,8 +144,8 @@ defmodule PhoenixUiComponents.FormField do
           size={@size}
           disabled={@disabled}
         >
-          <%= @label %>
-          <%= render_slot(@label_content) %>
+          {@label}
+          {render_slot(@label_content)}
         </.form_field_label>
         <textarea
           id={@id}
@@ -159,7 +159,7 @@ defmodule PhoenixUiComponents.FormField do
         ><%= Phoenix.HTML.Form.normalize_value("textarea", @value) %></textarea>
       </div>
       <.form_field_error :for={msg <- @errors}>
-        <%= msg %>
+        {msg}
       </.form_field_error>
     </div>
     """
@@ -203,7 +203,7 @@ defmodule PhoenixUiComponents.FormField do
         </label>
       </div>
       <.form_field_error :for={msg <- @errors}>
-        <%= msg %>
+        {msg}
       </.form_field_error>
     </div>
     """
@@ -247,8 +247,8 @@ defmodule PhoenixUiComponents.FormField do
           size={@size}
           disabled={@disabled}
         >
-          <%= @label %>
-          <%= render_slot(@label_content) %>
+          {@label}
+          {render_slot(@label_content)}
         </.form_field_label>
         <div class="relative">
           <input
@@ -264,11 +264,11 @@ defmodule PhoenixUiComponents.FormField do
             ]}
             {@rest}
           />
-          <%= render_slot(@input_content) %>
+          {render_slot(@input_content)}
         </div>
       </div>
       <.form_field_error :for={msg <- @errors}>
-        <%= msg %>
+        {msg}
       </.form_field_error>
     </div>
     """
@@ -286,7 +286,7 @@ defmodule PhoenixUiComponents.FormField do
   def form_field_label(assigns) do
     ~H"""
     <label for={@for} class={["form-field-label form-field-label-#{@size}", @disabled && "disabled"]}>
-      <%= render_slot(@inner_block) %>
+      {render_slot(@inner_block)}
     </label>
     """
   end
@@ -300,7 +300,7 @@ defmodule PhoenixUiComponents.FormField do
   def form_field_error(assigns) do
     ~H"""
     <p class={["form-field-error", @class]}>
-      <%= render_slot(@inner_block) %>
+      {render_slot(@inner_block)}
     </p>
     """
   end

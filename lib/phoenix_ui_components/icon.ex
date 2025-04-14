@@ -102,7 +102,7 @@ defmodule PhoenixUiComponents.Icon do
   def icon(assigns) do
     ~H"""
     <span class={["icon", get_material_icon_class(assigns), @class]} {@rest}>
-      <%= @icon %>
+      {@icon}
     </span>
     """
   end

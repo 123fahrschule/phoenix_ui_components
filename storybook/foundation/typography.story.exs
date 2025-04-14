@@ -41,7 +41,7 @@ defmodule Storybook.Foundation.Typography do
             "font-black"
           ]
         }>
-          <p class="text-body"><%= class %></p>
+          <p class="text-body">{class}</p>
           <p class={["text-body", class]}>
             Lorem ipsum dolor, sit amet consectetur adipisicing elit. Voluptatum, ut! Officia explicabo dolorem consectetur similique et dicta nulla nobis deleniti, odio esse? Quo enim voluptate sit quas maxime natus dignissimos.
           </p>
@@ -55,10 +55,10 @@ defmodule Storybook.Foundation.Typography do
     ~H"""
     <section>
       <h1 class="border-b-2 border-neutral-400 text-h2 mb-4">
-        <%= @title %>
+        {@title}
       </h1>
       <div class="space-y-4 pb-4">
-        <%= render_slot(@inner_block) %>
+        {render_slot(@inner_block)}
       </div>
     </section>
     """

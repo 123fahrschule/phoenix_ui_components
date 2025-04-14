@@ -13,7 +13,7 @@ defmodule PhoenixUiComponents.DetailsList do
     ~H"""
     <dl class="divide-y divide-gray-200 ">
       <.details_list_item :for={item <- @item} {item}>
-        <%= if item[:inner_block], do: render_slot(item) %>
+        {if item[:inner_block], do: render_slot(item)}
       </.details_list_item>
     </dl>
     """
@@ -29,10 +29,10 @@ defmodule PhoenixUiComponents.DetailsList do
     ~H"""
     <div class="grid grid-cols-3 gap-4 px-6 py-3 odd:bg-gray-50 even:bg-white">
       <dt class="text-sm font-semibold">
-        <%= @term %>
+        {@term}
       </dt>
       <dd class="col-span-2 text-sm">
-        <%= if @details, do: @details, else: render_slot(@inner_block) %>
+        {if @details, do: @details, else: render_slot(@inner_block)}
       </dd>
     </div>
     """

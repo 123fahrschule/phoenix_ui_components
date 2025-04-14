@@ -38,7 +38,7 @@ defmodule PhoenixUiComponents.Card do
       ]}
       {@rest}
     >
-      <%= render_slot(@inner_block) %>
+      {render_slot(@inner_block)}
     </div>
     """
   end
@@ -54,7 +54,7 @@ defmodule PhoenixUiComponents.Card do
       class={["bg-neutral-100 overflow-hidden border border-neutral-300 rounded-2xl", @class]}
       {@rest}
     >
-      <%= render_slot(@inner_block) %>
+      {render_slot(@inner_block)}
     </div>
     """
   end

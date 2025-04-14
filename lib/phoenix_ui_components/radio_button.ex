@@ -17,7 +17,7 @@ defmodule PhoenixUiComponents.RadioButton do
   def radio_button(assigns) do
     ~H"""
     <div class={["relative flex items-center px-2", get_size_classes(@size), @class]}>
-      <%= radio_button(
+      {radio_button(
         @form,
         @field,
         @value,
@@ -28,12 +28,12 @@ defmodule PhoenixUiComponents.RadioButton do
           ],
           name: input_name(@form, @field)
         ] ++ assigns_to_attributes(@rest)
-      ) %>
+      )}
       <label
         for={input_id(@form, @field, @value)}
         class="cursor-pointer text-neutral-700 peer-checked:font-semibold peer-checked:text-neutral-900"
       >
-        <%= if @label, do: @label, else: render_slot(@inner_block) %>
+        {if @label, do: @label, else: render_slot(@inner_block)}
       </label>
     </div>
     """

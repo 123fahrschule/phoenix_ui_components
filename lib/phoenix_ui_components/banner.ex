@@ -35,10 +35,10 @@ defmodule PhoenixUiComponents.Banner do
       </div>
       <div class="flex-grow">
         <p :if={@label} class="banner-label">
-          <%= @label %>
+          {@label}
         </p>
         <p :if={@message} class="banner-message">
-          <%= @message %>
+          {@message}
         </p>
       </div>
       <button

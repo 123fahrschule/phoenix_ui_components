@@ -18,7 +18,7 @@ defmodule PhoenixUiComponents.DropdownItem do
         icon={:check}
         class={list_class_value(["mr-2", get_icon_size_classes(@size)])}
       />
-      <%= if @label, do: @label, else: render_slot(@inner_block) %>
+      {if @label, do: @label, else: render_slot(@inner_block)}
       <.icon
         :if={@selected && @check_icon_position == "right"}
         icon={:check}

@@ -68,13 +68,13 @@ defmodule PhoenixUiComponents.Pagination do
       <form>
         <div class="grid grid-cols-4 gap-1">
           <div class="flex items-center gap-1">
-            <%= pgettext(
+            {pgettext(
               "pagination, showing entries info",
               "Showing %{number_of_entries} out of %{total_entries} items",
               number_of_entries: @current_entries_count |> bold(),
               total_entries: @total_entries |> bold()
             )
-            |> raw() %>
+            |> raw()}
           </div>
 
           <div class="col-span-2 flex items-center justify-center gap-2">
@@ -97,7 +97,7 @@ defmodule PhoenixUiComponents.Pagination do
               disabled={@current_page == 1}
             />
 
-            <%= pgettext(
+            {pgettext(
               "pagination, text for showing which page number is being displayed",
               "Page %{page_input} out of %{total_pages}",
               page_input:
@@ -106,7 +106,7 @@ defmodule PhoenixUiComponents.Pagination do
                 |> to_string(),
               total_pages: @total_pages |> bold()
             )
-            |> raw() %>
+            |> raw()}
 
             <.pagination_button
               phx-click={
@@ -130,7 +130,7 @@ defmodule PhoenixUiComponents.Pagination do
 
           <div class="flex items-center gap-2 justify-end">
             <%= if @page_size_options != []  do %>
-              <%= pgettext(
+              {pgettext(
                 "pagination, text for choosing how many items are shown per page",
                 "Display %{page_size_select} items",
                 page_size_select:
@@ -138,7 +138,7 @@ defmodule PhoenixUiComponents.Pagination do
                   |> Phoenix.HTML.Safe.to_iodata()
                   |> to_string()
               )
-              |> raw() %>
+              |> raw()}
             <% end %>
           </div>
         </div>
@@ -173,7 +173,7 @@ defmodule PhoenixUiComponents.Pagination do
   defp page_size_select(assigns) do
     ~H"""
     <select name="page-size" class={[input_class(), "py-2 pl-4"]}>
-      <%= Phoenix.HTML.Form.options_for_select(@page_size_options, @page_size) %>
+      {Phoenix.HTML.Form.options_for_select(@page_size_options, @page_size)}
     </select>
     """
   end

@@ -84,7 +84,7 @@ defmodule PhoenixUiComponents.Tooltip do
       role="tooltip"
       {@rest}
     >
-      <%= @text || render_slot(@inner_block) %>
+      {@text || render_slot(@inner_block)}
       <div :if={!@hide_arrow} class={["tooltip-arrow", @arrow_class]} data-tooltip-arrow />
     </div>
     """

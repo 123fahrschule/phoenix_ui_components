@@ -15,17 +15,17 @@ defmodule PhoenixUiComponents.Checkbox do
   def checkbox(assigns) do
     ~H"""
     <div class={["relative flex items-center px-2", get_size_classes(@size), @class]}>
-      <%= checkbox(@form, @field,
+      {checkbox(@form, @field,
         class: [
           "peer rounded border-2 border-neutral-700 text-primary-300 focus:ring-primary-300 mr-2 cursor-pointer",
           get_checkbox_size_classes(@size)
         ]
-      ) %>
+      )}
       <label
         for={input_id(@form, @field)}
         class="cursor-pointer text-neutral-700 peer-checked:font-semibold peer-checked:text-neutral-900"
       >
-        <%= if @label, do: @label, else: render_slot(@inner_block) %>
+        {if @label, do: @label, else: render_slot(@inner_block)}
       </label>
     </div>
     """

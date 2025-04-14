@@ -13,7 +13,7 @@ defmodule PhoenixUiComponents.CustomLink do
       when is_map_key(rest, :patch) do
     ~H"""
     <.link {@rest}>
-      <%= if @label, do: @label, else: render_slot(@inner_block) %>
+      {if @label, do: @label, else: render_slot(@inner_block)}
     </.link>
     """
   end
@@ -21,7 +21,7 @@ defmodule PhoenixUiComponents.CustomLink do
   def custom_link(assigns) do
     ~H"""
     <button type={@type} {@rest}>
-      <%= if @label, do: @label, else: render_slot(@inner_block) %>
+      {if @label, do: @label, else: render_slot(@inner_block)}
     </button>
     """
   end

@@ -89,7 +89,7 @@ defmodule PhoenixUiComponents.Button do
       default_class={list_class_value(["mr-1 -ml-2 ", get_icon_size_classes(@size)])}
       {@left_icon_attrs}
     />
-    <%= if @label, do: @label, else: render_slot(@inner_block) %>
+    {if @label, do: @label, else: render_slot(@inner_block)}
     <.button_icon
       :if={@right_icon}
       icon={@right_icon}

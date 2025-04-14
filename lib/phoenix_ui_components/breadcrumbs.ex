@@ -39,7 +39,7 @@ defmodule PhoenixUiComponents.Breadcrumbs do
     ~H"""
     <.link class={["flex items-center text-sm text-neutral-700 hover:text-neutral-800"]} {@rest}>
       <.icon :if={@icon} icon={@icon} class="text=[24px] mr-1" outlined />
-      <%= @label %>
+      {@label}
     </.link>
     """
   end
@@ -48,7 +48,7 @@ defmodule PhoenixUiComponents.Breadcrumbs do
     ~H"""
     <span class={["flex items-center text-sm text-neutral-900"]} {@rest}>
       <.icon :if={@icon} icon={@icon} class="text=[24px] mr-1" outlined />
-      <%= @label %>
+      {@label}
     </span>
     """
   end

@@ -20,10 +20,10 @@ defmodule PhoenixUiComponents.Timer do
       <div class="absolute">
         <%= if @text do %>
           <span class="text-white text-sm font-bold">
-            <%= @text %>
+            {@text}
           </span>
         <% else %>
-          <%= render_slot(@inner_block) %>
+          {render_slot(@inner_block)}
         <% end %>
       </div>
     </div>

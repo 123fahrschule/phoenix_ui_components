@@ -14,7 +14,7 @@ defmodule PhoenixUiComponents.TopNav do
   def top_nav_container(assigns) do
     ~H"""
     <div class={["border-b border-b-neutral-300 flex items-center", @class]} {@rest}>
-      <%= render_slot(@inner_block) %>
+      {render_slot(@inner_block)}
     </div>
     """
   end
@@ -29,13 +29,13 @@ defmodule PhoenixUiComponents.TopNav do
       <div>
         <.icon icon={:wb_sunny} class="text-[16px] text-warning-300 align-middle" />
         <span>
-          <%= @sunset %>
+          {@sunset}
         </span>
       </div>
       <div>
         <.icon icon={:dark_mode} class="text-[16px] text-info-500 align-middle" />
         <span>
-          <%= @sunrise %>
+          {@sunrise}
         </span>
       </div>
     </div>

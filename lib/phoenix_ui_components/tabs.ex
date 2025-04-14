@@ -11,7 +11,7 @@ defmodule PhoenixUiComponents.Tabs do
   def tabs(assigns) do
     ~H"""
     <div class={["flex", @class]} {@rest}>
-      <%= render_slot(@inner_block) %>
+      {render_slot(@inner_block)}
     </div>
     """
   end
@@ -36,7 +36,7 @@ defmodule PhoenixUiComponents.Tabs do
       {@rest}
     >
       <.icon :if={@icon} outlined icon={@icon} class="text-[16px] mr-1" />
-      <%= if @label, do: @label, else: render_slot(@inner_block) %>
+      {if @label, do: @label, else: render_slot(@inner_block)}
     </button>
     """
   end
@@ -48,7 +48,7 @@ defmodule PhoenixUiComponents.Tabs do
       {@rest}
     >
       <.icon :if={@icon} outlined icon={@icon} class="text-[16px] mr-1" />
-      <%= if @label, do: @label, else: render_slot(@inner_block) %>
+      {if @label, do: @label, else: render_slot(@inner_block)}
     </button>
     """
   end
@@ -63,7 +63,7 @@ defmodule PhoenixUiComponents.Tabs do
   def tab_content(assigns) do
     ~H"""
     <div id={@id} class={["hidden", @class]} data-tab-content={@group} {@rest}>
-      <%= render_slot(@inner_block) %>
+      {render_slot(@inner_block)}
     </div>
     """
   end

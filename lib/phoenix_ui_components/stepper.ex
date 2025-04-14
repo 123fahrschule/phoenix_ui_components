@@ -9,7 +9,7 @@ defmodule PhoenixUiComponents.Stepper do
 
   def stepper(assigns) do
     ~H"""
-    <div class={["flex", @class]} {@rest}><%= render_slot(@inner_block) %></div>
+    <div class={["flex", @class]} {@rest}>{render_slot(@inner_block)}</div>
     """
   end
 
@@ -25,10 +25,10 @@ defmodule PhoenixUiComponents.Stepper do
       get_border_classes(@state)
     ]}>
       <div class="h-6 w-6 border border-neutral-900 rounded-full bg-neutral-200 text-center text-neutral-900 text-sm font-semibold mr-2">
-        <%= @index %>
+        {@index}
       </div>
       <span class="text-sm font-semibold">
-        <%= @label %>
+        {@label}
       </span>
     </div>
     """
@@ -41,10 +41,10 @@ defmodule PhoenixUiComponents.Stepper do
       get_border_classes(@state)
     ]}>
       <div class="h-6 w-6 border border-neutral-100 rounded-full bg-secondary-300 text-center text-neutral-100 text-sm font-semibold mr-2">
-        <%= @index %>
+        {@index}
       </div>
       <span class="text-sm font-semibold">
-        <%= @label %>
+        {@label}
       </span>
     </div>
     """
@@ -60,7 +60,7 @@ defmodule PhoenixUiComponents.Stepper do
         <.icon icon={:check} class="text-[16px] text-secondary-300" />
       </div>
       <span class="text-sm font-semibold">
-        <%= @label %>
+        {@label}
       </span>
     </div>
     """

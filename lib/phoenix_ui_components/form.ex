@@ -33,7 +33,7 @@ defmodule PhoenixUiComponents.Form do
   def field_container(assigns) do
     ~H"""
     <div {@rest}>
-      <%= render_slot(@inner_block) %>
+      {render_slot(@inner_block)}
     </div>
     """
   end
@@ -46,7 +46,7 @@ defmodule PhoenixUiComponents.Form do
   def input_container(assigns) do
     ~H"""
     <div class={["mb-1 group relative", @class]} {@rest}>
-      <%= render_slot(@inner_block) %>
+      {render_slot(@inner_block)}
     </div>
     """
   end
@@ -61,9 +61,9 @@ defmodule PhoenixUiComponents.Form do
   def field_label(assigns) do
     ~H"""
     <%= label @form, @field, class: ["block text-neutral-900 font-semibold mb-1", get_text_size_classes(@size)] do %>
-      <%= @label %>
+      {@label}
       <span :if={@secondary_label != []} class="text-xs text-neutral-600 font-normal">
-        <%= render_slot(@secondary_label) %>
+        {render_slot(@secondary_label)}
       </span>
     <% end %>
     """
@@ -76,7 +76,7 @@ defmodule PhoenixUiComponents.Form do
   def field_error(assigns) do
     ~H"""
     <p class={["text-error-300 text-[11px] leading-[1.09]", @class]} {@rest}>
-      <%= @error_message %>
+      {@error_message}
     </p>
     """
   end
@@ -126,7 +126,7 @@ defmodule PhoenixUiComponents.Form do
     <.field_container {@container_attrs}>
       <.field_label form={@form} field={@field} label={@label} size={@size}>
         <:secondary_label :if={@secondary_label != []}>
-          <%= render_slot(@secondary_label) %>
+          {render_slot(@secondary_label)}
         </:secondary_label>
       </.field_label>
       <.input_container>
@@ -181,25 +181,25 @@ defmodule PhoenixUiComponents.Form do
 
   def field_input(%{type: "text"} = assigns) do
     ~H"""
-    <%= text_input(@form, @field, assigns_to_attributes(@rest)) %>
+    {text_input(@form, @field, assigns_to_attributes(@rest))}
     """
   end
 
   def field_input(%{type: "email"} = assigns) do
     ~H"""
-    <%= email_input(@form, @field, assigns_to_attributes(@rest)) %>
+    {email_input(@form, @field, assigns_to_attributes(@rest))}
     """
   end
 
   def field_input(%{type: "password"} = assigns) do
     ~H"""
-    <%= password_input(@form, @field, assigns_to_attributes(@rest)) %>
+    {password_input(@form, @field, assigns_to_attributes(@rest))}
     """
   end
 
   def field_input(%{type: "number"} = assigns) do
     ~H"""
-    <%= number_input(@form, @field, assigns_to_attributes(@rest)) %>
+    {number_input(@form, @field, assigns_to_attributes(@rest))}
     """
   end
 
@@ -209,7 +209,7 @@ defmodule PhoenixUiComponents.Form do
       |> assign_new(:class, fn assigns -> assigns.rest.class end)
 
     ~H"""
-    <%= textarea(
+    {textarea(
       @form,
       @field,
       [
@@ -219,19 +219,19 @@ defmodule PhoenixUiComponents.Form do
             @class
           ])
       ] ++ assigns_to_attributes(@rest)
-    ) %>
+    )}
     """
   end
 
   def field_input(%{type: "select"} = assigns) do
     ~H"""
-    <%= select(@form, @field, @options, assigns_to_attributes(@rest)) %>
+    {select(@form, @field, @options, assigns_to_attributes(@rest))}
     """
   end
 
   def field_input(%{type: "file"} = assigns) do
     ~H"""
-    <%= file_input(
+    {file_input(
       @form,
       @field,
       [
@@ -240,7 +240,7 @@ defmodule PhoenixUiComponents.Form do
           get_file_button_size_classes(@size)
         ]
       ] ++ assigns_to_attributes(@rest, [:class])
-    ) %>
+    )}
     """
   end
 
@@ -248,7 +248,7 @@ defmodule PhoenixUiComponents.Form do
     ~H"""
     <div class={["flex space-x-4"]}>
       <%= date_select @form, @field, builder: fn b -> %>
-        <%= b.(:day,
+        {b.(:day,
           class: [
             "bg-neutral-200 border rounded-full text-neutral-900 placeholder:text-neutral-600 border-neutral-300 shadow-input pl-6 pr-10",
             focus_classes(),
@@ -256,8 +256,8 @@ defmodule PhoenixUiComponents.Form do
             get_input_vertical_size_classes(@size),
             get_text_size_classes(@size)
           ]
-        ) %>
-        <%= b.(:month,
+        )}
+        {b.(:month,
           class: [
             "bg-neutral-200 border rounded-full text-neutral-900 placeholder:text-neutral-600 border-neutral-300 shadow-input pl-6 pr-10",
             focus_classes(),
@@ -265,8 +265,8 @@ defmodule PhoenixUiComponents.Form do
             get_input_vertical_size_classes(@size),
             get_text_size_classes(@size)
           ]
-        ) %>
-        <%= b.(:year,
+        )}
+        {b.(:year,
           class: [
             "bg-neutral-200 border rounded-full text-neutral-900 placeholder:text-neutral-600 border-neutral-300 shadow-input pl-6 pr-10",
             focus_classes(),
@@ -274,7 +274,7 @@ defmodule PhoenixUiComponents.Form do
             get_input_vertical_size_classes(@size),
             get_text_size_classes(@size)
           ]
-        ) %>
+        )}
       <% end %>
     </div>
     """
@@ -282,7 +282,7 @@ defmodule PhoenixUiComponents.Form do
 
   def field_input(%{type: "date"} = assigns) do
     ~H"""
-    <%= date_input(@form, @field, assigns_to_attributes(@rest)) %>
+    {date_input(@form, @field, assigns_to_attributes(@rest))}
     """
   end
 
@@ -299,7 +299,7 @@ defmodule PhoenixUiComponents.Form do
       @class
     ]}>
       <span class="text-ellipsis overflow-hidden">
-        <%= @label %>
+        {@label}
       </span>
       <button class="leading-[0] ml-1" {@close_button_attrs}>
         <.icon icon={:close} class="text-[16px]" />
@@ -329,14 +329,14 @@ defmodule PhoenixUiComponents.Form do
       x-data={"multiselect({scrollOptionsIntoView :#{@scroll_options_into_view}})"}
       {@container_attrs}
     >
-      <%= multiple_select(@form, @field, @options,
+      {multiple_select(@form, @field, @options,
         class: "hidden",
         "x-model": "selectedValues",
         selected: @selected
-      ) %>
+      )}
 
       <div class="relative">
-        <%= label(@form, @field, @label, class: "block text-neutral-900 font-semibold mb-1 text-sm") %>
+        {label(@form, @field, @label, class: "block text-neutral-900 font-semibold mb-1 text-sm")}
         <div class="mb-2">
           <button
             x-bind="toggler"
@@ -352,7 +352,7 @@ defmodule PhoenixUiComponents.Form do
             x-bind:class="tags.length === 0 ? 'py-3' : 'py-2'"
           >
             <span x-show="tags.length === 0" class="inline-block h-[1em]">
-              <%= @placeholder %>
+              {@placeholder}
             </span>
 
             <div class="flex flex-wrap gap-x-1 gap-y-2">

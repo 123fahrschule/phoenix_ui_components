@@ -42,10 +42,10 @@ defmodule PhoenixUiComponents.SideNav do
           <.side_nav_section :for={{label, items} <- @sections} label={label} items={items} />
         </nav>
 
-        <%= render_slot(@inner_block) %>
+        {render_slot(@inner_block)}
 
         <.side_nav_footer>
-          <%= render_slot(@footer) %>
+          {render_slot(@footer)}
         </.side_nav_footer>
       </div>
     </div>
@@ -66,7 +66,7 @@ defmodule PhoenixUiComponents.SideNav do
         <.logo class="w-6 h-6" />
       </.custom_link>
       <span class="text-neutral-100">
-        <%= @app_name %>
+        {@app_name}
       </span>
     </div>
     """
@@ -77,7 +77,7 @@ defmodule PhoenixUiComponents.SideNav do
   def side_nav_footer(assigns) do
     ~H"""
     <div class="flex items-center flex-shrink-0 px-4 mt-3 mb-6">
-      <%= render_slot(@inner_block) %>
+      {render_slot(@inner_block)}
     </div>
     """
   end
@@ -89,7 +89,7 @@ defmodule PhoenixUiComponents.SideNav do
     ~H"""
     <div class="mb-8 border-b-2 border-neutral-800 last:border-0">
       <p class="mb-2 text-sm font-bold uppercase text-neutral-600">
-        <%= @label %>
+        {@label}
       </p>
       <ul>
         <.side_nav_item :for={item <- @items} {item} />
@@ -115,7 +115,7 @@ defmodule PhoenixUiComponents.SideNav do
         {@rest}
       >
         <.icon outlined icon={@icon} class="flex-shrink-0 mr-2" />
-        <%= @label %>
+        {@label}
         <.icon
           outlined
           icon={:keyboard_arrow_down}
@@ -144,7 +144,7 @@ defmodule PhoenixUiComponents.SideNav do
         {@rest}
       >
         <.icon outlined icon={@icon} class="flex-shrink-0 mr-2" />
-        <%= @label %>
+        {@label}
       </.custom_link>
     </li>
     """
@@ -182,10 +182,10 @@ defmodule PhoenixUiComponents.SideNav do
     ~H"""
     <div class="px-4">
       <p class="mb-2 text-sm font-bold uppercase text-neutral-600">
-        <%= @label %>
+        {@label}
       </p>
       <ul>
-        <%= render_slot(@inner_block) %>
+        {render_slot(@inner_block)}
       </ul>
     </div>
     """
@@ -219,11 +219,11 @@ defmodule PhoenixUiComponents.SideNav do
         <.icon icon={devtools_icon(@status, @icon)} class="flex-shrink-0 mr-2" />
         <div>
           <p>
-            <%= @primary %>
+            {@primary}
           </p>
 
           <p :if={@show_secondary && @secondary} class="text-xs">
-            <%= @secondary %>
+            {@secondary}
           </p>
         </div>
         <.icon outlined icon={:chevron_right} class="flex-shrink-0 ml-auto" />

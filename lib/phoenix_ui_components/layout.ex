@@ -19,11 +19,11 @@ defmodule PhoenixUiComponents.Layout do
         <meta charset="utf-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <%= render_slot(@head) %>
+        {render_slot(@head)}
         <.critical_styles />
       </head>
       <body class="h-full bg-white text-neutral-900">
-        <%= render_slot(@inner_block) %>
+        {render_slot(@inner_block)}
       </body>
     </html>
     """
@@ -36,7 +36,7 @@ defmodule PhoenixUiComponents.Layout do
   def layout(assigns) do
     ~H"""
     <div id="layout" {@rest}>
-      <%= render_slot(@inner_block) %>
+      {render_slot(@inner_block)}
     </div>
     """
   end
@@ -48,7 +48,7 @@ defmodule PhoenixUiComponents.Layout do
   def layout_content(assigns) do
     ~H"""
     <div id="layout-content" {@rest}>
-      <%= render_slot(@inner_block) %>
+      {render_slot(@inner_block)}
     </div>
     """
   end
@@ -107,16 +107,16 @@ defmodule PhoenixUiComponents.Layout do
         sections={@nav_sections}
         class="row-span-2"
       >
-        <%= render_slot(@dev_tools) %>
+        {render_slot(@dev_tools)}
         <:footer>
-          <%= render_slot(@side_nav_footer) %>
+          {render_slot(@side_nav_footer)}
         </:footer>
       </.side_nav>
       <.top_nav_container>
-        <%= render_slot(@top_nav_content) %>
+        {render_slot(@top_nav_content)}
       </.top_nav_container>
       <main class="overflow-auto">
-        <%= render_slot(@inner_block) %>
+        {render_slot(@inner_block)}
       </main>
     </div>
     """
@@ -131,7 +131,7 @@ defmodule PhoenixUiComponents.Layout do
     ~H"""
     <div class={["h-full bg-gradient-to-b from-primary-300 to-primary-500 pt-14", @class]} {@rest}>
       <.logo text_white class="w-[153px] mx-auto" />
-      <%= render_slot(@inner_block) %>
+      {render_slot(@inner_block)}
     </div>
     """
   end
@@ -147,8 +147,8 @@ defmodule PhoenixUiComponents.Layout do
     ~H"""
     <div class={["mt-[186px]", @class]} {@rest}>
       <div class="bg-neutral-100 rounded-3xl shadow-sm-3 p-10 max-w-[480px] mx-auto">
-        <h2 class="mb-4"><%= @title %></h2>
-        <p class="mb-6"><%= @description %></p>
+        <h2 class="mb-4">{@title}</h2>
+        <p class="mb-6">{@description}</p>
         <.button primary label={@button_text} left_icon={:microsoft} class="w-full" {@button_attrs} />
       </div>
     </div>

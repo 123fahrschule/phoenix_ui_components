@@ -72,7 +72,7 @@ defmodule PhoenixUiComponents.Badge do
   def badge(assigns) do
     ~H"""
     <span class={["badge badge-#{@size} badge-#{@color}", @class]} {@rest}>
-      <%= render_slot(@inner_block) %>
+      {render_slot(@inner_block)}
     </span>
     """
   end
@@ -91,7 +91,7 @@ defmodule PhoenixUiComponents.Badge do
   def badge_label(assigns) do
     ~H"""
     <span class={["badge-label", @class]} {@rest}>
-      <%= @text %>
+      {@text}
     </span>
     """
   end
@@ -118,7 +118,7 @@ defmodule PhoenixUiComponents.Badge do
       <%= if @icon do %>
         <.icon icon={@icon} />
       <% else %>
-        <%= render_slot(@inner_block) %>
+        {render_slot(@inner_block)}
       <% end %>
     </.badge>
     """

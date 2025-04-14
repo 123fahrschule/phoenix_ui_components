@@ -64,7 +64,7 @@ defmodule PhoenixUiComponents.Sidebar do
       >
         <div class="bg-neutral-900 rounded-r-[16px] h-full relative py-3 pb-6 flex flex-col">
           <div class="h-12 pb-2 px-4 flex items-center justify-between gap-2 text-neutral-100">
-            <%= render_slot(@header) %>
+            {render_slot(@header)}
 
             <button
               phx-click={JS.exec("data-hide", to: "#sidebar")}
@@ -75,11 +75,11 @@ defmodule PhoenixUiComponents.Sidebar do
           </div>
 
           <div class="flex flex-col flex-1 min-h-0 overflow-y-auto pt-6 px-4">
-            <%= render_slot(@inner_block) %>
+            {render_slot(@inner_block)}
           </div>
 
           <div :if={@footer != []} class="px-4">
-            <%= render_slot(@footer) %>
+            {render_slot(@footer)}
           </div>
         </div>
       </div>
@@ -100,10 +100,10 @@ defmodule PhoenixUiComponents.Sidebar do
       {@rest}
     >
       <p class="text-h6 text-neutral-600 mb-2">
-        <%= @label %>
+        {@label}
       </p>
       <ul class="space-y-3">
-        <%= render_slot(@inner_block) %>
+        {render_slot(@inner_block)}
       </ul>
     </div>
     """
@@ -138,9 +138,9 @@ defmodule PhoenixUiComponents.Sidebar do
       <.link class={[@active && "active", item_class(), active_item_class()]} {@rest}>
         <.icon outlined icon={@icon} class="flex-shrink-0" />
         <span class="flex-grow">
-          <%= @label %>
+          {@label}
         </span>
-        <%= render_slot(@inner_block) %>
+        {render_slot(@inner_block)}
       </.link>
     </li>
     """
@@ -156,9 +156,9 @@ defmodule PhoenixUiComponents.Sidebar do
       <button class={[@active && "active", item_class(), active_item_class()]} {@rest}>
         <.icon outlined icon={@icon} class="flex-shrink-0" />
         <span class="flex-grow">
-          <%= @label %>
+          {@label}
         </span>
-        <%= render_slot(@inner_block) %>
+        {render_slot(@inner_block)}
         <.icon
           outlined
           icon={:keyboard_arrow_down}
@@ -166,7 +166,7 @@ defmodule PhoenixUiComponents.Sidebar do
         />
       </button>
       <ul class="pt-2 overflow-hidden hidden group-[.expanded]:block">
-        <%= render_slot(@subitems) %>
+        {render_slot(@subitems)}
       </ul>
     </li>
     """
@@ -207,9 +207,9 @@ defmodule PhoenixUiComponents.Sidebar do
         {@rest}
       >
         <span class="flex-grow">
-          <%= @label %>
+          {@label}
         </span>
-        <%= render_slot(@inner_block) %>
+        {render_slot(@inner_block)}
       </.link>
     </li>
     """
@@ -230,7 +230,7 @@ defmodule PhoenixUiComponents.Sidebar do
       ]}
       {@rest}
     >
-      <%= @text || render_slot(@inner_block) %>
+      {@text || render_slot(@inner_block)}
     </span>
     """
   end

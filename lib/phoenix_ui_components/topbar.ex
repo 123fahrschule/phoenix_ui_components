@@ -27,7 +27,7 @@ defmodule PhoenixUiComponents.Topbar do
         <.icon icon={:menu} class="text-[24px]" />
       </button>
 
-      <%= render_slot(@inner_block) %>
+      {render_slot(@inner_block)}
     </div>
     """
   end

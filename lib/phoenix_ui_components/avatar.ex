@@ -48,7 +48,7 @@ defmodule PhoenixUiComponents.Avatar do
       class={["flex items-center justify-center text-sm font-semibold", get_classes(assigns)]}
       {@rest}
     >
-      <%= @initials %>
+      {@initials}
     </div>
     """
   end

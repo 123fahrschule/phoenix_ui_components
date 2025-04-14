@@ -22,7 +22,7 @@ defmodule PhoenixUiComponents.Flyout do
         <%= if @title || @description do %>
           <div class="flex justify-between">
             <p class="text-2xl leading-[1.334] font-bold tracking-normal mb-2">
-              <%= @title %>
+              {@title}
             </p>
             <p>
               <.custom_link
@@ -36,10 +36,10 @@ defmodule PhoenixUiComponents.Flyout do
             </p>
           </div>
           <p class="text-neutral-600">
-            <%= @description %>
+            {@description}
           </p>
         <% else %>
-          <%= render_slot(@header) %>
+          {render_slot(@header)}
         <% end %>
         <.button
           :if={@close_button_attrs}
@@ -51,11 +51,11 @@ defmodule PhoenixUiComponents.Flyout do
       </.flyout_header>
 
       <.flyout_body>
-        <%= render_slot(@inner_block) %>
+        {render_slot(@inner_block)}
       </.flyout_body>
 
       <.flyout_footer :if={@footer != []}>
-        <%= render_slot(@footer) %>
+        {render_slot(@footer)}
       </.flyout_footer>
     </div>
     """
@@ -68,7 +68,7 @@ defmodule PhoenixUiComponents.Flyout do
   def flyout_header(assigns) do
     ~H"""
     <div class={["p-8", @class]}>
-      <%= render_slot(@inner_block) %>
+      {render_slot(@inner_block)}
     </div>
     """
   end
@@ -78,7 +78,7 @@ defmodule PhoenixUiComponents.Flyout do
   def flyout_body(assigns) do
     ~H"""
     <div class="px-8">
-      <%= render_slot(@inner_block) %>
+      {render_slot(@inner_block)}
     </div>
     """
   end
@@ -88,7 +88,7 @@ defmodule PhoenixUiComponents.Flyout do
   def flyout_footer(assigns) do
     ~H"""
     <div class="p-8">
-      <%= render_slot(@inner_block) %>
+      {render_slot(@inner_block)}
     </div>
     """
   end
