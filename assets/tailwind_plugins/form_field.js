@@ -118,7 +118,7 @@ module.exports = plugin(function ({ addComponents, theme }) {
         {},
 
       '&:disabled': {
-        '@apply border-neutral-400 cursor-not-allowed': {}
+        '@apply border-neutral-400 text-neutral-400 cursor-not-allowed': {}
       }
     },
 
