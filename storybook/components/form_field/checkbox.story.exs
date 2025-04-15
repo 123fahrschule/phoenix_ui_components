@@ -23,24 +23,36 @@ defmodule Storybook.Components.FormField.Checkbox do
         description: "Error",
         template: """
           <.form for={%{}} :let={f} class="w-full">
-            <% f = %{f | params: %{"field"  => ""}, errors: [field: {"can't be blank", []}]} %>
-            <.psb-variation type="checkbox" field={f[:field]} label="Label"/>
+            <% f = %{f | params: %{"error"  => ""}, errors: [error: {"can't be blank", []}]} %>
+            <.psb-variation type="checkbox" field={f[:error]} label="Label"/>
           </.form>
         """
       },
-      %Variation{
+      %VariationGroup{
         id: :disabled,
         description: "Disabled",
-        attributes: %{
-          disabled: true
-        }
+        variations: [
+          %Variation{
+            id: :default,
+            attributes: %{
+              disabled: true
+            }
+          },
+          %Variation{
+            id: :checked,
+            attributes: %{
+              disabled: true,
+              checked: true
+            }
+          }
+        ]
       },
       %Variation{
         id: :custom_label,
         description: "Custom label content",
         template: """
           <.form for={%{}} :let={f} class="w-full">
-            <.psb-variation type="checkbox" field={f[:field]}/>
+            <.psb-variation type="checkbox" field={f[:custom_label]}/>
           </.form>
         """,
         slots: [
@@ -56,7 +68,7 @@ defmodule Storybook.Components.FormField.Checkbox do
         description: "Without label",
         template: """
           <.form for={%{}} :let={f} class="w-full">
-            <.psb-variation type="checkbox" field={f[:field]}/>
+            <.psb-variation type="checkbox" field={f[:without_label]}/>
           </.form>
         """
       },
