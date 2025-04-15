@@ -27,6 +27,8 @@ defmodule PhoenixUiComponents.Banner do
   attr :close_button_attributes, :list, default: []
   attr :rest, :global
 
+  slot :inner_block
+
   def banner(assigns) do
     ~H"""
     <div role="alert" class={["banner banner-#{@color} banner-#{@size}", @class]} {@rest}>
@@ -40,6 +42,7 @@ defmodule PhoenixUiComponents.Banner do
         <p :if={@message} class="banner-message">
           {@message}
         </p>
+        {render_slot(@inner_block)}
       </div>
       <button
         :if={@on_close}

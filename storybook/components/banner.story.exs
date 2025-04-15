@@ -87,6 +87,22 @@ defmodule Storybook.Components.Banner do
               }
             }
           end
+      },
+      %Variation{
+        id: :custom_content,
+        description: "With custom content",
+        attributes: %{
+          label: "Label"
+        },
+        slots: [
+          """
+          <ul class="list-inside list-disc">
+            <li>One</li>
+            <li>Two</li>
+            <li>Three</li>
+          </ul>
+          """
+        ]
       }
     ]
   end
