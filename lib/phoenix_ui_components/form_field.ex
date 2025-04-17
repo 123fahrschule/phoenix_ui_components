@@ -18,11 +18,11 @@ defmodule PhoenixUiComponents.FormField do
     "select",
     "textarea",
     "hidden",
-    "color",
     "checkbox",
     "radio",
     "file"
     # TODO: add all possible types
+    # "color"
     # "range"
   ]
   @rest_attributes [
@@ -101,67 +101,61 @@ defmodule PhoenixUiComponents.FormField do
 
   def form_field(%{type: "select"} = assigns) do
     ~H"""
-    <div class={["form-field", @class]}>
-      <div class="relative w-full flex flex-col">
-        <.form_field_label
-          :if={@label || @label_content != []}
-          for={@id}
-          size={@size}
-          disabled={@disabled}
-        >
-          {@label}
-          {render_slot(@label_content)}
-        </.form_field_label>
-        <select
-          id={@id}
-          name={@name}
-          multiple={@multiple}
-          disabled={@disabled}
-          class={[
-            "form-field-input form-field-input-#{@size} select",
-            @errors != [] && "form-field-input-error"
-          ]}
-          {@rest}
-        >
-          <option :if={@prompt} value="">{@prompt}</option>
-          {Phoenix.HTML.Form.options_for_select(@options, @value)}
-        </select>
-      </div>
-      <.form_field_error :for={msg <- @errors}>
-        {msg}
-      </.form_field_error>
-    </div>
+    <.form_field_container
+      id={@id}
+      label={@label}
+      errors={@errors}
+      disabled={@disabled}
+      size={@size}
+      class={@class}
+      {@rest}
+    >
+      <:label_content>{render_slot(@label_content)}</:label_content>
+      <select
+        id={@id}
+        name={@name}
+        multiple={@multiple}
+        disabled={@disabled}
+        class={[
+          "form-field-input form-field-input-#{@size} select",
+          @errors != [] && "form-field-input-error"
+        ]}
+        {@rest}
+      >
+        <option :if={@prompt} value="">{@prompt}</option>
+        {Phoenix.HTML.Form.options_for_select(@options, @value)}
+      </select>
+      {render_slot(@input_content)}
+    </.form_field_container>
     """
   end
 
   def form_field(%{type: "textarea"} = assigns) do
     ~H"""
-    <div class={["form-field", @class]}>
-      <div class="relative w-full flex flex-col">
-        <.form_field_label
-          :if={@label || @label_content != []}
-          for={@id}
-          size={@size}
-          disabled={@disabled}
-        >
-          {@label}
-          {render_slot(@label_content)}
-        </.form_field_label>
-        <textarea
-          id={@id}
-          name={@name}
-          disabled={@disabled}
-          class={[
-            "form-field-input form-field-input-#{@size}",
-            @errors != [] && "form-field-input-error"
-          ]}
-          {@rest}
-        ><%= Phoenix.HTML.Form.normalize_value("textarea", @value) %></textarea>
-      </div>
-      <.form_field_error :for={msg <- @errors}>
-        {msg}
-      </.form_field_error>
-    </div>
+    <.form_field_container
+      id={@id}
+      label={@label}
+      errors={@errors}
+      disabled={@disabled}
+      size={@size}
+      class={@class}
+      {@rest}
+    >
+      <:label_content>{render_slot(@label_content)}</:label_content>
+      <textarea
+        id={@id}
+        name={@name}
+        disabled={@disabled}
+        class={[
+          "form-field-input form-field-input-#{@size}",
+          @errors != [] && "form-field-input-error"
+        ]}
+        {@rest}
+      >
+        {Phoenix.HTML.Form.normalize_value("textarea", @value)}
+      </textarea>
+      {render_slot(@input_content)}
+    </.form_field_container>
     """
   end
 
@@ -239,49 +233,83 @@ defmodule PhoenixUiComponents.FormField do
 
   def form_field(%{type: "file"} = assigns) do
     ~H"""
-    <div class={["form-field", @class]}>
-      <div class="relative w-full flex flex-col">
-        <.form_field_label
-          :if={@label || @label_content != []}
-          for={@id}
-          size={@size}
-          disabled={@disabled}
-        >
-          {@label}
-          {render_slot(@label_content)}
-        </.form_field_label>
-        <div class="relative">
-          <input
-            type={@type}
-            id={@id}
-            name={@name}
-            disabled={@disabled}
-            value={Phoenix.HTML.Form.normalize_value(@type, @value)}
-            class={[
-              "form-field-input form-field-input-#{@size}",
-              "!p-0 focus:outline-primary-300 focus-visible:outline-primary-300",
-              "file:bg-neutral-400 file:px-4 file:rounded-full file:border-0 file:mr-4 file:cursor-pointer cursor-pointer pr-3",
-              case @size do
-                "sm" -> "file:py-2"
-                "lg" -> "file:py-3"
-                _md -> "file:py-2.5"
-              end,
-              @errors != [] && "form-field-input-error",
-              @input_class
-            ]}
-            {@rest}
-          />
-          {render_slot(@input_content)}
-        </div>
-      </div>
-      <.form_field_error :for={msg <- @errors}>
-        {msg}
-      </.form_field_error>
-    </div>
+    <.form_field_container
+      id={@id}
+      label={@label}
+      errors={@errors}
+      disabled={@disabled}
+      size={@size}
+      class={@class}
+      {@rest}
+    >
+      <:label_content>{render_slot(@label_content)}</:label_content>
+      <input
+        type={@type}
+        id={@id}
+        name={@name}
+        disabled={@disabled}
+        value={Phoenix.HTML.Form.normalize_value(@type, @value)}
+        class={[
+          "form-field-input form-field-input-#{@size}",
+          "!p-0 focus:outline-primary-300 focus-visible:outline-primary-300",
+          "file:bg-neutral-400 file:px-4 file:rounded-full file:border-0 file:mr-4 file:cursor-pointer cursor-pointer pr-3",
+          case @size do
+            "sm" -> "file:py-2"
+            "lg" -> "file:py-3"
+            _md -> "file:py-2.5"
+          end,
+          @errors != [] && "form-field-input-error",
+          @input_class
+        ]}
+        {@rest}
+      />
+      {render_slot(@input_content)}
+    </.form_field_container>
     """
   end
 
   def form_field(assigns) do
+    ~H"""
+    <.form_field_container
+      id={@id}
+      label={@label}
+      errors={@errors}
+      disabled={@disabled}
+      size={@size}
+      class={@class}
+      {@rest}
+    >
+      <:label_content>{render_slot(@label_content)}</:label_content>
+      <input
+        type={@type}
+        id={@id}
+        name={@name}
+        disabled={@disabled}
+        value={Phoenix.HTML.Form.normalize_value(@type, @value)}
+        class={[
+          "form-field-input form-field-input-#{@size}",
+          @errors != [] && "form-field-input-error",
+          @input_class
+        ]}
+        {@rest}
+      />
+      {render_slot(@input_content)}
+    </.form_field_container>
+    """
+  end
+
+  attr :id, :any, default: nil
+  attr :label, :string, default: nil
+  attr :errors, :list, default: []
+  attr :disabled, :boolean, default: false
+  attr :size, :string, values: @sizes, default: "md"
+  attr :class, :any, default: nil
+  attr :rest, :global, include: @rest_attributes
+
+  slot :inner_block
+  slot :label_content
+
+  def form_field_container(assigns) do
     ~H"""
     <div class={["form-field", @class]}>
       <div class="relative w-full flex flex-col">
@@ -295,20 +323,7 @@ defmodule PhoenixUiComponents.FormField do
           {render_slot(@label_content)}
         </.form_field_label>
         <div class="relative">
-          <input
-            type={@type}
-            id={@id}
-            name={@name}
-            disabled={@disabled}
-            value={Phoenix.HTML.Form.normalize_value(@type, @value)}
-            class={[
-              "form-field-input form-field-input-#{@size}",
-              @errors != [] && "form-field-input-error",
-              @input_class
-            ]}
-            {@rest}
-          />
-          {render_slot(@input_content)}
+          {render_slot(@inner_block)}
         </div>
       </div>
       <.form_field_error :for={msg <- @errors}>
