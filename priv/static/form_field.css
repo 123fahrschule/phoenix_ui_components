@@ -1,0 +1,32 @@
+input[type='color'] {
+  cursor: pointer;
+  appearance: none;
+  padding: 0;
+  outline-color: theme('colors.primary.300');
+}
+
+input[type='color']::-webkit-color-swatch-wrapper {
+  padding: 0 !important;
+}
+
+input[type='color']::-webkit-color-swatch {
+  border-radius: 9999px !important;
+  border: 0 !important;
+}
+
+input[type='color']::-moz-color-swatch {
+  border-radius: 9999px !important;
+  border: 0 !important;
+}
+
+input[type='color'].form-field-input-sm {
+  @apply size-8;
+}
+
+input[type='color'].form-field-input-md {
+  @apply size-10;
+}
+
+input[type='color'].form-field-input-lg {
+  @apply size-12;
+}
