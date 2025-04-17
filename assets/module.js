@@ -5,6 +5,7 @@ import flashMessage from './js/phoenix-ui-components/flash_message';
 
 import { DropdownMenu } from './js/hooks/dropdown_menu';
 import { FlashMessage } from './js/hooks/flash_message';
+import { LocaleSelect } from './js/hooks/locale_select';
 import { Pagination } from './js/hooks/pagination';
 import { Tooltip } from './js/hooks/tooltip';
 
@@ -15,6 +16,7 @@ export {
   flashMessage,
   DropdownMenu,
   FlashMessage,
+  LocaleSelect,
   Pagination,
   Tooltip
 };

@@ -32,6 +32,7 @@ defmodule PhoenixUiComponents do
         FormField,
         Icon,
         Layout,
+        LocaleSelect,
         Modal,
         Page,
         Pagination,
