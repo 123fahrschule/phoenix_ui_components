@@ -62,6 +62,38 @@ defmodule Storybook.Components.FormField.FormField do
             }
           end
       },
+      %VariationGroup{
+        id: :different_types,
+        description: "Different types",
+        template: """
+          <.form for={%{}} :let={f} class="w-full">
+            <.psb-variation field={f[:field]} placeholder="Placeholder" />
+          </.form>
+        """,
+        variations:
+          for type <- [
+                # "text",
+                "email",
+                "password",
+                "number",
+                "date",
+                "month",
+                "week",
+                "time",
+                "datetime-local",
+                "search",
+                "tel",
+                "url"
+              ] do
+            %Variation{
+              id: String.to_atom("type_#{type}"),
+              attributes: %{
+                type: type,
+                label: type
+              }
+            }
+          end
+      },
       %Variation{
         id: :without_label,
         description: "Without label",
