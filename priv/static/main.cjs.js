@@ -465,7 +465,7 @@ var require_form_field = __commonJS({
         ".checkbox": {
           "@apply rounded border-neutral-700 text-primary-300 focus:ring-primary-300 focus-visible:ring-2 focus-visible:ring-primary-300 cursor-pointer": {},
           "&:disabled": {
-            "@apply border-neutral-400 cursor-not-allowed": {}
+            "@apply border-neutral-400 text-neutral-400 cursor-not-allowed": {}
           }
         },
         ".checkbox-label": {

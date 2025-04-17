@@ -1657,6 +1657,23 @@ var FlashMessage = {
   }
 };
 
+// js/hooks/locale_select.js
+var LocaleSelect = {
+  mounted() {
+    this.el.addEventListener("set-locale", (event) => {
+      this.setLocale(event.detail.locale);
+    });
+  },
+  setLocale(locale) {
+    const EXPIRY_TIME_IN_DAYS = 365;
+    const expiryDate = /* @__PURE__ */ new Date();
+    expiryDate.setTime(expiryDate.getTime() + EXPIRY_TIME_IN_DAYS * 24 * 60 * 60 * 1e3);
+    const expires = "expires=" + expiryDate.toUTCString();
+    document.cookie = `app_locale=${locale};${expires};path=/`;
+    window.location.reload();
+  }
+};
+
 // js/hooks/pagination.js
 var Pagination = {
   submitting: false,
@@ -1813,6 +1830,7 @@ var Tooltip = {
 export {
   DropdownMenu,
   FlashMessage,
+  LocaleSelect,
   Pagination,
   Tooltip,
   dropdown_default as dropdown,
