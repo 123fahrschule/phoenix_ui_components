@@ -68,8 +68,8 @@ defmodule PhoenixUiComponents.MixProject do
       ],
       dev: "run dev.exs",
       release: [
-        "cmd mix format --check-formatted",
-        "cmd mix compile --force --warnings-as-errors",
+        "format --check-formatted",
+        "compile --force --warnings-as-errors",
         "cmd git tag #{@version}",
         "cmd git push",
         "cmd git push --tags"
