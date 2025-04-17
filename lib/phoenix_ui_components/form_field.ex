@@ -20,9 +20,9 @@ defmodule PhoenixUiComponents.FormField do
     "hidden",
     "color",
     "checkbox",
-    "radio"
+    "radio",
+    "file"
     # TODO: add all possible types
-    # "file",
     # "range"
   ]
   @rest_attributes [
@@ -233,6 +233,50 @@ defmodule PhoenixUiComponents.FormField do
           {label}
         </label>
       </div>
+    </div>
+    """
+  end
+
+  def form_field(%{type: "file"} = assigns) do
+    ~H"""
+    <div class={["form-field", @class]}>
+      <div class="relative w-full flex flex-col">
+        <.form_field_label
+          :if={@label || @label_content != []}
+          for={@id}
+          size={@size}
+          disabled={@disabled}
+        >
+          {@label}
+          {render_slot(@label_content)}
+        </.form_field_label>
+        <div class="relative">
+          <input
+            type={@type}
+            id={@id}
+            name={@name}
+            disabled={@disabled}
+            value={Phoenix.HTML.Form.normalize_value(@type, @value)}
+            class={[
+              "form-field-input form-field-input-#{@size}",
+              "!p-0 focus:outline-primary-300 focus-visible:outline-primary-300",
+              "file:bg-neutral-400 file:px-4 file:rounded-full file:border-0 file:mr-4 file:cursor-pointer cursor-pointer pr-3",
+              case @size do
+                "sm" -> "file:py-2"
+                "lg" -> "file:py-3"
+                _md -> "file:py-2.5"
+              end,
+              @errors != [] && "form-field-input-error",
+              @input_class
+            ]}
+            {@rest}
+          />
+          {render_slot(@input_content)}
+        </div>
+      </div>
+      <.form_field_error :for={msg <- @errors}>
+        {msg}
+      </.form_field_error>
     </div>
     """
   end
