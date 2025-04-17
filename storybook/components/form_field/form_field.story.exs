@@ -83,7 +83,8 @@ defmodule Storybook.Components.FormField.FormField do
                 "datetime-local",
                 "search",
                 "tel",
-                "url"
+                "url",
+                "range"
               ] do
             %Variation{
               id: String.to_atom("type_#{type}"),

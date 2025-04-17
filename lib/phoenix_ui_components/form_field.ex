@@ -21,9 +21,8 @@ defmodule PhoenixUiComponents.FormField do
     "checkbox",
     "radio",
     "file",
-    "color"
-    # TODO: add all possible types
-    # "range"
+    "color",
+    "range"
   ]
   @rest_attributes [
     "accept",

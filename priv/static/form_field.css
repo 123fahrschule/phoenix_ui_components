@@ -30,3 +30,9 @@ input[type='color'].form-field-input-md {
 input[type='color'].form-field-input-lg {
   @apply size-12;
 }
+
+input[type='range'],
+input[type='range']:focus {
+  box-shadow: none;
+  background-color: initial;
+}
