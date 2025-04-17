@@ -1,10 +1,15 @@
 Application.put_env(:example, Example.Endpoint,
-  http: [ip: {127, 0, 0, 1}, port: System.get_env("PORT", "4000")],
+  http: [
+    ip: {127, 0, 0, 1},
+    port: System.get_env("PORT", "4000")
+  ],
   server: true,
-  live_view: [signing_salt: "aaaaaaaa"],
+  live_view: [
+    signing_salt: "aaaaaaaa"
+  ],
   secret_key_base: String.duplicate("a", 64),
   adapter: Bandit.PhoenixAdapter,
-    watchers: [
+  watchers: [
     esbuild: {Esbuild, :install_and_run, [:storybook, ~w(--sourcemap=inline --watch)]},
     storybook_tailwind: {Tailwind, :install_and_run, [:storybook, ~w(--watch)]}
   ],
@@ -40,7 +45,6 @@ defmodule Example.Storybook do
     sandbox_class: "phoenix-ui-components"
 end
 
-
 defmodule Example.Router do
   use Phoenix.Router
 
@@ -48,14 +52,14 @@ defmodule Example.Router do
   import PhoenixStorybook.Router
 
   pipeline :browser do
-    plug(:accepts, ["html"])
+    plug :accepts, ["html"]
   end
 
   scope "/", Example do
     storybook_assets()
-    pipe_through(:browser)
+    pipe_through :browser
 
-    live_storybook "/", backend_module: Example.Storybook
+    live_storybook("/", backend_module: Example.Storybook)
   end
 end
 
@@ -66,14 +70,19 @@ end
 defmodule Example.Endpoint do
   use Phoenix.Endpoint, otp_app: :example
 
-   @session_options [
+  @session_options [
     store: :cookie,
     key: "_live_view_key",
     signing_salt: "/VEDsdfsffMnp5",
     same_site: "Lax"
   ]
 
-  socket "/live", Phoenix.LiveView.Socket, websocket: [connect_info: [session: @session_options]]
+  socket "/live", Phoenix.LiveView.Socket,
+    websocket: [
+      connect_info: [
+        session: @session_options
+      ]
+    ]
 
   # Serve at "/" the static files from "priv/static" directory.
   #
@@ -98,8 +107,13 @@ defmodule Example.Endpoint do
   plug(Example.Router)
 end
 
-{:ok, _} = Supervisor.start_link([
-  {Phoenix.PubSub, name: Example.PubSub},
-  Example.Endpoint
-], strategy: :one_for_one)
+{:ok, _} =
+  Supervisor.start_link(
+    [
+      {Phoenix.PubSub, name: Example.PubSub},
+      Example.Endpoint
+    ],
+    strategy: :one_for_one
+  )
+
 Process.sleep(:infinity)
