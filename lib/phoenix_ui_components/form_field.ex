@@ -1,6 +1,8 @@
 defmodule PhoenixUiComponents.FormField do
   use Phoenix.Component
 
+  import PhoenixUiComponents.Icon
+
   @sizes ["sm", "md", "lg"]
   @types [
     "text",
@@ -22,7 +24,8 @@ defmodule PhoenixUiComponents.FormField do
     "radio",
     "file",
     "color",
-    "range"
+    "range",
+    "switch"
   ]
   @rest_attributes [
     "accept",
@@ -71,6 +74,7 @@ defmodule PhoenixUiComponents.FormField do
   attr :size, :string, values: @sizes, default: "md"
   attr :class, :any, default: nil
   attr :input_class, :any, default: nil
+  attr :switch_icon, :any, default: nil
 
   attr :form, :any,
     default: nil,
@@ -191,6 +195,90 @@ defmodule PhoenixUiComponents.FormField do
           disabled={@disabled}
           {@rest}
         />
+        <label :if={label = @label || render_slot(@inner_block)} for={@id} class="checkbox-label">
+          {label}
+        </label>
+      </div>
+      <.form_field_error :for={msg <- @errors}>
+        {msg}
+      </.form_field_error>
+    </div>
+    """
+  end
+
+  def form_field(%{type: "switch"} = assigns) do
+    assigns =
+      assign_new(assigns, :checked, fn ->
+        Phoenix.HTML.Form.normalize_value("checkbox", assigns[:value])
+      end)
+
+    ~H"""
+    <div class={["form-field", @class]}>
+      <div class="checkbox-container">
+        <div class={[
+          "relative inline-flex items-center justify-center flex-shrink-0 group mr-2",
+          case @size do
+            "lg" -> "w-[52px] h-8"
+            _md -> "w-[39px] h-6"
+          end
+        ]}>
+          <input type="hidden" name={@name} value="false" disabled={@disabled} />
+          <input
+            type="checkbox"
+            id={@id}
+            name={@name}
+            value="true"
+            checked={@checked}
+            class={[
+              "absolute bg-neutral-100 border-none rounded-full cursor-pointer peer checked:border-0 checked:bg-transparent checked:focus:bg-transparent checked:hover:bg-transparent focus:ring-primary-300",
+              case @size do
+                "lg" -> "w-[52px] h-8"
+                _md -> "w-[39px] h-6"
+              end
+            ]}
+            disabled={@disabled}
+            {@rest}
+          />
+          <span class={[
+            "absolute mx-auto transition-colors duration-200 ease-in-out bg-neutral-200 pointer-events-none border-2 border-neutral-400 rounded-full peer-checked:border-primary-300 peer-checked:peer-disabled:border-neutral-300 peer-checked:bg-primary-300 peer-checked:peer-disabled:bg-neutral-300 peer-disabled:peer-checked:bg-neutral-300 peer-disabled:bg-neutral-100 peer-disabled:border-neutral-200",
+            case @size do
+              "lg" -> "w-[52px] h-8"
+              _md -> "w-[39px] h-6"
+            end
+          ]}>
+          </span>
+          <span class={[
+            "inline-flex items-center justify-center absolute left-1 transition-transform duration-200 ease-in-out transform translate-x-0 bg-neutral-400 rounded-full shadow pointer-events-none peer-checked:bg-neutral-100 ring-0 peer-disabled:bg-neutral-300 peer-disabled:peer-checked:bg-neutral-200 text-neutral-300 peer-checked:text-primary-300 peer-disabled:peer-checked:text-neutral-300",
+            "group",
+            case @size do
+              "lg" -> "size-6 top-1 peer-checked:translate-x-5"
+              _md -> "size-[18px] top-[3px] peer-checked:translate-x-[15px]"
+            end
+          ]}>
+            <.icon
+              :if={@switch_icon}
+              icon={:close}
+              class={[
+                "peer-checked:group-[]:hidden",
+                case @size do
+                  "lg" -> "text-[16px]"
+                  _md -> "text-[12px]"
+                end
+              ]}
+            />
+            <.icon
+              :if={@switch_icon}
+              icon={:check}
+              class={[
+                "hidden peer-checked:group-[]:inline-block",
+                case @size do
+                  "lg" -> "text-[16px]"
+                  _md -> "text-[12px]"
+                end
+              ]}
+            />
+          </span>
+        </div>
         <label :if={label = @label || render_slot(@inner_block)} for={@id} class="checkbox-label">
           {label}
         </label>
