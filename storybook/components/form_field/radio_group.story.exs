@@ -99,9 +99,6 @@ defmodule Storybook.Components.FormField.RadioGroup do
       %Variation{
         id: :legacy,
         description: "Legacy form",
-        attributes: %{
-          label: "Legacy form"
-        },
         template: """
         <.form for={%{}} :let={f} class="w-full">
           <.psb-variation label="Legacy form" field={f[:legacy]} />
