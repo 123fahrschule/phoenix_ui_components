@@ -67,9 +67,13 @@ defmodule PhoenixUiComponents.MixProject do
         "cmd git commit -m \"Build\\\ assets\""
       ],
       dev: "run dev.exs",
-      release: [
+      check: [
         "format --check-formatted",
-        "compile --force --warnings-as-errors",
+        "deps.unlock --check-unused",
+        "compile --force --warnings-as-errors"
+      ],
+      release: [
+        "check",
         "cmd git tag #{@version}",
         "cmd git push",
         "cmd git push --tags"
