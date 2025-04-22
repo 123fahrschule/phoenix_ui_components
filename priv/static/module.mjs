@@ -1734,6 +1734,27 @@ var Pagination = {
   }
 };
 
+// js/hooks/sidebar.js
+var Sidebar = {
+  mounted() {
+    this.setActiveLinks();
+  },
+  updated() {
+    this.setActiveLinks();
+  },
+  setActiveLinks() {
+    const { pathname } = window.location;
+    const links = this.el.querySelectorAll("a");
+    for (const link of links) {
+      if (pathname.startsWith(link.getAttribute("href"))) {
+        link.classList.add("active");
+      } else {
+        link.classList.remove("active");
+      }
+    }
+  }
+};
+
 // js/hooks/tooltip.js
 var Tooltip = {
   tooltip: null,
@@ -1832,6 +1853,7 @@ export {
   FlashMessage,
   LocaleSelect,
   Pagination,
+  Sidebar,
   Tooltip,
   dropdown_default as dropdown,
   flash_message_default as flashMessage,
