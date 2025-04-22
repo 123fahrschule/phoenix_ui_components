@@ -16,6 +16,7 @@ defmodule PhoenixUiComponents.Sidebar do
     ~H"""
     <div
       id="sidebar"
+      phx-hook="Sidebar"
       class={["relative z-50 hidden md:!block", @class]}
       data-show={
         JS.show()
