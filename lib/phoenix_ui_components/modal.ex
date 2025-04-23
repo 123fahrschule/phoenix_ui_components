@@ -103,13 +103,14 @@ defmodule PhoenixUiComponents.Modal do
               type="button"
               class={[
                 "absolute top-6 right-8 p-1 inline-flex rounded-full text-neutral-900 hover:bg-neutral-200 focus:bg-neutral-200 focus-within:outline-neutral-300",
+                "p-1.5",
                 @sizes[:mobile] == "fullscreen" && "max-md:hidden",
                 @sizes[:desktop] == "fullscreen" && "md:hidden",
                 @close_button_class
               ]}
               phx-click={JS.exec("data-hide", to: "##{@id}")}
             >
-              <.icon icon={:close} class="text-[24px]" />
+              <.icon icon={:close} class="text-[16px]" />
             </button>
 
             <div id={"#{@id}-content"} class={["space-y-4", @class]}>
@@ -172,7 +173,7 @@ defmodule PhoenixUiComponents.Modal do
 
   def modal_title(assigns) do
     ~H"""
-    <p class={["text-h4", @class]} {@rest}>
+    <p class={["modal-title", @class]} {@rest}>
       {@text}
     </p>
     """

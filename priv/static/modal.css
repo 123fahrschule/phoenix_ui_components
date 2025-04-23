@@ -1,0 +1,10 @@
+@layer components {
+  .modal-title {
+    @apply text-h4 pr-8;
+  }
+
+  .modal-title.text-center,
+  .text-center > .modal-title {
+    @apply pl-8;
+  }
+}
