@@ -19,8 +19,8 @@
 
     display: grid;
     grid-template-areas:
-      "topbar"
-      "content";
+      'topbar'
+      'content';
     grid-template-rows: var(--topbar-height) 1fr;
     grid-template-columns: 1fr;
   }
@@ -29,8 +29,8 @@
     #layout {
       display: grid;
       grid-template-areas:
-        "sidebar topbar"
-        "sidebar content";
+        'sidebar topbar'
+        'sidebar content';
       grid-template-rows: var(--topbar-height) 1fr;
       grid-template-columns: var(--sidebar-width) 1fr;
     }

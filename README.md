@@ -27,12 +27,12 @@ Add preset to the tailwind config file and add path to package in content sectio
 // https://tailwindcss.com/docs/configuration
 
 module.exports = {
-  presets: [require("../deps/phoenix_ui_components").preset],
+  presets: [require('../deps/phoenix_ui_components').preset],
   content: [
     // ...
-    "../deps/phoenix_ui_components/**/*.*ex",
-    "../deps/phoenix_ui_components/priv/static/**/*.*js",
-  ],
+    '../deps/phoenix_ui_components/**/*.*ex',
+    '../deps/phoenix_ui_components/priv/static/**/*.*js'
+  ]
 };
 ```
 
@@ -47,34 +47,29 @@ Import `styles.css` at the top of the tailwind .css file
 Import icons, styles and add required components for Alpine and Phoenix hooks in main `*.js` file
 
 ```js
-import "phoenix_ui_components/fonts.css";
-import "phoenix_ui_components/material-icons.css";
+import 'phoenix_ui_components/fonts.css';
+import 'phoenix_ui_components/material-icons.css';
 
-import { Socket } from "phoenix";
-import { LiveSocket } from "phoenix_live_view";
+import { Socket } from 'phoenix';
+import { LiveSocket } from 'phoenix_live_view';
 
-import Alpine from "alpinejs";
+import Alpine from 'alpinejs';
 
-import {
-  dropdown,
-  multiselect,
-  pagination,
-  FlashMessage,
-} from "phoenix_ui_components";
+import { dropdown, multiselect, pagination, FlashMessage } from 'phoenix_ui_components';
 
 window.Alpine = Alpine;
 
-Alpine.data("dropdown", dropdown);
-Alpine.data("multiselect", multiselect);
-Alpine.data("pagination", pagination);
+Alpine.data('dropdown', dropdown);
+Alpine.data('multiselect', multiselect);
+Alpine.data('pagination', pagination);
 
 Alpine.start();
 
-let liveSocket = new LiveSocket("/live", Socket, {
+let liveSocket = new LiveSocket('/live', Socket, {
   params: { _csrf_token: csrfToken },
   hooks: {
-    FlashMessage,
-  },
+    FlashMessage
+  }
 });
 ```
 
