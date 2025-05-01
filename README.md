@@ -7,18 +7,12 @@ The package can be installed by adding `phoenix_ui_components` to your list of d
 ```elixir
 def deps do
   [
-    {:phoenix_ui_components, github: "123fahrschule/phoenix_ui_components", tag: "1.5.0"}
+    {:phoenix_ui_components, github: "123fahrschule/phoenix_ui_components", tag: "0.1.0"}
   ]
 end
 ```
 
 Configure [Tailwind](https://github.com/phoenixframework/tailwind) and [Esbuild](https://github.com/phoenixframework/esbuild)
-
-Install required node modules inside `assets`
-
-```term
-npm install alpinejs@3.10.3 --prefix ./assets --save-exact
-```
 
 Add preset to the tailwind config file and add path to package in content section
 
@@ -44,7 +38,7 @@ Import `styles.css` at the top of the tailwind .css file
 // rest of tailwind config
 ```
 
-Import icons, styles and add required components for Alpine and Phoenix hooks in main `*.js` file
+Import icons, styles and Phoenix hooks in main `*.js` file
 
 ```js
 import 'phoenix_ui_components/fonts.css';
@@ -53,22 +47,24 @@ import 'phoenix_ui_components/material-icons.css';
 import { Socket } from 'phoenix';
 import { LiveSocket } from 'phoenix_live_view';
 
-import Alpine from 'alpinejs';
-
-import { dropdown, multiselect, pagination, FlashMessage } from 'phoenix_ui_components';
-
-window.Alpine = Alpine;
-
-Alpine.data('dropdown', dropdown);
-Alpine.data('multiselect', multiselect);
-Alpine.data('pagination', pagination);
-
-Alpine.start();
+import {
+  DropdownMenu,
+  FlashMessage,
+  LocaleSelect,
+  Pagination,
+  Sidebar,
+  Tooltip
+} from 'phoenix_ui_components';
 
 let liveSocket = new LiveSocket('/live', Socket, {
   params: { _csrf_token: csrfToken },
   hooks: {
-    FlashMessage
+    DropdownMenu,
+    FlashMessage,
+    LocaleSelect,
+    Pagination,
+    Sidebar,
+    Tooltip
   }
 });
 ```
@@ -86,30 +82,20 @@ config :esbuild,
 
 ```
 
-use PhoenixUiComponents in layout view and change root layout
-
-```heex
-<.root_layout>
-  <:head>
-    <%= csrf_meta_tag() %>
-    <%= live_title_tag("App name") %>
-    ...
-  </:head>
-  <%= @inner_content %>
-</.root_layout>
-
-```
-
 ## Local development
 
 1. Install required dependencies
+
    ```term
    mix setup
    ```
+
 1. Start dev server
+
    ```term
    mix dev
    ```
+
 1. Open `localhost:4000`. In the root path you can find Storybook with components and their usages
 1. Update any components inside `lib/phoenix_ui_components` and/or update story for this component.
 1. Check update in the Storybook.
