@@ -1,5 +1,6 @@
 defmodule PhoenixUiComponents.Pagination do
   use Phoenix.LiveComponent
+  use Gettext, backend: PhoenixUiComponents.Gettext
 
   import Phoenix.HTML
   import PhoenixUiComponents.Icon
@@ -183,13 +184,6 @@ defmodule PhoenixUiComponents.Pagination do
       "rounded-full shadow-input focus:shadow-input-focus focus:ring-0 border-neutral-300 focus:border-primary-300 bg-neutral-200/50 text-body-xs"
 
   defp bold(str), do: "<b>#{str |> html_escape() |> safe_to_string()}</b>"
-
-  defp pgettext(msgctxt, msgid, bindings) do
-    gettext_backend =
-      Application.get_env(:phoenix_ui_components, :gettext_backend)
-
-    Gettext.pgettext(gettext_backend, msgctxt, msgid, bindings)
-  end
 
   def to_pagination_attr(paginated_entries) when is_map(paginated_entries) do
     %{

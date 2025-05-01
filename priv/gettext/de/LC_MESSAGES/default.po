@@ -34,3 +34,21 @@ msgstr "Warten Sie bitte, bis wir es wieder in Ordnung bringen."
 msgctxt "flash message, live view crashed title"
 msgid "Something went wrong!"
 msgstr "Etwas ist schief gelaufen"
+
+#: lib/phoenix_ui_components/pagination.ex:72
+#, elixir-autogen, elixir-format
+msgctxt "pagination, showing entries info"
+msgid "Showing %{number_of_entries} out of %{total_entries} items"
+msgstr "Zeige %{number_of_entries} von %{total_entries} Elementen"
+
+#: lib/phoenix_ui_components/pagination.ex:134
+#, elixir-autogen, elixir-format, fuzzy
+msgctxt "pagination, text for choosing how many items are shown per page"
+msgid "Display %{page_size_select} items"
+msgstr "%{page_size_select} Elemente anzeigen"
+
+#: lib/phoenix_ui_components/pagination.ex:101
+#, elixir-autogen, elixir-format
+msgctxt "pagination, text for showing which page number is being displayed"
+msgid "Page %{page_input} out of %{total_pages}"
+msgstr "Seite %{page_input} von %{total_pages}"
