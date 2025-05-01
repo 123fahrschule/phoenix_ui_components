@@ -26,6 +26,7 @@ defmodule PhoenixUiComponents do
         DetailsList,
         DevTools,
         Dropdown,
+        FlashGroup,
         Flyout,
         FormField,
         Icon,

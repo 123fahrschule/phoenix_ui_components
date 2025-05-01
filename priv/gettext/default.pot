@@ -1,0 +1,36 @@
+## This file is a PO Template file.
+##
+## "msgid"s here are often extracted from source code.
+## Add new messages manually only if they're dynamic
+## messages that can't be statically extracted.
+##
+## Run "mix gettext.extract" to bring this file up to
+## date. Leave "msgstr"s empty as changing them here has no
+## effect: edit them in PO (.po) files instead.
+#
+msgid ""
+msgstr ""
+
+#: lib/phoenix_ui_components/flash_group.ex:42
+#, elixir-autogen, elixir-format
+msgctxt "flash message, live socket disconnected description"
+msgid "Attempting to reconnect"
+msgstr ""
+
+#: lib/phoenix_ui_components/flash_group.ex:39
+#, elixir-autogen, elixir-format
+msgctxt "flash message, live socket disconnected title"
+msgid "We can't find the internet"
+msgstr ""
+
+#: lib/phoenix_ui_components/flash_group.ex:58
+#, elixir-autogen, elixir-format
+msgctxt "flash message, live view crashed description"
+msgid "Hang in there while we get back on track"
+msgstr ""
+
+#: lib/phoenix_ui_components/flash_group.ex:56
+#, elixir-autogen, elixir-format
+msgctxt "flash message, live view crashed title"
+msgid "Something went wrong!"
+msgstr ""

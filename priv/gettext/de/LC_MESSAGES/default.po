@@ -1,0 +1,36 @@
+## "msgid"s in this file come from POT (.pot) files.
+###
+### Do not add, change, or remove "msgid"s manually here as
+### they're tied to the ones in the corresponding POT file
+### (with the same domain).
+###
+### Use "mix gettext.extract --merge" or "mix gettext.merge"
+### to merge POT files into PO files.
+msgid ""
+msgstr ""
+"Language: de\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: lib/phoenix_ui_components/flash_group.ex:42
+#, elixir-autogen, elixir-format
+msgctxt "flash message, live socket disconnected description"
+msgid "Attempting to reconnect"
+msgstr "Es wird versucht, die Verbindung herzustellen"
+
+#: lib/phoenix_ui_components/flash_group.ex:39
+#, elixir-autogen, elixir-format
+msgctxt "flash message, live socket disconnected title"
+msgid "We can't find the internet"
+msgstr "Nicht verbunden mit dem Internet."
+
+#: lib/phoenix_ui_components/flash_group.ex:58
+#, elixir-autogen, elixir-format
+msgctxt "flash message, live view crashed description"
+msgid "Hang in there while we get back on track"
+msgstr "Warten Sie bitte, bis wir es wieder in Ordnung bringen."
+
+#: lib/phoenix_ui_components/flash_group.ex:56
+#, elixir-autogen, elixir-format, fuzzy
+msgctxt "flash message, live view crashed title"
+msgid "Something went wrong!"
+msgstr "Etwas ist schief gelaufen"
