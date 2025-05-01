@@ -1,11 +1,10 @@
-const DEFAULT_FLASH_HIDE_DELAY = 5000;
-
 export const FlashMessage = {
   timer: null,
 
   remove() {
     this.el.remove();
     clearTimeout(this.timer);
+    this.liveSocket.execJS(this.el, this.el.getAttribute('phx-remove'));
   },
 
   mounted() {
@@ -18,7 +17,7 @@ export const FlashMessage = {
     if (type !== 'error') {
       this.timer = setTimeout(() => {
         this.remove();
-      }, DEFAULT_FLASH_HIDE_DELAY);
+      }, 5_000);
     }
   }
 };
