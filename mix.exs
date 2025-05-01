@@ -33,7 +33,7 @@ defmodule PhoenixUiComponents.MixProject do
       # Productive. Reliable. Fast. A productive web framework that does not compromise speed and maintainability.
       {:phoenix, "~> 1.7"},
       # Rich, real-time user experiences with server-rendered HTML
-      {:phoenix_live_view, "~> 1.0.5"},
+      {:phoenix_live_view, "~> 1.0.10"},
       {:phoenix_html, "~> 4.2"},
       {:gettext, "~> 0.26.0"},
       {:scrivener_ecto, ">= 2.0.0 or >= 3.0.0"},
@@ -42,9 +42,9 @@ defmodule PhoenixUiComponents.MixProject do
       {:esbuild, "~> 0.9", only: :dev},
       {:tailwind, "~> 0.2.0", only: :dev},
       {:jason, "~> 1.2", only: :dev},
-      {:bandit, "~> 1.5", only: :dev},
+      {:bandit, "~> 1.6", only: :dev},
       {:phoenix_live_reload, "~> 1.2", only: :dev},
-      {:phoenix_storybook, "~> 0.8.0", only: :dev}
+      {:phoenix_storybook, "~> 0.8.2", only: :dev},
     ]
   end
 
