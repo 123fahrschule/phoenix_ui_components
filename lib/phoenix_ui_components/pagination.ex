@@ -6,7 +6,6 @@ defmodule PhoenixUiComponents.Pagination do
   import PhoenixUiComponents.Icon
 
   alias Phoenix.LiveView.JS
-  alias Scrivener.Page
 
   @doc """
   Renders pagination component.
@@ -50,7 +49,8 @@ defmodule PhoenixUiComponents.Pagination do
     |> pagination()
   end
 
-  def pagination(%{paginated_entries: %Page{}} = assigns) do
+  def pagination(%{paginated_entries: paginated_entries} = assigns)
+      when is_struct(paginated_entries, Scrivener.Page) do
     assigns
     |> assign(to_pagination_attr(assigns.paginated_entries))
     |> assign(paginated_entries: nil)
