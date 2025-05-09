@@ -5,7 +5,7 @@ defmodule PhoenixUiComponents.DevTools do
   import PhoenixUiComponents.CustomLink
 
   attr :primary, :string, required: true
-  attr :secondary, :string
+  attr :secondary, :any
   attr :icon, :any, default: :dashboard
   attr :status, :string, values: ["default", "warning", "error"]
   attr :errors_count, :integer, default: 0
