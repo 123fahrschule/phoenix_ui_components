@@ -26,7 +26,7 @@ defmodule PhoenixUiComponents.LocaleHookTest do
         |> get_session()
 
       {:cont, _updated_socket} =
-        LocaleHook.on_mount(:restore_locale, %{}, session, %LiveView.Socket{})
+        LocaleHook.on_mount(:default, %{}, session, %LiveView.Socket{})
 
       assert Gettext.get_locale() == locale
     end
