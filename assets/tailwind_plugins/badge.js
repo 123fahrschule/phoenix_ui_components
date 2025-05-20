@@ -33,7 +33,7 @@ module.exports = plugin(function ({ addComponents, theme }) {
       }
     },
     '.badge-info': {
-      color: theme('colors.info.400'),
+      color: theme('colors.info.500'),
       backgroundColor: theme('colors.info.100'),
 
       '& .badge-remove-button:hover, .badge-remove-button:focus': {
@@ -41,7 +41,7 @@ module.exports = plugin(function ({ addComponents, theme }) {
       }
     },
     '.badge-success': {
-      color: theme('colors.success.400'),
+      color: theme('colors.success.500'),
       backgroundColor: theme('colors.success.100'),
 
       '& .badge-remove-button:hover, .badge-remove-button:focus': {
@@ -49,7 +49,7 @@ module.exports = plugin(function ({ addComponents, theme }) {
       }
     },
     '.badge-warning': {
-      color: theme('colors.warning.500'),
+      color: theme('colors.warning.400'),
       backgroundColor: theme('colors.warning.100'),
 
       '& .badge-remove-button:hover, .badge-remove-button:focus': {
