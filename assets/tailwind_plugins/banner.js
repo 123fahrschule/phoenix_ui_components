@@ -8,7 +8,6 @@ module.exports = plugin(function ({ addComponents, theme }) {
       alignItems: 'center',
       gap: '2px',
       borderRadius: '12px',
-      color: theme('colors.neutral.900'),
 
       '& .close-button': {
         color: 'currentColor',
@@ -39,54 +38,38 @@ module.exports = plugin(function ({ addComponents, theme }) {
     },
 
     '.banner-info': {
+      color: theme('colors.info.500'),
       backgroundColor: theme('colors.info.100')
-    },
-    '.banner-info .banner-label': {
-      color: theme('colors.info.400')
     },
     '.banner-info .banner-icon-container': {
       backgroundColor: theme('colors.info.400')
     },
-    '.banner-info .close-button': {
-      color: theme('colors.info.400')
-    },
     '.banner-success': {
+      color: theme('colors.success.500'),
       backgroundColor: theme('colors.success.100')
-    },
-    '.banner-success .banner-label': {
-      color: theme('colors.success.300')
     },
     '.banner-success .banner-icon-container': {
       backgroundColor: theme('colors.success.300')
     },
-    '.banner-success .close-button': {
-      color: theme('colors.success.300')
-    },
-
     '.banner-warning': {
+      color: theme('colors.warning.400'),
       backgroundColor: theme('colors.warning.100')
     },
     '.banner-warning .banner-icon-container': {
       backgroundColor: theme('colors.warning.300')
     },
     '.banner-warning .banner-label': {
-      color: theme('colors.warning.300')
+      color: theme('colors.warning.400')
     },
     '.banner-warning .close-button': {
-      color: theme('colors.warning.300')
+      color: theme('colors.warning.400')
     },
-
     '.banner-error': {
+      color: theme('colors.error.400'),
       backgroundColor: theme('colors.error.100')
     },
     '.banner-error .banner-icon-container': {
       backgroundColor: theme('colors.error.300')
-    },
-    '.banner-error .banner-label': {
-      color: theme('colors.error.300')
-    },
-    '.banner-error .close-button': {
-      color: theme('colors.error.300')
     },
 
     '.banner-sm': {
