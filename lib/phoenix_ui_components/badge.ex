@@ -98,6 +98,7 @@ defmodule PhoenixUiComponents.Badge do
 
   attr :class, :any, default: nil
   attr :icon, :atom, default: nil
+  attr :outlined, :boolean, default: false
   attr :size, :string, values: @sizes, default: "md"
   attr :color, :string, values: @colors, default: "neutral"
 
@@ -116,7 +117,7 @@ defmodule PhoenixUiComponents.Badge do
     ~H"""
     <.badge size={@size} color={@color} class={@class}>
       <%= if @icon do %>
-        <.icon icon={@icon} />
+        <.icon outlined={@outlined} icon={@icon} />
       <% else %>
         {render_slot(@inner_block)}
       <% end %>
