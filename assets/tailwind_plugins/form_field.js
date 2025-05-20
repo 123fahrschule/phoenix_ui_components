@@ -56,7 +56,6 @@ module.exports = plugin(function ({ addComponents, theme }) {
       width: '100%',
       borderRadius: '9999px',
       border: `1px solid ${theme('colors.neutral.300')}`,
-      boxShadow: theme('boxShadow.input'),
       backgroundColor: 'rgba(245, 247, 250, 0.5)',
       color: theme('colors.neutral.900'),
       fontWeight: 'normal',
@@ -66,14 +65,13 @@ module.exports = plugin(function ({ addComponents, theme }) {
       },
 
       '&:focus': {
-        borderColor: theme('colors.primary.300'),
-        boxShadow: theme('boxShadow.input-focus')
+        '@apply ring-0': {},
+        borderColor: theme('colors.primary.300')
       },
 
       '.form-field &.form-field-input-error': {
         backgroundColor: 'rgba(254, 227, 212, 0.32)',
-        borderColor: theme('colors.error.300'),
-        boxShadow: theme('boxShadow.input-error')
+        borderColor: theme('colors.error.300')
       },
 
       '.form-field &.form-field-input-error form-field-icon': {
@@ -86,25 +84,29 @@ module.exports = plugin(function ({ addComponents, theme }) {
       },
 
       '&:disabled': {
-        color: theme('colors.neutral.400'),
+        color: theme('colors.neutral.500'),
         backgroundColor: 'rgba(224, 229, 235, 0.5)',
         border: `1px solid ${theme('colors.neutral.300')}`,
-        boxShadow: theme('boxShadow.input'),
-        cursor: 'not-allowed'
+        cursor: 'not-allowed',
+
+        '&::placeholder': {
+          color: theme('colors.neutral.500')
+        }
       }
     },
 
     '.form-field-input-sm': {
       '@apply text-body-xs': {},
-      padding: '8px 12px'
+      padding: '7px 11px'
     },
     '.form-field-input-md': {
       '@apply text-body-sm': {},
-      padding: '8px 12px'
+      padding: '7px 11px',
+      minHeight: '40px'
     },
     '.form-field-input-lg': {
       '@apply text-body': {},
-      padding: '8px 12px'
+      padding: '11px'
     }
   });
 
@@ -163,7 +165,7 @@ module.exports = plugin(function ({ addComponents, theme }) {
   addComponents({
     '.form-field-error': {
       '@apply text-helper': {},
-      color: theme('colors.error.300'),
+      color: theme('colors.error.400'),
       marginTop: '4px',
       order: 1
     }
