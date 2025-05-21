@@ -34,6 +34,27 @@ defmodule Storybook.Components.Avatar do
           initials: "JD"
         }
       },
+      %VariationGroup{
+        id: :different_sizes,
+        description: "Different sizes",
+        variations: [
+          %Variation{
+            id: :size_default
+          },
+          %Variation{
+            id: :size_sm,
+            attributes: %{
+              size: "lg"
+            }
+          },
+          %Variation{
+            id: :size_custom,
+            attributes: %{
+              size: "size-4 [&>.icon]:text-[10px]"
+            }
+          }
+        ]
+      },
       %Variation{
         id: :custom_class,
         description: "Custom Styled Avatar",

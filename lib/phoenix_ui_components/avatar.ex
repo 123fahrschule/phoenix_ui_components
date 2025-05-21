@@ -22,6 +22,10 @@ defmodule PhoenixUiComponents.Avatar do
   attr :src, :string, doc: "Image source URL for the avatar"
   attr :initials, :string, doc: "Text initials to display in the avatar"
 
+  attr :size, :string,
+    default: "md",
+    doc: "String with predefined size: 'md', 'lg' or size class: 'size-4'"
+
   attr :shape, :string,
     values: ["circle", "square"],
     default: "circle",
@@ -38,14 +42,24 @@ defmodule PhoenixUiComponents.Avatar do
   """
   def avatar(%{src: _} = assigns) do
     ~H"""
-    <img src={@src} class={get_classes(assigns)} {@rest} />
+    <img
+      src={@src}
+      class={[default_classes(), shape_classes(@shape), size_classes(@size), @class]}
+      {@rest}
+    />
     """
   end
 
   def avatar(%{initials: _} = assigns) do
     ~H"""
     <div
-      class={["flex items-center justify-center text-sm font-semibold", get_classes(assigns)]}
+      class={[
+        "flex items-center justify-center text-body-sm font-semibold",
+        default_classes(),
+        shape_classes(@shape),
+        size_classes(@size),
+        @class
+      ]}
       {@rest}
     >
       {@initials}
@@ -55,16 +69,27 @@ defmodule PhoenixUiComponents.Avatar do
 
   def avatar(assigns) do
     ~H"""
-    <div class={["flex items-center justify-center", get_classes(assigns)]} {@rest}>
-      <.icon icon={:account_circle} class="text-[20px]" />
+    <div
+      class={[
+        "flex items-center justify-center",
+        default_classes(),
+        shape_classes(@shape),
+        size_classes(@size),
+        @class
+      ]}
+      {@rest}
+    >
+      <.icon icon={:account_circle} />
     </div>
     """
   end
 
-  defp get_classes(%{class: class, shape: shape}) do
-    ["w-8 h-8 bg-neutral-300 text-neutral-900", get_shape_classes(shape), class]
-  end
+  defp default_classes, do: "bg-neutral-300 text-neutral-900"
 
-  defp get_shape_classes("circle"), do: "rounded-full"
-  defp get_shape_classes("square"), do: "rounded-lg"
+  defp shape_classes("circle"), do: "rounded-full"
+  defp shape_classes("square"), do: "rounded-lg"
+
+  defp size_classes("md"), do: "size-8"
+  defp size_classes("lg"), do: "size-10"
+  defp size_classes(size_classes), do: size_classes
 end
