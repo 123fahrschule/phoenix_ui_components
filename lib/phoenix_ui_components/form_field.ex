@@ -86,7 +86,8 @@ defmodule PhoenixUiComponents.FormField do
   slot :input_content
   slot :label_content
 
-  def form_field(%{form: %Phoenix.HTML.Form{} = form, field: field} = assigns) do
+  def form_field(%{form: %Phoenix.HTML.Form{} = form, field: field} = assigns)
+      when is_atom(field) do
     assigns
     |> assign(:form, nil)
     |> assign(:field, form[field])
