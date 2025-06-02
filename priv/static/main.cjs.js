@@ -159,21 +159,21 @@ var require_badge = __commonJS({
           }
         },
         ".badge-info": {
-          color: theme("colors.info.400"),
+          color: theme("colors.info.500"),
           backgroundColor: theme("colors.info.100"),
           "& .badge-remove-button:hover, .badge-remove-button:focus": {
             backgroundColor: theme("colors.info.200")
           }
         },
         ".badge-success": {
-          color: theme("colors.success.400"),
+          color: theme("colors.success.500"),
           backgroundColor: theme("colors.success.100"),
           "& .badge-remove-button:hover, .badge-remove-button:focus": {
             backgroundColor: theme("colors.success.200")
           }
         },
         ".badge-warning": {
-          color: theme("colors.warning.500"),
+          color: theme("colors.warning.400"),
           backgroundColor: theme("colors.warning.100"),
           "& .badge-remove-button:hover, .badge-remove-button:focus": {
             backgroundColor: theme("colors.warning.200")
@@ -235,7 +235,6 @@ var require_banner = __commonJS({
           alignItems: "center",
           gap: "2px",
           borderRadius: "12px",
-          color: theme("colors.neutral.900"),
           "& .close-button": {
             color: "currentColor",
             padding: "8px",
@@ -261,52 +260,38 @@ var require_banner = __commonJS({
           fontWeight: "bold"
         },
         ".banner-info": {
+          color: theme("colors.info.500"),
           backgroundColor: theme("colors.info.100")
-        },
-        ".banner-info .banner-label": {
-          color: theme("colors.info.400")
         },
         ".banner-info .banner-icon-container": {
           backgroundColor: theme("colors.info.400")
         },
-        ".banner-info .close-button": {
-          color: theme("colors.info.400")
-        },
         ".banner-success": {
+          color: theme("colors.success.500"),
           backgroundColor: theme("colors.success.100")
-        },
-        ".banner-success .banner-label": {
-          color: theme("colors.success.300")
         },
         ".banner-success .banner-icon-container": {
           backgroundColor: theme("colors.success.300")
         },
-        ".banner-success .close-button": {
-          color: theme("colors.success.300")
-        },
         ".banner-warning": {
+          color: theme("colors.warning.400"),
           backgroundColor: theme("colors.warning.100")
         },
         ".banner-warning .banner-icon-container": {
           backgroundColor: theme("colors.warning.300")
         },
         ".banner-warning .banner-label": {
-          color: theme("colors.warning.300")
+          color: theme("colors.warning.400")
         },
         ".banner-warning .close-button": {
-          color: theme("colors.warning.300")
+          color: theme("colors.warning.400")
         },
         ".banner-error": {
+          color: theme("colors.error.400"),
           backgroundColor: theme("colors.error.100")
         },
         ".banner-error .banner-icon-container": {
           backgroundColor: theme("colors.error.300")
-        },
-        ".banner-error .banner-label": {
-          color: theme("colors.error.300")
-        },
-        ".banner-error .close-button": {
-          color: theme("colors.error.300")
         },
         ".banner-sm": {
           "@apply text-body-xs": {},
@@ -414,7 +399,6 @@ var require_form_field = __commonJS({
           width: "100%",
           borderRadius: "9999px",
           border: `1px solid ${theme("colors.neutral.300")}`,
-          boxShadow: theme("boxShadow.input"),
           backgroundColor: "rgba(245, 247, 250, 0.5)",
           color: theme("colors.neutral.900"),
           fontWeight: "normal",
@@ -422,13 +406,12 @@ var require_form_field = __commonJS({
             color: theme("colors.neutral.600")
           },
           "&:focus": {
-            borderColor: theme("colors.primary.300"),
-            boxShadow: theme("boxShadow.input-focus")
+            "@apply ring-0": {},
+            borderColor: theme("colors.primary.300")
           },
           ".form-field &.form-field-input-error": {
             backgroundColor: "rgba(254, 227, 212, 0.32)",
-            borderColor: theme("colors.error.300"),
-            boxShadow: theme("boxShadow.input-error")
+            borderColor: theme("colors.error.300")
           },
           ".form-field &.form-field-input-error form-field-icon": {
             color: theme("colors.error.300")
@@ -438,24 +421,27 @@ var require_form_field = __commonJS({
             borderRadius: "12px"
           },
           "&:disabled": {
-            color: theme("colors.neutral.400"),
+            color: theme("colors.neutral.500"),
             backgroundColor: "rgba(224, 229, 235, 0.5)",
             border: `1px solid ${theme("colors.neutral.300")}`,
-            boxShadow: theme("boxShadow.input"),
-            cursor: "not-allowed"
+            cursor: "not-allowed",
+            "&::placeholder": {
+              color: theme("colors.neutral.500")
+            }
           }
         },
         ".form-field-input-sm": {
           "@apply text-body-xs": {},
-          padding: "8px 12px"
+          padding: "7px 11px"
         },
         ".form-field-input-md": {
           "@apply text-body-sm": {},
-          padding: "8px 12px"
+          padding: "7px 11px",
+          minHeight: "40px"
         },
         ".form-field-input-lg": {
           "@apply text-body": {},
-          padding: "8px 12px"
+          padding: "11px"
         }
       });
       addComponents({
@@ -501,7 +487,7 @@ var require_form_field = __commonJS({
       addComponents({
         ".form-field-error": {
           "@apply text-helper": {},
-          color: theme("colors.error.300"),
+          color: theme("colors.error.400"),
           marginTop: "4px",
           order: 1
         }
