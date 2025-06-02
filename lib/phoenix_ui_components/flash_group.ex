@@ -32,8 +32,8 @@ defmodule PhoenixUiComponents.FlashGroup do
 
         <.banner
           id="client-error"
-          phx-disconnected={show(".phx-client-error #client-error")}
-          phx-connected={hide("#client-error")}
+          phx-disconnected={show(".phx-client-error #client-error") |> JS.remove_attribute("hidden")}
+          phx-connected={hide("#client-error") |> JS.set_attribute({"hidden", ""})}
           hidden
           label={
             pgettext("flash message, live socket disconnected title", "We can't find the internet")
@@ -42,7 +42,7 @@ defmodule PhoenixUiComponents.FlashGroup do
             pgettext("flash message, live socket disconnected description", "Attempting to reconnect")
           }
           color="error"
-          on_close={hide("#client-error")}
+          on_close={hide("#client-error") |> JS.set_attribute({"hidden", ""})}
           class="hidden shadow-small-300 break-all pointer-events-auto"
           icon={:autorenew}
           icon_class="animate-spin"
@@ -51,8 +51,8 @@ defmodule PhoenixUiComponents.FlashGroup do
 
         <.banner
           id="server-error"
-          phx-disconnected={show(".phx-server-error #server-error")}
-          phx-connected={hide("#server-error")}
+          phx-disconnected={show(".phx-server-error #server-error") |> JS.remove_attribute("hidden")}
+          phx-connected={hide("#server-error") |> JS.set_attribute({"hidden", ""})}
           label={pgettext("flash message, live view crashed title", "Something went wrong!")}
           message={
             pgettext(
@@ -61,7 +61,7 @@ defmodule PhoenixUiComponents.FlashGroup do
             )
           }
           color="error"
-          on_close={hide("#server-error")}
+          on_close={hide("#server-error") |> JS.set_attribute({"hidden", ""})}
           class="hidden shadow-small-300 break-all pointer-events-auto"
           icon={:autorenew}
           icon_class="animate-spin"
