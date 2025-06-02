@@ -38,11 +38,11 @@ defmodule PhoenixUiComponents.MixProject do
       {:gettext, "~> 0.26.0"},
 
       # Dev dependencies
-      {:esbuild, "~> 0.9", only: :dev},
-      {:tailwind, "~> 0.2.0", only: :dev},
+      {:esbuild, "~> 0.10", only: :dev},
+      {:tailwind, "~> 0.3", only: :dev},
       {:jason, "~> 1.2", only: :dev},
-      {:bandit, "~> 1.6", only: :dev},
-      {:phoenix_live_reload, "~> 1.2", only: :dev},
+      {:bandit, "~> 1.7", only: :dev},
+      {:phoenix_live_reload, "~> 1.6", only: :dev},
       {:phoenix_storybook, "~> 0.8.2", only: :dev},
       {:scrivener_ecto, ">= 2.0.0 or >= 3.0.0", only: :dev}
     ]
