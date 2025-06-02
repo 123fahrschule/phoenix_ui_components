@@ -13,7 +13,7 @@ defmodule PhoenixUiComponents.FlashGroup do
     ~H"""
     <div class="fixed inset-x-0 top-8 z-[60] px-4 pointer-events-none">
       <div class="mx-auto w-full max-w-[500px] flex flex-col gap-4">
-        <.banner
+        <div
           :for={{flash_type, flash_message} <- @flash}
           id={"flash_#{flash_type}"}
           phx-hook="FlashMessage"
@@ -21,77 +21,79 @@ defmodule PhoenixUiComponents.FlashGroup do
           phx-remove={
             JS.push("lv:clear-flash", value: %{key: flash_type}) |> hide("#flash_#{flash_type}")
           }
-          message={flash_message}
-          color={flash_type}
-          on_close={
-            JS.push("lv:clear-flash", value: %{key: flash_type}) |> hide("#flash_#{flash_type}")
-          }
-          class="shadow-small-300 break-all pointer-events-auto"
-          size={@size}
-        />
+        >
+          <.banner
+            message={flash_message}
+            color={flash_type}
+            on_close={
+              JS.push("lv:clear-flash", value: %{key: flash_type}) |> hide("#flash_#{flash_type}")
+            }
+            class="shadow-small-300 break-all pointer-events-auto"
+            size={@size}
+          />
+        </div>
 
-        <.banner
+        <div
           id="client-error"
-          phx-disconnected={show(".phx-client-error #client-error") |> JS.remove_attribute("hidden")}
-          phx-connected={hide("#client-error") |> JS.set_attribute({"hidden", ""})}
+          phx-disconnected={JS.remove_attribute("hidden", to: ".phx-client-error #client-error")}
+          phx-connected={JS.set_attribute({"hidden", ""})}
           hidden
-          label={
-            pgettext("flash message, live socket disconnected title", "We can't find the internet")
-          }
-          message={
-            pgettext("flash message, live socket disconnected description", "Attempting to reconnect")
-          }
-          color="error"
-          on_close={hide("#client-error") |> JS.set_attribute({"hidden", ""})}
-          class="hidden shadow-small-300 break-all pointer-events-auto"
-          icon={:autorenew}
-          icon_class="animate-spin"
-          size={@size}
-        />
+        >
+          <.banner
+            label={
+              pgettext("flash message, live socket disconnected title", "We can't find the internet")
+            }
+            message={
+              pgettext(
+                "flash message, live socket disconnected description",
+                "Attempting to reconnect"
+              )
+            }
+            color="error"
+            on_close={JS.exec("phx-connected", to: "#client-error")}
+            class="shadow-small-300 break-all pointer-events-auto"
+            icon={:autorenew}
+            icon_class="motion-safe:animate-spin"
+            size={@size}
+          />
+        </div>
 
-        <.banner
+        <div
           id="server-error"
-          phx-disconnected={show(".phx-server-error #server-error") |> JS.remove_attribute("hidden")}
-          phx-connected={hide("#server-error") |> JS.set_attribute({"hidden", ""})}
-          label={pgettext("flash message, live view crashed title", "Something went wrong!")}
-          message={
-            pgettext(
-              "flash message, live view crashed description",
-              "Hang in there while we get back on track"
-            )
-          }
-          color="error"
-          on_close={hide("#server-error") |> JS.set_attribute({"hidden", ""})}
-          class="hidden shadow-small-300 break-all pointer-events-auto"
-          icon={:autorenew}
-          icon_class="animate-spin"
-          size={@size}
-        />
+          phx-disconnected={JS.remove_attribute("hidden", to: ".phx-server-error #server-error")}
+          phx-connected={JS.set_attribute({"hidden", ""})}
+          hidden
+        >
+          <.banner
+            label={pgettext("flash message, live view crashed title", "Something went wrong!")}
+            message={
+              pgettext(
+                "flash message, live view crashed description",
+                "Hang in there while we get back on track"
+              )
+            }
+            color="error"
+            on_close={JS.exec("phx-connected", to: "#server-error")}
+            class="shadow-small-300 break-all pointer-events-auto"
+            icon={:autorenew}
+            icon_class="motion-safe:animate-spin"
+            size={@size}
+          />
+        </div>
       </div>
     </div>
     """
   end
 
-  defp show(selector) do
-    JS.show(
-      to: selector,
-      time: 300,
-      display: "flex",
-      transition:
-        {"transition-all transform ease-out duration-300",
-         "opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95",
-         "opacity-100 translate-y-0 sm:scale-100"}
-    )
-  end
-
-  defp hide(js \\ %JS{}, selector) do
+  defp hide(js, selector) do
     JS.hide(js,
       to: selector,
       time: 200,
-      transition:
-        {"transition-all transform ease-in duration-200",
-         "opacity-100 translate-y-0 sm:scale-100",
-         "opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"}
+      transition: {
+        "transition-all ease-in duration-200",
+        "opacity-100 translate-y-0 sm:scale-100",
+        "opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
+      }
     )
   end
 end
