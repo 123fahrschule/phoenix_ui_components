@@ -24,7 +24,7 @@ defmodule PhoenixUiComponents.MultiselectAlpine do
 
     assigns =
       assigns
-      |> assign_new(:id, field.id)
+      |> assign_new(:id, fn -> field.id end)
       |> assign_new(:name, fn -> field.name <> "[]" end)
       |> assign_new(:value, fn -> field.value end)
 
