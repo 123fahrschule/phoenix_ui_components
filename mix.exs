@@ -35,7 +35,7 @@ defmodule PhoenixUiComponents.MixProject do
       # Rich, real-time user experiences with server-rendered HTML
       {:phoenix_live_view, "~> 1.0"},
       {:phoenix_html, "~> 4.2"},
-      {:gettext, "~> 0.26.0"},
+      {:gettext, "~> 0.26 or ~> 1.0"},
 
       # Dev dependencies
       {:esbuild, "~> 0.10", only: :dev},
